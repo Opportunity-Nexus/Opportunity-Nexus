@@ -1,9 +1,9 @@
 
 export default function Hero() {
   return (
-    <div className=" relative flex flex-col justify-center items-center -mt-28 overflow-hidden pt-10 pb-16 w-full dark:bg-gray-900 bg-gray-100 mx-auto max-w-7xl">
+    <div className=" relative flex flex-col justify-center items-center -mt-28 overflow-hidden pt-10 pb-16 w-full dark:bg-gray-900 bg-gray-10">
       <main className="w-full">
-        <div className="pt-32  sm:pt-32 lg:pt-28 lg:pb-14 lg:overflow-hidden">
+        <div className="0 mx-auto max-w-7xl pt-32  sm:pt-32 lg:pt-28 lg:pb-14 lg:overflow-hidden">
           <div className="lg:px-8">
             <div className="lg:grid lg:grid-cols-2 lg:gap-8">
               <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">

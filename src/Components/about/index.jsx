@@ -75,7 +75,7 @@ const features = [
 export default function About() {
   return (
     <div className="bg-white dark:bg-gray-950">
-      <div className="relative pb-32 bg-gray-800 max-w-7xl mx-auto">
+      <div className="relative pb-32 bg-gray-800">
         <div className="absolute inset-0">
           <img
             className="w-full h-full object-cover"
