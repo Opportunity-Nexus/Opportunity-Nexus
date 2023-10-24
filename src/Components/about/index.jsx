@@ -89,7 +89,7 @@ export default function About() {
         </div>
         <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold tracking-tight dark:text-white text-black md:text-5xl lg:text-6xl">
-            Your All-in-One Solutio
+            Your All-in-One Solution
           </h1>
           <p className="mt-6 max-w-3xl text-xl font-semibold tracking-tighter text-black dark:text-white">
             Think of us as your personal career assistant. You can effortlessly
