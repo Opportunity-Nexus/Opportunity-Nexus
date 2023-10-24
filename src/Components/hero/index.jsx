@@ -1,14 +1,14 @@
 
 export default function Hero() {
   return (
-    <div className=" relative flex flex-col justify-center items-center -mt-28 overflow-hidden pt-10 pb-16 w-full dark:bg-gray-900 bg-gray-100">
+    <div className=" relative flex flex-col justify-center items-center -mt-28 overflow-hidden pt-10 pb-16 w-full dark:bg-gray-900 bg-gray-100 mx-auto max-w-7xl">
       <main className="w-full">
         <div className="pt-32  sm:pt-32 lg:pt-28 lg:pb-14 lg:overflow-hidden">
-          <div className="mx-auto max-w-7xl lg:px-8">
+          <div className="lg:px-8">
             <div className="lg:grid lg:grid-cols-2 lg:gap-8">
               <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
                 <div className="lg:py-24">
-                  <div className="badge relative flex justify-center items-center text-center bg-white dark:bg-black dark:text-white text-xs font-normal  rounded-lg px-2 py-1 w-fit">
+                  <div className="badge relative flex justify-center items-center text-center bg-white dark:bg-black dark:text-white text-xs font-normal  rounded-lg px-2 py-1 w-fit  mx-0 sm:mx-auto lg:mx-0">
                     Our Gateway to Infinite Opportunities
                   </div>
                   <h1 className="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
@@ -22,7 +22,7 @@ export default function Hero() {
                   <p className="mt-3 text-base text-gray-500 dark:text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
                   Your gateway to on-campus, off-campus, and prestigious programs. Discover, apply, and track your journey with ease.
                   </p>
-                  <div className="mt-10 sm:mt-12 w-fit">
+                  <div className="mt-10 sm:mt-12 w-fit mx-0 sm:mx-auto lg:mx-0">
                   <a href="" className="">
 										<div className=" relative rounded-md">
 											<span className="relative isolate m-[-1px] block overflow-hidden rounded-lg p-[1px] [transform:translateZ(10px)] ">

@@ -75,7 +75,7 @@ const features = [
 export default function About() {
   return (
     <div className="bg-white dark:bg-gray-950">
-      <div className="relative pb-32 bg-gray-800">
+      <div className="relative pb-32 bg-gray-800 max-w-7xl mx-auto">
         <div className="absolute inset-0">
           <img
             className="w-full h-full object-cover"
@@ -91,7 +91,7 @@ export default function About() {
           <h1 className="text-4xl font-extrabold tracking-tight dark:text-white text-black md:text-5xl lg:text-6xl">
             Your All-in-One Solution
           </h1>
-          <p className="mt-6 max-w-3xl text-xl font-semibold text-black dark:text-white">
+          <p className="mt-6 max-w-3xl text-xl font-semibold tracking-tighter text-black dark:text-white">
             Think of us as your personal career assistant. You can effortlessly
             create a professional profile, manage your resume, and track your
             application progress, all within a single platform. We understand

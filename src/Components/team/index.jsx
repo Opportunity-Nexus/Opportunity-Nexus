@@ -50,17 +50,16 @@ export default function Team() {
         <div className="space-y-12">
           <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl dark:text-white text-black">Meet our team</h2>
-            <p className="text-xl text-gray-500 dark:text-gray-300">
-              Ornare sagittis, suspendisse in hendrerit quis. Sed dui aliquet lectus sit pretium egestas vel mattis
-              neque.
+            <p className="text-xl font-medium tracking-tighter text-gray-500 dark:text-gray-300">
+            Our platform is driven by a passionate and diverse team dedicated to simplifying your journey to career success. We're here to make your search for opportunities seamless and rewarding. Get to know the faces behind your success.
             </p>
           </div>
           <ul
             role="list"
-            className="mx-auto space-y-16 sm:grid sm:grid-cols-2 sm:gap-16 sm:space-y-0 lg:grid-cols-3 lg:max-w-5xl"
+            className="mx-auto bg-cyan-300 space-y-16 sm:grid sm:grid-cols-2 sm:gap-16 sm:space-y-0 lg:grid-cols-3 lg:max-w-5xl"
           >
             {people.map((person) => (
-              <li key={person.name}>
+              <li key={person.name} className=" bg-pink-400">
                 <div className="space-y-6">
                   <img className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56" src={person.imageUrl} alt="" />
                   <div className="space-y-2">
