@@ -24,8 +24,8 @@ export default function Hero() {
                   </p>
                   <div className="mt-10 sm:mt-12 w-fit mx-0 sm:mx-auto lg:mx-0">
                     <a href="" className="">
-                      <div className=" flex  items-center justify-center rounded-lg">
-                        <button className=" focus:ring-2 focus:ring-offset-2 shadow dark:bg-black bg-white text-primary-500 border-none rounded-lg px-4 py-2.5 text-base">
+                      <div className=" flex items-center justify-center rounded-lg ">
+                        <button className=" border border-primary-500 focus:ring-2 focus:ring-offset-2 shadow hover:drop-shadow-md bg-primary-500 text-white dark:bg-black dark:text-primary-500 dark:border-none hover:bg-white hover:text-primary-500 dark:hover:bg-primary-500 dark:hover:text-black font-medium rounded-lg px-4 py-2.5 text-base">
                           Unlock Your Future
                         </button>
                       </div>
