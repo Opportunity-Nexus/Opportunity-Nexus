@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./global.css"
-import Header from "./Components/header";
-import Hero from "./Components/hero";
-import About from "./Components/about";
-import Team from "./Components/team";
-import Footer from "./Components/footer";
+import Header from "./components/header";
+import Hero from "./components/hero";
+import About from "./components/about";
+import Team from "./components/team";
+import Footer from "./components/footer";
 import { ThemeSwitcherProvider } from 'react-css-theme-switcher';
 import {
 	Route,
@@ -23,14 +23,9 @@ const router = createBrowserRouter(
 	)
 );
 
-const themes = {
-  light: 'public/light.css',
-  dark: 'public/dark.css',
-};
-
 const App = () => {
   return (
-    <ThemeSwitcherProvider defaultTheme="light" themeMap={themes}>
+    <ThemeSwitcherProvider defaultTheme="light">
       	<RouterProvider router={router} /> 
     </ThemeSwitcherProvider>
   );
