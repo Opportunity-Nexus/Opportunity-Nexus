@@ -23,9 +23,14 @@ const router = createBrowserRouter(
 	)
 );
 
+const themes = {
+	light: '',
+	dark: '',
+  };
+
 const App = () => {
   return (
-    <ThemeSwitcherProvider defaultTheme="light">
+    <ThemeSwitcherProvider defaultTheme="light" themeMap={themes}>
       	<RouterProvider router={router} /> 
     </ThemeSwitcherProvider>
   );
