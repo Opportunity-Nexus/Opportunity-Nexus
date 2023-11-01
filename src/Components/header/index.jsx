@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Theme from "../theme";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
   const [navbarColor, setNavbarColor] = useState(false);
@@ -18,21 +19,21 @@ export default function Header() {
 
   const navigation = {
     main: [
-      { name: 'About', href: '#' },
-      { name: 'Blog', href: '#' },
-      { name: 'Jobs', href: '#' },
+      { name: "About", href: "#" },
+      { name: "Blog", href: "#" },
+      { name: "Jobs", href: "#" },
     ],
-  }
+  };
 
   return (
     <Popover
       className={`sticky top-0 z-20 ${
-        navbarColor ? "backdrop-blur-md" : null
-      } `}
+        navbarColor ? "dark-header" : "light-header"
+      } overlapping-header`}
     >
       <div className="relative flex justify-between items-center px-4 py-2 sm:px-6 md:justify-start md:space-x-10 max-w-7xl mx-auto">
         <div>
-          <a href="#" className="flex">
+          <Link to="/" className="flex">
             <span className="sr-only">Opportunity Nexus</span>
             <span className="font-bold text-lg tracking-tighter dark:text-white text-black">
               OpportunityNexus
@@ -42,7 +43,7 @@ export default function Header() {
               src="https://tailwindui.com/img/logos/workflow-mark-primary-600.svg"
               alt=""
             /> */}
-          </a>
+          </Link>
         </div>
         <div className="-mr-2 -my-2 md:hidden flex items-center">
           <Popover.Button className=" rounded-md p-2 inline-flex items-center justify-center hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500">
@@ -60,25 +61,28 @@ export default function Header() {
           <Popover.Group as="nav" className="flex space-x-10">
             {navigation.main.map((item) => (
               <div key={item.name}>
-                <a href={item.href} className="text-base text-gray-500 hover:text-gray-900 dark:hover:text-gray-400">
+                <a
+                  href={item.href}
+                  className="text-base text-gray-500 hover:text-gray-900 dark:hover:text-gray-400"
+                >
                   {item.name}
                 </a>
               </div>
             ))}
           </Popover.Group>
           <div className="flex items-center md:ml-12">
-            <a
-              href="#"
+            <NavLink
+              to="/signin"
               className="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-400"
             >
               Sign in
-            </a>
-            <a
-              href="#"
+            </NavLink>
+            <NavLink
+              to="/signup"
               className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 text-center"
             >
               Sign up
-            </a>
+            </NavLink>
           </div>
         </div>
         <div className="hidden md:flex cursor-pointer">
@@ -137,29 +141,32 @@ export default function Header() {
             </div>
             <div className="space-y-6 px-5 py-6">
               <div className="space-y-4 text-center flex flex-col">
-              {navigation.main.map((item) => (
-              <div key={item.name}>
-                <a href={item.href} className="text-base text-gray-500 hover:text-gray-900 dark:hover:text-gray-400">
-                  {item.name}
-                </a>
-              </div>
-            ))}
+                {navigation.main.map((item) => (
+                  <div key={item.name}>
+                    <a
+                      href={item.href}
+                      className="text-base text-gray-500 hover:text-gray-900 dark:hover:text-gray-400"
+                    >
+                      {item.name}
+                    </a>
+                  </div>
+                ))}
               </div>
               <div>
-                <a
-                  href="#"
+                <NavLink
+                  to="/signup"
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                 >
                   Sign up
-                </a>
+                </NavLink>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   Existing user?{" "}
-                  <a
-                    href="#"
+                  <NavLink
+                    to="/signin"
                     className="text-primary-600 hover:text-primary-500 text-center"
                   >
                     Sign in
-                  </a>
+                  </NavLink>
                 </p>
               </div>
             </div>
