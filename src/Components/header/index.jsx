@@ -72,7 +72,7 @@ export default function Header() {
           </Popover.Group>
           <div className="flex items-center md:ml-12">
             <NavLink
-              to="/signin"
+              to="/login"
               className="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-400"
             >
               Sign in
@@ -162,7 +162,7 @@ export default function Header() {
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   Existing user?{" "}
                   <NavLink
-                    to="/signin"
+                    to="/login"
                     className="text-primary-600 hover:text-primary-500 text-center"
                   >
                     Sign in

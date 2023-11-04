@@ -1,4 +1,5 @@
 import NandaniAvatar from "../../assets/team/avatar-nandani.png";
+import AmanAvatar from "../../assets/team/avatar-aman.png";
 
 const people = [
   {
@@ -17,6 +18,13 @@ const people = [
     linkedinUrl: "#",
   },
   {
+    name: "Aman kumar Gupta",
+    role: "MERN Developer",
+    imageUrl: AmanAvatar,
+    twitterUrl: "https://twitter.com/AmanGup03229924",
+    linkedinUrl: "https://www.linkedin.com/in/aman-gupta-2b6164212/",
+  },
+  {
     name: "Vishwajeet",
     role: "Copywriter",
     imageUrl:
@@ -24,14 +32,7 @@ const people = [
     twitterUrl: "#",
     linkedinUrl: "#",
   },
-  {
-    name: "Aman kumar Gupta",
-    role: "Copywriter",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-    twitterUrl: "#",
-    linkedinUrl: "#",
-  },
+
   {
     name: "Prashant Dubey",
     role: "Copywriter",

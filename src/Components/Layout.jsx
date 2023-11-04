@@ -4,9 +4,9 @@ import Header from "./header/index";
 
 const Layout = () => {
   return (
-    <div>
-      <Header />
-      <div className="relative">
+    <div className="dark:bg-richblack-900">
+      <Header className="sticky-header " />
+      <div className="min-h-screen mt-14">
         <Outlet />
       </div>
     </div>

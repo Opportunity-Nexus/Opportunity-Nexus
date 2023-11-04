@@ -6,9 +6,11 @@ import Hero from "./Components/hero";
 import About from "./Components/about";
 import Team from "./Components/team";
 import Footer from "./Components/footer";
-import Signup from "./Components/Account/Signup";
-import Signin from "./Components/Account/Signin";
 import Layout from "./Components/Layout";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import {
   Route,
@@ -16,28 +18,6 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route
-        path="/"
-        element={
-          <>
-            <Header />
-            <Hero />
-            <About />
-            <Team />
-            <Footer />
-          </>
-        }
-      />
-      <Route path="" element={<Layout />}>
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-      </Route>
-    </>
-  )
-);
 
 const themes = {
   light: "public/light.css",
@@ -45,6 +25,45 @@ const themes = {
 };
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log(isLoggedIn);
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route
+          path="/"
+          element={
+            <>
+              <Header />
+              <Hero />
+              <About />
+              <Team />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path=""
+          element={
+            <div className="w-screen h-screen bg-white dark:bg-richblack-900 flex flex-col ">
+              <Layout />
+            </div>
+          }
+        >
+          <Route
+            path="/login"
+            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          />
+          <Route
+            path="/signup"
+            element={<Signup setIsLoggedIn={setIsLoggedIn} />}
+          />
+        </Route>
+      </>
+    )
+  );
+
   return (
     <ThemeSwitcherProvider defaultTheme="light" themeMap={themes}>
       <RouterProvider router={router} />
@@ -54,4 +73,9 @@ const App = () => {
 
 const root = document.getElementById("root");
 
-ReactDOM.createRoot(root).render(<App />);
+ReactDOM.createRoot(root).render(
+  <>
+    <App />
+    <Toaster />
+  </>
+);
