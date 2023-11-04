@@ -7,7 +7,7 @@ const Template = (props) => {
   const setIsLoggedIn = props.setIsLoggedIn;
   return (
     <div
-      className="flex w-11/12 max-w-[1160px] py-1  mx-auto  gap-y-0 gap-x-12 justify-center text-richblack-100 
+      className="flex w-11/12 max-w-[1160px] py-0 mx-auto  gap-y-0 gap-x-12 justify-center text-richblack-100 
     "
     >
       <div className="w-11/12 max-w-[450px] flex flex-col ">
@@ -40,7 +40,7 @@ const Template = (props) => {
 
         <button className="flex rounded-md items-center justify-center border border-richblack-700 font-medium text-black dark:text-richblack-100 px-[12px] py-[8px] gap-x-2 mt-4">
           <FcGoogle />
-          <p>Sign in with Google</p>
+          <p>Continue with Google</p>
         </button>
       </div>
 

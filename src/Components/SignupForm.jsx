@@ -48,14 +48,14 @@ const SignupForm = ({ setIsLoggedIn }) => {
 
     console.log(finalData);
     setIsLoggedIn(true);
-    toast.success("Account Create Successful");
+    toast.success("Account Created Successfully");
     navigate("/");
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-4">
       {/* Button Group */}
-      <div className="flex border border-gray-300  bg-gray-50 dark:bg-richblack-800 dark:border-none max-w-max rounded-full p-0.5 gap-x-1">
+      <div className="flex border border-gray-300  bg-gray-50 dark:bg-richblack-800 dark:border-none max-w-max rounded-full p-0 m-0 gap-x-1">
         <button
           className={`${
             accountType === "student"

@@ -22,7 +22,7 @@ const LoginForm = (props) => {
 
   function submitHandler(event) {
     event.preventDefault();
-    toast.success("Login Success");
+    toast.success("Loggedin Successfully");
     console.log(formData);
     setIsLoggedIn(true);
     navigate("/");
@@ -77,7 +77,7 @@ const LoginForm = (props) => {
           )}
         </span>
 
-        <Link to="#">
+        <Link to="/ForgetPass">
           <p className="text-xs mt-1 text-primary-600 max-w-max ml-auto">
             Forgot Password
           </p>

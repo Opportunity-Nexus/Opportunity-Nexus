@@ -31,7 +31,7 @@ export default function Header() {
         navbarColor ? "dark-header" : "light-header"
       } overlapping-header`}
     >
-      <div className="relative flex justify-between items-center px-4 py-2 sm:px-6 md:justify-start md:space-x-10 max-w-7xl mx-auto">
+      <div className="relative flex justify-between items-center px-4 py-2  sm:px-6 md:justify-start md:space-x-10 max-w-7xl mx-auto">
         <div>
           <Link to="/" className="flex">
             <span className="sr-only">Opportunity Nexus</span>

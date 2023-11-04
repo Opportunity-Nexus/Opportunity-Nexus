@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
+import ForgetPass from "./Components/ForgetPass";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import {
   Route,
@@ -59,6 +60,7 @@ const App = () => {
             path="/signup"
             element={<Signup setIsLoggedIn={setIsLoggedIn} />}
           />
+          <Route path="/ForgetPass" element={<ForgetPass />} />
         </Route>
       </>
     )
