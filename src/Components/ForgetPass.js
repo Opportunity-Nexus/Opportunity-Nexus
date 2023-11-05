@@ -7,6 +7,7 @@ const ForgetPass = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [validEmail, setValidEmail] = useState(true);
+  console.log(email);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);

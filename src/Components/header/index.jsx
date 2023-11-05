@@ -28,8 +28,8 @@ export default function Header() {
   return (
     <Popover
       className={`sticky top-0 z-20 ${
-        navbarColor ? "dark-header" : "light-header"
-      } overlapping-header`}
+        navbarColor ? "backdrop-blur-md" : null
+      } `}
     >
       <div className="relative flex justify-between items-center px-4 py-2  sm:px-6 md:justify-start md:space-x-10 max-w-7xl mx-auto">
         <div>
@@ -73,7 +73,7 @@ export default function Header() {
           <div className="flex items-center md:ml-12">
             <NavLink
               to="/login"
-              className="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-400"
+              className="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-400 "
             >
               Sign in
             </NavLink>

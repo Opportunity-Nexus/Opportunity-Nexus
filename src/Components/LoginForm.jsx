@@ -15,6 +15,10 @@ const LoginForm = (props) => {
 
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
+  const isPasswordValid = (password) => {
+    return password.length >= 8;
+  };
+
   function changeHandler(event) {
     setFormData((prev) => ({
       ...prev,
@@ -30,6 +34,11 @@ const LoginForm = (props) => {
       return;
     }
 
+    if (!isPasswordValid(formData.password)) {
+      toast.error("Password must be at least 8 characters long");
+      return;
+    }
+
     toast.success("Logged in Successfully");
     console.log(formData);
     setIsLoggedIn(true);
@@ -39,7 +48,7 @@ const LoginForm = (props) => {
   return (
     <form
       onSubmit={submitHandler}
-      className="flex flex-col w-full gap-y-4 mt-6 "
+      className="flex flex-col w-full gap-y-4 mt-6"
     >
       <label htmlFor="" className="w-full">
         <p className="text-[0.875rem] text-black dark:text-richblack-5 mb-1 leading-[1.375rem]">
@@ -71,12 +80,12 @@ const LoginForm = (props) => {
           placeholder="Enter Password"
           onChange={changeHandler}
           name="password"
-          className="border border-gray-300  bg-gray-50 dark:bg-richblack-800 rounded-[0.75rem] w-full p-[12px] text-black dark:text-richblack-5 dark:border-none"
+          className="border border-gray-300 bg-gray-50 dark:bg-richblack-800 rounded-[0.75rem] w-full p-[12px] text-black dark:text-richblack-5 dark:border-none"
         />
 
         <span
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-[38px] cursor-pointer "
+          className="absolute right-3 top-[38px] cursor-pointer"
         >
           {showPassword ? (
             <AiOutlineEye fontSize={24} fill="#AFB2BF" />
@@ -92,7 +101,7 @@ const LoginForm = (props) => {
         </Link>
       </label>
 
-      <button className=" bg-primary-600 hover:bg-primary-700 text-white dark:text-richblack-900 py-[8px] px-[12px] rounded-[8px] mt-2 font-semibold  ">
+      <button className="bg-primary-600 hover:bg-primary-700 text-white dark:text-richblack-900 py-[8px] px-[12px] rounded-[8px] mt-2 font-semibold">
         Sign in
       </button>
       <p class="text-sm font-light text-gray-500 dark:text-gray-400">

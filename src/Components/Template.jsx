@@ -38,7 +38,7 @@ const Template = (props) => {
           <div className="h-[1px] bg-richblack-700 w-full"></div>
         </div>
 
-        <button className="flex rounded-md items-center justify-center border border-richblack-700 font-medium text-black dark:text-richblack-100 px-[12px] py-[8px] gap-x-2 mt-4">
+        <button className=" flex rounded-md items-center justify-center border hover:bg-slate-100 dark:hover:bg-slate-600 border-richblack-700 font-medium text-black dark:text-richblack-100 px-[12px] py-[8px] gap-x-2 mt-4 	">
           <FcGoogle />
           <p>Continue with Google</p>
         </button>

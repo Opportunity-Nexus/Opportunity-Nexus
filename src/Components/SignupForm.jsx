@@ -44,6 +44,11 @@ const SignupForm = ({ setIsLoggedIn }) => {
       return;
     }
 
+    if (formData.createPassword.length < 8) {
+      toast.error("Password must be at least 8 characters long");
+      return;
+    }
+
     if (formData.createPassword !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
