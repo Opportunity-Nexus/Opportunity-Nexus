@@ -36,6 +36,14 @@ const SignupForm = ({ setIsLoggedIn }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
     if (formData.createPassword !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
@@ -53,7 +61,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-1">
       {/* Button Group */}
       <div className="flex border border-gray-300  bg-gray-50 dark:bg-richblack-800 dark:border-none max-w-max rounded-full p-0 m-0 gap-x-1">
         <button
@@ -90,7 +98,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               First Name<sup className="text-pink-200">*</sup>
             </p>
             <input
-              className="border border-gray-300 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px] 
+              className="border border-gray-300 text-black dark:text-richblack-5  bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px] 
               "
               required
               type="text"
@@ -107,7 +115,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               Last Name<sup className="text-pink-200">*</sup>
             </p>
             <input
-              className="border border-gray-300 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
+              className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
               required
               type="text"
               name="lastName"
@@ -124,7 +132,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
             Email Address<sup className="text-pink-200">*</sup>
           </p>
           <input
-            className="border border-gray-300 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
+            className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
             required
             type="email"
             name="email"
@@ -141,7 +149,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               Create Password<sup className="text-pink-200">*</sup>
             </p>
             <input
-              className="border border-gray-300 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
+              className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
               required
               type={showPassword.createPassword ? "text" : "password"}
               name="createPassword"
@@ -168,7 +176,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               Create Password<sup className="text-pink-200">*</sup>
             </p>
             <input
-              className="border border-gray-300 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
+              className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
               required
               type={showPassword.confirmPassword ? "text" : "password"}
               name="confirmPassword"
@@ -191,7 +199,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
           </label>
         </div>
 
-        <button className=" bg-primary-600 hover:bg-primary-700 text-white dark:bg-yellow-50 dark:text-richblack-900 font-semibold px-[12px] rounded-[8px] py-[8px] mt-2">
+        <button className=" bg-primary-600 hover:bg-primary-700 text-white dark:text-richblack-900 font-semibold px-[12px] rounded-[8px] py-[8px] mt-2">
           Create Account
         </button>
         <p class="text-sm font-light text-gray-500 dark:text-gray-400">

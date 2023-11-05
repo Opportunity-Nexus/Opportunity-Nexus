@@ -13,6 +13,8 @@ const LoginForm = (props) => {
     password: "",
   });
 
+  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
   function changeHandler(event) {
     setFormData((prev) => ({
       ...prev,
@@ -22,7 +24,13 @@ const LoginForm = (props) => {
 
   function submitHandler(event) {
     event.preventDefault();
-    toast.success("Loggedin Successfully");
+
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    toast.success("Logged in Successfully");
     console.log(formData);
     setIsLoggedIn(true);
     navigate("/");
@@ -31,7 +39,7 @@ const LoginForm = (props) => {
   return (
     <form
       onSubmit={submitHandler}
-      className="flex flex-col w-full gap-y-4 mt-6"
+      className="flex flex-col w-full gap-y-4 mt-6 "
     >
       <label htmlFor="" className="w-full">
         <p className="text-[0.875rem] text-black dark:text-richblack-5 mb-1 leading-[1.375rem]">
@@ -84,7 +92,7 @@ const LoginForm = (props) => {
         </Link>
       </label>
 
-      <button className=" bg-primary-600 hover:bg-primary-700 text-white dark:bg-yellow-50 dark:text-richblack-900 py-[8px] px-[12px] rounded-[8px] mt-2 font-semibold  ">
+      <button className=" bg-primary-600 hover:bg-primary-700 text-white dark:text-richblack-900 py-[8px] px-[12px] rounded-[8px] mt-2 font-semibold  ">
         Sign in
       </button>
       <p class="text-sm font-light text-gray-500 dark:text-gray-400">

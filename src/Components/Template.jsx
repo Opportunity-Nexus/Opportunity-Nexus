@@ -7,10 +7,10 @@ const Template = (props) => {
   const setIsLoggedIn = props.setIsLoggedIn;
   return (
     <div
-      className="flex w-11/12 max-w-[1160px] py-0 mx-auto  gap-y-0 gap-x-12 justify-center text-richblack-100 
+      className="flex w-11/12 max-w-[1160px] py-0 mx-auto  gap-y-0 gap-x-12 justify-center align-center  h-[90vh] text-richblack-100 
     "
     >
-      <div className="w-11/12 max-w-[450px] flex flex-col ">
+      <div className="w-11/12 max-w-[450px] flex flex-col justify-center  ">
         <h1 className="text-black dark:text-richblack-5 font-semibold text-[1.875rem] leading-[2.375rem] ">
           {props.title}
         </h1>
@@ -44,7 +44,7 @@ const Template = (props) => {
         </button>
       </div>
 
-      <div className="  elative w-11/12 max-w-[450px] hidden md:block ">
+      <div className=" relative w-11/12 max-w-[450px] hidden md:block my-auto ">
         <img
           src={props.image}
           alt="patter"
