@@ -1,4 +1,5 @@
 import React from "react";
+
 import ReactDOM from "react-dom";
 import "./global.css";
 import Header from "./Components/header";
@@ -13,6 +14,7 @@ import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import ForgetPass from "./Components/ForgetPass";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
+
 import {
   Route,
   createBrowserRouter,
@@ -21,9 +23,11 @@ import {
 } from "react-router-dom";
 
 const themes = {
+
   light: "public/light.css",
   dark: "public/dark.css",
 };
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
