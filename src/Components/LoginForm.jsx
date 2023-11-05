@@ -101,7 +101,7 @@ const LoginForm = (props) => {
         </Link>
       </label>
 
-      <button className="bg-primary-600 hover:bg-primary-700 text-white dark:text-richblack-900 py-[8px] px-[12px] rounded-[8px] mt-2 font-semibold">
+      <button className="bg-primary-600 hover:bg-primary-700 text-white  py-[8px] px-[12px] rounded-[8px] mt-2 font-semibold">
         Sign in
       </button>
       <p class="text-sm font-light text-gray-500 dark:text-gray-400">

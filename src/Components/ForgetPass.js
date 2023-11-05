@@ -163,7 +163,7 @@ const ForgetPass = () => {
               </svg>
               <span>Reset password</span>
             </button>
-            <p className="text-center">
+            <p className="text-center dark:text-white">
               Not registered yet?{" "}
               <a
                 href="/signup"

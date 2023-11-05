@@ -204,10 +204,10 @@ const SignupForm = ({ setIsLoggedIn }) => {
           </label>
         </div>
 
-        <button className=" bg-primary-600 hover:bg-primary-700 text-white dark:text-richblack-900 font-semibold px-[12px] rounded-[8px] py-[8px] mt-2">
+        <button className=" bg-primary-600 hover:bg-primary-700 text-white  font-semibold px-[12px] rounded-[8px] py-[8px] mt-2">
           Create Account
         </button>
-        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+        <p class="text-sm font-light text-black dark:text-white">
           Already have an account?{" "}
           <a
             href="/login"
