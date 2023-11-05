@@ -104,7 +104,7 @@ const LoginForm = (props) => {
       <button className="bg-primary-600 hover:bg-primary-700 text-white  py-[8px] px-[12px] rounded-[8px] mt-2 font-semibold">
         Sign in
       </button>
-      <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+      <p class="text-sm font-light text-black dark:text-white">
         Don't have an account?{" "}
         <a
           href="/signup"
