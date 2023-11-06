@@ -1,5 +1,5 @@
 import Template from "../Components/Template";
-import loginImg from "../assets/login.png";
+import loginImg from "../assets/utils/login.png";
 
 function Login({ setIsLoggedIn }) {
   return (
