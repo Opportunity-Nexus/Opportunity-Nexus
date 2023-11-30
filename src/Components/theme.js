@@ -7,10 +7,6 @@ export default function Theme() {
   const { switcher, themes, status } = useThemeSwitcher();
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 
-  if (status === "loading") {
-    return <div>Loading styles...</div>;
-  }
-
   const toggleDarkMode = () => {
     setIsDarkMode((previous) => {
       switcher({ theme: previous ? themes.light : themes.dark });
