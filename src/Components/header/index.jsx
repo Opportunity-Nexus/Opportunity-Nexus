@@ -3,6 +3,8 @@ import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Theme from "../theme";
 import { Link, NavLink } from "react-router-dom";
+import LogoLight from "../../assets/logo/opportunity-nexus-light-logo.png";
+import LogoDark from "../../assets/logo/opportunity-nexus-dark-logo.png";
 
 export default function Header() {
   const [navbarColor, setNavbarColor] = useState(false);
@@ -35,14 +37,13 @@ export default function Header() {
         <div>
           <Link to="/" className="flex">
             <span className="sr-only">Opportunity Nexus</span>
-            <span className="font-bold text-lg tracking-tighter dark:text-white text-black">
-              OpportunityNexus
-            </span>
-            {/* <img
-              className="h-8 w-auto sm:h-10"
-              src="https://tailwindui.com/img/logos/workflow-mark-primary-600.svg"
+
+            <img
+              className="h-12 w-auto dark:flex hidden items-center"
+              src={LogoDark}
               alt=""
-            /> */}
+            />
+            <img className="h-12 w-auto dark:hidden  items-center" src={LogoLight} alt="" />
           </Link>
         </div>
         <div className="-mr-2 -my-2 md:hidden flex items-center">
@@ -113,16 +114,16 @@ export default function Header() {
                     aria-label="Home"
                     className="h-auto w-auto select-none"
                   >
-                    <span className="font-bold text-lg tracking-tighter dark:text-white text-black">
-                      OpportunityNexus
-                    </span>
-                    {/* <img
-											src={'/assets/logo/full-logo-orange.svg'}
-											draggable={false}
-											alt="softlancer-logo"
-											height={40}
-											width={200}
-										/> */}
+                    <img
+                      className="h-12 w-auto sm:h-10 dark:flex hidden"
+                      src={LogoDark}
+                      alt=""
+                    />
+                    <img
+                      className="h-12 w-auto sm:h-10 dark:hidden"
+                      src={LogoLight}
+                      alt=""
+                    />
                   </a>
                 </div>
                 <div className="-mr-2">

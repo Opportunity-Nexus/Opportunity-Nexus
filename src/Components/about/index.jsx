@@ -109,7 +109,7 @@ export default function About() {
           {features.map((link) => (
             <div
               key={link.name}
-              className="flex flex-col bg-white dark:bg-black rounded-2xl shadow-xl"
+              className="flex flex-col bg-white dark:bg-midnightblue rounded-2xl shadow-xl"
             >
               <div className="flex-1 relative pt-16 px-6 pb-8 md:px-8">
                 <div className="absolute top-0 p-5 inline-block bg-primary-600 rounded-xl shadow-lg transform -translate-y-1/2">

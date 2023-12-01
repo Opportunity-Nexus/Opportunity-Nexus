@@ -24,6 +24,7 @@ module.exports = {
         blue: {
           100: "#47A5C5",
         },
+        midnightblue: "#191D2D",
         pink: {
           200: "#EF476F",
         },
