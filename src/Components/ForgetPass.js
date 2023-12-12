@@ -34,7 +34,7 @@ const ForgetPass = () => {
     }
 
     if (password === confirmPassword) {
-      toast.success("Password changed successfully");
+      toast.success("Reset password link has been send to your email");
     } else {
       toast.error("Password and Confirm Password must match.");
     }

@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import InputOtp from "./InputOtp";
 
 const SignupForm = ({ setIsLoggedIn }) => {
   const [accountType, setAccountType] = useState("student");
-  const navigate = useNavigate();
+  const [enrollmentNo, setEnrollmentNo] = useState("");
+  const [showOTPModel, setShowOTPModel] = useState(false);
+  const handleOnClose = () => {
+    setShowOTPModel(false);
+  };
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -14,7 +18,10 @@ const SignupForm = ({ setIsLoggedIn }) => {
     createPassword: "",
     confirmPassword: "",
   });
-
+  const handleEnrollmentNoChange = (event) => {
+    const inputValue = event.target.value;
+    setEnrollmentNo(inputValue);
+  };
   function changeHandler(event) {
     setFormData((prev) => ({
       ...prev,
@@ -53,6 +60,12 @@ const SignupForm = ({ setIsLoggedIn }) => {
       toast.error("Passwords do not match");
       return;
     }
+    if (
+      !(enrollmentNo.startsWith("BU") && /^\d*$/.test(enrollmentNo.slice(2)))
+    ) {
+      toast.error("Please enter a valid enrollment number");
+      return;
+    }
 
     const finalData = {
       ...formData,
@@ -60,42 +73,19 @@ const SignupForm = ({ setIsLoggedIn }) => {
     };
 
     console.log(finalData);
-    setIsLoggedIn(true);
-    toast.success("Account Created Successfully");
-    navigate("/");
+    setShowOTPModel(true);
+    // setIsLoggedIn(true);
+    toast.success("OTP has been sent successfully");
+    // navigate("/");
   };
 
   return (
-    <div className="mt-1">
+    <div className="mt-0">
       {/* Button Group */}
-      <div className="flex border border-gray-300  bg-gray-50 dark:bg-richblack-800 dark:border-none max-w-max rounded-full p-0 m-0 gap-x-1">
-        <button
-          className={`${
-            accountType === "student"
-              ? " bg-primary-600 dark:bg-richblack-900 text-richblack-5"
-              : "bg-transparent text-richblack-200"
-          } py-2 px-5 rounded-full transition-all duration-200`}
-          onClick={() => setAccountType("student")}
-        >
-          Student
-        </button>
-
-        <button
-          className={`${
-            accountType === "instructor"
-              ? "bg-primary-600 dark:bg-richblack-900 text-richblack-5"
-              : "bg-transparent text-richblack-200"
-          } py-2 px-5 rounded-full transition-all duration-200`}
-          onClick={() => setAccountType("instructor")}
-        >
-          Instructor
-        </button>
-      </div>
-
       {/* Form */}
       <form
         onSubmit={submitHandler}
-        className="flex flex-col w-full gap-y-4 mt-6"
+        className="flex flex-col w-full gap-y-2 mt-3"
       >
         <div className="flex gap-x-4">
           <label className="w-full">
@@ -103,7 +93,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
               First Name<sup className="text-pink-200">*</sup>
             </p>
             <input
-              className="border border-gray-300 text-black dark:text-richblack-5  bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px] 
+              className="border border-gray-3 text-black dark:text-richblack-5  bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px] 
               "
               required
               type="text"
@@ -131,7 +121,6 @@ const SignupForm = ({ setIsLoggedIn }) => {
             />
           </label>
         </div>
-
         <label className="w-full">
           <p className="text-black dark:text-richblack-5 mb-1 text-[0.875rem] leading-[1.375rem]">
             Email Address<sup className="text-pink-200">*</sup>
@@ -147,7 +136,6 @@ const SignupForm = ({ setIsLoggedIn }) => {
             onChange={changeHandler}
           />
         </label>
-
         <div className="flex-col gap-x-4  ">
           <label className="w-full relative ">
             <p className="text-black dark:text-richblack-5 mb-1 text-[0.875rem] leading-[1.375rem]">
@@ -165,7 +153,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
             />
 
             <span
-              className="absolute top-[38px] right-3 z-10 cursor-pointer"
+              className=" absolute top-[38px] right-3  cursor-pointer"
               onClick={() => handleClick("createPassword")}
             >
               {showPassword.createPassword ? (
@@ -192,7 +180,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
             />
 
             <span
-              className="absolute top-[82px] right-3 z-10 cursor-pointer"
+              className="  absolute top-[82px] right-3  cursor-pointer"
               onClick={() => handleClick("confirmPassword")}
             >
               {showPassword.confirmPassword ? (
@@ -203,7 +191,18 @@ const SignupForm = ({ setIsLoggedIn }) => {
             </span>
           </label>
         </div>
-
+        <label>
+          <p className="text-black dark:text-richblack-5 mb-1 text-[0.875rem] leading-[1.375rem] mt-3">
+            Enrollment No<sup className="text-pink-200">*</sup>
+          </p>
+          <input
+            className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
+            required
+            placeholder="BUxxxxxxxxxxxx"
+            value={enrollmentNo}
+            onChange={handleEnrollmentNoChange}
+          />
+        </label>
         <button className=" bg-primary-600 hover:bg-primary-700 text-white  font-semibold px-[12px] rounded-[8px] py-[8px] mt-2">
           Create Account
         </button>
@@ -217,6 +216,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
           </a>
         </p>
       </form>
+      <InputOtp onClose={handleOnClose} visible={showOTPModel} />;
     </div>
   );
 };
