@@ -216,7 +216,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
           </a>
         </p>
       </form>
-      <InputOtp onClose={handleOnClose} visible={showOTPModel} />;
+      <InputOtp onClose={handleOnClose} visible={showOTPModel} />
     </div>
   );
 };
