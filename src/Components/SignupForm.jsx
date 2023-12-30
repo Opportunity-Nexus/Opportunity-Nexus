@@ -60,9 +60,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
       toast.error("Passwords do not match");
       return;
     }
-    if (
-      !(enrollmentNo.startsWith("BU") && /^\d*$/.test(enrollmentNo.slice(2)))
-    ) {
+    if (!/^BU\d{10}$/.test(enrollmentNo)) {
       toast.error("Please enter a valid enrollment number");
       return;
     }
@@ -198,7 +196,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
           <input
             className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-800 dark:border-none rounded-[8px] w-full px-[12px] py-[8px]"
             required
-            placeholder="BUxxxxxxxxxxxx"
+            placeholder="BUxxxxxxxxxx"
             value={enrollmentNo}
             onChange={handleEnrollmentNoChange}
           />
@@ -216,7 +214,11 @@ const SignupForm = ({ setIsLoggedIn }) => {
           </a>
         </p>
       </form>
-      <InputOtp onClose={handleOnClose} visible={showOTPModel} />
+      <InputOtp
+        email={formData.email}
+        onClose={handleOnClose}
+        visible={showOTPModel}
+      />
     </div>
   );
 };
