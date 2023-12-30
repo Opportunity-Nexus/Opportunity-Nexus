@@ -23,11 +23,9 @@ import {
 } from "react-router-dom";
 
 const themes = {
-
   light: "public/light.css",
   dark: "public/dark.css",
 };
-
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

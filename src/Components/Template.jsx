@@ -44,7 +44,7 @@ const Template = (props) => {
         </button>
       </div>
 
-      <div className=" relative w-11/12 max-w-[450px] hidden md:block my-auto ">
+      <div className=" static w-11/12 max-w-[450px] hidden md:block my-auto ">
         <img
           src={props.image}
           alt="patter"
