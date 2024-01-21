@@ -22,7 +22,7 @@ const ForgetPass = () => {
       return;
     }
 
-    toast.success("Reset-Password-Link has been sent to your resistered Email");
+    toast.success("Reset-Password-Link has been sent to your registered Email");
   };
 
   return (
