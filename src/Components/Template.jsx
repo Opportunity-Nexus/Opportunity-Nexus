@@ -11,7 +11,7 @@ const Template = (props) => {
     "
     >
       <div className="w-11/12 max-w-[450px] flex flex-col justify-center  ">
-        <h1 className="text-black dark:text-richblack-5 font-semibold text-[1.875rem] leading-[2.375rem] ">
+        <h1 className="text-black dark:text-richblack-5 font-semibold text-[1.875rem] leading-[2.375rem]  xs:mt-25  ">
           {props.title}
         </h1>
         <p className="text-[1.125rem] mt-0 leading-[1.625rem]">
@@ -23,7 +23,6 @@ const Template = (props) => {
             {props.description2}
           </span>
         </p>
-
         {props.formType === "login" ? (
           <LoginForm setIsLoggedIn={setIsLoggedIn} />
         ) : (
@@ -44,7 +43,7 @@ const Template = (props) => {
         </button>
       </div>
 
-      <div className=" relative w-11/12 max-w-[450px] hidden md:block my-auto ">
+      <div className=" static w-11/12 max-w-[450px] hidden md:block my-auto ">
         <img
           src={props.image}
           alt="patter"
