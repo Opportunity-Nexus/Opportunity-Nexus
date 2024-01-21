@@ -23,7 +23,6 @@ const Template = (props) => {
             {props.description2}
           </span>
         </p>
-
         {props.formType === "login" ? (
           <LoginForm setIsLoggedIn={setIsLoggedIn} />
         ) : (
