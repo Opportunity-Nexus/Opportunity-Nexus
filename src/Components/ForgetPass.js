@@ -5,7 +5,6 @@ const ForgetPass = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordMatch, setPasswordMatch] = useState(true);
   const [validEmail, setValidEmail] = useState(true);
   console.log(email);
 
@@ -13,16 +12,6 @@ const ForgetPass = () => {
     setEmail(event.target.value);
     const updatedEmailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     setValidEmail(updatedEmailRegex.test(event.target.value));
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-    setPasswordMatch(event.target.value === confirmPassword);
-  };
-
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
-    setPasswordMatch(event.target.value === password);
   };
 
   const handleSubmit = (event) => {
@@ -33,19 +22,15 @@ const ForgetPass = () => {
       return;
     }
 
-    if (password === confirmPassword) {
-      toast.success("Reset password link has been send to your email");
-    } else {
-      toast.error("Password and Confirm Password must match.");
-    }
+    toast.success("Reset-Password-Link has been sent to your registered Email");
   };
 
   return (
-    <section className="bg-white dark:bg-gray-900  ">
-      <div className="flex flex-col   justify-center  items-center px-6 py-8 mx-auto md:h-[85vh] lg:py-0 ">
+    <section className="bg-white dark:bg-gray-900 ">
+      <div className="flex flex-col   justify-center h-[80vh] items-center px-6 py-8 mx-auto md:h-[85vh] lg:py-0 md-p-3 ">
         <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
           <h2 className="flex justify-center align-center mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Change Password
+            Reset Password
           </h2>
           <form
             className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
@@ -75,49 +60,7 @@ const ForgetPass = () => {
                 </p>
               )}
             </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                New Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="••••••••"
-                className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
-                required={true}
-                minLength="8"
-                onChange={handlePasswordChange}
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="confirm-password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Confirm password
-              </label>
-              <input
-                type="password"
-                name="confirm-password"
-                id="confirm-password"
-                placeholder="••••••••"
-                className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
-                  passwordMatch ? "" : "border-red-500"
-                }`}
-                required={true}
-                minLength="8"
-                onChange={handleConfirmPasswordChange}
-              />
-              {!passwordMatch && (
-                <p className="text-red-500 text-sm">
-                  Password and Confirm Password must match.
-                </p>
-              )}
-            </div>
+
             <div className="flex items-start">
               <div className="flex items-center h-5">
                 <input
