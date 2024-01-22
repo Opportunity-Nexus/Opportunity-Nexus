@@ -1,8 +1,8 @@
 export default function CtaSection() {
   return (
-    <section className="relative py-16 w-full">
+    <section className="relative dark:bg-gray-950 py-16 w-full">
       <div className=" z-10 md:px-6">
-        <svg class="absolute inset-0 z-0 h-full w-full stroke-gray-200 [mask-image:radial-gradient(transparent,white)] md:[mask-image:radial-gradient(white,transparent)]">
+        <svg class="absolute inset-0 z-0 h-full w-full stroke-gray-200 dark:stroke-gray-800 [mask-image:radial-gradient(transparent,white)] md:[mask-image:radial-gradient(white,transparent)]">
           <rect width="100%" height="100%" fill="url(#grid-3)"></rect>
           <defs>
             <pattern
@@ -23,13 +23,13 @@ export default function CtaSection() {
         <h2 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
           <span
             className="block 
-            text-secondary-900"
+            text-secondary-900 dark:text-white"
           >
             Discover Exciting Job{" "}
           </span>
           <span className="block text-primary-500">Opportunities</span>
         </h2>
-        <p className="text-xl mt-5 font-medium text-gray-500 ">
+        <p className="text-xl mt-5 font-medium text-gray-500 dark:text-gray-300">
           Explore a wide range of job and fellowship Opportunities for you!
         </p>
         <div className="mt-8 flex justify-center">

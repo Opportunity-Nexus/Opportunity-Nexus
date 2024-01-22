@@ -88,7 +88,7 @@ const FrequentlyAskedQuestions = () => {
                   </Disclosure.Button>
                 </dt>
                 <Disclosure.Panel as="dd" className="mt-2 pr-12">
-                  <p className="text-base text-gray-500 dark:text-gray-600">{faq.answer}</p>
+                  <p className="text-base text-gray-500 dark:text-gray-200">{faq.answer}</p>
                 </Disclosure.Panel>
               </>
             )}
