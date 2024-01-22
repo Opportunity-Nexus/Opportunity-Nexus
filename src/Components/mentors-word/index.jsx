@@ -11,7 +11,7 @@ export default function MentorsWords() {
               <div className="top-1/3 mx-auto max-w-md px-4 pt-6 sm:max-w-3xl sm:px-6 lg:h-full lg:p-0">
                 <div className="aspect-w-10 aspect-h-2 sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none overflow-hidden rounded-xl shadow-xl lg:h-full">
                   <img
-                    className="object-cover lg:h-full lg:w-full mx-auto"
+                    className="object-cover lg:h-full lg:w-full mx-auto rounded-md"
                     src={Mentor}
                     alt="Project Mentor"
                   />
