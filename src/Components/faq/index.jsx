@@ -63,7 +63,7 @@ const FrequentlyAskedQuestions = () => {
               <>
                 <dt className="text-lg">
                   <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-400">
-                    <span className="font-medium dark:text-gray-900 text-gray-700">
+                    <span className="font-medium dark:text-gray-500 text-gray-700">
                       {faq.question}
                     </span>
                     <span className="ml-6 flex h-7 items-center">

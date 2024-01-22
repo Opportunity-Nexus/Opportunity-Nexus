@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <Popover
-      className={`sticky top-0 z-20 ${
+      className={`sticky top-0 z-[9999] ${
         navbarColor ? "backdrop-blur-md" : null
       } `}
     >
