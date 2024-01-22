@@ -32,7 +32,7 @@ export default function MentorsWords() {
                     </svg>
                     <p className="mt-6 text-2xl font-medium text-white">
                       Welcome to{" "}
-                      <b className="text-primary-500">Opportunity Nexus</b>,
+                      <b className="text-primary-200">Opportunity Nexus</b>,
                       where your potential meets possibility. As a mentor in
                       this vibrant community, I've witnessed firsthand the
                       transformative power of connecting passionate individuals
@@ -42,7 +42,7 @@ export default function MentorsWords() {
                     </p>
                   </div>
                   <footer className="mt-6">
-                    <p className="text-base font-medium text-primary-500">
+                    <p className="text-base font-medium text-primary-200">
                       Dr. Sadik Khan
                     </p>
                     <p className="text-base font-medium text-indigo-100">
