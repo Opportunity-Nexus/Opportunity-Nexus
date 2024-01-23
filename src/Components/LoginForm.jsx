@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { toast } from "react-hot-toast";
+import axios from "axios"
 
 const LoginForm = (props) => {
   const setIsLoggedIn = props.setIsLoggedIn;
@@ -39,10 +40,30 @@ const LoginForm = (props) => {
       return;
     }
 
-    toast.success("Logged in Successfully");
-    console.log(formData);
-    setIsLoggedIn(true);
-    navigate("/");
+    const finalData = JSON.stringify(formData);
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://localhost:4000/api/v1/auth/login",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: finalData,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        if (response.data.success) {
+          toast.success("Logged in Successfully");
+          localStorage.setItem('token', response.data.token);
+          setIsLoggedIn(true);
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (

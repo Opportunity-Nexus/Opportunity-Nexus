@@ -1,13 +1,47 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Theme from "../theme";
 import { Link, NavLink } from "react-router-dom";
 import LogoLight from "../../assets/logo/opportunity-nexus-light-logo.png";
 import LogoDark from "../../assets/logo/opportunity-nexus-dark-logo.png";
+import axios from "axios";
 
 export default function Header() {
   const [navbarColor, setNavbarColor] = useState(false);
+  const token = localStorage.getItem("token");
+  const [user, setUser] = useState(null);
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (token) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:4000/api/v1/auth/user",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          if(response.data.status){
+          setUser(response.data.data);
+          }
+          else{
+            setUser(null);
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchData();
+    }
+  }, []);
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
@@ -23,7 +57,8 @@ export default function Header() {
     main: [
       { name: "About", href: "#" },
       { name: "Blog", href: "#" },
-      { name: "Jobs", href: "#" },
+      { name: "Jobs", href: "/jobs" },
+      { name: "Contests", href: "/contests" },
     ],
   };
 
@@ -43,7 +78,11 @@ export default function Header() {
               src={LogoDark}
               alt=""
             />
-            <img className="h-12 w-auto dark:hidden  items-center" src={LogoLight} alt="" />
+            <img
+              className="h-12 w-auto dark:hidden  items-center"
+              src={LogoLight}
+              alt=""
+            />
           </Link>
         </div>
         <div className="-mr-2 -my-2 md:hidden flex items-center">
@@ -72,18 +111,32 @@ export default function Header() {
             ))}
           </Popover.Group>
           <div className="flex items-center md:ml-12">
-            <NavLink
-              to="/login"
-              className="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-400 "
-            >
-              Sign in
-            </NavLink>
-            <NavLink
-              to="/signup"
-              className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 text-center"
-            >
-              Sign up
-            </NavLink>
+            {user!==null ? (
+              <>
+                {"Hi, " + user?.firstName + " " + user?.lastName}
+                <button
+                  onClick={handleLogOut}
+                  className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 text-center"
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  to="/login"
+                  className="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-400 "
+                >
+                  Sign in
+                </NavLink>
+                <NavLink
+                  to="/signup"
+                  className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 text-center"
+                >
+                  Sign up
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
         <div className="hidden md:flex cursor-pointer">
@@ -154,21 +207,35 @@ export default function Header() {
                 ))}
               </div>
               <div>
-                <NavLink
-                  to="/signup"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                >
-                  Sign up
-                </NavLink>
-                <p className="mt-6 text-center text-base font-medium text-gray-500">
-                  Existing user?{" "}
-                  <NavLink
-                    to="/login"
-                    className="text-primary-600 hover:text-primary-500 text-center"
-                  >
-                    Sign in
-                  </NavLink>
-                </p>
+                {user ? (
+                  <>
+                    {"Hi, " + user.firstName + " " + user.lastName}
+                    <button
+                      onClick={handleLogOut}
+                      className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 text-center"
+                    >
+                      Log Out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <NavLink
+                      to="/signup"
+                      className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                    >
+                      Sign up
+                    </NavLink>
+                    <p className="mt-6 text-center text-base font-medium text-gray-500">
+                      Existing user?{" "}
+                      <NavLink
+                        to="/login"
+                        className="text-primary-600 hover:text-primary-500 text-center"
+                      >
+                        Sign in
+                      </NavLink>
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>

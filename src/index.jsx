@@ -21,6 +21,10 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
+import Contests from "./pages/Contests";
+import Jobs from "./pages/Jobs";
+
+
 
 const themes = {
   light: "public/light.css",
@@ -62,6 +66,15 @@ const App = () => {
             path="/signup"
             element={<Signup setIsLoggedIn={setIsLoggedIn} />}
           />
+          <Route
+            path="/contests"
+            element={<Contests isLoggedIn={isLoggedIn} />}
+          />
+          <Route
+            path="/jobs"
+            element={<Jobs isLoggedIn={isLoggedIn} />}
+          />
+          
           <Route path="/ForgetPass" element={<ForgetPass />} />
         </Route>
       </>
