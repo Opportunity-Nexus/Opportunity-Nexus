@@ -5,7 +5,7 @@ export default function MentorsWords() {
     <section className="pt-16 dark:bg-gray-950 lg:py-24">
       <div className="lg:mb-24 ">
         {" "}
-        <div className="bg-primary-900   pb-16 lg:relative lg:z-10 lg:pb-0">
+        <div className="bg-primary-500 dark:bg-gray-900   pb-16 lg:relative lg:z-10 lg:pb-0">
           <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-8 lg:px-8">
             <div className="relative lg:-my-8">
               <div className="top-1/3 mx-auto max-w-md px-4 pt-6 sm:max-w-3xl sm:px-6 lg:h-full lg:p-0">
@@ -32,7 +32,7 @@ export default function MentorsWords() {
                     </svg>
                     <p className="mt-6 text-2xl font-medium text-white">
                       Welcome to{" "}
-                      <b className="text-primary-200">Opportunity Nexus</b>,
+                      <b className="text-black dark:text-primary-500">Opportunity Nexus</b>,
                       where your potential meets possibility. As a mentor in
                       this vibrant community, I've witnessed firsthand the
                       transformative power of connecting passionate individuals
@@ -42,7 +42,7 @@ export default function MentorsWords() {
                     </p>
                   </div>
                   <footer className="mt-6">
-                    <p className="text-base font-medium text-primary-200">
+                    <p className="text-base font-medium text-black dark:text-primary-500">
                       Dr. Sadik Khan
                     </p>
                     <p className="text-base font-medium text-indigo-100">
