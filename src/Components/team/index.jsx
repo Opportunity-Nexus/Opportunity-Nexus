@@ -4,7 +4,7 @@ import AmanAvatar from "../../assets/team/avatar-aman.png";
 const people = [
   {
     name: "Nandani Paliwal",
-    role: "Reactjs Developer",
+    role: "Frontend Developer",
     imageUrl: NandaniAvatar,
     twitterUrl: "https://twitter.com/Nandanipaliwal",
     linkedinUrl: "https://www.linkedin.com/in/nandanipaliwal/",

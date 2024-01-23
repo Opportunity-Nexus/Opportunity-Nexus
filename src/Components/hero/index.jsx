@@ -47,7 +47,7 @@ export default function Hero() {
                     <span className="block dark:text-white text-black">
                       Opportunity Awaits,
                     </span>
-                    <span className="block text-primary-400">
+                    <span className="block text-primary-500">
                       Your Future Begins Here
                     </span>
                   </h1>
