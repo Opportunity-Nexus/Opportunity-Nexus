@@ -5,11 +5,13 @@ import "./global.css";
 import Header from "./Components/header";
 import Hero from "./Components/hero";
 import About from "./Components/about";
+import MentorsWords from "./Components/mentors-word";
 import Team from "./Components/team";
+import Faq from "./Components/faq";
 import Footer from "./Components/footer";
 import Layout from "./Components/Layout";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from "./Components/Login";
+import Signup from "./Components/Signup";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import ForgetPass from "./Components/ForgetPass";
@@ -21,8 +23,11 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
+
 import Contests from "./pages/Contests";
 import Jobs from "./pages/Jobs";
+import CtaSection from "./Components/cta-section";
+import CrispScript from "./Components/crisp";
 
 
 
@@ -42,10 +47,14 @@ const App = () => {
           path="/"
           element={
             <>
+            <CrispScript />
               <Header />
               <Hero />
               <About />
+              <MentorsWords />
               <Team />
+              <CtaSection />
+              <Faq />
               <Footer />
             </>
           }
