@@ -1,5 +1,4 @@
 import React from "react";
-
 import ReactDOM from "react-dom/client";
 import "./global.css";
 import Header from "./Components/header";
@@ -17,14 +16,12 @@ import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 
 import {
   Route,
-  createBrowserRouter,
+  createHashRouter, // Change to createHashRouter
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
 import Contests from "./pages/Contests";
 import Jobs from "./pages/Jobs";
-
-
 
 const themes = {
   light: "public/light.css",
@@ -35,7 +32,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   console.log(isLoggedIn);
 
-  const router = createBrowserRouter(
+  const router = createHashRouter( // Change to createHashRouter
     createRoutesFromElements(
       <>
         <Route

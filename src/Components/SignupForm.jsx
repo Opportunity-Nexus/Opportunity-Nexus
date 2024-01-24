@@ -73,7 +73,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:4000/api/v1/auth/sendotp",
+      url: "https://api.hostellelo.in/api/v1/auth/sendotp",
       headers: {
         "Content-Type": "application/json",
       },

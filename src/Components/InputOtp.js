@@ -21,7 +21,7 @@ export default function InputOtp({ visible, onClose, email, data }) {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:4000/api/v1/auth/signup",
+      url: "https://api.hostellelo.in/api/v1/auth/signup",
       headers: {
         "Content-Type": "application/json",
       },

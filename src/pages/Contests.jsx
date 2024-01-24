@@ -49,7 +49,7 @@ function Contests({ isLoggedIn }) {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            "http://localhost:4000/api/v1/auth/user",
+            "https://api.hostellelo.in/api/v1/auth/user",
             {
               headers: {
                 Authorization: `Bearer ${token}`
@@ -91,7 +91,7 @@ function Contests({ isLoggedIn }) {
     let config = {
       method: "patch",
       maxBodyLength: Infinity,
-      url: "http://localhost:4000/api/v1/auth/user",
+      url: "https://api.hostellelo.in/api/v1/auth/user",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`

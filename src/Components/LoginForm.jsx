@@ -44,7 +44,7 @@ const LoginForm = (props) => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:4000/api/v1/auth/login",
+      url: "https://api.hostellelo.in/api/v1/auth/login",
       headers: {
         "Content-Type": "application/json",
       },

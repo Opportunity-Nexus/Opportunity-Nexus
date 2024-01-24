@@ -22,7 +22,7 @@ export default function Header() {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            "http://localhost:4000/api/v1/auth/user",
+            "https://api.hostellelo.in/api/v1/auth/user",
             {
               headers: {
                 Authorization: `Bearer ${token}`,

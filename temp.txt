@@ -1,7 +1,7 @@
 let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:4000/api/auth/signup",
+      url: "https://api.hostellelo.in/api/auth/signup",
       headers: {
         "Content-Type": "application/json",
       },
