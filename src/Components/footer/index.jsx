@@ -17,7 +17,7 @@ const navigation = [
 
 export default function Footer() {
   return (
-    <footer className="flex justify-center items-center dark:bg-gray-900  border-t dark:border-gray-600 border-gray-300">
+    <footer className="flex justify-center items-center dark:bg-gray-900 bg-gray-100 border-t dark:border-gray-600 border-gray-300">
       <div className=" max-w-7xl mx-auto flex flex-col py-12 px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
           {navigation.map((item) => (
@@ -28,7 +28,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="mt-8 md:mt-0 md:order-1">
-          <p className="text-center text-base text-gray-400">&copy; {new Date().getFullYear()} Workflow, Inc. All rights reserved.</p>
+          <p className="text-center text-base text-gray-400">&copy; 2023 Workflow, Inc. All rights reserved.</p>
         </div>
       </div>
     </footer>

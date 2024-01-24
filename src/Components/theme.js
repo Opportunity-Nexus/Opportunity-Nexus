@@ -4,7 +4,7 @@ import SunIcon from "../assets/theme-icons/icon-sun.svg";
 import MoonIcon from "../assets/theme-icons/icon-moon.svg";
 
 export default function Theme() {
-  const { switcher, themes } = useThemeSwitcher();
+  const { switcher, themes, status } = useThemeSwitcher();
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 
   const toggleDarkMode = () => {

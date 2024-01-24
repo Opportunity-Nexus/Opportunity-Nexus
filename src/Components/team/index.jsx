@@ -4,7 +4,7 @@ import AmanAvatar from "../../assets/team/avatar-aman.png";
 const people = [
   {
     name: "Nandani Paliwal",
-    role: "Frontend Developer",
+    role: "Reactjs Developer",
     imageUrl: NandaniAvatar,
     twitterUrl: "https://twitter.com/Nandanipaliwal",
     linkedinUrl: "https://www.linkedin.com/in/nandanipaliwal/",
@@ -60,7 +60,7 @@ export default function Team() {
             </p>
           </div>
           <ul
-            
+            role="list"
             className="mx-auto space-y-16 sm:grid sm:grid-cols-4 sm:gap-16 sm:space-y-0 sm:[&>*:nth-child(1)]:col-start-1 sm:[&>*:nth-child(1)]:col-end-3 sm:[&>*:nth-child(2)]:col-start-3 sm:[&>*:nth-child(2)]:col-end-5 sm:[&>*:nth-child(3)]:col-start-1 sm:[&>*:nth-child(3)]:col-end-3 sm:[&>*:nth-child(4)]:col-start-3 sm:[&>*:nth-child(4)]:col-end-5 sm:[&>*:nth-child(5)]:col-start-2 sm:[&>*:nth-child(5)]:col-end-4
           
             lg:grid-cols-6 lg:max-w-5xl lg:[&>*:nth-child(1)]:col-end-3 lg:[&>*:nth-child(1)]:col-start-1 lg:[&>*:nth-child(2)]:col-end-5 lg:[&>*:nth-child(2)]:col-start-3 lg:[&>*:nth-child(3)]:col-end-7 lg:[&>*:nth-child(3)]:col-start-5 lg:[&>*:nth-child(4)]:col-end-4 lg:[&>*:nth-child(4)]:col-start-2 lg:[&>*:nth-child(5)]:col-end-6 lg:[&>*:nth-child(5)]:col-start-4 "
@@ -80,7 +80,7 @@ export default function Team() {
                       </h3>
                       <p className="text-primary-600">{person.role}</p>
                     </div>
-                    <ul className="flex justify-center space-x-5">
+                    <ul role="list" className="flex justify-center space-x-5">
                       <li>
                         <a
                           href={person.twitterUrl}
