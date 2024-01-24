@@ -5,7 +5,7 @@ export default function MentorsWords() {
     <section className="pt-16 dark:bg-gray-950 lg:py-24">
       <div className="lg:mb-24 ">
         {" "}
-        <div className="bg-primary-500 dark:bg-gray-900   pb-16 lg:relative lg:z-10 lg:pb-0">
+        <div className="bg-primary-400 dark:bg-gray-900   pb-16 lg:relative lg:z-10 lg:pb-0">
           <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-8 lg:px-8">
             <div className="relative lg:-my-8">
               <div className="top-1/3 mx-auto max-w-md px-4 pt-6 sm:max-w-3xl sm:px-6 lg:h-full lg:p-0">
@@ -30,9 +30,9 @@ export default function MentorsWords() {
                     >
                       <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                     </svg>
-                    <p className="mt-6 text-2xl font-medium text-white">
+                    <p className="mt-6 text-2xl font-medium tracking-tighter text-black dark:text-white">
                       Welcome to{" "}
-                      <b className="text-black dark:text-primary-500">Opportunity Nexus</b>,
+                      <b className="text-white dark:text-primary-500 ">Opportunity Nexus </b>,
                       where your potential meets possibility. As a mentor in
                       this vibrant community, I've witnessed firsthand the
                       transformative power of connecting passionate individuals
@@ -42,10 +42,10 @@ export default function MentorsWords() {
                     </p>
                   </div>
                   <footer className="mt-6">
-                    <p className="text-base font-medium text-black dark:text-primary-500">
+                    <p className="text-lg font-bold text-primary-900 dark:text-primary-500">
                       Dr. Sadik Khan
                     </p>
-                    <p className="text-base font-medium text-indigo-100">
+                    <p className="text-base font-medium text-black dark:text-primary-100">
                       Head of the Department (Computer Science and Engineering)
                       <br />
                       Project Mentor

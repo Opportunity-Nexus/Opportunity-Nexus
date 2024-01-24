@@ -1,5 +1,9 @@
 import NandaniAvatar from "../../assets/team/avatar-nandani.png";
 import AmanAvatar from "../../assets/team/avatar-aman.png";
+import SheetalAvatar from "../../assets/team/avatar-sheetal.jpg";
+import PrashantAvatar from "../../assets/team/avatar-prashant.jpg";
+import VishwajeetAvatar from "../../assets/team/avatar-vishwajeet.jpg";
+
 
 const people = [
   {
@@ -11,11 +15,10 @@ const people = [
   },
   {
     name: "Sheetal Tyagi",
-    role: "Copywriter",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-    twitterUrl: "#",
-    linkedinUrl: "#",
+    role: "Full Stack Developer",
+    imageUrl: SheetalAvatar,
+    twitterUrl: "https://twitter.com/Sheetal8653",
+    linkedinUrl: "https://www.linkedin.com/in/sheetal-tyagi-39b62b21b/",
   },
   {
     name: "Aman kumar Gupta",
@@ -27,19 +30,17 @@ const people = [
   {
     name: "Vishwajeet",
     role: "Copywriter",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-    twitterUrl: "#",
-    linkedinUrl: "#",
+    imageUrl:VishwajeetAvatar,
+    twitterUrl: "https://twitter.com/TechVishwajeet",
+    linkedinUrl: "https://www.linkedin.com/in/techyvishwajeet/",
   },
 
   {
     name: "Prashant Dubey",
     role: "Copywriter",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
+    imageUrl:PrashantAvatar,
     twitterUrl: "#",
-    linkedinUrl: "#",
+    linkedinUrl: "https://www.linkedin.com/in/prashantdubey2001/",
   },
 ];
 
