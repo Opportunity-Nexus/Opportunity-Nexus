@@ -55,16 +55,17 @@ export default function Header() {
 
   const navigation = {
     main: [
-      { name: "About", href: "#" },
-      { name: "Blog", href: "#" },
+ vishwajeet
+      { name: "About", href: "#about" },
       { name: "Jobs", href: "/jobs" },
       { name: "Contests", href: "/contests" },
+        { name: "faq", href: "#faq"}
     ],
   };
 
   return (
     <Popover
-      className={`sticky top-0 z-20 ${
+      className={`sticky top-0 z-[9999] ${
         navbarColor ? "backdrop-blur-md" : null
       } `}
     >
