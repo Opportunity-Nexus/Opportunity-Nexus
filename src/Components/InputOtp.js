@@ -1,9 +1,44 @@
-import React from "react";
-import Otp from "./Input";
-export default function InputOtp({ visible, onClose, email }) {
-  console.log(`Email : ${email}`);
+import React, { useState } from "react";
+import axios from "axios";
+import OtpInput from "react-otp-input";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
+export default function InputOtp({ visible, onClose, email, data }) {
+  const [otp, setOtp] = useState("");
+  const navigate=useNavigate();
   const handleOnClose = (e) => {
     if (e.target.id === "cotainer") onClose();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const finalData = JSON.stringify({
+      ...data,
+      otp: otp,
+    });
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://localhost:4000/api/v1/auth/signup",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: finalData,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        if (response.data.success) {
+          toast.success("OTP has been sent successfully");
+         navigate("/login");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   if (!visible) return null;
@@ -29,12 +64,34 @@ export default function InputOtp({ visible, onClose, email }) {
             <form action="" method="post">
               <div className="flex flex-col space-y-16">
                 <div className="flex justify-center ">
-                  <Otp />
+                  <OtpInput
+                    value={otp}
+                    onChange={setOtp}
+                    numInputs={6}
+                    renderInput={(props) => (
+                      <input
+                        {...props}
+                        placeholder="-"
+                        style={{
+                          boxShadow:
+                            "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                        }}
+                        className="w-[48px] lg:w-[60px] border-0 bg-richblack-25 dark:bg-richblack-800 rounded-[0.5rem] text-black dark:text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-50"
+                      />
+                    )}
+                    containerStyle={{
+                      justifyContent: "space-between",
+                      gap: "0 6px",
+                    }}
+                  />
                 </div>
 
                 <div className="flex flex-col space-y-5">
                   <div>
-                    <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-xl shadow-sm">
+                    <button
+                      onClick={handleSubmit}
+                      className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-xl shadow-sm"
+                    >
                       Verify Account
                     </button>
                   </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import toast from "react-hot-toast";
 import InputOtp from "./InputOtp";
+import axios from "axios";
 
 const SignupForm = ({ setIsLoggedIn }) => {
   const [accountType, setAccountType] = useState("student");
@@ -69,12 +70,31 @@ const SignupForm = ({ setIsLoggedIn }) => {
       ...formData,
       accountType,
     };
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://localhost:4000/api/v1/auth/sendotp",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({email:finalData.email}),
+    };
 
-    console.log(finalData);
-    setShowOTPModel(true);
-    // setIsLoggedIn(true);
-    toast.success("OTP has been sent successfully");
-    // navigate("/");
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(response);
+        if (response.data.success) {
+          setShowOTPModel(true);
+          toast.success("OTP has been sent successfully");
+        }
+        else{
+          toast.success(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -218,6 +238,10 @@ const SignupForm = ({ setIsLoggedIn }) => {
         email={formData.email}
         onClose={handleOnClose}
         visible={showOTPModel}
+        data={{
+          ...formData,
+          accountType,
+        }}
       />
     </div>
   );
