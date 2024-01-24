@@ -55,7 +55,6 @@ export default function Header() {
 
   const navigation = {
     main: [
- vishwajeet
       { name: "About", href: "#about" },
       { name: "Jobs", href: "/jobs" },
       { name: "Contests", href: "/contests" },
