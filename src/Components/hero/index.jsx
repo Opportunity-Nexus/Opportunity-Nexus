@@ -40,7 +40,7 @@ export default function Hero() {
             <div className="lg:grid lg:grid-cols-2 lg:gap-8">
               <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
                 <div className="lg:py-24">
-                  <div className="flex justify-center items-center text-center dark:bg-black shadow-md dark:text-white text-[16px] font-normal rounded-lg px-2 py-1 w-fit mx-0 sm:mx-auto lg:mx-0">
+                  <div className="flex justify-center items-center text-center dark:bg-black shadow-md dark:text-white text-base font-normal rounded-lg px-2 py-1 w-fit mx-0 sm:mx-auto lg:mx-0">
                     Our Gateway to Infinite Opportunities
                   </div>
                   <h1 className="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">

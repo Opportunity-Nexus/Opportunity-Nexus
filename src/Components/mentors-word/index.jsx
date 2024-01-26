@@ -42,7 +42,7 @@ export default function MentorsWords() {
                     </p>
                   </div>
                   <footer className="mt-6">
-                    <p className="text-lg font-bold text-primary-900 dark:text-primary-500">
+                    <p className="text-lg font-bold text-white dark:text-primary-500">
                       Dr. Sadik Khan
                     </p>
                     <p className="text-base font-medium text-black dark:text-primary-100">
