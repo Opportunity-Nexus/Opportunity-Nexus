@@ -29,7 +29,7 @@ const people = [
   },
   {
     name: "Vishwajeet",
-    role: "Copywriter",
+    role: "Backend Developer",
     imageUrl:VishwajeetAvatar,
     twitterUrl: "https://twitter.com/TechVishwajeet",
     linkedinUrl: "https://www.linkedin.com/in/techyvishwajeet/",
@@ -37,9 +37,9 @@ const people = [
 
   {
     name: "Prashant Dubey",
-    role: "Copywriter",
+    role: "Android Developer",
     imageUrl:PrashantAvatar,
-    twitterUrl: "#",
+    twitterUrl: "https://twitter.com/Prashant______p",
     linkedinUrl: "https://www.linkedin.com/in/prashantdubey2001/",
   },
 ];
