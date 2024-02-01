@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { toast } from "react-hot-toast";
-import axios from "axios"
+import axios from "axios";
 
 const LoginForm = (props) => {
   const setIsLoggedIn = props.setIsLoggedIn;
@@ -125,7 +125,7 @@ const LoginForm = (props) => {
       <button className="bg-primary-600 hover:bg-primary-700 text-white  py-[8px] px-[12px] rounded-[8px] mt-2 font-semibold">
         Sign in
       </button>
-      <p class="text-sm font-light text-black dark:text-white">
+      <p className="text-sm font-light text-black dark:text-white">
         Don't have an account?{" "}
         <a
           href="/signup"

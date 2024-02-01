@@ -1,4 +1,4 @@
-import Mentor from "../../assets/team/sadik-khan-sir.jpg";
+import Mentor from "../../assets/team/avatar-sadik-khan-sir.jpg";
 
 export default function MentorsWords() {
   return (

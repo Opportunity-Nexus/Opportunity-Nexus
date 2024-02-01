@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import toast from "react-hot-toast";
-import InputOtp from "./InputOtp";
+import InputOtp from "../../Pages/Authentication/InputOtp";
 import axios from "axios";
 
 const SignupForm = ({ setIsLoggedIn }) => {
@@ -224,7 +224,7 @@ const SignupForm = ({ setIsLoggedIn }) => {
         <button className=" bg-primary-600 hover:bg-primary-700 text-white  font-semibold px-[12px] rounded-[8px] py-[8px] mt-2">
           Create Account
         </button>
-        <p class="text-sm font-light text-black dark:text-white">
+        <p className="text-sm font-light text-black dark:text-white">
           Already have an account?{" "}
           <a
             href="/login"

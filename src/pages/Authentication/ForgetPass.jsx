@@ -27,7 +27,7 @@ const ForgetPass = () => {
 
   return (
     <section className="bg-white dark:bg-gray-900 ">
-      <div className="flex flex-col   justify-center h-[80vh] items-center px-6 py-8 mx-auto md:h-[85vh] lg:py-0 md-p-3 ">
+      <div className="flex flex-col justify-center h-[80vh] items-center px-6 py-8 mx-auto md:h-[85vh] lg:py-0 md-p-3 ">
         <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
           <h2 className="flex justify-center align-center mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Reset Password
