@@ -41,7 +41,7 @@ export default function Header() {
       };
       fetchData();
     }
-  }, []);
+  },);
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {

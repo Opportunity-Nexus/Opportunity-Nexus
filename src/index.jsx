@@ -8,7 +8,7 @@ import Login from "./Pages/Authentication/Login";
 import Signup from "./Pages/Authentication/Signup";
 import ForgetPass from "./Pages/Authentication/ForgetPass";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
-import './Components/theme';
+// import './Components/theme';
 
 import {
 	Route,
@@ -31,9 +31,7 @@ function App() {
 	const routes = [
 		<Route
 			element={
-				<div className="w-screen h-screen bg-white dark:bg-richblack-900 flex flex-col ">
-					<Layout />
-				</div>
+				<Layout />
 			}
 		>
 			<Route path="/" element={<Home />} />
