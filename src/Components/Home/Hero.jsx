@@ -19,7 +19,7 @@ export default function Hero() {
           </pattern>
         </defs>
       </svg>
-      <svg class="absolute inset-0 z-0 h-full w-full select-none stroke-gray-400 dark:stroke-gray-800 [mask-image:linear-gradient(90deg,white,transparent_18%,transparent_82%,white)]">
+      <svg className="absolute inset-0 z-0 h-full w-full select-none stroke-gray-400 dark:stroke-gray-800 [mask-image:linear-gradient(90deg,white,transparent_18%,transparent_82%,white)]">
         <rect width="100%" height="100%" fill="url(#grid-1)"></rect>
         <defs>
           <pattern
