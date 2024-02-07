@@ -37,7 +37,7 @@ const Opportunities = () => {
 				{OpportunityData[opportunityName].length === 0 ? (
 					<div className="flex flex-col justify-center items-center lg:w-2/4 dark:text-white ">
 						<img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
-						<h2 className="text-3xl font-bold animate-bounce ">
+						<h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">
 							No Opportunities Available!!
 						</h2>
 						<p className="font-semibold text-center">

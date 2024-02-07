@@ -271,7 +271,7 @@ export default function Header() {
 															<a
 																key={subIndex}
 																href={opportunity.href}
-																className="block md:mt-0 px-4 py-2 text-black dark:text-white hover:text-slate-900  rounded-md hover:bg-white dark:hover:bg-richblack-900 dark:hover:text-white cursor-pointer "
+																className=" md:mt-0 px-4 py-2 text-black dark:text-white hover:text-slate-900  rounded-md hover:bg-white dark:hover:bg-richblack-900 dark:hover:text-white cursor-pointer min-w-full flex items-start "
 																onClick={() =>
 																	setOpportunityType(opportunity.value)
 																}
