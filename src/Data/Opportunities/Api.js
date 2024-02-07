@@ -10,7 +10,7 @@
 
 export async function opportunitiesData(opportunityType) {
 	let API_URL;
-	if (opportunityType === "Review") {
+	if (opportunityType === "ToReview") {
 		API_URL = `http:/localhost:3001/${opportunityType}`;
 	} else {
 		API_URL = opportunityType

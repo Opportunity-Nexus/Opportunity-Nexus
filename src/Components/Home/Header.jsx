@@ -13,7 +13,7 @@ export default function Header() {
 	const token = localStorage.getItem("token");
 	const [user, setUser] = useState(null);
 	const [opportunityType, setOpportunityType] = useState("Scholarships");
-	// console.log(opportunityType);
+	console.log(opportunityType);
 
 	const handleLogOut = () => {
 		localStorage.removeItem("token");
@@ -84,9 +84,9 @@ export default function Header() {
 						value: "Others",
 					},
 					{
-						name: "Review",
+						name: "ToReview",
 						href: `/opportunities/${opportunityType}`,
-						value: "Review",
+						value: "ToReview",
 					},
 				],
 			},
