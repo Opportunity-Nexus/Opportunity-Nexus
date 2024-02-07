@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import "./global.css";
@@ -8,6 +8,10 @@ import Login from "./Pages/Authentication/Login";
 import Signup from "./Pages/Authentication/Signup";
 import ForgetPass from "./Pages/Authentication/ForgetPass";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
+import Opportunities, {
+	loader as OpportunitiesLoader,
+} from "./Pages/Opportunities/Opportunities";
+import Error from "./Components/Opportunities/Error";
 // import './Components/theme';
 
 import {
@@ -29,11 +33,7 @@ function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	console.log(isLoggedIn);
 	const routes = [
-		<Route
-			element={
-				<Layout />
-			}
-		>
+		<Route element={<Layout />}>
 			<Route path="/" element={<Home />} />
 			<Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
 			<Route
@@ -42,7 +42,13 @@ function App() {
 			/>
 			<Route path="/contests" element={<Contests isLoggedIn={isLoggedIn} />} />
 			<Route path="/jobs" element={<Jobs isLoggedIn={isLoggedIn} />} />
-			<Route path="/ForgetPass" element={<ForgetPass/>} />
+			<Route path="/ForgetPass" element={<ForgetPass />} />
+			<Route
+				path="/Opportunities/:id"
+				element={<Opportunities />}
+				loader={OpportunitiesLoader}
+				errorElement={<Error />}
+			/>
 		</Route>,
 	];
 	const router = createBrowserRouter(createRoutesFromElements(...routes));

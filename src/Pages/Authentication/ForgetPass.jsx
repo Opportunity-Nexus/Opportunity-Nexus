@@ -3,8 +3,6 @@ import toast from "react-hot-toast";
 
 const ForgetPass = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [validEmail, setValidEmail] = useState(true);
   console.log(email);
 

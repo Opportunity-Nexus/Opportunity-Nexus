@@ -40,6 +40,7 @@ function Jobs({ isLoggedIn }) {
         "https://www.finsmes.com/wp-content/uploads/2022/03/hackerrank.png",
     },
   ]);
+  console.log(setJobs());  //Just to remove warning on temporary basis
   const [appliedJobs, setAppliedJobs] = useState([]);
 
   useEffect(() => {
@@ -63,7 +64,7 @@ function Jobs({ isLoggedIn }) {
       };
       fetchData();
     }
-  }, []);
+  }, [navigate,token]);    //Took action here to remove warning
 
   /*useEffect(() => {
   const fetchData = async () => {

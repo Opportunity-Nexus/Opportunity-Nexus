@@ -3,7 +3,7 @@ export default function CtaSection() {
     return (
       <section className="relative dark:bg-gray-950 py-16 w-full">
         <div className=" z-10 md:px-6">
-          <svg class="absolute inset-0 z-0 h-full w-full stroke-gray-200 dark:stroke-gray-800 [mask-image:radial-gradient(transparent,white)] md:[mask-image:radial-gradient(white,transparent)]">
+          <svg className="absolute inset-0 z-0 h-full w-full stroke-gray-200 dark:stroke-gray-800 [mask-image:radial-gradient(transparent,white)] md:[mask-image:radial-gradient(white,transparent)]">
             <rect width="100%" height="100%" fill="url(#grid-3)"></rect>
             <defs>
               <pattern
