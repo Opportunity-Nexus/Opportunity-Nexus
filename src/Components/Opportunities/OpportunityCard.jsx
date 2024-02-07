@@ -7,7 +7,8 @@ import { TbCoinRupeeFilled } from "react-icons/tb";
 import { SiVisualstudiocode } from "react-icons/si";
 import { IoBookmarks } from "react-icons/io5";
 import { IoBookmarksOutline } from "react-icons/io5";
-import BookMarkSound from '../../assets/sounds/bookmark-sound.mp3';
+import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
+import toast from "react-hot-toast";
 
 import OpportunityIcons from "./OpportunityIcons";
 import OpportunityDataItem from "./OpportunityDataItem";
@@ -29,6 +30,12 @@ const OpportunityCard = (opportunity) => {
 						onClick={() => {
 							audio.play();
 							setIsBookmarked((prev) => !prev);
+							toast[isBookmarked ? "error" : "success"](
+								isBookmarked
+									? "Opportunity removed from your profile!"
+									: "Opportunity added to your profile!",
+								{ position: "bottom-center" }
+							);
 						}}
 					>
 						{isBookmarked ? <IoBookmarks /> : <IoBookmarksOutline />}

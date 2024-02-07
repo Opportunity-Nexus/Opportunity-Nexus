@@ -140,14 +140,14 @@ export default function Header() {
 											</span>
 											<IoIosArrowDropdownCircle className="cursor-pointer text-sm text-gray-500 hover:text-gray-900 dark:hover:text-gray-400 " />
 										</div>
-										<div className="invisible absolute left-1/2 -translate-x-32 translate-y-7 top-1/2 flex flex-col rounded-md bg-slate-900 dark:bg-white p-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 w-72">
-											<div className="absolute left-1/2 top-0 h-6 w-6 rotate-45 rounded bg-slate-900 dark:bg-white -translate-y-2 translate-x-5"></div>
-											<ul className="py-1 text-base font-semibold dark:text-black ">
+										<div className="invisible absolute left-1/2 -translate-x-32 translate-y-7 top-1/2 flex flex-col rounded-md dark:bg-midnightblue bg-gray-100 p-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 w-72">
+											<div className="absolute left-1/2 top-0 h-6 w-6 rotate-45 rounded dark:bg-midnightblue bg-gray-100 -translate-y-2 translate-x-5"></div>
+											<ul className="py-1 text-base font-semibold dark:text-black flex flex-col items-start">
 												{item.opportunities.map((opportunity, subIndex) => (
 													<a
 														key={subIndex}
 														href={opportunity.href}
-														className="block md:mt-0 px-4 py-2 text-white hover:text-slate-900 dark:text-black rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+														className="block md:mt-0 px-4 py-2 text-black dark:text-white hover:text-slate-900  rounded-md hover:bg-white dark:hover:bg-richblack-900 dark:hover:text-white cursor-pointer w-full"
 														onClick={() =>
 															setOpportunityType(opportunity.value)
 														}
@@ -264,20 +264,20 @@ export default function Header() {
 													</span>
 													<IoIosArrowDropdownCircle className="cursor-pointer text-sm text-gray-500 hover:text-gray-900 dark:hover:text-gray-400 " />
 												</div>
-												<div className="invisible absolute left-1/2 -translate-x-32 translate-y-7 top-1/2 flex flex-col rounded-md bg-slate-900 dark:bg-white p-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 w-72">
-													<div className="absolute left-1/2 top-0 h-6 w-6 rotate-45 rounded bg-slate-900 dark:bg-white -translate-y-2 translate-x-5"></div>
-													<ul className="py-1 text-base font-semibold dark:text-black ">
+												<div className="invisible absolute left-1/2 -translate-x-32 translate-y-7 top-1/2 flex flex-col rounded-md dark:bg-midnightblue bg-gray-100 p-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 w-72">
+													<div className="absolute left-1/2 top-0 h-6 w-6 rotate-45 rounded dark:bg-midnightblue bg-gray-100 -translate-y-2 translate-x-5"></div>
+													<ul className="py-1 text-base font-semibold dark:text-black flex flex-col items-start ">
 														{item.opportunities.map((opportunity, subIndex) => (
-															<Link
+															<a
 																key={subIndex}
-																to={opportunity.href}
-																className=" md:mt-0 px-4 py-2 flex items-start text-white hover:text-slate-900 dark:text-black rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+																href={opportunity.href}
+																className="block md:mt-0 px-4 py-2 text-black dark:text-white hover:text-slate-900  rounded-md hover:bg-white dark:hover:bg-richblack-900 dark:hover:text-white cursor-pointer "
 																onClick={() =>
 																	setOpportunityType(opportunity.value)
 																}
 															>
 																{opportunity.name}
-															</Link>
+															</a>
 														))}
 													</ul>
 												</div>

@@ -16,13 +16,13 @@ const Opportunities = () => {
 	const OpportunityData = useLoaderData();
 	const opportunityName = window.location.pathname.split("/")[2];
 	const TagLine = opportunityTagLine[opportunityName];
-	// console.log(` Opportunity Name : ${opportunityName}`);
-	// console.log("Data is :" + JSON.stringify(OpportunityData, null, 2));
+	console.log(` Opportunity Name : ${opportunityName}`);
+	console.log("Data is :" + JSON.stringify(OpportunityData, null, 2));
 
 	//----------------------PAGINTAION----------------------//
 	const [currentPage, setCurrentPage] = useState(1);
-	const totalOpportunitiesPages = Math.ceil(OpportunityData.length / 6);
-	const currentOpportunities = OpportunityData.slice(
+	const totalOpportunitiesPages = Math.ceil(OpportunityData[opportunityName].length / 6);
+	const currentOpportunities = OpportunityData[opportunityName].slice(
 		currentPage * 6 - 6,
 		currentPage * 6
 	);
@@ -33,8 +33,8 @@ const Opportunities = () => {
 
 	return (
 		<>
-			<div className="flex flex-wrap justify-center max-w-7xl mx-auto min-h-[80vh] ">
-				{OpportunityData.length === 0 ? (
+			<div className="flex flex-wrap justify-center max-w-7xl mx-auto min-h-[80vh]">
+				{OpportunityData[opportunityName].length === 0 ? (
 					<div className="flex flex-col justify-center items-center lg:w-2/4 dark:text-white ">
 						<img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
 						<h2 className="text-3xl font-bold animate-bounce ">
@@ -48,17 +48,17 @@ const Opportunities = () => {
 				) : (
 					<>
 						<div className="flex flex-col items-center justify-center w-full h-fit">
-							<div className="text-center font-bold font-mono text-2xl dark:text-white mb-7 ">
+							<div className="text-center font-bold font-mono text-2xl dark:text-white">
 								{TagLine}
 							</div>
 						</div>
-						<div className="flex flex-wrap justify-center mx-auto mt-4">
+						<div className="flex flex-wrap justify-center mx-auto mt-4 mb-7">
 							{currentOpportunities.map((opportunity, index) => (
 								<OpportunityCard key={index} {...opportunity} />
 							))}
 						</div>
 						{/* ------------PAGINATION----------- */}
-						<div className="flex items-center justify-center w-2/4 ">
+						<div className="flex items-center justify-center w-2/4 mt-8">
 							<button
 								className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
 									currentPage <= 1
