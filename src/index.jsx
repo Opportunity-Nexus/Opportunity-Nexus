@@ -12,7 +12,6 @@ import Opportunities, {
 	loader as OpportunitiesLoader,
 } from "./Pages/Opportunities/Opportunities";
 import Error from "./Components/Opportunities/Error";
-// import './Components/theme';
 
 import {
 	Route,
@@ -44,7 +43,7 @@ function App() {
 			<Route path="/jobs" element={<Jobs isLoggedIn={isLoggedIn} />} />
 			<Route path="/ForgetPass" element={<ForgetPass />} />
 			<Route
-				path="/Opportunities/:id"
+				path="/opportunities/:id"
 				element={<Opportunities />}
 				loader={OpportunitiesLoader}
 				errorElement={<Error />}

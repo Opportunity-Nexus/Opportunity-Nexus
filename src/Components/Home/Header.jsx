@@ -12,8 +12,6 @@ export default function Header() {
 	const [navbarColor, setNavbarColor] = useState(false);
 	const token = localStorage.getItem("token");
 	const [user, setUser] = useState(null);
-	const [opportunityType, setOpportunityType] = useState("Scholarships");
-	console.log(opportunityType);
 
 	const handleLogOut = () => {
 		localStorage.removeItem("token");
@@ -64,28 +62,23 @@ export default function Header() {
 				opportunities: [
 					{
 						name: "Educational Scholarships",
-						href: `/opportunities/${opportunityType}`,
 						value: "Scholarships",
 					},
 					{
 						name: "Workplace  Prospects",
-						href: `/opportunities/${opportunityType}`,
 						value: "ITJobs",
 					},
 					{
 						name: "Coding Challenges",
-						href: `/opportunities/${opportunityType}`,
 						value: "CodingContests",
 					},
 					//TEMPORARY FOR REVIEW ONLY
 					{
 						name: "Others",
-						href: `/opportunities/${opportunityType}`,
 						value: "Others",
 					},
 					{
 						name: "ToReview",
-						href: `/opportunities/${opportunityType}`,
 						value: "ToReview",
 					},
 				],
@@ -144,16 +137,13 @@ export default function Header() {
 											<div className="absolute left-1/2 top-0 h-6 w-6 rotate-45 rounded dark:bg-midnightblue bg-gray-100 -translate-y-2 translate-x-5"></div>
 											<ul className="py-1 text-base font-semibold dark:text-black flex flex-col items-start">
 												{item.opportunities.map((opportunity, subIndex) => (
-													<a
+													<NavLink
 														key={subIndex}
-														href={opportunity.href}
+														to={`/opportunities/${opportunity.value}`}
 														className="block md:mt-0 px-4 py-2 text-black dark:text-white hover:text-slate-900  rounded-md hover:bg-white dark:hover:bg-richblack-900 dark:hover:text-white cursor-pointer w-full"
-														onClick={() =>
-															setOpportunityType(opportunity.value)
-														}
 													>
 														{opportunity.name}
-													</a>
+													</NavLink>
 												))}
 											</ul>
 										</div>
@@ -268,16 +258,13 @@ export default function Header() {
 													<div className="absolute left-1/2 top-0 h-6 w-6 rotate-45 rounded dark:bg-midnightblue bg-gray-100 -translate-y-2 translate-x-5"></div>
 													<ul className="py-1 text-base font-semibold dark:text-black flex flex-col items-start ">
 														{item.opportunities.map((opportunity, subIndex) => (
-															<a
+															<NavLink
 																key={subIndex}
-																href={opportunity.href}
+																to={`/opportunities/${opportunity.value}`}
 																className=" md:mt-0 px-4 py-2 text-black dark:text-white hover:text-slate-900  rounded-md hover:bg-white dark:hover:bg-richblack-900 dark:hover:text-white cursor-pointer min-w-full flex items-start "
-																onClick={() =>
-																	setOpportunityType(opportunity.value)
-																}
 															>
 																{opportunity.name}
-															</a>
+															</NavLink>
 														))}
 													</ul>
 												</div>
