@@ -47,7 +47,7 @@ const Opportunities = () => {
 				) : (
 					<>
 						<div className="flex flex-col items-center justify-center w-full h-fit">
-							<div className="text-center font-bold  text-2xl dark:text-white">
+							<div className="text-center font-bold text-2xl dark:text-white pt-10 pb-16">
 								{TagLine}
 							</div>
 						</div>

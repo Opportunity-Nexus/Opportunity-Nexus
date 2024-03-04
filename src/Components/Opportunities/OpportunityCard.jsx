@@ -54,7 +54,7 @@ const OpportunityCard = (opportunity) => {
 					</div>
 
 					{/* <-----WE WILL ADD ANY EXTRA DATA FIELD HERE,IF ANY COMES.------>*/}
-					<div className="mt-4">
+					<div className="mt-4 min-h-32">
 						<OpportunityDataItem
 							label="Organization"
 							value={opportunity.organization}
@@ -63,7 +63,7 @@ const OpportunityCard = (opportunity) => {
 							label="Start Date"
 							value={opportunity.startDate}
 						/>
-						<OpportunityDataItem label="End Data" value={opportunity.endDate} />
+						<OpportunityDataItem label="End Date" value={opportunity.endDate} />
 					</div>
 					<div className="inline-flex flex-wrap items-center gap-3 mt-8 ">
 						{
