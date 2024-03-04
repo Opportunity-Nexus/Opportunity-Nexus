@@ -46,9 +46,13 @@ const OpportunityCard = (opportunity) => {
 							{opportunity.name}
 						</h5>
 					</div>
-					<p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700 dark:text-gray-300">
-						{opportunity.description.split(" ").slice(0, 15).join(" ") + "..."}
-					</p>
+					<div className="description-container max-h-20 overflow-hidden">
+						<p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700 dark:text-gray-300">
+							{opportunity.description.split(" ").slice(0, 15).join(" ") +
+								"..."}
+						</p>
+					</div>
+
 					{/* <-----WE WILL ADD ANY EXTRA DATA FIELD HERE,IF ANY COMES.------>*/}
 					<div className="mt-4">
 						<OpportunityDataItem
@@ -101,7 +105,7 @@ const OpportunityCard = (opportunity) => {
 						)}
 					</div>
 				</div>
-				<div className="p-6 pt-3">
+				<div className="p-6 mb-0">
 					<Link
 						className="block w-full select-none rounded-lg bg-richblack-900 hover:bg-primary-600 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
 						to={opportunity.applicationUrl}
