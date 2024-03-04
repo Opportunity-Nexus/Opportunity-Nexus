@@ -54,7 +54,7 @@ const OpportunityCard = (opportunity) => {
 					</div>
 
 					{/* <-----WE WILL ADD ANY EXTRA DATA FIELD HERE,IF ANY COMES.------>*/}
-					<div className="mt-4 min-h-32">
+					<div className="mt-3 min-h-28 ">
 						<OpportunityDataItem
 							label="Organization"
 							value={opportunity.organization}
