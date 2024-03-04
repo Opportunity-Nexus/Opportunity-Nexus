@@ -6,6 +6,5 @@ export async function opportunitiesData(opportunityType) {
 		throw new Error(`ERROR: ${res.status}`);
 	}
 	const data = await res.json();
-	// console.log("DATA IN API ..." + data[opportunityType]);
 	return data[opportunityType];
 }

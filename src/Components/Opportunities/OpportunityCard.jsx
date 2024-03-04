@@ -9,7 +9,6 @@ import { IoBookmarks } from "react-icons/io5";
 import { IoBookmarksOutline } from "react-icons/io5";
 import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
 import toast from "react-hot-toast";
-
 import OpportunityIcons from "./OpportunityIcons";
 import OpportunityDataItem from "./OpportunityDataItem";
 

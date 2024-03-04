@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Theme from "../theme";
@@ -6,42 +6,13 @@ import { Link, NavLink } from "react-router-dom";
 import LogoLight from "../../assets/logo/opportunity-nexus-light-logo.png";
 import LogoDark from "../../assets/logo/opportunity-nexus-dark-logo.png";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import Navigation from "../../Data/Home/Navigation";
+import ProfileDropdown from "../Authentication/ProfileDropDown";
 
 export default function Header() {
 	const [navbarColor, setNavbarColor] = useState(false);
-	const token = localStorage.getItem("token");
-	const [user, setUser] = useState(null);
-
-	const handleLogOut = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-	};
-
-	useEffect(() => {
-		if (token) {
-			const fetchData = async () => {
-				try {
-					const response = await axios.get(
-						"http://localhost:4000/api/v1/auth/user",
-						{
-							headers: {
-								Authorization: `Bearer ${token}`,
-							},
-						}
-					);
-					if (response.data.status) {
-						setUser(response.data.data);
-					} else {
-						setUser(null);
-					}
-				} catch (error) {
-					console.error("Error fetching data:", error);
-				}
-			};
-			fetchData();
-		}
-	});
+	const { token } = useSelector((state) => state.auth);
 
 	if (typeof window !== "undefined") {
 		window.addEventListener("scroll", () => {
@@ -52,40 +23,6 @@ export default function Header() {
 			}
 		});
 	}
-
-	const navigation = {
-		main: [
-			{ name: "About", href: "#about" },
-			{ name: "faq", href: "/#faq" },
-			{
-				name: "Opportunities",
-				opportunities: [
-					{
-						name: "Educational Scholarships",
-						value: "Scholarships",
-					},
-					{
-						name: "Workplace  Prospects",
-						value: "ITJobs",
-					},
-					{
-						name: "Coding Challenges",
-						value: "CodingContests",
-					},
-					//TEMPORARY FOR REVIEW ONLY
-					{
-						name: "Others",
-						value: "Others",
-					},
-					{
-						name: "ToReview",
-						value: "ToReview",
-					},
-				],
-			},
-		],
-	};
-
 	return (
 		<Popover
 			className={`sticky top-0 z-[9999] ${
@@ -123,7 +60,7 @@ export default function Header() {
 				</div>
 				<div className="hidden md:flex-1 md:flex md:items-center md:justify-between">
 					<Popover.Group as="nav" className="flex space-x-10">
-						{navigation.main.map((item) => (
+						{Navigation.main.map((item) => (
 							<div key={item.name}>
 								{item.name === "Opportunities" ? (
 									<div className="group relative flex ">
@@ -160,15 +97,9 @@ export default function Header() {
 						))}
 					</Popover.Group>
 					<div className="flex items-center md:ml-12">
-						{user !== null ? (
+						{token !== null ? (
 							<>
-								{"Hi, " + user?.firstName + " " + user?.lastName}
-								<button
-									onClick={handleLogOut}
-									className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 text-center"
-								>
-									Log Out
-								</button>
+								<ProfileDropdown/>
 							</>
 						) : (
 							<>
@@ -244,7 +175,7 @@ export default function Header() {
 						</div>
 						<div className="space-y-6 px-5 py-6">
 							<div className="space-y-4 text-center flex flex-col ">
-								{navigation.main.map((item) => (
+								{Navigation.main.map((item) => (
 									<div key={item.name}>
 										{item.name === "Opportunities" ? (
 											<div className="group relative flex ">
@@ -281,15 +212,9 @@ export default function Header() {
 								))}
 							</div>
 							<div>
-								{user ? (
+								{token !== null ? (
 									<>
-										{"Hi, " + user.firstName + " " + user.lastName}
-										<button
-											onClick={handleLogOut}
-											className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 text-center"
-										>
-											Log Out
-										</button>
+										<ProfileDropdown/>
 									</>
 								) : (
 									<>
