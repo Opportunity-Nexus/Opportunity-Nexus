@@ -16,6 +16,7 @@ const Opportunities = () => {
 	const OpportunityData = useLoaderData();
 	const opportunityName = window.location.pathname.split("/")[2];
 	const TagLine = opportunityTagLine[opportunityName];
+	const [firstPart, secondPart] = TagLine ? TagLine.split(":") : [null, null];
 	// console.log(` Opportunity Name : ${opportunityName}`);
 	// console.log("Data is :" + JSON.stringify(OpportunityData, null, 2));
 
@@ -32,7 +33,7 @@ const Opportunities = () => {
 	}
 	return (
 		<>
-			<div className="flex flex-wrap justify-center max-w-7xl mx-auto min-h-[80vh]">
+			<div className="flex flex-wrap justify-center max-w-7xl mx-auto min-h-[80vh] ">
 				{OpportunityData.length === 0 ? (
 					<div className="flex flex-col justify-center items-center lg:w-2/4 dark:text-white ">
 						<img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
@@ -46,11 +47,13 @@ const Opportunities = () => {
 					</div>
 				) : (
 					<>
-						<div className="flex flex-col items-center justify-center w-full h-fit">
-							<div className="text-center font-bold text-2xl dark:text-white pt-10 pb-16">
-								{TagLine}
+						<div className="flex flex-col items-center justify-center h-fit pt-10 pb-16">
+							<div className="mt-4 text-center flex flex-col tracking-tight font-extrabold text-3xl sm:mt-5 sm:text-5xl lg:mt-6 xl:text-4xl dark:text-white ">
+								<span>{firstPart}</span>
+								<span className="text-primary-500">{secondPart}</span>
 							</div>
 						</div>
+
 						<div className="flex flex-wrap justify-center mx-auto mt-4 mb-7">
 							{currentOpportunities.map((opportunity, index) => (
 								<OpportunityCard key={index} {...opportunity} />

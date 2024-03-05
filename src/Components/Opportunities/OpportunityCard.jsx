@@ -54,7 +54,7 @@ const OpportunityCard = (opportunity) => {
 					</div>
 
 					{/* <-----WE WILL ADD ANY EXTRA DATA FIELD HERE,IF ANY COMES.------>*/}
-					<div className="mt-3 min-h-28 ">
+					<div className="mt-3 min-h-32 overflow-hidden ">
 						<OpportunityDataItem
 							label="Organization"
 							value={opportunity.organization}
@@ -65,7 +65,7 @@ const OpportunityCard = (opportunity) => {
 						/>
 						<OpportunityDataItem label="End Date" value={opportunity.endDate} />
 					</div>
-					<div className="inline-flex flex-wrap items-center gap-3 mt-2">
+					<div className="inline-flex flex-wrap items-center gap-3 mt-4">
 						{
 							<OpportunityIcons
 								label="Eligibility Criteria"
