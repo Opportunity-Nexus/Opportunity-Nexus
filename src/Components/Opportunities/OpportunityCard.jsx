@@ -46,7 +46,7 @@ const OpportunityCard = (opportunity) => {
 							{opportunity.name}
 						</h5>
 					</div>
-					<div className="description-container max-h-20 overflow-hidden mb-6">
+					<div className="max-h-20 overflow-hidden mb-6 ">
 						<p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700 dark:text-gray-300">
 							{opportunity.description.split(" ").slice(0, 15).join(" ") +
 								"..."}
@@ -54,7 +54,7 @@ const OpportunityCard = (opportunity) => {
 					</div>
 
 					{/* <-----WE WILL ADD ANY EXTRA DATA FIELD HERE,IF ANY COMES.------>*/}
-					<div className="mt-3 min-h-32 overflow-hidden ">
+					<div className="mt-3 min-h-44 overflow-hidden  ">
 						<OpportunityDataItem
 							label="Organization"
 							value={opportunity.organization}
