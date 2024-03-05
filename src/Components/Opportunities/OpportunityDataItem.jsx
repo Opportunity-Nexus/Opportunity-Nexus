@@ -7,7 +7,7 @@ const OpportunityDataItem = ({ label, value }) => {
 				<span className="font-semibold text-lg md:text-base text-blue-gray-900 dark:text-white">
 					{label}:
 				</span>
-				<span className="ml-1 dark:text-gray-300 ">{value}</span>
+				<span className="dark:text-gray-300 ">{value}</span>
 			</div>
 		</>
 	);
