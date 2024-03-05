@@ -3,7 +3,7 @@ import React from "react";
 const OpportunityDataItem = ({ label, value }) => {
 	return (
 		<>
-			<div className="flex md:flex-row flex-col ">
+			<div className="flex md:flex-row flex-col">
 				<span className="font-semibold text-lg md:text-base text-blue-gray-900 dark:text-white">
 					{label}:
 				</span>
