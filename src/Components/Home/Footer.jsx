@@ -1,4 +1,3 @@
-
 const navigation = [
     {
       name: 'GitHub',

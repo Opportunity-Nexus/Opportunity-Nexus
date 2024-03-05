@@ -1,6 +1,8 @@
-import React,{ useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
+import Store from "./Redux/Store";
+import { Provider } from "react-redux";
 import "./global.css";
 import Layout from "./Common/Layout";
 import Home from "./Pages/Home/Home";
@@ -8,7 +10,10 @@ import Login from "./Pages/Authentication/Login";
 import Signup from "./Pages/Authentication/Signup";
 import ForgetPass from "./Pages/Authentication/ForgetPass";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
-// import './Components/theme';
+import Opportunities, {
+	loader as OpportunitiesLoader,
+} from "./Pages/Opportunities/Opportunities";
+import Error from "./Components/Opportunities/Error";
 
 import {
 	Route,
@@ -16,33 +21,26 @@ import {
 	createRoutesFromElements,
 	RouterProvider,
 } from "react-router-dom";
-
-import Contests from "./Pages/Contests";
-import Jobs from "./Pages/Jobs";
-
+import UpdatePassword from "./Pages/Authentication/UpdatePassword";
 const themes = {
 	light: "public/light.css",
 	dark: "public/dark.css",
 };
 
 function App() {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	console.log(isLoggedIn);
 	const routes = [
-		<Route
-			element={
-				<Layout />
-			}
-		>
+		<Route element={<Layout />}>
 			<Route path="/" element={<Home />} />
-			<Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+			<Route path="/login" element={<Login />} />
+			<Route path="/signup" element={<Signup />} />
+			<Route path="/ForgetPass" element={<ForgetPass />} />
+			<Route path="/update-password/:id" element={<UpdatePassword />} />
 			<Route
-				path="/signup"
-				element={<Signup setIsLoggedIn={setIsLoggedIn} />}
+				path="/opportunities/:id"
+				element={<Opportunities />}
+				loader={OpportunitiesLoader}
+				errorElement={<Error />}
 			/>
-			<Route path="/contests" element={<Contests isLoggedIn={isLoggedIn} />} />
-			<Route path="/jobs" element={<Jobs isLoggedIn={isLoggedIn} />} />
-			<Route path="/ForgetPass" element={<ForgetPass/>} />
 		</Route>,
 	];
 	const router = createBrowserRouter(createRoutesFromElements(...routes));
@@ -54,8 +52,8 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<>
+	<Provider store={Store}>
 		<App />
 		<Toaster />
-	</>
+	</Provider>
 );
