@@ -21,7 +21,7 @@ const ForgotPassword = () => {
           <div className="loader"></div>
         ) : (
           <div className="p-4 lg:p-8">
-            <h1 className="flex justify-center  text-[1.875rem] text-blue-600 font-bold leading-[2.375rem] my-5 dark:text-white">
+            <h1 className="flex justify-center text-center  text-[1.875rem] text-blue-600 font-bold leading-[2.375rem] my-5 dark:text-white">
               {!emailSent ? "Reset your Password" : "Check your email"}
             </h1>
             <div className="">
