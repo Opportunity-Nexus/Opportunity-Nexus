@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getPasswordResetToken } from "../../Services/Operations/AuthenticationApi";
 import { BiArrowBack } from "react-icons/bi";
+import toast from "react-hot-toast";
 
 const ForgotPassword = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -12,13 +13,18 @@ const ForgotPassword = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
     dispatch(getPasswordResetToken(email, setEmailSent));
   };
   return (
     <div className="flex justify-center items-center  dark:bg-richblack-900 bg-white  h-[90vh]">
       <div className=" flex flex-col p-1 lg:p-4  rounded-lg shadow-2xl">
         {loading ? (
-          <div className="loader"></div>
+          <div className="loader  h-[80vh] "></div>
         ) : (
           <div className="p-4 lg:p-8">
             <h1 className="flex justify-center text-center  text-[1.875rem] text-blue-600 font-bold leading-[2.375rem] my-5 dark:text-white">
