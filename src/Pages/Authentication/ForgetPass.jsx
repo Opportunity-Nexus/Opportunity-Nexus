@@ -24,7 +24,7 @@ const ForgotPassword = () => {
     <div className="flex justify-center items-center  dark:bg-richblack-900 bg-white  h-[90vh]">
       <div className=" flex flex-col justify-center items-center p-1 lg:p-4  rounded-lg shadow-2xl">
         {loading ? (
-          <div className="loader  h-[80vh] "></div>
+          <div className="loader  h-screen "></div>
         ) : (
           <div className="p-4 lg:p-8 ">
             <h1 className="flex justify-center text-center  text-[1.875rem] text-blue-600 font-bold leading-[2.375rem] my-5 dark:text-white">
