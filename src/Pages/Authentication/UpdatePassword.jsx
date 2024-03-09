@@ -35,7 +35,7 @@ const UpdatePassword = () => {
       <div className=" w-full h-[80vh] md:w-screen flex justify-center  ">
         <div className=" max-w-7xl w-full p-8 max-h-80 flex justify-center text-black dark:text-white shadow-lg ">
           {loading ? (
-            <div className="loader"></div>
+            <div className="loader h-screen"></div>
           ) : (
             <div className=" w-full flex justify-center px-8">
               {!passwordResetDone ? (
