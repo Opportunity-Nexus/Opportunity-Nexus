@@ -124,7 +124,7 @@ const UpdatePassword = () => {
             ) : (
               <div className="flex  h-[90vh] flex-col justify-center  items-center  text-center text-gray-700 dark:text-gray-300">
                 <div className="hidden ">
-                  <img
+                  {/* <img
                     src={forgoticon}
                     alt="Forgot Icon"
                     style={{
@@ -132,7 +132,7 @@ const UpdatePassword = () => {
                       width: "400px",
                       objectFit: "contain",
                     }}
-                  />
+                  /> */}
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold mb-2">
