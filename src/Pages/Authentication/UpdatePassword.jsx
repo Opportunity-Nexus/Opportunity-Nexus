@@ -31,11 +31,11 @@ const UpdatePassword = () => {
     );
   };
   return (
-    <div className=" flex justify-center h-[90vh] w-full items-center ">
-      <div className=" w-full h-[80vh] md:w-screen flex justify-center  ">
-        <div className=" max-w-7xl w-full p-8 max-h-80 flex justify-center text-black dark:text-white shadow-lg ">
+    <div className="flex justify-center items-center  dark:bg-richblack-900 bg-white  h-[90vh] ">
+      <div className=" flex flex-col justify-center max-w-3xl items-center p-5 lg:p-4  rounded-lg   ">
+        <div className=" max-w-7xl w-full p-8 max-h-80 flex justify-center text-black dark:text-white  ">
           {loading ? (
-            <div className="loader h-screen"></div>
+            <div className="loader h-screen shadow-"></div>
           ) : (
             <div className=" w-full flex justify-center px-8">
               {!passwordResetDone ? (
