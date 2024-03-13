@@ -28,7 +28,7 @@ export default function ProfileDropdown() {
 			{open && (
 				<div
 					onClick={(e) => e.stopPropagation()}
-					className="absolute px-9 top-15 mt-2 -right-20 z-[1000] divide-y-[1px] dark:divide-richblack-700 overflow-hidden rounded-md  border-richblack-700 bg-gray-100 dark:bg-midnightblue"
+					className="absolute px-9 top-15 mt-2 -right-20 z-[9999] divide-y-[1px] dark:divide-richblack-700 overflow-hidden rounded-md  border-richblack-700 bg-gray-100 dark:bg-midnightblue"
 					ref={ref}
 				>
 					<div className="flex flex-row justify-between items-center my-2 gap-x-3 ">
@@ -43,12 +43,7 @@ export default function ProfileDropdown() {
 						</div>
 					</div>
 					<hr className="border-2 mt-4 " />
-					<Link to="/dashboard" onClick={() => setOpen(false)}>
-						<div className="flex w-full items-center gap-x-1 my-2  py-3 px-8 text-sm rounded-md transition-all dark:text-white hover:text-slate-900 hover:bg-white dark:hover:bg-richblack-900 dark:hover:text-white">
-							<VscDashboard className="text-lg" />
-							Dashboard
-						</div>
-					</Link>
+					
 					<Link to="/dashboard/settings" onClick={() => setOpen(false)}>
 						<div className="flex w-full items-center gap-x-1 my-2  py-3 px-8 text-sm transition-all text-black dark:text-white hover:text-slate-900  rounded-md hover:bg-white dark:hover:bg-richblack-900 dark:hover:text-white">
 							<VscQuestion className="text-lg" />

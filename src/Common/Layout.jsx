@@ -1,16 +1,19 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import Header from "../Components/Home/Header";
+import React, { useEffect, useState } from "react";
+import ApplicationLayout from "./application-layout";
+import StandardLayout from "./standard-layout";
+import { useSelector } from "react-redux";
+
 
 const Layout = () => {
-	return (
-		<div className="dark:bg-richblack-900">
-			<Header className="sticky-header " />
-			<div className="min-h-screen mt-8">
-				<Outlet />
-			</div>
-		</div>
-	);
-};
+
+	const { token } = useSelector((state) => state.auth);
+
+	if( token ) {
+		return <ApplicationLayout />
+	}
+	else {
+		return <StandardLayout />
+	}
+}
 
 export default Layout;
