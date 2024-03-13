@@ -5,28 +5,24 @@ import Theme from "../theme";
 import { Link, NavLink } from "react-router-dom";
 import LogoLight from "../../assets/logo/opportunity-nexus-light-logo.png";
 import LogoDark from "../../assets/logo/opportunity-nexus-dark-logo.png";
-import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { useSelector } from "react-redux";
-import Navigation from "../../Data/Home/Navigation";
 import ProfileDropdown from "../Authentication/ProfileDropDown";
-import {
-    CalendarIcon,
-    ChartBarIcon,
-    FolderIcon,
-    HomeIcon,
-    InboxIcon,
-    UsersIcon,
-  } from "@heroicons/react/outline";
+import { MdDashboard as HomeIcon } from 'react-icons/md';
+import { FaCode as UsersIcon } from 'react-icons/fa';
+import { MdWorkOutline as FolderIcon } from 'react-icons/md';
+import { IoIosRocket as CalendarIcon } from 'react-icons/io';
+import { MdSettings as InboxIcon } from 'react-icons/md';
+import { MdSchool as ChartBarIcon } from 'react-icons/md';
 
-  const navigation = [
-    { name: "Dashboard", icon: HomeIcon, href: "#", current: true },
-    { name: "Team", icon: UsersIcon, href: "#", count: 3, current: false },
-    { name: "Projects", icon: FolderIcon, href: "#", count: 4, current: false },
-    { name: "Calendar", icon: CalendarIcon, href: "#", current: false },
-    { name: "Documents", icon: InboxIcon, href: "#", count: 12, current: false },
-    { name: "Reports", icon: ChartBarIcon, href: "#", current: false },
-  ];
-  
+const navigation = [
+  { name: "Dashboard", icon: HomeIcon, href: "#", current: true },
+  { name: "Coding Challenges", icon: UsersIcon, href: "#", current: false },
+  { name: "Projects", icon: FolderIcon, href: "#", current: false },
+  { name: "Opportunities", icon: CalendarIcon, href: "#", current: false },
+  { name: "Settings", icon: InboxIcon, href: "#", current: false },
+  { name: "Scholarships", icon: ChartBarIcon, href: "#", current: false },
+];
+
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -55,9 +51,9 @@ export default function Header() {
       {({ open }) => (
         <>
           <div className="relative flex justify-end items-center px-4 py-2  sm:px-6 lg:space-x-10 max-w-7xl mx-auto ">
-            <div className="-mr-2 -my-2 lg:hidden flex items-center justify-end">
+            <div className="-mr-2 -my-2 md:hidden flex items-center justify-end">
               <Popover.Button
-                className=" rounded-md p-2 inline-flex items-center justify-end hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+                className=" rounded-md mr-2 inline-flex items-center justify-end hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
                 ref={menuRef}
               >
                 <span className="sr-only">Open menu</span>
@@ -86,8 +82,8 @@ export default function Header() {
                     </div>
               
             </div>
-            <div className="flex-1 flex items-center justify-end">
-              <div className="flex items-center mr-4">
+            <div className="flex-1 flex items-center justify-end ml-2 md:ml-0">
+              <div className="flex items-center ">
                 {token !== null ? (
                   <>
                     <ProfileDropdown />
@@ -110,8 +106,8 @@ export default function Header() {
                 )}
               </div>
             </div>
-           
-              <Theme className="cursor-pointer" />
+           <div className="cursor-pointer hidden md:block ml-4">    <Theme /></div>
+          
             
           </div>
 
@@ -128,9 +124,9 @@ export default function Header() {
           >
             <Popover.Panel
               focus
-              className="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition lg:hidden w-fit "
+              className="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden w-fit "
             >
-              <div className="divide-y-2 divide-gray-50 dark:divide-gray-800 rounded-lg  ring-1 ring-black ring-opacity-5 dark:bg-gray-950 bg-white w-full h-screen">
+              <div className="relative divide-y-2 divide-gray-50 dark:divide-gray-800 rounded-lg  ring-1 ring-black ring-opacity-5 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 w-full h-screen">
                 <div className="px-5 pb-6 pt-5 flex flex-row items-center">
                   <div className="flex items-center justify-between">
                     <div>
@@ -165,7 +161,7 @@ export default function Header() {
                     </div>
                   </div>
                 </div>
-                <div className="space-y-6 px-5 py-6">
+                <div className="space-y-6 px-5">
                   <div>
                     {token !== null ? (
                       <>    <div className="mt-5 flex-grow flex flex-col">
@@ -241,6 +237,7 @@ export default function Header() {
                     )}
                   </div>
                 </div>
+                <div className="cursor-pointer absolute bottom-10 p-4 ">    <Theme /></div>
               </div>
             </Popover.Panel>
           </Transition>

@@ -1,12 +1,12 @@
 import ApplicationLayoutSidebar from './application-sidebar'
 import React from 'react'
-import Header from "../Components/dashboard/Header";
+import Header from "../Components/application/Header";
 
 const ApplicationLayout = ({ children }) => {
 	return (
 		<div className="root">
-			<div id="layout-mid-container" className=" relative flex flex-1 overflow-clip">
-				<div id="layout-sidebar-desktop-container" className="z-50 hidden lg:block ">
+			<div id="layout-mid-container" className=" relative flex flex-1">
+				<div id="layout-sidebar-desktop-container" className="z-50  overflow-y-hidden">
 					<ApplicationLayoutSidebar />
 				</div>
 
