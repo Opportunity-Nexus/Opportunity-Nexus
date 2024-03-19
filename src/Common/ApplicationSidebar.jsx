@@ -185,7 +185,7 @@ export default function ApplicationLayoutSidebar() {
           </div>
         </div>
         <div className="md:pl-64 flex flex-col flex-1 md:w-full">
-          <div className="sticky top-0 z-10 flex-shrink-0 flex items-center h-16 bg-white  dark:bg-gray-900 shadow dark:shadow-gray-700 min-w-full">
+          <div className="sticky top-0 z-10 flex-shrink-0 flex justify-end items-center h-16 bg-white  dark:bg-gray-900 shadow dark:shadow-gray-700 min-w-full">
             <button
               type="button"
               className="px-2  text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 md:hidden"
@@ -213,8 +213,8 @@ export default function ApplicationLayoutSidebar() {
                 />
               </Link>
             </div>
-            <div className="flex-1 px-4 flex items-center justify-between md:pt-5">
-              <div className="flex-1 flex">
+            <div className="flex-1 px-4 flex items-center justify-end md:pt-5">
+              {/* <div className="flex-1 flex">
                 <form className="w-full flex md:ml-0" action="#" method="GET">
                   <label htmlFor="search-field" className="sr-only">
                     Search
@@ -232,7 +232,7 @@ export default function ApplicationLayoutSidebar() {
                     />
                   </div>
                 </form>
-              </div>
+              </div> */}
               <div className="ml-4 flex items-center md:ml-6 gap-3">
                 <button
                   type="button"

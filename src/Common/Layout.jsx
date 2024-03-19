@@ -9,7 +9,8 @@ import { useSelector } from "react-redux";
 const Layout = () => {
 
 	const { token } = useSelector((state) => state.auth);
-	const pathName = window.location.pathname;
+	const pathName = window.location.pathname; 
+
 	console.log('pathname',pathName);
 
 	if( token && pathName !== '/') {
