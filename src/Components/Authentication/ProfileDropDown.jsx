@@ -39,13 +39,13 @@ export default function ProfileDropdown() {
           </div>
           <hr className="border-px dark:border-gray-700" />
           {!(pathName === "/dashboard" || pathName === "/dashboard/")? (
-            <Link to="/dashboard" reloadDocument onClick={() => setOpen(false)}>
+            <Link to="/dashboard"  onClick={() => setOpen(false)}>
               <div className="flex w-full items-center gap-x-1 my-2  p-2 text-sm transition-all font-medium   rounded-md dark:hover:bg-richblack-900 hover:bg-gray-50 hover:dark:bg-gray-500">
               Dashboard   
               </div>
             </Link>
           ) : (
-            <Link to="/" reloadDocument onClick={() => setOpen(false)}>
+            <Link to="/"  onClick={() => setOpen(false)}>
               <div className="flex w-full items-center gap-x-1 my-2  p-2 text-sm transition-all font-medium   rounded-md dark:hover:bg-richblack-900 hover:bg-gray-50 hover:dark:bg-gray-500">
                 Home
               </div>
