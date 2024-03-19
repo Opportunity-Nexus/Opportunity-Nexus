@@ -5,13 +5,12 @@ import { useSelector } from "react-redux";
 import userNavigation from "../Data/ApplicationNavigation/UserNavigation";
 import adminNavigation from "../Data/ApplicationNavigation/AdminNavigation";
 import Theme from "../Components/theme";
+import { IoNotificationsSharp } from "react-icons/io5";
 
 import { Fragment, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import ProfileDropdown from "../Components/Authentication/ProfileDropDown";
-
-import { BellIcon, MenuAlt2Icon, XIcon } from "@heroicons/react/outline";
-import { SearchIcon } from "@heroicons/react/solid";
+import {MenuAlt2Icon, XIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -107,7 +106,7 @@ export default function ApplicationLayoutSidebar() {
                         className={classNames(
                           (index + 1) === activeNavigation
                             ? "bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-300"
-                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 hover:dark:bg-gray-500 hover:text-gray-900 hover:dark:text-gray-300",
+                            : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 hover:dark:bg-gray-700 hover:text-gray-900 hover:dark:text-gray-300",
                           "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                         )}
                         onClick={() => {setActiveNavigation(()=> item.id) 
@@ -168,7 +167,7 @@ export default function ApplicationLayoutSidebar() {
                     className={classNames(
                       (index + 1) === activeNavigation
                         ? "bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-300"
-                        : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 hover:dark:bg-gray-500 hover:text-gray-900 hover:dark:text-gray-300",
+                        : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 hover:dark:bg-gray-800 hover:text-gray-900 hover:dark:text-gray-300",
                       "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                     )}
                     onClick={() => setActiveNavigation(()=> item.id)}
@@ -239,7 +238,7 @@ export default function ApplicationLayoutSidebar() {
                   className="bg-white  dark:bg-gray-900 p-1 rounded-full text-black  dark:text-white hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                 >
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <IoNotificationsSharp className="h-6 w-6" aria-hidden="true" />
                 </button>
 
                 <ProfileDropdown />

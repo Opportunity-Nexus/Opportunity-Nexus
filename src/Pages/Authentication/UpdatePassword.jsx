@@ -4,7 +4,6 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useLocation, Link } from "react-router-dom";
 import { resetPassword } from "../../Services/Operations/AuthenticationApi";
 import { BiArrowBack } from "react-icons/bi";
-import forgoticon from "../../assets/utils/forgot.png";
 const UpdatePassword = () => {
   const { loading } = useSelector((state) => state.auth);
   const location = useLocation();
