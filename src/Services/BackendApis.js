@@ -1,6 +1,6 @@
-// const BASE_URL = "http://localhost:4000/api/v1";
+const BASE_URL = "http://localhost:4000/api/v1";
 // const BASE_URL = "https://api.hostellelo.in/api/v1";
-const BASE_URL = "https://opportunity-nexus-backend.onrender.com/api/v1";
+// const BASE_URL = "https://opportunity-nexus-backend.onrender.com/api/v1";
 
 
 // AUTH ENDPOINTS
@@ -10,4 +10,9 @@ export const authEndpoints = {
 	LOGIN_API: BASE_URL + "/auth/login",
 	RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
 	RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
+};
+//OFF-CAMPUS ENDPOINTS
+export const offCampusEndpoints = {
+	SAVE_BOOKMARK_OPPORTUNITY: BASE_URL + "/offCampus/saveBookmarkedOpportunities",
+	GET_ALL_BOOKMARK_OPPORTUNITY: BASE_URL + "//offCampus/getAllSavedOpportunities"
 };
