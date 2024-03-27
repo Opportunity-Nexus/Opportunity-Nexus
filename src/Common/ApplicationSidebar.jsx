@@ -23,7 +23,7 @@ export default function ApplicationLayoutSidebar() {
 
   return (
     <>
-      <div>
+      <div className="sticky top-0">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
