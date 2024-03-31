@@ -25,7 +25,13 @@ const OpportunityCard = (opportunity) => {
     try {
       const response = await apiConnector(
         "POST",
-        offCampusEndpoints.SAVE_BOOKMARK_OPPORTUNITY
+        offCampusEndpoints.SAVE_BOOKMARK_OPPORTUNITY,
+        {
+          opportunityType: "off-campus", // ! TODO: switch this later dynamically
+          name: opportunityName,
+          endDate: opportunity.endDate,
+          applicationUrl: opportunity.applicationUrl,
+        }
       );
       console.log("SAVED BOOKMARK OPPORTUNITY RESPONSE :", response);
       if (!response.data.success) {
