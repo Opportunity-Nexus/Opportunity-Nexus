@@ -11,51 +11,53 @@ import Signup from "./Pages/Authentication/Signup";
 import ForgetPass from "./Pages/Authentication/ForgetPass";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import Opportunities, {
-	loader as OpportunitiesLoader,
+  loader as OpportunitiesLoader,
 } from "./Pages/Opportunities/Opportunities";
 import Error from "./Components/Opportunities/Error";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
 
 import {
-	Route,
-	createBrowserRouter,
-	createRoutesFromElements,
-	RouterProvider,
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
 } from "react-router-dom";
 import UpdatePassword from "./Pages/Authentication/UpdatePassword";
 const themes = {
-	light: "public/light.css",
-	dark: "public/dark.css",
+  light: "public/light.css",
+  dark: "public/dark.css",
 };
 
 function App() {
-	const routes = [
-		<Route element={<Layout />}>
-			<Route path="/" element={<Home />} />
-			<Route path="/login" element={<Login />} />
-			<Route path="/signup" element={<Signup />} />
-			<Route path="/ForgetPass" element={<ForgetPass />} />
-			<Route path="/update-password/:id" element={<UpdatePassword />} />
-			<Route
-				path="/opportunities/:id"
-				element={<Opportunities />}
-				loader={OpportunitiesLoader}
-				errorElement={<Error />}
-			/>
-			<Route path="/dashboard" element={<Dashboard />} />
-		</Route>,
-	];
-	const router = createBrowserRouter(createRoutesFromElements(...routes));
-	return (
-		<ThemeSwitcherProvider defaultTheme="light" themeMap={themes}>
-			<RouterProvider router={router} />
-		</ThemeSwitcherProvider>
-	);
+  const routes = [
+    <Route element={<Layout />}>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/ForgetPass" element={<ForgetPass />} />
+      <Route path="/update-password/:id" element={<UpdatePassword />} />
+      <Route
+        path="/opportunities/:id"
+        element={<Opportunities />}
+        loader={OpportunitiesLoader}
+        errorElement={<Error />}
+      />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard/my-opportunities" element={<MyOpportunities />} />
+    </Route>,
+  ];
+  const router = createBrowserRouter(createRoutesFromElements(...routes));
+  return (
+    <ThemeSwitcherProvider defaultTheme="light" themeMap={themes}>
+      <RouterProvider router={router} />
+    </ThemeSwitcherProvider>
+  );
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<Provider store={Store}>
-		<App />
-		<Toaster />
-	</Provider>
+  <Provider store={Store}>
+    <App />
+    <Toaster />
+  </Provider>
 );

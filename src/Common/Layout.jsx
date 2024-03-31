@@ -5,15 +5,17 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
 const Layout = () => {
-	const { token } = useSelector((state) => state.auth);
-	const location = useLocation();
-	const pathName = location.pathname;
-	if( token &&( pathName === '/dashboard' || pathName === '/dashboard/') ) {
-		return <ApplicationLayout />
-	}
-	else {
-		return <StandardLayout />
-	}
-}
+  const { token } = useSelector((state) => state.auth);
+  const location = useLocation();
+  const pathName = location.pathname;
+  if (
+    token &&
+    (pathName === "/dashboard" || pathName.startsWith("/dashboard/"))
+  ) {
+    return <ApplicationLayout />;
+  } else {
+    return <StandardLayout />;
+  }
+};
 
 export default Layout;
