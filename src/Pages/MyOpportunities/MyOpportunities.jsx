@@ -58,13 +58,13 @@ const MyOpportunities = () => {
 
   return (
     <>
-      <div className="flex flex-col mx-auto min-h-[80vh] p-4">
+      <div className="flex flex-col mx-auto min-h-screen p-4 bg-white dark:bg-gray-900">
         <div className="w-full flex items-end justify-end">
           <select
             name="Opportunity Type"
             id="opportunity-type-selector"
             defaultValue="off-campus"
-            className="w-fit px-4 py-2 border-gray-500 rounded-md ml-auto"
+            className="w-fit  border-gray-500 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white  rounded-md "
             onChange={(e) => {
               setOpportunityType(() => e.target.value);
             }}
