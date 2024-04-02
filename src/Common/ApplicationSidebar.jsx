@@ -18,33 +18,31 @@ function classNames(...classes) {
 }
 
 export default function ApplicationLayoutSidebar() {
+  const pathName = useLocation().pathname;
 
-  const location = useLocation();
-  const pathName = location.pathname;
-
-  const [ navigationToUse, setNavigationToUse ] = useState([]);
+  const [navigationToUse, setNavigationToUse] = useState([]);
   const { user } = useSelector((state) => state.profile);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const [activeNavigation, setActiveNavigation] = useState(
-    useState(() => {
-      const activeTabIndex = navigationToUse.findIndex(
-        (item) => item.slug === pathName.split("/").at(-1)
-      );
-
-      return activeTabIndex + 1 || 1;
-    })
-  );
+  const [activeNavigation, setActiveNavigation] = useState(1);
 
   useEffect(() => {
-    if(user.accountType === 'Admin'){
-      setNavigationToUse(adminNavigation)
+    if (user.accountType === "Admin") {
+      setNavigationToUse(adminNavigation);
+    } else {
+      setNavigationToUse(userNavigation);
     }
-    else{
-      setNavigationToUse(userNavigation)
-    }
-  }, [user])
+  }, [user]);
 
+  useEffect(() => {
+    setActiveNavigation(() => {
+      const activeTabIndex = navigationToUse.findIndex((item) => {
+        return item.href === pathName;
+      });
+
+      return activeTabIndex + 1 || 1;
+    });
+  }, [navigationToUse, pathName]);
 
   return (
     <>
