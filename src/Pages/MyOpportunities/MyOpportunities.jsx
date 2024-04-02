@@ -40,7 +40,7 @@ const MyOpportunities = () => {
 
     useEffect(() => {
       async function getSavedOpportunities() {
-        console.log(token);
+        console.log('Token in SAVE_OPP_API',token);
         if (token) {
           try {
             const response = await fetch(offCampusEndpoints.GET_ALL_BOOKMARK_OPPORTUNITY, {
