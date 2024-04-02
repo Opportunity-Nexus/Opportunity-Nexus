@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import OpportunityCard from "../../Components/Opportunities/OpportunityCard";
+import SavedOpportunityCard from "../../Components/Opportunities/SavedOpportunityCard";
 import { TbPlayerTrackPrevFilled } from "react-icons/tb";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import OpportunitiesNotFoundImg from "../../assets/utils/opp-not-found.svg";
-import { apiConnector } from "../../Services/ApiConnector";
 import { offCampusEndpoints } from "../../Services/BackendApis";
-import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const MyOpportunities = () => {
   /**
@@ -13,6 +12,7 @@ const MyOpportunities = () => {
    */
   const [opportunityType, setOpportunityType] = useState("offCampus");
   const [savedOpportunitiesList, setSavedOpportunitiesList] = useState([]);
+  const {token} = useSelector((state)=>state.auth);
 
   //----------------------PAGINTAION----------------------//
 
@@ -38,7 +38,6 @@ const MyOpportunities = () => {
 
     useEffect(() => {
       async function getSavedOpportunities() {
-        const token = localStorage.getItem('token'); // Retrieving the token
     
         if (token) {
           try {
@@ -50,13 +49,11 @@ const MyOpportunities = () => {
               }
             });
     
-            console.log('token is',token)
             const data = await response.json();
             if (response.ok) {
               console.log('Success:', data);
-              // Here, you would typically update your component state
-              // For example:
-              // setSavedOpportunitiesList(data.opportunities);
+              setSavedOpportunitiesList(() => {return data.data});
+    
               // setPaginationMeta(data.pagination);
             } 
             
@@ -76,10 +73,10 @@ const MyOpportunities = () => {
           // Potentially handle the lack of a token, like redirecting to a login page
         }
       }
-    
+   
       getSavedOpportunities();
-    }, [paginationMeta, opportunityType]); // Depend on paginationMeta and opportunityType
-    
+    }, [paginationMeta, token, opportunityType]); // Depend on paginationMeta and opportunityType
+   
 
   return (
     <>
@@ -119,7 +116,7 @@ const MyOpportunities = () => {
           <>
             <div className="flex flex-wrap justify-center mx-auto mt-4 mb-7 flex-1">
               {savedOpportunitiesList.map((opportunity, index) => (
-                <OpportunityCard key={index} {...opportunity} />
+                <SavedOpportunityCard key={index} {...opportunity} />
               ))}
             </div>
 

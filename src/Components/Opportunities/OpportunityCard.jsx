@@ -53,7 +53,10 @@ const OpportunityCard = (opportunity) => {
     <>
       <div className="relative flex w-full max-w-[24rem] flex-col rounded-xl bg-white dark:bg-gray-800 bg-clip-border text-gray-700 shadow-lg mx-2 my-2">
         <div className="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
-          <img src={opportunity.image} alt="OpportunityImage" />
+          {opportunity.image && (
+            <img src={opportunity.image} alt="OpportunityImage" />
+          )}
+
           <div className="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
           <button
             className="!absolute top-4 right-4 text-lg transition-all"
@@ -83,12 +86,14 @@ const OpportunityCard = (opportunity) => {
               {opportunity.name}
             </h5>
           </div>
-          <div className="max-h-20 overflow-hidden mb-6">
-            <p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700 dark:text-gray-300">
-              {opportunity.description.split(" ").slice(0, 15).join(" ") +
-                "..."}
-            </p>
-          </div>
+          {opportunity.description && (
+            <div className="max-h-20 overflow-hidden mb-6">
+              <p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700 dark:text-gray-300">
+                {opportunity.description?.split(" ").slice(0, 15).join(" ") +
+                  "..."}
+              </p>
+            </div>
+          )}
 
           {/* <-----WE WILL ADD ANY EXTRA DATA FIELD HERE,IF ANY COMES.------>*/}
           <div className="mt-3 min-h-40 md:min-h-32 overflow-hidden">
