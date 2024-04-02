@@ -6,6 +6,7 @@ import OpportunitiesNotFoundImg from "../../assets/utils/opp-not-found.svg";
 import { apiConnector } from "../../Services/ApiConnector";
 import { offCampusEndpoints } from "../../Services/BackendApis";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const MyOpportunities = () => {
   /**
@@ -13,6 +14,7 @@ const MyOpportunities = () => {
    */
   const [opportunityType, setOpportunityType] = useState("offCampus");
   const [savedOpportunitiesList, setSavedOpportunitiesList] = useState([]);
+  const {token} = useSelector((state)=>state.auth);
 
   //----------------------PAGINTAION----------------------//
 
@@ -38,8 +40,7 @@ const MyOpportunities = () => {
 
     useEffect(() => {
       async function getSavedOpportunities() {
-        const token = localStorage.getItem('token'); // Retrieving the token
-    
+        console.log(token);
         if (token) {
           try {
             const response = await fetch(offCampusEndpoints.GET_ALL_BOOKMARK_OPPORTUNITY, {
