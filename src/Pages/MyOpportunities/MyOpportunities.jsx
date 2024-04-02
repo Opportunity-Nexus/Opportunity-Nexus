@@ -80,12 +80,13 @@ const MyOpportunities = () => {
   return (
     <>
       <div className="flex flex-col mx-auto min-h-screen p-4 bg-white dark:bg-gray-900">
+        <div className="flex justify-center items-center py-4"><h1 className="font-bold text-2xl sm:text-4xl lg:text-5xl text-center dark:text-white ">Saved  <span className=" text-primary-500">Opportunities</span></h1></div>
         <div className="w-full flex items-end justify-end">
           <select
             name="Opportunity Type"
             id="opportunity-type-selector"
             defaultValue="off-campus"
-            className="w-fit  border-gray-500 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white  rounded-md "
+            className="w-fit mx-10 border-gray-500 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white  rounded-md "
             onChange={(e) => {
               setOpportunityType(() => e.target.value);
             }}
@@ -95,7 +96,7 @@ const MyOpportunities = () => {
                 <option
                   value={item}
                   key={item}
-                  className="uppercase gap-1 flex"
+                  className="uppercase gap-1 flex text-sm"
                 >
                   {item}
                 </option>
