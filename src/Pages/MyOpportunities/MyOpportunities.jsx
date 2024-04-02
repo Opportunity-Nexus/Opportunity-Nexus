@@ -36,25 +36,50 @@ const MyOpportunities = () => {
     ? paginationMeta.totalResults / pageSize
     : 1;
 
-  useEffect(() => {
-    // this function will be responsible for switching the request url between on-campus and off-campus saved opportunities, by using "opportunityType" state
-    async function getSavedOpportunities() {
-      const response = await apiConnector(
-        "GET",
-        offCampusEndpoints.GET_ALL_BOOKMARK_OPPORTUNITY
-      );
-
-      if (!response.data.success) {
-        toast["error"](response.data.message, { position: "bottom-center" });
+    useEffect(() => {
+      async function getSavedOpportunities() {
+        const token = localStorage.getItem('token'); // Retrieving the token
+    
+        if (token) {
+          try {
+            const response = await fetch(offCampusEndpoints.GET_ALL_BOOKMARK_OPPORTUNITY, {
+              method: 'GET',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              }
+            });
+    
+            console.log('token is',token)
+            const data = await response.json();
+            if (response.ok) {
+              console.log('Success:', data);
+              // Here, you would typically update your component state
+              // For example:
+              // setSavedOpportunitiesList(data.opportunities);
+              // setPaginationMeta(data.pagination);
+            } 
+            
+            else {
+              // If we get an HTTP error response
+              console.error('Fetch error:', data.message);
+              // Potentially show a toast notification with the error
+            }
+          } catch (error) {
+            console.error('Request failed:', error);
+            // Handle network errors or other unexpected errors
+          }
+        } 
+        
+        else {
+          console.error('Token is undefined or not found');
+          // Potentially handle the lack of a token, like redirecting to a login page
+        }
       }
-
-      // ! TODO: get the type of backend response here and then map it to set the states below
-      // setPaginationMeta();
-      // setSavedOpportunitiesList();
-    }
-
-    getSavedOpportunities();
-  }, [paginationMeta, opportunityType]);
+    
+      getSavedOpportunities();
+    }, [paginationMeta, opportunityType]); // Depend on paginationMeta and opportunityType
+    
 
   return (
     <>
