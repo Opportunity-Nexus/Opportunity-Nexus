@@ -34,5 +34,31 @@ export async function getSavedOpportunities(params) {
   }
 }
 
+export async function deleteOpportunity(params) {
+  try {
+    const response = await fetch(
+      `${offCampusEndpoints.REMOVE_BOOKMARK_OPPORTUNITY}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${params.token}`, // Assuming you have the token available
+          "Content-Type": "application/json",
+        },
+        body: {
+          opportunityName: params.opportunityName
+        }
+      }
+    );
 
-
+    if (response.ok) {
+      // Handle successful deletion here
+      // For example, you could remove the deleted opportunity from the local state to update the UI
+      console.log("Opportunity deleted successfully");
+    } else {
+      // Handle failure
+      console.error("Failed to delete the opportunity");
+    }
+  } catch (error) {
+    console.error("Error deleting opportunity:", error);
+  }
+}

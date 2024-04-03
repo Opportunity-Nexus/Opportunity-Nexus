@@ -4,41 +4,10 @@ import { HiInformationCircle } from "react-icons/hi";
 import { FaBookmark } from "react-icons/fa";
 import { deleteOpportunity } from "../../Services/Operations/MyOpportunity";
 import { useSelector } from "react-redux";
-import { offCampusEndpoints } from "../../Services/BackendApis";
 
 const SavedOpportunityCard = (opportunity) => {
   const isExpired = new Date(opportunity.endDate) < new Date();
   const { token } = useSelector((state) => state.auth);
-  console.log('token in card',token)
-
-  const params = {
-    token: token,
-    opportunityName: opportunity.name
-  };
-
-   async function deleteOpportunity  (opportunityName){
-
-    try {
-      const response = await fetch(`${offCampusEndpoints.REMOVE_BOOKMARK_OPPORTUNITY}/${opportunityName}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`, // Assuming you have the token available
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (response.ok) {
-        // Handle successful deletion here
-        // For example, you could remove the deleted opportunity from the local state to update the UI
-        console.log("Opportunity deleted successfully");
-      } else {
-        // Handle failure
-        console.error("Failed to delete the opportunity");
-      }
-    } catch (error) {
-      console.error("Error deleting opportunity:", error);
-    }
-  };
 
   return (
     <>
@@ -59,7 +28,6 @@ const SavedOpportunityCard = (opportunity) => {
                     />
                     {opportunity.description
                       ? opportunity.description
-                          
                       : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five cent "}
                   </p>
                 </div>
@@ -89,12 +57,15 @@ const SavedOpportunityCard = (opportunity) => {
                       </span>
                     )}
                   </p>
-                  <div
-                    className="flex items-center justify-center"
-                  >
+                  <div className="flex items-center justify-center">
                     <button
-                    onClick={() => deleteOpportunity(opportunity.name)}
-                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-black bg-gray-300 hover:bg-gray-400"
+                      onClick={() =>
+                        deleteOpportunity({
+                          token: token,
+                          opportunityName: opportunity.name,
+                        }).catch((error) => console.error(error))
+                      }
+                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-red-500 hover:bg-red-600"
                     >
                       Delete
                     </button>

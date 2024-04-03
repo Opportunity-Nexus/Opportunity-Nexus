@@ -17,7 +17,6 @@ import { offCampusEndpoints } from "../../Services/BackendApis";
 const OpportunityCard = (opportunity) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const opportunityName = window.location.pathname.split("/")[2];
-  // console.log(` Opportunity Name in card : ${opportunityName}`);
   const audio = new Audio();
   audio.src = BookMarkSound;
 

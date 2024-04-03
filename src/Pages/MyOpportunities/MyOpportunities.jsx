@@ -7,12 +7,17 @@ import { useSelector } from "react-redux";
 import { getSavedOpportunities } from "../../Services/Operations/MyOpportunity";
 
 const MyOpportunities = () => {
+  const opportunityTypeArr = ["Scholarships", "ITJobs", "CodingContests"];
+
+  const [opportunityType, setOpportunityType] = useState(opportunityTypeArr);
+
   /**
    * @type {string} - offCampus | onCampus
    */
-  const [opportunityType, setOpportunityType] = useState("Scholarships");
-  const [campusType, setCampusType] = useState("Scholarships");
+  const [campusType, setCampusType] = useState("offCampus");
   const [savedOpportunitiesList, setSavedOpportunitiesList] = useState(null);
+
+  console.log({ savedOpportunitiesList });
   const { token } = useSelector((state) => state.auth);
   const opportunityName = window.location.pathname.split("/")[2];
 
@@ -61,15 +66,28 @@ const MyOpportunities = () => {
       </div>
       <div className="w-full flex items-center justify-between sm:px-6">
         <div className="justify-between items-center gap-3 hidden lg:flex">
-          <button className="px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer">
-            Scholarships
-          </button>
-          <button className="px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer">
-            IT Jobs
-          </button>
-          <button className="px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer">
-            Coding Contests
-          </button>
+          {opportunityTypeArr.map((item, type) => {
+            return (
+              <button
+                className={`px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer ${
+                  opportunityType.includes(item)
+                    ? "bg-gray-200 dark:bg-gray-800"
+                    : ""
+                }`}
+                onClick={() => {
+                  setOpportunityType((data) => {
+                    if (data.includes(item)) {
+                      return data.filter((i) => i !== item);
+                    } else {
+                      return [...data, item];
+                    }
+                  });
+                }}
+              >
+                {item}
+              </button>
+            );
+          })}
         </div>
         <select
           name="Opportunity Type"
@@ -127,9 +145,13 @@ const MyOpportunities = () => {
           ) : (
             <>
               <div className="flex flex-wrap justify-center mx-auto mt-4 mb-7 flex-1">
-                {savedOpportunitiesList.map((opportunity, index) => (
-                  <SavedOpportunityCard key={index} {...opportunity} />
-                ))}
+                {savedOpportunitiesList
+                  .filter((item) =>
+                    opportunityType.includes(item.opportunityType)
+                  )
+                  .map((opportunity, index) => (
+                    <SavedOpportunityCard key={index} {...opportunity} />
+                  ))}
               </div>
 
               {/* ------------PAGINATION----------- */}
