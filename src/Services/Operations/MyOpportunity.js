@@ -41,21 +41,18 @@ export async function deleteOpportunity(params) {
       {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${params.token}`, // Assuming you have the token available
+          Authorization: `Bearer ${params.token}`,
           "Content-Type": "application/json",
         },
-        body: {
-          opportunityName: params.opportunityName
-        }
+        body: JSON.stringify({
+          opportunityName: params.opportunityName,
+        }),
       }
     );
 
     if (response.ok) {
-      // Handle successful deletion here
-      // For example, you could remove the deleted opportunity from the local state to update the UI
       console.log("Opportunity deleted successfully");
     } else {
-      // Handle failure
       console.error("Failed to delete the opportunity");
     }
   } catch (error) {

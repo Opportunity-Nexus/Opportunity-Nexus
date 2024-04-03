@@ -59,12 +59,15 @@ const SavedOpportunityCard = (opportunity) => {
                   </p>
                   <div className="flex items-center justify-center">
                     <button
-                      onClick={() =>
+                      onClick={() => {
                         deleteOpportunity({
                           token: token,
                           opportunityName: opportunity.name,
-                        }).catch((error) => console.error(error))
-                      }
+                        }).catch((error) => console.error(error));
+                        opportunity.setSavedOpportunitiesList((data) =>
+                          data.filter((i) => i.name !== opportunity.name)
+                        );
+                      }}
                       className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-red-500 hover:bg-red-600"
                     >
                       Delete

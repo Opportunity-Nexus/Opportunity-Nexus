@@ -12,9 +12,9 @@ const MyOpportunities = () => {
   const [opportunityType, setOpportunityType] = useState(opportunityTypeArr);
 
   /**
-   * @type {string} - offCampus | onCampus
+   * @type {string} - off-campus | on-campus
    */
-  const [campusType, setCampusType] = useState("offCampus");
+  const [campusType, setCampusType] = useState("off-campus");
   const [savedOpportunitiesList, setSavedOpportunitiesList] = useState(null);
   const { token } = useSelector((state) => state.auth);
   const opportunityName = window.location.pathname.split("/")[2];
@@ -153,7 +153,11 @@ const MyOpportunities = () => {
                   )
                   .filter(() => campusType === "off-campus")
                   .map((opportunity, index) => (
-                    <SavedOpportunityCard key={index} {...opportunity} />
+                    <SavedOpportunityCard
+                      key={index}
+                      {...opportunity}
+                      setSavedOpportunitiesList={setSavedOpportunitiesList}
+                    />
                   ))}
               </div>
 
