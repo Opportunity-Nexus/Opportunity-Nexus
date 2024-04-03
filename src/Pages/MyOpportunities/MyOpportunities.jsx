@@ -10,9 +10,11 @@ const MyOpportunities = () => {
   /**
    * @type {string} - offCampus | onCampus
    */
-  const [opportunityType, setOpportunityType] = useState("offCampus");
+  const [opportunityType, setOpportunityType] = useState("Scholarships");
+  const [campusType, setCampusType] = useState("Scholarships");
   const [savedOpportunitiesList, setSavedOpportunitiesList] = useState(null);
   const { token } = useSelector((state) => state.auth);
+  const opportunityName = window.location.pathname.split("/")[2];
 
   //----------------------PAGINTAION----------------------//
 
@@ -49,19 +51,54 @@ const MyOpportunities = () => {
 
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
-      <div className="flex justify-center items-center py-4">
+      <div className="flex justify-center items-center py-12">
         <h1 className="font-bold text-2xl sm:text-4xl lg:text-5xl text-center dark:text-white ">
-          Saved <span className=" text-primary-500">Opportunities</span>
+          OpportunityNexus: Save Spot
+          <span className="block text-primary-500">
+            Apply Now! Something you've choosen{" "}
+          </span>
         </h1>
       </div>
-      <div className="w-full flex items-end justify-end">
+      <div className="w-full flex items-center justify-between sm:px-6">
+        <div className="justify-between items-center gap-3 hidden lg:flex">
+          <button className="px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer">
+            Scholarships
+          </button>
+          <button className="px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer">
+            IT Jobs
+          </button>
+          <button className="px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer">
+            Coding Contests
+          </button>
+        </div>
         <select
           name="Opportunity Type"
           id="opportunity-type-selector"
-          defaultValue="off-campus"
-          className="w-fit mx-10 border-gray-500 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white  rounded-md "
+          defaultValue="scholarships"
+          className="w-fit mx-10 border-gray-500 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium  rounded-md lg:hidden "
           onChange={(e) => {
             setOpportunityType(() => e.target.value);
+          }}
+        >
+          {["Scholarships", "IT Jobs", "Coding Contets"].map((item) => {
+            return (
+              <option
+                value={item}
+                key={item}
+                className="uppercase gap-1 flex text-sm"
+              >
+                {item}
+              </option>
+            );
+          })}
+        </select>
+        <select
+          name="Campus Type"
+          id="Campus-type-selector"
+          defaultValue="off-campus"
+          className="w-fit mx-10 border-gray-500 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium  rounded-md "
+          onChange={(e) => {
+            setCampusType(() => e.target.value);
           }}
         >
           {["off-campus", "on-campus"].map((item) => {

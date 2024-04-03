@@ -17,8 +17,9 @@ const Opportunities = () => {
 	const opportunityName = window.location.pathname.split("/")[2];
 	const TagLine = opportunityTagLine[opportunityName];
 	const [firstPart, secondPart] = TagLine ? TagLine.split(":") : [null, null];
-	// console.log(` Opportunity Name : ${opportunityName}`);
+	console.log(` Opportunity Name : ${opportunityName}`);
 	// console.log("Data is :" + JSON.stringify(OpportunityData, null, 2));
+
 
 	//----------------------PAGINTAION----------------------//
 	const [currentPage, setCurrentPage] = useState(1);
