@@ -16,8 +16,6 @@ const MyOpportunities = () => {
    */
   const [campusType, setCampusType] = useState("offCampus");
   const [savedOpportunitiesList, setSavedOpportunitiesList] = useState(null);
-
-  console.log({ savedOpportunitiesList });
   const { token } = useSelector((state) => state.auth);
   const opportunityName = window.location.pathname.split("/")[2];
 
@@ -93,12 +91,16 @@ const MyOpportunities = () => {
           name="Opportunity Type"
           id="opportunity-type-selector"
           defaultValue="scholarships"
-          className="w-fit mx-10 border-gray-500 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium  rounded-md lg:hidden "
+          className="w-fit mx-10 border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md lg:hidden "
           onChange={(e) => {
-            setOpportunityType(() => e.target.value);
+            setOpportunityType((data) => {
+              const value = e.target.value;
+              if (!value) return;
+              return [value];
+            });
           }}
         >
-          {["Scholarships", "IT Jobs", "Coding Contets"].map((item) => {
+          {opportunityTypeArr.map((item) => {
             return (
               <option
                 value={item}
@@ -114,7 +116,7 @@ const MyOpportunities = () => {
           name="Campus Type"
           id="Campus-type-selector"
           defaultValue="off-campus"
-          className="w-fit mx-10 border-gray-500 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium  rounded-md "
+          className="w-fit mx-10 border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md "
           onChange={(e) => {
             setCampusType(() => e.target.value);
           }}
@@ -149,6 +151,7 @@ const MyOpportunities = () => {
                   .filter((item) =>
                     opportunityType.includes(item.opportunityType)
                   )
+                  .filter(() => campusType === "off-campus")
                   .map((opportunity, index) => (
                     <SavedOpportunityCard key={index} {...opportunity} />
                   ))}
