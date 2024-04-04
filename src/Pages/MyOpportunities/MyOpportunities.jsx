@@ -41,7 +41,7 @@ const MyOpportunities = () => {
     totalResults: null,
     hasNextPage: false,
   });
-
+  
   const totalPages = paginationMeta.totalResults
     ? paginationMeta.totalResults / pageSize
     : 1;
