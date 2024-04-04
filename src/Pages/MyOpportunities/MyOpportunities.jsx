@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
-import OpportunityCard from "../../Components/Opportunities/OpportunityCard";
+import SavedOpportunityCard from "../../Components/Opportunities/SavedOpportunityCard";
 import { TbPlayerTrackPrevFilled } from "react-icons/tb";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import OpportunitiesNotFoundImg from "../../assets/utils/opp-not-found.svg";
-import { apiConnector } from "../../Services/ApiConnector";
-import { offCampusEndpoints } from "../../Services/BackendApis";
-import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { getSavedOpportunities } from "../../Services/Operations/MyOpportunity";
 
 const MyOpportunities = () => {
+
+  const opportunityTypeArr = [
+    "All",
+    "Scholarships",
+    "ITJobs",
+    "CodingContests",
+  ];
+
+  const [opportunityType, setOpportunityType] = useState(['All']);
+
   /**
-   * @type {string} - offCampus | onCampus
+   * @type {string} - off-campus | on-campus
    */
-  const [opportunityType, setOpportunityType] = useState("offCampus");
-  const [savedOpportunitiesList, setSavedOpportunitiesList] = useState([]);
-  const {token} = useSelector((state)=>state.auth);
+  const [campusType, setCampusType] = useState("off-campus");
+  const [savedOpportunitiesList, setSavedOpportunitiesList] = useState(null);
+  const { token } = useSelector((state) => state.auth);
 
   //----------------------PAGINTAION----------------------//
 
@@ -38,155 +46,211 @@ const MyOpportunities = () => {
     ? paginationMeta.totalResults / pageSize
     : 1;
 
-    useEffect(() => {
-      async function getSavedOpportunities() {
-        console.log('Token in SAVE_OPP_API',token);
-        if (token) {
-          try {
-            const response = await fetch(offCampusEndpoints.GET_ALL_BOOKMARK_OPPORTUNITY, {
-              method: 'GET',
-              headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-              }
-            });
-    
-            console.log('token is',token)
-            const data = await response.json();
-            if (response.ok) {
-              console.log('Success:', data);
-              // Here, you would typically update your component state
-              // For example:
-              // setSavedOpportunitiesList(data.opportunities);
-              // setPaginationMeta(data.pagination);
-            } 
-            
-            else {
-              // If we get an HTTP error response
-              console.error('Fetch error:', data.message);
-              // Potentially show a toast notification with the error
-            }
-          } catch (error) {
-            console.error('Request failed:', error);
-            // Handle network errors or other unexpected errors
-          }
-        } 
-        
-        else {
-          console.error('Token is undefined or not found');
-          // Potentially handle the lack of a token, like redirecting to a login page
-        }
-      }
-    
-      getSavedOpportunities();
-    }, [paginationMeta, opportunityType]); // Depend on paginationMeta and opportunityType
-    
+  useEffect(() => {
+    getSavedOpportunities({ token: token })
+      .then((data) => {
+        console.log({ data });
+        setSavedOpportunitiesList(() => {
+          return data;
+        });
+      })
+      .catch((error) => console.error(error));
+  }, [paginationMeta, token, opportunityType]);
 
   return (
-    <>
-      <div className="flex flex-col mx-auto min-h-screen p-4 bg-white dark:bg-gray-900">
-        <div className="w-full flex items-end justify-end">
-          <select
-            name="Opportunity Type"
-            id="opportunity-type-selector"
-            defaultValue="off-campus"
-            className="w-fit  border-gray-500 dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white  rounded-md "
-            onChange={(e) => {
-              setOpportunityType(() => e.target.value);
-            }}
-          >
-            {["off-campus", "on-campus"].map((item) => {
-              return (
-                <option
-                  value={item}
-                  key={item}
-                  className="uppercase gap-1 flex"
-                >
-                  {item}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-
-        {savedOpportunitiesList.length === 0 ? (
-          <div className="flex flex-col justify-center items-center lg:w-2/4 flex-1 dark:text-white mx-auto self-center">
-            <img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
-            <h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">
-              You have not saved any opportunities yet!
-            </h2>
-          </div>
-        ) : (
-          <>
-            <div className="flex flex-wrap justify-center mx-auto mt-4 mb-7 flex-1">
-              {savedOpportunitiesList.map((opportunity, index) => (
-                <OpportunityCard key={index} {...opportunity} />
-              ))}
-            </div>
-
-            {/* ------------PAGINATION----------- */}
-            <div className="flex items-center justify-center w-2/4 mt-8">
+    <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
+      <div className="flex justify-center items-center py-12">
+        <h1 className="font-bold text-2xl sm:text-4xl lg:text-5xl text-center dark:text-white ">
+          OpportunityNexus: Save Spot
+          <span className="block text-primary-500">
+            Apply Now! Something you've chosen{" "}
+          </span>
+        </h1>
+      </div>
+      <div className="w-full flex items-center justify-between sm:px-6">
+        <div className="justify-between items-center gap-3 hidden lg:flex">
+          {opportunityTypeArr.map((item, id) => {
+            return (
               <button
-                className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
-                  paginationMeta.currentPage <= 1
-                    ? "cursor-not-allowed text-gray-400 "
-                    : "cursor-pointer"
+                key={id}
+                className={`px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer ${
+                  opportunityType.includes(item)
+                    ? "bg-gray-200 dark:bg-gray-800"
+                    : ""
                 }`}
-                onClick={() =>
-                  setPaginationMeta((data) => ({
-                    ...data,
-                    currentPage: data.currentPage - 1,
-                  }))
-                }
-                disabled={paginationMeta.currentPage <= 1}
+                onClick={() => {                
+                  setOpportunityType((data) => {
+                    if(data.includes('All')) {
+                      if(item !== 'All'){
+                        return [item];
+                      }
+                      else {
+                       return data;
+                      }
+                    }
+                    
+                    else {
+                      console.log("I am called");
+                      if (data.includes(item)) {
+                     
+                        return data.filter((i) => i === item);
+                        
+                      } 
+                      else {
+                        return [item];
+                      }
+                    
+                    }
+                  });
+                }}
               >
-                <TbPlayerTrackPrevFilled />
-                <span className="uppercase">previous</span>
+                {item}
               </button>
-              <div className="flex items-center justify-center">
-                {Array(totalPages)
-                  .fill(null)
-                  .map((_, index) => (
-                    <button
-                      key={index + 1}
-                      className={
-                        "border rounded-full px-4 py-2 ml-3 mr-3 dark:text-white focus:ring-2 "
-                      }
-                      onClick={() =>
-                        setPaginationMeta((data) => ({
-                          ...data,
-                          currentPage: index + 1,
-                        }))
-                      }
-                    >
-                      {index + 1}
-                    </button>
+            );
+          })}
+        </div>
+        <select
+          name="Opportunity Type"
+          id="opportunity-type-selector"
+          defaultValue="scholarships"
+          className="w-fit mx-10 border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md lg:hidden "
+          onChange={(e) => {
+            setOpportunityType((data) => {
+              const value = e.target.value;
+              if (!value) return;
+              return [value];
+            });
+          }}
+        >
+          {opportunityTypeArr.map((item) => {
+            return (
+              <option
+                value={item}
+                key={item}
+                className="uppercase gap-1 flex text-sm"
+              >
+                {item}
+              </option>
+            );
+          })}
+        </select>
+        <select
+          name="Campus Type"
+          id="Campus-type-selector"
+          defaultValue="off-campus"
+          className="w-fit mx-10 border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md "
+          onChange={(e) => {
+            setCampusType(() => e.target.value);
+          }}
+        >
+          {["off-campus", "on-campus"].map((item) => {
+            return (
+              <option
+                value={item}
+                key={item}
+                className="uppercase gap-1 flex text-sm"
+              >
+                {item}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
+      {savedOpportunitiesList ? (
+        <>
+          {savedOpportunitiesList.length === 0 ? (
+            <div className="flex flex-col justify-center items-center lg:w-2/4 flex-1 dark:text-white mx-auto self-center">
+              <img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
+              <h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">
+                You have not saved any opportunities yet!
+              </h2>
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-wrap justify-center mx-auto mt-4 mb-7 flex-1">
+                {savedOpportunitiesList
+                  .filter((item ) =>
+                    opportunityType.includes("All") ? !!item : opportunityType.includes(item.opportunityType)
+                  )
+                  .filter(() => campusType === "off-campus")
+                  .map((opportunity, index) => (
+                    <SavedOpportunityCard
+                      key={index}
+                      {...opportunity}
+                      setSavedOpportunitiesList={setSavedOpportunitiesList}
+                    />
                   ))}
               </div>
-              <button
-                className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
-                  paginationMeta.currentPage >= paginationMeta.totalResults
-                    ? "cursor-not-allowed text-gray-400"
-                    : "cursor-pointer"
-                }`}
-                onClick={() =>
-                  setPaginationMeta((data) => ({
-                    ...data,
-                    currentPage: data.currentPage + 1,
-                  }))
-                }
-                disabled={
-                  paginationMeta.currentPage >= paginationMeta.totalResults
-                }
-              >
-                <span className="uppercase ml-3">next</span>
-                <TbPlayerTrackNextFilled />
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-    </>
+
+              {/* ------------PAGINATION----------- */}
+              <div className="flex items-center justify-center w-2/4 mt-8">
+                <button
+                  className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
+                    paginationMeta.currentPage <= 1
+                      ? "cursor-not-allowed text-gray-400 "
+                      : "cursor-pointer"
+                  }`}
+                  onClick={() =>
+                    setPaginationMeta((data) => ({
+                      ...data,
+                      currentPage: data.currentPage - 1,
+                    }))
+                  }
+                  disabled={paginationMeta.currentPage <= 1}
+                >
+                  <TbPlayerTrackPrevFilled />
+                  <span className="uppercase">previous</span>
+                </button>
+                <div className="flex items-center justify-center">
+                  {Array(totalPages)
+                    .fill(null)
+                    .map((_, index) => (
+                      <button
+                        key={index + 1}
+                        className={
+                          "border rounded-full px-4 py-2 ml-3 mr-3 dark:text-white focus:ring-2 "
+                        }
+                        onClick={() =>
+                          setPaginationMeta((data) => ({
+                            ...data,
+                            currentPage: index + 1,
+                          }))
+                        }
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                </div>
+                <button
+                  className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
+                    paginationMeta.currentPage >= paginationMeta.totalResults
+                      ? "cursor-not-allowed text-gray-400"
+                      : "cursor-pointer"
+                  }`}
+                  onClick={() =>
+                    setPaginationMeta((data) => ({
+                      ...data,
+                      currentPage: data.currentPage + 1,
+                    }))
+                  }
+                  disabled={
+                    paginationMeta.currentPage >= paginationMeta.totalResults
+                  }
+                >
+                  <span className="uppercase ml-3">next</span>
+                  <TbPlayerTrackNextFilled />
+                </button>
+              </div>
+            </>
+          )}
+        </>
+      ) : (
+        <div className="h-screen flex flex-1 items-center justify-center">
+          <div className="loader"></div>
+        </div>
+      )}
+    </div>
   );
 };
 
