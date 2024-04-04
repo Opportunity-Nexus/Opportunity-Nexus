@@ -7,9 +7,15 @@ import { useSelector } from "react-redux";
 import { getSavedOpportunities } from "../../Services/Operations/MyOpportunity";
 
 const MyOpportunities = () => {
-  const opportunityTypeArr = ["Scholarships", "ITJobs", "CodingContests"];
 
-  const [opportunityType, setOpportunityType] = useState(opportunityTypeArr);
+  const opportunityTypeArr = [
+    "All",
+    "Scholarships",
+    "ITJobs",
+    "CodingContests",
+  ];
+
+  const [opportunityType, setOpportunityType] = useState(['All']);
 
   /**
    * @type {string} - off-campus | on-campus
@@ -17,7 +23,6 @@ const MyOpportunities = () => {
   const [campusType, setCampusType] = useState("off-campus");
   const [savedOpportunitiesList, setSavedOpportunitiesList] = useState(null);
   const { token } = useSelector((state) => state.auth);
-  const opportunityName = window.location.pathname.split("/")[2];
 
   //----------------------PAGINTAION----------------------//
 
@@ -58,26 +63,43 @@ const MyOpportunities = () => {
         <h1 className="font-bold text-2xl sm:text-4xl lg:text-5xl text-center dark:text-white ">
           OpportunityNexus: Save Spot
           <span className="block text-primary-500">
-            Apply Now! Something you've choosen{" "}
+            Apply Now! Something you've chosen{" "}
           </span>
         </h1>
       </div>
       <div className="w-full flex items-center justify-between sm:px-6">
         <div className="justify-between items-center gap-3 hidden lg:flex">
-          {opportunityTypeArr.map((item, type) => {
+          {opportunityTypeArr.map((item, id) => {
             return (
               <button
+                key={id}
                 className={`px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer ${
                   opportunityType.includes(item)
                     ? "bg-gray-200 dark:bg-gray-800"
                     : ""
                 }`}
-                onClick={() => {
+                onClick={() => {                
                   setOpportunityType((data) => {
-                    if (data.includes(item)) {
-                      return data.filter((i) => i !== item);
-                    } else {
-                      return [...data, item];
+                    if(data.includes('All')) {
+                      if(item !== 'All'){
+                        return [item];
+                      }
+                      else {
+                       return data;
+                      }
+                    }
+                    
+                    else {
+                      console.log("I am called");
+                      if (data.includes(item)) {
+                     
+                        return data.filter((i) => i === item);
+                        
+                      } 
+                      else {
+                        return [item];
+                      }
+                    
                     }
                   });
                 }}
@@ -148,8 +170,8 @@ const MyOpportunities = () => {
             <>
               <div className="flex flex-wrap justify-center mx-auto mt-4 mb-7 flex-1">
                 {savedOpportunitiesList
-                  .filter((item) =>
-                    opportunityType.includes(item.opportunityType)
+                  .filter((item ) =>
+                    opportunityType.includes("All") ? !!item : opportunityType.includes(item.opportunityType)
                   )
                   .filter(() => campusType === "off-campus")
                   .map((opportunity, index) => (

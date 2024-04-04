@@ -62,7 +62,7 @@ const SavedOpportunityCard = (opportunity) => {
                       onClick={() => {
                         deleteOpportunity({
                           token: token,
-                          opportunityName: opportunity.name,
+                          opportunityId: opportunity._id,
                         }).catch((error) => console.error(error));
                         opportunity.setSavedOpportunitiesList((data) =>
                           data.filter((i) => i.name !== opportunity.name)

@@ -45,7 +45,7 @@ export async function deleteOpportunity(params) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          opportunityName: params.opportunityName,
+          opportunityId: params.opportunityId,
         }),
       }
     );
