@@ -5,10 +5,10 @@ import { Outlet } from "react-router-dom";
 const ApplicationLayout = () => {
   return (
     <div className="root">
-      <div id="layout-mid-container" className=" relative flex flex-1">
+      <div id="layout-mid-container" className=" relative">
         <div
           id="layout-sidebar-desktop-container"
-          className=" w-full overflow-y-hidden relative min-h-screen bg-white dark:bg-gray-900"
+          className="w-full relative min-h-screen"
         >
           <ApplicationLayoutSidebar />
           <div className="min-h-screen md:pl-64">

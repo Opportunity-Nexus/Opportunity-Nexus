@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
 import LogoLight from "../../src/assets/logo/opportunity-nexus-light-logo.png";
 import LogoDark from "../../src/assets/logo/opportunity-nexus-dark-logo.png";
 import { useSelector } from "react-redux";
@@ -7,23 +8,45 @@ import adminNavigation from "../Data/ApplicationNavigation/AdminNavigation";
 import Theme from "../Components/theme";
 import { IoNotificationsSharp } from "react-icons/io5";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ProfileDropdown from "../Components/Authentication/ProfileDropDown";
-import {MenuAlt2Icon, XIcon } from "@heroicons/react/outline";
+import { MenuAlt2Icon, XIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function ApplicationLayoutSidebar() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pathName = useLocation().pathname;
+
+  const [navigationToUse, setNavigationToUse] = useState([]);
   const { user } = useSelector((state) => state.profile);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const [activeNavigation, setActiveNavigation] = useState(1);
+
+  useEffect(() => {
+    if (user.accountType === "Admin") {
+      setNavigationToUse(adminNavigation);
+    } else {
+      setNavigationToUse(userNavigation);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    setActiveNavigation(() => {
+      const activeTabIndex = navigationToUse.findIndex((item) => {
+        return item.href === pathName;
+      });
+
+      return activeTabIndex + 1 || 1;
+    });
+  }, [navigationToUse, pathName]);
 
   return (
     <>
-      <div>
+      <div className="sticky top-0 z-[9999]">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -95,22 +118,21 @@ export default function ApplicationLayoutSidebar() {
                     className="flex-1 px-2 bg-white dark:bg-gray-900 space-y-1"
                     aria-label="Sidebar"
                   >
-                    {(user && user?.accountType !== "Admin"
-                      ? userNavigation
-                      : adminNavigation
-                    ).map((item, index) => (
+                    {navigationToUse.map((item, index) => (
                       <Link
                         key={item.name}
                         reloadDocument
                         to={item.href}
                         className={classNames(
-                          (index + 1) === activeNavigation
+                          index + 1 === activeNavigation
                             ? "bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-300"
                             : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 hover:dark:bg-gray-700 hover:text-gray-900 hover:dark:text-gray-300",
                           "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                         )}
-                        onClick={() => {setActiveNavigation(()=> item.id) 
-                        setSidebarOpen(false)}}
+                        onClick={() => {
+                          setActiveNavigation(() => item.id);
+                          setSidebarOpen(false);
+                        }}
                       >
                         <item.icon
                           className={classNames("mr-3 flex-shrink-0 h-6 w-6")}
@@ -127,9 +149,7 @@ export default function ApplicationLayoutSidebar() {
                 </div>
               </div>
             </Transition.Child>
-            <div className="flex-shrink-0 w-14 " aria-hidden="true">
-             
-            </div>
+            <div className="flex-shrink-0 w-14 " aria-hidden="true"></div>
           </Dialog>
         </Transition.Root>
 
@@ -137,7 +157,7 @@ export default function ApplicationLayoutSidebar() {
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           <div className="flex flex-col flex-grow border-r border-gray-200 dark:border-gray-700 pt-5 bg-white dark:bg-gray-900 overflow-y-auto">
             <div className="flex items-center flex-shrink-0">
-              <Link to="/"  className="flex">
+              <Link to="/" className="flex">
                 <span className="sr-only">Opportunity Nexus</span>
 
                 <img
@@ -157,20 +177,17 @@ export default function ApplicationLayoutSidebar() {
                 className="flex-1 px-2 bg-white dark:bg-gray-900 space-y-1"
                 aria-label="Sidebar"
               >
-                {(user && user?.accountType !== "Admin"
-                  ? userNavigation
-                  : adminNavigation
-                ).map((item, index) => (
+                {navigationToUse.map((item, index) => (
                   <Link
                     key={item.name}
                     to={item.href}
                     className={classNames(
-                      (index + 1) === activeNavigation
+                      index + 1 === activeNavigation
                         ? "bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-300"
                         : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 hover:dark:bg-gray-800 hover:text-gray-900 hover:dark:text-gray-300",
                       "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                     )}
-                    onClick={() => setActiveNavigation(()=> item.id)}
+                    onClick={() => setActiveNavigation(() => item.id)}
                   >
                     <item.icon
                       className={classNames("mr-3 flex-shrink-0 h-6 w-6")}
@@ -196,7 +213,6 @@ export default function ApplicationLayoutSidebar() {
             <div className="flex items-center justify-center md:hidden">
               <Link
                 to="/"
-                
                 aria-label="Home"
                 className="h-auto w-auto select-none"
               >
@@ -238,7 +254,10 @@ export default function ApplicationLayoutSidebar() {
                   className="bg-white  dark:bg-gray-900 p-1 rounded-full text-black  dark:text-white hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                 >
                   <span className="sr-only">View notifications</span>
-                  <IoNotificationsSharp className="h-6 w-6" aria-hidden="true" />
+                  <IoNotificationsSharp
+                    className="h-6 w-6"
+                    aria-hidden="true"
+                  />
                 </button>
 
                 <ProfileDropdown />
