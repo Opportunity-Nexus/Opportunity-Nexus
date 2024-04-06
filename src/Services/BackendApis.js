@@ -30,3 +30,20 @@ export const profileSettingsEndpoints = {
 export const profileEndpoints = {
 	GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
   }
+
+//ON-CAMPUS ENDPOINTS
+export const oncampusEndpoints = {
+     CREATE_OPPORTUNITY: BASE_URL + "/onCampus/createopportunity",
+	 EDIT_OPPORTUNITY: BASE_URL + "/onCampus/editopportunity",
+	 GET_ALL_OPPORTUNITIES: BASE_URL + "/onCampus/getallopportunities",
+	 GET_OPPORTUNITY_DETAILS: BASE_URL + "/onCampus/getopportunitydetails",
+	 DELETE_OPPORTUNITY: BASE_URL + "/onCampus/deleteOpportunity",
+	 GET_USER_OPPORTUNITY: BASE_URL + "/onCampus/getuseropportunities",  //TESTING PART 2 REMAINING : HOW TO MAKE THE STUDENT ENROLLED.
+}
+
+//ON-CAMPUS BOOKMARK OPPORTUNITY ENDPOINTS
+export const onCampusBookMarkEndpoints = {
+	SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY : BASE_URL + "/onCampus/saveopportunity",
+	GET_ALL_ONCAMPUS_BOOKMARKED_OPPORTUNITIES : BASE_URL + "/onCampus/getAllBookmarkedOpportunities",
+	DELETE__ONCAMPUS_BOOKMARK_OPPORTUNITY : BASE_URL + "/onCampus/removeBookmarkedOpportunity",
+}
