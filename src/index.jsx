@@ -16,6 +16,7 @@ import Opportunities, {
 import Error from "./Components/Opportunities/Error";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
+import OpportunityPanel from "./Pages/OpportunityPanel/OpportunityPanel";
 
 import {
   Route,
@@ -45,6 +46,7 @@ function App() {
       />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/dashboard/my-opportunities" element={<MyOpportunities />} />
+      <Route path="dashboard/opportunity-panel" element={<OpportunityPanel />} />
     </Route>,
   ];
   const router = createBrowserRouter(createRoutesFromElements(...routes));
