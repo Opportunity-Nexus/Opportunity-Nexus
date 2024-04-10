@@ -11,7 +11,7 @@ export default function ActionBtn({
 		<button
 			disabled={disabled}
 			onClick={onclick}
-			className={`flex justify-center items-center text-xs sm:text-base  ${
+			className={`flex justify-center items-center text-base w-[80%] lg:w-fit  ${
 				outline
 					? "border border-primary-500 bg-transparent"
 					: "px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-700 hover:bg-primary-600"

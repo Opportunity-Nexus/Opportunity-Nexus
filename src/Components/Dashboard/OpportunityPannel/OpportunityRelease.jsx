@@ -88,12 +88,12 @@ const OpportunityRelease = () => {
 						</span>
 					</label>
 				</div>
-				<div className="flex flex-wrap sm:justify-end gap-x-2 gap-y-2 justify-center">
+				<div className="flex lg:justify-end justify-center gap-x-2 flex-wrap gap-y-2 ">
 					<button
 						disabled={loading}
 						type="button"
 						onClick={goBack}
-						className="flex cursor-pointer items-center gap-x-2 rounded-md text-xs sm:text-base bg-richblack-700 hover:bg-richblack-900 py-2 px-5 font-semibold text-gray-100"
+						className={`flex w-[80%] lg:w-fit cursor-pointer items-center justify-center gap-x-2 rounded-md bg-richblack-700 hover:bg-richblack-900 py-2 px-5 text-base font-semibold text-gray-100`}
 					>
 						Back
 					</button>

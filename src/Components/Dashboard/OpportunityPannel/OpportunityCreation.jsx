@@ -256,14 +256,14 @@ const OpportunityCreation = () => {
 					getValues={getValues}
 					placeholder="Add Eligibility Criteria"
 				/>
-				<div className="flex sm:justify-end justify-center gap-x-2 flex-wrap gap-y-2">
+				<div className="flex lg:justify-end justify-center gap-x-2 flex-wrap gap-y-2">
 					{editOpportunity && (
 						<button
 							onClick={() => {
 								dispatch(setEditOpportunity(false), dispatch(setStep(2)));
 							}}
 							disabled={loading}
-							className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-700 hover:bg-richblack-900 py-2 px-5 text-xs sm:text-base font-semibold text-gray-100`}
+							className={`flex w-[80%] lg:w-fit cursor-pointer items-center justify-center gap-x-2 rounded-md bg-richblack-700 hover:bg-richblack-900 py-2 px-5 text-base font-semibold text-gray-100`}
 						>
 							Continue Without Saving
 						</button>

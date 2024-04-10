@@ -288,15 +288,15 @@ const OpportunityDetails = () => {
 						className="input-style"
 					/>
 				</div>
-				<div className="flex flex-wrap justify-center  gap-y-2 md:justify-end gap-x-3">
+				<div className="flex lg:justify-end justify-center gap-x-2 flex-wrap gap-y-2 ">
 					<button
 						onClick={goBack}
-						className={`flex justify-center cursor-pointer items-center gap-x-2 rounded-md bg-richblack-700 hover:bg-richblack-900 py-2 px-5 font-semibold text-gray-100`}
+						className={`flex w-[80%] lg:w-fit cursor-pointer items-center justify-center gap-x-2 rounded-md bg-richblack-700 hover:bg-richblack-900 py-2 px-5 text-base font-semibold text-gray-100`}
 					>
 						Back
 					</button>
 					<ActionBtn disabled={loading} text="Next" type="submit">
-						<MdNavigateNext />
+						<MdNavigateNext className="hidden lg:inline-block" />
 					</ActionBtn>
 				</div>
 			</form>
