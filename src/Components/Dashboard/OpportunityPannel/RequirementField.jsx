@@ -79,13 +79,13 @@ const RequirementField = ({
 								className="flex flex-col sm:flex-row items-center text-gray-500 md:text-justify mb-3"
 							>
 								<div className="flex flex-row justify-start gap-x-2">
-									<VscActivateBreakpoints className="font-bold text-4xl text-black dark:text-richblack-5" />
+									<VscActivateBreakpoints className="font-bold text-base text-black dark:text-richblack-5 " />
 									<span>{requirement}</span>
 								</div>
 
 								<button
 									type="button"
-									className="ml-2 text-base md:text-lg text-primary-600 font-bold self-end sm:self-auto"
+									className="ml-2 text-base md:text-lg text-red-700 font-bold self-end sm:self-auto"
 									onClick={() => handleRemoveRequirement(index)}
 								>
 									<RiDeleteBin6Fill />

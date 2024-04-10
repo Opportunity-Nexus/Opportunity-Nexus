@@ -38,8 +38,8 @@ const RenderOpportunitySteps = () => {
 										className={`grid cursor-default aspect-square w-8 md:w-9 place-items-center rounded-full border border-1 ${
 											step === item.id
 												? "border-primary-700 bg-primary-500 text-white"
-												: "border-richblack-200 bg-richblack-700 text-white"
-										} ${step > item.id && "bg-green-700"}} `}
+												: "border-richblack-200 bg-richblack-200 dark:bg-richblack-700 text-black dark:text-white"
+										} ${step > item.id && "bg-yellow-50 dark:bg-yellow-50 text-yellow-50"}} `}
 									>
 										{step > item.id ? (
 											<FaCheck className="font-bold text-white" />

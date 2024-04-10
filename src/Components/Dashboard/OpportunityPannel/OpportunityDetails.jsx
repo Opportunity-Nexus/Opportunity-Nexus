@@ -13,7 +13,7 @@ import {
 
 const OpportunityDetails = () => {
 	const [opportunityMode, setOpportunityMode] = useState("");
-	const { opportunity, editOpportunity,editGlobalOpportunity } = useSelector(
+	const { opportunity, editOpportunity, editGlobalOpportunity } = useSelector(
 		(state) => state.opportunity
 	);
 	const [loading, setLoading] = useState(false);
@@ -232,13 +232,14 @@ const OpportunityDetails = () => {
 						<select
 							type="text"
 							name="opportunityMode"
+							defaultValue=""
 							id="opportunityMode"
 							className="input-style"
 							{...register("opportunityMode", { required: true })}
 							onChange={handleOpportunityModeChange}
 						>
 							<option value="" disabled>
-								Select Opportunity Mode
+								Select Drive Mode
 							</option>
 							{opportunityModes.map((ele, i) => {
 								return (
@@ -262,10 +263,11 @@ const OpportunityDetails = () => {
 							Opportunity Drive Link <sup className="text-pink-200">*</sup>
 						</label>
 						<input
+							type="url"
 							id="opportunityDriveLink"
 							{...register("opportunityDriveLink", { required: true })}
 							className="input-style"
-							placeholder="Enter Opportunity Drive Link"
+							placeholder="https://meet.google.com/oop-amtc-xxx"
 						/>
 						{errors.opportunityDriveLink && (
 							<span className="error-style">

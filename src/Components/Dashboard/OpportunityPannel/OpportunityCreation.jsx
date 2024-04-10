@@ -14,7 +14,7 @@ import {
 import toast from "react-hot-toast";
 
 const OpportunityCreation = () => {
-	const { opportunity, editOpportunity ,editGlobalOpportunity } = useSelector(
+	const { opportunity, editOpportunity, editGlobalOpportunity } = useSelector(
 		(state) => state.opportunity
 	);
 	const [loading, setLoading] = useState(false);
@@ -152,7 +152,7 @@ const OpportunityCreation = () => {
 					</label>
 					<input
 						id="opportunityName"
-						placeholder="Enter Opportunity Name"
+						placeholder="e.g., HCL Tech. Ltd."
 						{...register("opportunityName", { required: true })}
 						className="input-style"
 					/>
@@ -184,7 +184,7 @@ const OpportunityCreation = () => {
 					</label>
 					<input
 						id="opportunityRole"
-						placeholder="Enter Opportunity Role"
+						placeholder="e.g., Backend Developer"
 						{...register("opportunityRole", { required: true })}
 						className="input-style"
 					/>
@@ -196,7 +196,7 @@ const OpportunityCreation = () => {
 				<ChipInput
 					label="Opportunity Tags"
 					id="opportunityTags"
-					placeholder="Enter opportunity Tag & press Enter"
+					placeholder="e.g., B.Tech & press Enter"
 					register={register}
 					errors={errors}
 					setValue={setValue}
@@ -210,7 +210,7 @@ const OpportunityCreation = () => {
 						</label>
 						<input
 							id="opportunityLocation"
-							placeholder="Enter Opportunity Location"
+							placeholder="e.g., Bangalore"
 							{...register("opportunityLocation", { required: true })}
 							className="input-style"
 						/>
@@ -226,19 +226,24 @@ const OpportunityCreation = () => {
 						<div className="relative">
 							<input
 								id="opportunityPackage"
-								placeholder="Enter Opportunity Package"
+								placeholder="e.g., 2500000"
 								{...register("opportunityPackage", {
-									required: true,
+									required: "Opportunity Package is required",
+									pattern: {
+										value: /^(0\.0*[1-9]\d*|[1-9]\d*(\.\d+)?)$/,
+										message:
+											"Opportunity Package must be a positive number greater than zero",
+									},
 								})}
 								className="!pl-12 input-style"
 							/>
+							{errors.opportunityPackage && (
+								<span className="error-style">
+									{errors.opportunityPackage.message}
+								</span>
+							)}
 							<HiOutlineCurrencyRupee className="absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-800 dark:text-richblack-200" />
 						</div>
-						{errors.opportunityPackage && (
-							<span className="error-style">
-								Opportunity Package is required
-							</span>
-						)}
 					</div>
 				</div>
 				{/*---------------ELIGIBILITY REQUIREMENTS------------ */}

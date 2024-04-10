@@ -68,7 +68,7 @@ const OpportunityRelease = () => {
 				className="space-y-4 md:space-y-6 rounded-md border border-1 dark:border-richblack-700 dark:bg-richblack-800 p-6 mb-10"
 			>
 				<h1 className="text-base sm:text-lg text-black dark:text-richblack-5 font-bold">
-					Do you wanna publish this opportunity ?
+					Do you want to publish this opportunity ?
 				</h1>
 				<div className="my-6">
 					<label htmlFor="public" className="inline-flex items-center text-lg">
@@ -84,7 +84,7 @@ const OpportunityRelease = () => {
 							</span>
 						)}
 						<span className=" ml-2 text-sm sm:text-base text-black dark:text-richblack-5 uppercase">
-							Make this opportunity as public
+							Mark this opportunity as public
 						</span>
 					</label>
 				</div>
