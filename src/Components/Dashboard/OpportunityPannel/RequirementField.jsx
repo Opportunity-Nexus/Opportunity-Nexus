@@ -71,25 +71,27 @@ const RequirementField = ({
 						</span>
 					</button>
 				</div>
+
 				{requirementList.length > 0 && (
 					<ul className="mt-2">
 						{requirementList.map((requirement, index) => (
 							<li
 								key={index}
-								className="flex flex-col sm:flex-row items-center text-gray-500 md:text-justify mb-3"
+								className="flex flex-col sm:flex-row items-center text-gray-500 md:text-justify mb-4"
 							>
-								<div className="flex flex-row justify-start gap-x-2">
-									<VscActivateBreakpoints className="font-bold text-base text-black dark:text-richblack-5 " />
+								<div className="flex flex-row justify-start self-start sm:self-auto items-center gap-x-1">
+									<span className="w-4 h-4 self-start">
+										<VscActivateBreakpoints className="font-bold text-base text-black dark:text-richblack-5 " />
+									</span>
 									<span>{requirement}</span>
+									<button
+										type="button"
+										className="ml-2 text-base md:text-lg text-red-700 font-bold self-end "
+										onClick={() => handleRemoveRequirement(index)}
+									>
+										<RiDeleteBin6Fill />
+									</button>
 								</div>
-
-								<button
-									type="button"
-									className="ml-2 text-base md:text-lg text-red-700 font-bold self-end sm:self-auto"
-									onClick={() => handleRemoveRequirement(index)}
-								>
-									<RiDeleteBin6Fill />
-								</button>
 							</li>
 						))}
 					</ul>
