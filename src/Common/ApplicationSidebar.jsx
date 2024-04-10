@@ -183,7 +183,7 @@ export default function ApplicationLayoutSidebar() {
                     to={item.href}
                     className={classNames(
                       index + 1 === activeNavigation
-                        ? "bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-300"
+                        ? "bg-gray-100  text-gray-900 dark:bg-gray-700 dark:text-gray-300"
                         : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 hover:dark:bg-gray-800 hover:text-gray-900 hover:dark:text-gray-300",
                       "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                     )}

@@ -3,7 +3,12 @@ import { MdDashboard } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 
 const adminNavigation = [
-  { name: "My Profile", icon: FaUserCircle, href: "/dashboard/profile", id: 1 },
+  {
+    name: "My Profile",
+    icon: FaUserCircle,
+    href: "/dashboard/my-profile",
+    id: 1,
+  },
   {
     name: "Opportunity Panel",
     icon: MdDashboard,

@@ -9,24 +9,37 @@
 }
 
 /* HTML: <div class="loader"></div> */
+
 .loader {
   width: fit-content;
   font-weight: bold;
   font-family: monospace;
   font-size: 50px;
-  background: radial-gradient(circle closest-side,#1422bc 94%,#0000) right/calc(200% - 1em) 100%;
+  background: radial-gradient(circle closest-side, #1422bc 94%, #0000)
+    right/calc(200% - 1em) 100%;
   animation: l24 1s infinite alternate linear;
 }
+
 .loader::before {
   content: "Loading...";
   line-height: 1em;
   color: #0000;
   background: inherit;
-  background-image: radial-gradient(circle closest-side,#fff 94%,#000);
-  -webkit-background-clip:text;
-          background-clip:text;
+  background-image: radial-gradient(circle closest-side, #fff 94%, #000);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
-@keyframes l24{
-  100%{background-position: left}
+@keyframes l24 {
+  100% {
+    background-position: left;
+  }
 }
+
+/* .form-style {
+  @apply border border-gray-300 text-black dark: text-richblack-5 bg-gray-50 dark: bg-richblack-700 dark: border-none rounded-[8px] w-full px-[12px] py-[8px] shadow-[0_1px_0_0] shadow-white/50;
+}
+
+.label-style {
+  @apply text-sm text-black dark: text-richblack-5;
+} */
