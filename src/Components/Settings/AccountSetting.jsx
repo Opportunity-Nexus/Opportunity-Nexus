@@ -6,14 +6,15 @@ import DeleteAccount from "./AccountSetting/DeleteAccount";
 const AccountSetting = () => {
   return (
     <div className="sm:p-[5%] mt-2 flex flex-col">
-      <div className="flex justify-center items-center mb-7">
-        <h1 className="font-bold text-2xl sm:text-2xl lg:text-4xl text-center dark:text-white ">
-          Account Settings Hub: Navigate Your Options
+      <div className="flex justify-center items-center py-12">
+        <h1 className="font-bold text-2xl sm:text-4xl lg:text-5xl text-center dark:text-white ">
+          Account Settings Hub
           <span className="block text-primary-500">
-            Personalize Your Account: Tailor Your Experience to Perfection
+            Personalize Your Own Account{" "}
           </span>
         </h1>
       </div>
+
       <div className="space-y-8 rounded-md border border-1 dark:border-richblack-700  dark:bg-richblack-800 sm:p-6 dark:text-gray-500 ">
         <h1 className="sm:mb-6 text-3xl font-medium text-richblack-700 p-1 dark:text-richblack-25">
           Edit Profile

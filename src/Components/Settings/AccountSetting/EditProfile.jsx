@@ -30,7 +30,7 @@ export default function EditProfile() {
         className="space-y-8 rounded-md border border-1 dark:border-richblack-700 dark:bg-richblack-900 p-6"
       >
         <div className="my-4 flex flex-col gap-y-2 rounded-md ">
-          <h2 className="text-lg font-semibold dark:text-richblack-5">
+          <h2 className="text-xl font-bold dark:text-richblack-5 mb-8">
             Profile Information{" "}
           </h2>
           <div className="flex space-x-2 ">
@@ -81,70 +81,71 @@ export default function EditProfile() {
               )}
             </div>
           </div>
-
-          <div className="flex flex-col gap-5 lg:flex-row">
+          <div className="flex space-x-4 justify-between">
+            <div className="flex flex-col gap-5 lg:flex-row w-full">
+              <div className="flex flex-col  w-full space-y-2 mt-1">
+                <label
+                  htmlFor="dateOfBirth"
+                  className="text-base font-semibold text-black dark:text-richblack-5 "
+                >
+                  {" "}
+                  Date of Birth
+                  <sup className="text-pink-200">*</sup>
+                </label>
+                <input
+                  type="date"
+                  name="dateOfBirth"
+                  id="dateOfBirth"
+                  className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
+                  {...register("dateOfBirth", {
+                    required: {
+                      value: true,
+                      message: "Please Enter Your Date of Birth",
+                    },
+                    max: {
+                      value: new Date().toISOString().split("T")[0],
+                      message: "Date of Birth cannot be in the future ",
+                    },
+                  })}
+                  defaultValue={user?.additionalDetails?.dateOfBirth}
+                />
+                {errors.dateOfBirth && (
+                  <span className="mt-1 text-[12px] text-blue-500">
+                    {errors.dateOfBirth.message}
+                  </span>
+                )}
+              </div>
+            </div>
             <div className="flex flex-col  w-full space-y-2 mt-1">
               <label
-                htmlFor="dateOfBirth"
+                htmlFor="gender"
                 className="text-base font-semibold text-black dark:text-richblack-5 "
               >
-                {" "}
-                Date of Birth
+                Gender
                 <sup className="text-pink-200">*</sup>
               </label>
-              <input
-                type="date"
-                name="dateOfBirth"
-                id="dateOfBirth"
+              <select
+                name="gender"
+                id="gender"
                 className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
-                {...register("dateOfBirth", {
-                  required: {
-                    value: true,
-                    message: "Please Enter Your Date of Birth",
-                  },
-                  max: {
-                    value: new Date().toISOString().split("T")[0],
-                    message: "Date of Birth cannot be in the future ",
-                  },
-                })}
-                defaultValue={user?.additionalDetails?.dateOfBirth}
-              />
-              {errors.dateOfBirth && (
-                <span className="mt-1 text-[12px] text-blue-500">
-                  {errors.dateOfBirth.message}
+                {...register("gender", { required: true })}
+                defaultValue={user?.additionalDetails?.gender || ""}
+              >
+                <option value="" disabled>
+                  Choose Your Gender
+                </option>
+                {genders.map((element, i) => (
+                  <option key={i} value={element}>
+                    {element}
+                  </option>
+                ))}
+              </select>
+              {errors.gender && (
+                <span className="-mt-1 text-[12px] text-black  dark:text-yellow-100">
+                  Please Select your gender
                 </span>
               )}
             </div>
-          </div>
-          <div className="flex flex-col  w-full space-y-2 mt-1">
-            <label
-              htmlFor="gender"
-              className="text-base font-semibold text-black dark:text-richblack-5 "
-            >
-              Gender
-              <sup className="text-pink-200">*</sup>
-            </label>
-            <select
-              name="gender"
-              id="gender"
-              className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
-              {...register("gender", { required: true })}
-              defaultValue={user?.additionalDetails?.gender || ""}
-            >
-              <option value="" disabled>
-                Choose Your Gender
-              </option>
-              {genders.map((element, i) => (
-                <option key={i} value={element}>
-                  {element}
-                </option>
-              ))}
-            </select>
-            {errors.gender && (
-              <span className="-mt-1 text-[12px] text-black  dark:text-yellow-100">
-                Please Select your gender
-              </span>
-            )}
           </div>
           <div className="">
             <div className="flex flex-col  w-full space-y-2 mt-1">

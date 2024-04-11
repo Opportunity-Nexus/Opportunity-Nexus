@@ -27,14 +27,14 @@ export default function UpdatePassword() {
     <>
       <form onSubmit={handleSubmit(submitPasswordForm)}>
         <div className=" flex flex-col gap-y-6 rounded-md border-[1px] dark:border-richblack-700 dark:bg-richblack-900 p-8 sm:px-6">
-          <h2 className="text-lg font-semibold dark:text-richblack-5">
+          <h2 className="text-xl font-bold dark:text-richblack-5 mb-6">
             Password
           </h2>
           <div className="flex-col  gap-2 ">
             <div className="relative flex flex-col gap-2 w-full">
               <label
                 htmlFor="oldPassword"
-                className="text-[14px] dark:text-richblack-5"
+                className="text-base font-semibold text-[14px] dark:text-richblack-5"
               >
                 Current Password
               </label>
@@ -65,7 +65,7 @@ export default function UpdatePassword() {
             <div className="relative flex flex-col gap-2 w-full mt-3">
               <label
                 htmlFor="newPassword"
-                className="text-[14px] dark:text-richblack-5"
+                className="text-base font-semibold  text-[14px] dark:text-richblack-5"
               >
                 New Password
               </label>
