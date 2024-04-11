@@ -46,6 +46,7 @@ function App() {
       <Route path="/dashboard/my-profile" element={<MyProfile />} />
       <Route path="/dashboard/my-opportunities" element={<MyOpportunities />} />
       <Route path="/dashboard/my-settings" element={<Settings />} />
+     
     </Route>,
   ];
   const router = createBrowserRouter(createRoutesFromElements(...routes));
