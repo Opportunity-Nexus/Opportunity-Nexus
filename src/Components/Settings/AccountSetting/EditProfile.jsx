@@ -31,13 +31,13 @@ export default function EditProfile() {
       >
         <div className="my-4 flex flex-col gap-y-2 rounded-md ">
           <h2 className="text-lg font-semibold dark:text-richblack-5">
-            Profile Infomration{" "}
+            Profile Information{" "}
           </h2>
-          <div className="">
-            <div className="flex flex-col space-y-2">
+          <div className="flex space-x-2 ">
+            <div className="flex flex-col space-y-2 w-full">
               <label
                 htmlFor="firstName"
-                className="text-sm text-black dark:text-richblack-5 "
+                className="text-base font-semibold text-black dark:text-richblack-5 "
               >
                 First Name
                 <sup className="text-pink-200">*</sup>
@@ -57,10 +57,10 @@ export default function EditProfile() {
                 </span>
               )}
             </div>
-            <div className="flex flex-col space-y-2 mt-3">
+            <div className="flex flex-col space-y-2 w-full ">
               <label
                 htmlFor="lastName"
-                className="text-sm text-black dark:text-richblack-5 "
+                className="text-base font-semibold text-black dark:text-richblack-5 "
               >
                 Last Name
                 <sup className="text-pink-200">*</sup>
@@ -86,7 +86,7 @@ export default function EditProfile() {
             <div className="flex flex-col  w-full space-y-2 mt-1">
               <label
                 htmlFor="dateOfBirth"
-                className="text-sm text-black dark:text-richblack-5"
+                className="text-base font-semibold text-black dark:text-richblack-5 "
               >
                 {" "}
                 Date of Birth
@@ -119,26 +119,26 @@ export default function EditProfile() {
           <div className="flex flex-col  w-full space-y-2 mt-1">
             <label
               htmlFor="gender"
-              className="text-[14px] dark:text-richblack-5"
+              className="text-base font-semibold text-black dark:text-richblack-5 "
             >
               Gender
               <sup className="text-pink-200">*</sup>
             </label>
             <select
-              type="text"
               name="gender"
               id="gender"
               className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
               {...register("gender", { required: true })}
-              defaultValue={user?.additionalDetails?.gender}
+              defaultValue={user?.additionalDetails?.gender || ""}
             >
-              {genders.map((element, i) => {
-                return (
-                  <option key={i} value={element}>
-                    {element}
-                  </option>
-                );
-              })}
+              <option value="" disabled>
+                Choose Your Gender
+              </option>
+              {genders.map((element, i) => (
+                <option key={i} value={element}>
+                  {element}
+                </option>
+              ))}
             </select>
             {errors.gender && (
               <span className="-mt-1 text-[12px] text-black  dark:text-yellow-100">
@@ -150,7 +150,7 @@ export default function EditProfile() {
             <div className="flex flex-col  w-full space-y-2 mt-1">
               <label
                 htmlFor="contactNumber"
-                className="text-sm text-black dark:text-richblack-5"
+                className="text-base font-semibold text-black dark:text-richblack-5 "
               >
                 Contact Number
               </label>
@@ -179,11 +179,11 @@ export default function EditProfile() {
             <div className="flex flex-col  w-full space-y-2 mt-2">
               <label
                 htmlFor="about"
-                className="text-sm text-black dark:text-richblack-5"
+                className="text-base font-semibold text-black dark:text-richblack-5 "
               >
                 About
               </label>
-              <input
+              <textarea
                 type="text"
                 name="about"
                 id="about"

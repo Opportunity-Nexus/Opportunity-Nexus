@@ -8,9 +8,9 @@ const AccountSetting = () => {
     <div className="sm:p-[5%] mt-2 flex flex-col">
       <div className="flex justify-center items-center mb-7">
         <h1 className="font-bold text-2xl sm:text-2xl lg:text-4xl text-center dark:text-white ">
-          OpportunityNexus: Setting Spot
+          Account Settings Hub: Navigate Your Options
           <span className="block text-primary-500">
-            Setting Your Course: Opportunities at Every Turn
+            Personalize Your Account: Tailor Your Experience to Perfection
           </span>
         </h1>
       </div>
@@ -19,7 +19,7 @@ const AccountSetting = () => {
           Edit Profile
         </h1>
 
-        <div className="flex  flex-col gap-y-2 lg:gap-x-10 sm:p-4 lg:flex-row justify-between">
+        <div className="flex  flex-col gap-y-2 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
           <div className="">
             <h1 className="text-xl font-semibold dark:text-white px-2">
               About us
@@ -34,7 +34,7 @@ const AccountSetting = () => {
           </div>
         </div>
         <hr className="border-t border-richblack-200" />
-        <div className="flex  flex-col gap-y-2 lg:gap-x-10 sm:p-4 lg:flex-row justify-between ">
+        <div className="flex  flex-col gap-y-2 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between ">
           <div>
             <h1 className="text-xl font-semibold dark:text-white px-2">
               Change Password
@@ -48,7 +48,7 @@ const AccountSetting = () => {
           </div>
         </div>
         <hr className="border-t border-richblack-200" />
-        <div className="flex  flex-col gap-y-2 lg:gap-x-10 sm:p-4 lg:flex-row justify-between">
+        <div className="flex  flex-col gap-y-2 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
           <div>
             <h1 className="text-xl font-semibold dark:text-white px-2">
               Delete account

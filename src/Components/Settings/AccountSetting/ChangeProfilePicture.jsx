@@ -51,16 +51,16 @@ export default function ChangeProfilePicture() {
         className="flex flex-col space-y-2 rounded-md border border-1 dark:border-richblack-700 
        dark:bg-richblack-900 p-2 mb-5"
       >
-        <h1 className="ml-4 text-md font-semibold dark:text-richblack-25 mt-8">
+        <h1 className="ml-4 text-lg font-semibold dark:text-richblack-25 mt-8">
           Change Profile Picture
         </h1>
         <div className="flex  items-center sm:p-4 sm:px-6 ">
           <div className="flex   w-[100%]  flex-row">
-            <div className="flex  gap-x-4 justify-evenly  sm:px-5 items-center w-full ">
+            <div className="flex  gap-x-4 justify-between  sm:px-5 items-center w-full ">
               <img
                 src={previewSource || user?.image}
                 alt={`profile-${user?.firstName}`}
-                className="aspect-square w-[78px] rounded-full object-cover"
+                className="aspect-square w-[82px] rounded-full object-cover"
               />
               <div className="flex gap-x-4 items-center flex-wrap   gap-y-4">
                 <div className=" flex    items-center h-7 px-5 py-5 border border-richblack-25 dark:border-richblack-800  dark:text-richblack-800 rounded-md dark:bg-yellow-400 ">
