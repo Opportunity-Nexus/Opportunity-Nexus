@@ -12,7 +12,7 @@ const adminNavigation = [
   {
     name: "Opportunity Panel",
     icon: MdDashboard,
-    href: "/dashboard/opportunities",
+    href: "/dashboard/opportunity-panel",
     id: 2,
   },
   { name: "Record", icon: FaRegFileAlt, href: "/dashboard/records", id: 3 },

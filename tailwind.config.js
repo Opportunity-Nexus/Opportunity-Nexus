@@ -5,7 +5,7 @@ module.exports = {
     "./src/**/*.{html,js}",
     "./src/Components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/Common/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/Pages/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -43,6 +43,11 @@ module.exports = {
 
         yellow: {
           50: "#FFD60A",
+        },
+        green:{
+          500:"#22c55e",
+          950:"#052e16",
+          600:"#16a34a",
         },
         primary: {
           50: "#f5fbff",

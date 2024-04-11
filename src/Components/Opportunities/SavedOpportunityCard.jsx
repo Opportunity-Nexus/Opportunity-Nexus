@@ -21,7 +21,7 @@ const SavedOpportunityCard = (opportunity) => {
                 </p>
 
                 <div className="sm:flex items-start">
-                  <p className="flex text-sm text-gray-500 md:max-w-lg items-start">
+                  <p className="flex text-sm text-gray-500 md:max-w-lg items-start text-justify">
                     <HiInformationCircle
                       className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400 text-start hidden lg:flex"
                       aria-hidden="true"
