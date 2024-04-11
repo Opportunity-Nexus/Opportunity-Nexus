@@ -26,7 +26,7 @@ export default function UpdatePassword() {
   return (
     <>
       <form onSubmit={handleSubmit(submitPasswordForm)}>
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] dark:border-richblack-700 dark:bg-richblack-900 p-8 sm:px-12">
+        <div className=" flex flex-col gap-y-6 rounded-md border-[1px] dark:border-richblack-700 dark:bg-richblack-900 p-8 sm:px-12">
           <h2 className="text-lg font-semibold dark:text-richblack-5">
             Password
           </h2>
@@ -43,7 +43,7 @@ export default function UpdatePassword() {
                 name="oldPassword"
                 id="oldPassword"
                 placeholder="Enter Current Password"
-                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/50"
+                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("oldPassword", { required: true })}
               />
               <span
@@ -74,7 +74,7 @@ export default function UpdatePassword() {
                 name="newPassword"
                 id="newPassword"
                 placeholder="Enter New Password"
-                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/50"
+                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("newPassword", { required: true })}
               />
               <span
@@ -100,7 +100,7 @@ export default function UpdatePassword() {
               onClick={() => {
                 navigate("/dashboard/my-profile");
               }}
-              className="cursor-pointer rounded-md dark:bg-richblack-700 py-2 px-5 font-semibold  text-richblack-50 border dark:border-richblack-700"
+              className="cursor-pointer rounded-md dark:bg-red-500 py-2 px-5 font-semibold  dark:text-richblack-5 border dark:border-richblack-700"
             >
               Cancel
             </button>

@@ -5,9 +5,17 @@ import UpdatePassword from "./AccountSetting/UpdatePassword";
 import DeleteAccount from "./AccountSetting/DeleteAccount";
 const AccountSetting = () => {
   return (
-    <div className="sm:p-[5%] mt-2 flex ">
+    <div className="sm:p-[5%] mt-2 flex flex-col">
+      <div className="flex justify-center items-center mb-7">
+        <h1 className="font-bold text-2xl sm:text-2xl lg:text-4xl text-center dark:text-white ">
+          OpportunityNexus: Setting Spot
+          <span className="block text-primary-500">
+            Setting Your Course: Opportunities at Every Turn
+          </span>
+        </h1>
+      </div>
       <div className="space-y-8 rounded-md border border-1 dark:border-richblack-700  dark:bg-richblack-800 sm:p-6 dark:text-gray-500 ">
-        <h1 className="sm:mb-12 text-3xl font-medium text-richblack-700 p-2 dark:text-richblack-25">
+        <h1 className="sm:mb-6 text-3xl font-medium text-richblack-700 p-1 dark:text-richblack-25">
           Edit Profile
         </h1>
 
@@ -17,7 +25,7 @@ const AccountSetting = () => {
               About us
             </h1>
             <p className="text-sm px-2">
-              Tell us about yourself so startups know who you are.
+              Tell us about yourself so we know who you are.
             </p>
           </div>
           <div className="lg:w-[70%] w-full ">

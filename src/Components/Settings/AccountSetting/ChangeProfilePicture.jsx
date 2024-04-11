@@ -51,7 +51,7 @@ export default function ChangeProfilePicture() {
         className="flex flex-col space-y-2 rounded-md border border-1 dark:border-richblack-700 
        dark:bg-richblack-900 p-2 mb-5"
       >
-        <h1 className="ml-4 text-md font-semibold dark:text-richblack-25">
+        <h1 className="ml-4 text-md font-semibold dark:text-richblack-25 mt-8">
           Change Profile Picture
         </h1>
         <div className="flex  items-center sm:p-4 sm:px-6 ">
@@ -63,7 +63,7 @@ export default function ChangeProfilePicture() {
                 className="aspect-square w-[78px] rounded-full object-cover"
               />
               <div className="flex gap-x-4 items-center flex-wrap   gap-y-4">
-                <div className=" flex    items-center h-7 px-5 py-5 border border-richblack-25 dark:border-richblack-800  dark:text-richblack-600 rounded-md dark:bg-richblack-700 ">
+                <div className=" flex    items-center h-7 px-5 py-5 border border-richblack-25 dark:border-richblack-800  dark:text-richblack-800 rounded-md dark:bg-yellow-400 ">
                   <input
                     type="file"
                     ref={fileInputRef}
@@ -74,7 +74,7 @@ export default function ChangeProfilePicture() {
                   <button
                     onClick={handleClick}
                     disabled={loading}
-                    className="cursor-pointer  rounded-md dark:bg-richblue-700 py-3 px-4 font-semibold  text-richblack-50"
+                    className="cursor-pointer  rounded-md  py-3 px-4 font-semibold  text-richblack-50"
                   >
                     Select
                   </button>

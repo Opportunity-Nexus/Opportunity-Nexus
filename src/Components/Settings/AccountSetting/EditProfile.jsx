@@ -47,7 +47,7 @@ export default function EditProfile() {
                 name="firstName"
                 id="firstName"
                 placeholder="Enter First Name"
-                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/50"
+                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("firstName", { required: true })}
                 defaultValue={user?.firstName}
               />
@@ -70,7 +70,7 @@ export default function EditProfile() {
                 name="lastName"
                 id="lastName"
                 placeholder="Enter Last Name"
-                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/50"
+                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("lastName", { required: true })}
                 defaultValue={user?.lastName}
               />
@@ -96,7 +96,7 @@ export default function EditProfile() {
                 type="date"
                 name="dateOfBirth"
                 id="dateOfBirth"
-                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/50"
+                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("dateOfBirth", {
                   required: {
                     value: true,
@@ -128,7 +128,7 @@ export default function EditProfile() {
               type="text"
               name="gender"
               id="gender"
-              className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/50"
+              className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
               {...register("gender", { required: true })}
               defaultValue={user?.additionalDetails?.gender}
             >
@@ -159,7 +159,7 @@ export default function EditProfile() {
                 name="contactNumber"
                 id="contactNumber"
                 placeholder=" Enter Contact Number"
-                className="border border-gray-300 text-black dark:text-richblack-25 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/50"
+                className="border border-gray-300 text-black dark:text-richblack-25 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("contactNumber", {
                   required: {
                     value: true,
@@ -188,7 +188,7 @@ export default function EditProfile() {
                 name="about"
                 id="about"
                 placeholder="Enter Bio Details"
-                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/50"
+                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("about", {
                   required: true,
                 })}
@@ -206,7 +206,7 @@ export default function EditProfile() {
               onClick={() => {
                 navigate("/dashboard/my-profile");
               }}
-              className="cursor-pointer rounded-md dark:bg-richblack-700 py-2 px-3 font-semibold dark:text-richblack-600 border dark:border-richblack-800"
+              className="cursor-pointer rounded-md dark:bg-red-500 py-2 px-3 font-semibold dark:text-richblack-5 border dark:border-richblack-800"
             >
               Cancel
             </button>
