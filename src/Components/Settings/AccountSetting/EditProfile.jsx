@@ -81,42 +81,42 @@ export default function EditProfile() {
               )}
             </div>
           </div>
-          <div className="flex space-x-4 justify-between">
-            <div className="flex flex-col gap-5 lg:flex-row w-full">
-              <div className="flex flex-col  w-full space-y-2 mt-1">
-                <label
-                  htmlFor="dateOfBirth"
-                  className="text-base font-semibold text-black dark:text-richblack-5 "
-                >
-                  {" "}
-                  Date of Birth
-                  <sup className="text-pink-200">*</sup>
-                </label>
-                <input
-                  type="date"
-                  name="dateOfBirth"
-                  id="dateOfBirth"
-                  className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
-                  {...register("dateOfBirth", {
-                    required: {
-                      value: true,
-                      message: "Please Enter Your Date of Birth",
-                    },
-                    max: {
-                      value: new Date().toISOString().split("T")[0],
-                      message: "Date of Birth cannot be in the future ",
-                    },
-                  })}
-                  defaultValue={user?.additionalDetails?.dateOfBirth}
-                />
-                {errors.dateOfBirth && (
-                  <span className="mt-1 text-[12px] text-blue-500">
-                    {errors.dateOfBirth.message}
-                  </span>
-                )}
-              </div>
+          <div className="sm:flex  sm:space-x-2 ">
+            {/* <div className="flex flex-col gap-5 lg:flex-row w-full border "> */}
+            <div className="flex flex-col  w-full space-y-2 mt-1 ">
+              <label
+                htmlFor="dateOfBirth"
+                className="text-base font-semibold text-black dark:text-richblack-5 "
+              >
+                {" "}
+                Date of Birth
+                <sup className="text-pink-200">*</sup>
+              </label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                id="dateOfBirth"
+                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
+                {...register("dateOfBirth", {
+                  required: {
+                    value: true,
+                    message: "Please Enter Your Date of Birth",
+                  },
+                  max: {
+                    value: new Date().toISOString().split("T")[0],
+                    message: "Date of Birth cannot be in the future ",
+                  },
+                })}
+                defaultValue={user?.additionalDetails?.dateOfBirth}
+              />
+              {errors.dateOfBirth && (
+                <span className="mt-1 text-[12px] text-blue-500">
+                  {errors.dateOfBirth.message}
+                </span>
+              )}
             </div>
-            <div className="flex flex-col  w-full space-y-2 mt-1">
+            {/* </div> */}
+            <div className="flex flex-col  sm:w-full space-y-2 mt-1  ">
               <label
                 htmlFor="gender"
                 className="text-base font-semibold text-black dark:text-richblack-5 "
@@ -148,7 +148,7 @@ export default function EditProfile() {
             </div>
           </div>
           <div className="">
-            <div className="flex flex-col  w-full space-y-2 mt-1">
+            <div className="flex flex-col  w-full space-y-2    sm:mt-1">
               <label
                 htmlFor="contactNumber"
                 className="text-base font-semibold text-black dark:text-richblack-5 "
