@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IoAdd } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { VscActivateBreakpoints } from "react-icons/vsc";
+import { GoDotFill } from "react-icons/go";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 
 const RequirementField = ({
@@ -80,16 +80,18 @@ const RequirementField = ({
 								className="flex flex-col sm:flex-row items-center text-gray-500 md:text-justify mb-4"
 							>
 								<div className="flex flex-row justify-start self-start sm:self-auto items-center gap-x-1">
-									<span className="w-4 h-4 self-start">
-										<VscActivateBreakpoints className="font-bold text-base text-black dark:text-richblack-5 " />
+								{/* <div className="flex flex-row justify-start self-start sm:self-auto items-center gap-x-1"> */}
+									<span className="self-start">
+										<GoDotFill className="font-bold text-base text-black dark:text-richblack-5 " />
 									</span>
 									<span>{requirement}</span>
 									<button
 										type="button"
-										className="ml-2 text-base md:text-lg text-red-700 font-bold self-end "
+										className="self-end"
+										// className="ml-2 text-base md:text-lg text-red-700 font-bold self-end "
 										onClick={() => handleRemoveRequirement(index)}
 									>
-										<RiDeleteBin6Fill />
+										<RiDeleteBin6Fill className="text-red-600" />
 									</button>
 								</div>
 							</li>

@@ -263,7 +263,7 @@ const OpportunityCreation = () => {
 								dispatch(setEditOpportunity(false), dispatch(setStep(2)));
 							}}
 							disabled={loading}
-							className={`flex w-[80%] lg:w-fit cursor-pointer items-center justify-center gap-x-2 rounded-md bg-richblack-700 hover:bg-richblack-900 py-2 px-5 text-base font-semibold text-gray-100`}
+							className={`flex w-[80%] lg:w-fit cursor-pointer items-center justify-center gap-x-2 rounded-md bg-richblack-700 hover:bg-richblack-900 py-2 px-5 text-xs sm:text-base font-semibold text-gray-100`}
 						>
 							Continue Without Saving
 						</button>
