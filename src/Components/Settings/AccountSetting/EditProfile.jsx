@@ -29,7 +29,7 @@ export default function EditProfile() {
         className="space-y-8 rounded-md border border-1 dark:border-richblack-700 dark:bg-richblack-800 p-6 "
       >
         <div className="my-4 flex flex-col gap-y-2 rounded-md ">
-          <h2 className="sm:text-2xl text-lg font-bold dark:text-richblack-5 mb-8 text-center sm:text-start ">
+          <h2 className="sm:text-2xl text-xl font-bold dark:text-richblack-5 mb-8 text-center sm:text-start ">
             Profile Information{" "}
           </h2>
           <div className="flex space-x-2 ">
