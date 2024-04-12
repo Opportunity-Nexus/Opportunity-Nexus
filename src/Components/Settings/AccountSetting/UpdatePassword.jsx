@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import IconBtn from "../../../Common/IconBtn";
 
 export default function UpdatePassword() {
   const { token } = useSelector((state) => state.auth);
@@ -26,16 +25,13 @@ export default function UpdatePassword() {
   return (
     <>
       <form onSubmit={handleSubmit(submitPasswordForm)}>
-        <div className=" flex flex-col gap-y-6 rounded-md border-[1px] dark:border-richblack-700 dark:bg-richblack-900 p-8 sm:px-6">
-          <h2 className="text-xl font-bold dark:text-richblack-5 mb-6">
+        <div className=" flex flex-col gap-y-6 rounded-md border-[1px] dark:border-richblack-700 dark:bg-richblack-800 p-8 sm:px-6">
+          <h2 className="text-2xl font-bold dark:text-richblack-5 mb-3 sm:mb-6 text-center sm:text-start">
             Password
           </h2>
-          <div className="flex-col  gap-2 ">
+          <div className="flex-col  gap-2  ">
             <div className="relative flex flex-col gap-2 w-full">
-              <label
-                htmlFor="oldPassword"
-                className="text-base font-semibold text-[14px] dark:text-richblack-5"
-              >
+              <label htmlFor="oldPassword" className="label-style">
                 Current Password
               </label>
               <input
@@ -43,7 +39,7 @@ export default function UpdatePassword() {
                 name="oldPassword"
                 id="oldPassword"
                 placeholder="Enter Current Password"
-                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
+                className="input-style"
                 {...register("oldPassword", { required: true })}
               />
               <span
@@ -63,10 +59,7 @@ export default function UpdatePassword() {
               )}
             </div>
             <div className="relative flex flex-col gap-2 w-full mt-3">
-              <label
-                htmlFor="newPassword"
-                className="text-base font-semibold  text-[14px] dark:text-richblack-5"
-              >
+              <label htmlFor="newPassword" className="label-style">
                 New Password
               </label>
               <input
@@ -74,7 +67,7 @@ export default function UpdatePassword() {
                 name="newPassword"
                 id="newPassword"
                 placeholder="Enter New Password"
-                className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
+                className="input-style"
                 {...register("newPassword", { required: true })}
               />
               <span
@@ -95,7 +88,7 @@ export default function UpdatePassword() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-2  flex-wrap">
+          <div className="flex justify-center sm:justify-end gap-2  flex-wrap">
             <button
               onClick={() => {
                 navigate("/dashboard/my-profile");
@@ -104,7 +97,12 @@ export default function UpdatePassword() {
             >
               Cancel
             </button>
-            <IconBtn type="submit" text="Update" />
+            <button
+              className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
+              type="submit"
+            >
+              Update
+            </button>
           </div>
         </div>
       </form>

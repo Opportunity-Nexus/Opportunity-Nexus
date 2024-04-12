@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import { updateDisplayPicture } from "../../../Services/Operations/SettingAPI";
 import { useSelector, useDispatch } from "react-redux";
-import IconBtn from "../../../Common/IconBtn";
 export default function ChangeProfilePicture() {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
@@ -48,45 +47,46 @@ export default function ChangeProfilePicture() {
   return (
     <>
       <div
-        className="flex flex-col space-y-2 rounded-md border border-1 dark:border-richblack-700 
-       dark:bg-richblack-900 p-2 mb-5"
+        className="flex flex-col space-y-1 rounded-md border border-1 dark:border-richblack-700 
+       dark:bg-richblack-800 mb-5"
       >
-        <h1 className="ml-4 text-xl font-bold dark:text-richblack-25 my-6">
+        <h1 className="ml-6 sm:text-2xl text-lg font-bold dark:text-richblack-25 mt-5 ">
           Change Profile Picture
         </h1>
-        <div className="flex  items-center sm:p-4 sm:px-6 ">
-          <div className="flex   w-[100%]  flex-row">
-            <div className="flex  gap-x-4 justify-between  sm:px-5 items-center w-full ">
-              <img
-                src={previewSource || user?.image}
-                alt={`profile-${user?.firstName}`}
-                className="aspect-square w-[82px] rounded-full object-cover"
-              />
-              <div className="flex gap-x-4 items-center flex-wrap   gap-y-4">
-                <div className=" flex    items-center h-7 px-5 py-5 border border-richblack-25 dark:border-richblack-800  dark:text-richblack-800 rounded-md dark:bg-yellow-400 ">
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                    className="hidden"
-                    accept="image/png ,image/gig,image/jpeg"
-                  />
-                  <button
-                    onClick={handleClick}
-                    disabled={loading}
-                    className="cursor-pointer  rounded-md  py-3 px-4 font-semibold  text-richblack-50"
-                  >
-                    Select
-                  </button>
-                </div>
-
-                <IconBtn
-                  text={loading ? "Uploading..." : "Upload"}
-                  onclick={handleFileUpload}
+        <div className="flex w-full items-center  sm:px-3 ">
+          <div className="flex  gap-x-4 justify-between  px-3 items-center w-full py-5 ">
+            <img
+              src={previewSource || user?.image}
+              alt={`profile-${user?.firstName}`}
+              className="aspect-square w-[82px] rounded-full object-cover"
+            />
+            <div className="flex gap-x-4 items-center flex-wrap   gap-y-4 justify-end">
+              <div className=" flex items-center h-7 px-5 py-5 border border-richblack-25 dark:border-richblack-800  dark:text-richblack-800 rounded-md bg-red-500 text-white dark:bg-yellow-400  ">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  className="hidden"
+                  accept="image/png ,image/gig,image/jpeg"
+                />
+                <button
+                  onClick={handleClick}
+                  disabled={loading}
+                  className="cursor-pointer rounded-md py-3 px-4 font-bold text-richblack-50"
                 >
-                  {!loading && <FiUpload className="text-lg text-white" />}
-                </IconBtn>
+                  Select
+                </button>
               </div>
+
+              <button
+                className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
+                onclick={handleFileUpload}
+              >
+                <span className="flex flex-row gap-x-2 items-center">
+                  {loading ? "Uploading..." : "Upload"}
+                  {!loading && <FiUpload className="text-lg text-white" />}
+                </span>
+              </button>
             </div>
           </div>
         </div>
