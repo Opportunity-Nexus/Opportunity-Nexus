@@ -183,7 +183,7 @@ export default function EditProfile() {
               )}
             </div>
           </div>
-          <div className="flex justify-end flex-wrap gap-2 mt-6 ">
+          <div className="flex sm:justify-end justify-center flex-wrap gap-2 mt-6 ">
             <button
               onClick={() => {
                 navigate("/dashboard/my-profile");

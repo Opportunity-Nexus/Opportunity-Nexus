@@ -50,7 +50,7 @@ export default function ChangeProfilePicture() {
         className="flex flex-col space-y-1 rounded-md border border-1 dark:border-richblack-700 
        dark:bg-richblack-800 mb-5"
       >
-        <h1 className="ml-6 sm:text-2xl text-lg font-bold dark:text-richblack-25 mt-5 text-center sm:text-start">
+        <h1 className="ml-6 sm:text-2xl text-xl font-bold dark:text-richblack-25 mt-5 text-center sm:text-start">
           Change Profile Picture
         </h1>
         <div className="flex w-full items-center  sm:px-3 ">

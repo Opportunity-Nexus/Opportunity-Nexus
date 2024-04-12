@@ -34,13 +34,14 @@ export default function UpdatePassword() {
     <>
       <form onSubmit={handleSubmit(submitPasswordForm)}>
         <div className=" flex flex-col gap-y-4 rounded-md border-[1px] dark:border-richblack-700 dark:bg-richblack-800 p-8 sm:px-6">
-          <h2 className="sm:text-2xl text-lg font-bold dark:text-richblack-5 mb-8 text-center sm:text-start ">
+          <h2 className="sm:text-2xl text-xl font-bold dark:text-richblack-5 mb-8 text-center sm:text-start ">
             Password
           </h2>
           <div className="flex-col  gap-2  ">
             <div className="relative flex flex-col gap-2 w-full">
               <label htmlFor="oldPassword" className="label-style">
                 Current Password
+                <sup className="text-pink-200">*</sup>
               </label>
               <input
                 type={showOldPassword ? "text" : "password"}
@@ -52,7 +53,7 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowOldPassword((prev) => !prev)}
-                className="absolute right-3 top-[43px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[42px] z-[10] cursor-pointer"
               >
                 {showOldPassword ? (
                   <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
@@ -69,6 +70,7 @@ export default function UpdatePassword() {
             <div className="relative flex flex-col gap-2 w-full mt-3">
               <label htmlFor="newPassword" className="label-style">
                 New Password
+                <sup className="text-pink-200">*</sup>
               </label>
               <input
                 type={showNewPassword ? "text" : "password"}
@@ -80,7 +82,7 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowNewPassword((prev) => !prev)}
-                className="absolute right-3 top-[43px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[42px] z-[10] cursor-pointer"
               >
                 {showNewPassword ? (
                   <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
