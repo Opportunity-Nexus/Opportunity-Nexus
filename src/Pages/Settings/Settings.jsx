@@ -21,7 +21,7 @@ const AccountSetting = () => {
         </h1>
 
         <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between ">
-          <div className="">
+          <div className=" lg:w-[30%]">
             <h1 className="text-2xl font-semibold dark:text-white px-2">
               About us
             </h1>
@@ -36,7 +36,7 @@ const AccountSetting = () => {
         </div>
         <hr className="border-t dark:border-richblack-700" />
         <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between ">
-          <div>
+          <div className="lg:w-[30%]">
             <h1 className="text-2xl font-semibold dark:text-white px-2 ">
               Change Password
             </h1>
@@ -50,7 +50,7 @@ const AccountSetting = () => {
         </div>
         <hr className="border-t dark:border-richblack-700" />
         <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
-          <div className="pr-4">
+          <div className="pr-4  lg:w-[30%]">
             <h1 className="text-2xl font-semibold dark:text-white px-2">
               Delete account
             </h1>

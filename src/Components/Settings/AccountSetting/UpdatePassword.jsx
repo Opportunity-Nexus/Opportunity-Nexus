@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { toast } from "react-hot-toast";
 
 export default function UpdatePassword() {
   const { token } = useSelector((state) => state.auth);
@@ -15,7 +16,14 @@ export default function UpdatePassword() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const isPasswordValid = (password) => {
+    return password.length >= 8;
+  };
   const submitPasswordForm = async (data) => {
+    if (!isPasswordValid(data.newPassword)) {
+      toast.error("Password must be at least 8 characters long");
+      return;
+    }
     try {
       await changePassword(token, data);
     } catch (error) {
@@ -25,8 +33,8 @@ export default function UpdatePassword() {
   return (
     <>
       <form onSubmit={handleSubmit(submitPasswordForm)}>
-        <div className=" flex flex-col gap-y-6 rounded-md border-[1px] dark:border-richblack-700 dark:bg-richblack-800 p-8 sm:px-6">
-          <h2 className="text-2xl font-bold dark:text-richblack-5 mb-3 sm:mb-6 text-center sm:text-start">
+        <div className=" flex flex-col gap-y-4 rounded-md border-[1px] dark:border-richblack-700 dark:bg-richblack-800 p-8 sm:px-6">
+          <h2 className="sm:text-2xl text-lg font-bold dark:text-richblack-5 mb-8 text-center sm:text-start ">
             Password
           </h2>
           <div className="flex-col  gap-2  ">
@@ -44,7 +52,7 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowOldPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[43px] z-[10] cursor-pointer"
               >
                 {showOldPassword ? (
                   <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
@@ -72,7 +80,7 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowNewPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[43px] z-[10] cursor-pointer"
               >
                 {showNewPassword ? (
                   <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />

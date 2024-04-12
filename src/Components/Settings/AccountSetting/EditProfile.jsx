@@ -26,7 +26,7 @@ export default function EditProfile() {
       <form
         onSubmit={handleSubmit(submitProfileForm)}
         action=""
-        className="space-y-8 rounded-md border border-1 dark:border-richblack-700 dark:bg-richblack-800 p-6"
+        className="space-y-8 rounded-md border border-1 dark:border-richblack-700 dark:bg-richblack-800 p-6 "
       >
         <div className="my-4 flex flex-col gap-y-2 rounded-md ">
           <h2 className="sm:text-2xl text-lg font-bold dark:text-richblack-5 mb-8 text-center sm:text-start ">
@@ -106,7 +106,7 @@ export default function EditProfile() {
               )}
             </div>
             {/* </div> */}
-            <div className="flex flex-col  sm:w-full space-y-2 mt-1  ">
+            <div className="flex flex-col  sm:w-full space-y-2 sm:mt-1 mt-3   ">
               <label htmlFor="gender" className="label-style">
                 Gender
                 <sup className="text-pink-200">*</sup>
