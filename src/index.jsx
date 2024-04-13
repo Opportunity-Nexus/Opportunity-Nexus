@@ -14,14 +14,10 @@ import Opportunities, {
   loader as OpportunitiesLoader,
 } from "./Pages/Opportunities/Opportunities";
 import Error from "./Components/Opportunities/Error";
-<<<<<<< HEAD
-import Dashboard from "./Pages/Dashboard/Dashboard";
 import BookmarkedOpportunities from "./Pages/BookmarkedOpportunities/BookmarkedOpportunities";
-=======
-import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
 import MyProfile from "./Pages/MyProfile/MyProfile";
 import Settings from "./Pages/Settings/Settings";
->>>>>>> e29e3af4674d7683ac031af42166f137aaa8fa0c
+
 import OpportunityPanel from "./Pages/OpportunityPanel/OpportunityPanel";
 
 import {
@@ -50,8 +46,6 @@ function App() {
         loader={OpportunitiesLoader}
         errorElement={<Error />}
       />
-
-   
 
       <Route path="/dashboard/my-profile" element={<MyProfile />} />
       <Route path="/dashboard/bookmarked" element={<BookmarkedOpportunities />} />

@@ -60,8 +60,8 @@ const BookmarkedOpportunities = () => {
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
       <div className="flex justify-center items-center py-12">
-        <h1 className="font-bold text-2xl sm:text-4xl lg:text-5xl text-center dark:text-white ">
-          OpportunityNexus: Save Spot
+        <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl text-center dark:text-white ">
+          OpportunityNexus: <span className="block lg:inline-flex">Save Spot</span> 
           <span className="block text-primary-500">
             Apply Now! Something you've chosen{" "}
           </span>
@@ -113,7 +113,7 @@ const BookmarkedOpportunities = () => {
           name="Opportunity Type"
           id="opportunity-type-selector"
           defaultValue="scholarships"
-          className="w-fit mx-10 border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md lg:hidden "
+          className="w-fit border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md lg:hidden "
           onChange={(e) => {
             setOpportunityType((data) => {
               const value = e.target.value;
@@ -138,7 +138,7 @@ const BookmarkedOpportunities = () => {
           name="Campus Type"
           id="Campus-type-selector"
           defaultValue="off-campus"
-          className="w-fit mx-10 border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md "
+          className="w-fit border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md "
           onChange={(e) => {
             setCampusType(() => e.target.value);
           }}
