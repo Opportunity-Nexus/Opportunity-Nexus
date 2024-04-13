@@ -6,7 +6,7 @@ import OpportunitiesNotFoundImg from "../../assets/utils/opp-not-found.svg";
 import { useSelector } from "react-redux";
 import { getSavedOpportunities } from "../../Services/Operations/MyOpportunity";
 
-const MyOpportunities = () => {
+const BookmarkedOpportunities = () => {
 
   const opportunityTypeArr = [
     "All",
@@ -254,4 +254,4 @@ const MyOpportunities = () => {
   );
 };
 
-export default MyOpportunities;
+export default BookmarkedOpportunities;

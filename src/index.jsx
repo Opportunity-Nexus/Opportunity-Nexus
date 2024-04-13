@@ -15,7 +15,7 @@ import Opportunities, {
 } from "./Pages/Opportunities/Opportunities";
 import Error from "./Components/Opportunities/Error";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
+import BookmarkedOpportunities from "./Pages/BookmarkedOpportunities/BookmarkedOpportunities";
 import OpportunityPanel from "./Pages/OpportunityPanel/OpportunityPanel";
 
 import {
@@ -45,7 +45,7 @@ function App() {
         errorElement={<Error />}
       />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/dashboard/my-opportunities" element={<MyOpportunities />} />
+      <Route path="/dashboard/bookmarked" element={<BookmarkedOpportunities />} />
       <Route path="dashboard/opportunity-panel" element={<OpportunityPanel />} />
     </Route>,
   ];

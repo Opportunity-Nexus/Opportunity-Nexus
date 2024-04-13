@@ -4,9 +4,9 @@ import { IoMdSettings } from "react-icons/io";
 const userNavigation = [
   { name: "My Profile", icon: FaUser, href: "/dashboard/profile", id: 1 },
   {
-    name: "My Opportunities",
+    name: "Bookmarked",
     icon: FaSuitcase,
-    href: "/dashboard/my-opportunities",
+    href: "/dashboard/bookmarked",
     id: 2,
   },
   { name: "Analytics", icon: FaChartBar, href: "/dashboard/analytics", id: 3 },
