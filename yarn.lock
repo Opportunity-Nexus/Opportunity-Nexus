@@ -2778,7 +2778,7 @@ ast-types-flow@^0.0.8:
   resolved "https://registry.npmjs.org/ast-types-flow/-/ast-types-flow-0.0.8.tgz#0a85e1c92695769ac13a428bb653e7538bea27d6"
   integrity sha512-OH/2E5Fg20h2aPrbe+QL8JZQFko0YZaF+j4mnQ7BGhfavO7OpSLa8a0y9sBwomHdSbkhTS8TQNayBfnW5DwbvQ==
 
-async@^3.2.3:
+"async@>= 0.1.22", async@^3.2.3:
   version "3.2.5"
   resolved "https://registry.npmjs.org/async/-/async-3.2.5.tgz#ebd52a8fdaf7a2289a24df399f8d8485c8a46b66"
   integrity sha512-baNZyqaaLhyLVKm/DlvdW051MSgO6b8eVfIezl9E5PqWxFgzLm/wQntEW4zOytVburDEr0JlALEpdOFwvErLsg==
@@ -4765,6 +4765,14 @@ form-data@^4.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
+form@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.npmjs.org/form/-/form-0.2.4.tgz#69a0e9bf9003e7d6e4eee7f9d16239148a129a21"
+  integrity sha512-3Of3Giw5TP2fzbfUec9PFil79CiRbhsnhPKN/xAqdt9fnDaclsCbTdoJsQxeWdoN3Pb4x0gCwQyLNmdPAzlenQ==
+  dependencies:
+    async ">= 0.1.22"
+    validator ">= 0.4.9"
+
 forwarded@0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/forwarded/-/forwarded-0.2.0.tgz#2269936428aad4c15c7ebe9779a84bf0b2a81811"
@@ -5055,6 +5063,13 @@ he@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
+
+hook@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/hook/-/hook-0.0.5.tgz#bca87347a964efada87a96557372be24d46fa59a"
+  integrity sha512-n27aWbghlOJ5/HpPsZBQdqg8LduXf1sc8XcdPvHzeDASsRTMqXqSTXK+ExN+3SXeaZl2353KSCRkfpkpzBUzfA==
+  dependencies:
+    mochiscript ">=0.4.3"
 
 hoopy@^0.1.4:
   version "0.1.4"
@@ -6613,6 +6628,13 @@ mkdirp@~0.5.1:
   integrity sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==
   dependencies:
     minimist "^1.2.6"
+
+mochiscript@>=0.4.3:
+  version "0.6.16"
+  resolved "https://registry.npmjs.org/mochiscript/-/mochiscript-0.6.16.tgz#2585d67bd4578ad2544053ecbb2791654bedbc34"
+  integrity sha512-Xl3x7zu+wPt6CeEkT4M3TFTyXGWnrFtHB+Bkf56Yl50x6+plNsT2qvsKoX+gV/vn0WsECXmnTgiAbCs3MysRTA==
+  dependencies:
+    watch "0.5.1"
 
 ms@2.0.0:
   version "2.0.0"
@@ -9306,6 +9328,11 @@ v8-to-istanbul@^8.1.0:
     convert-source-map "^1.6.0"
     source-map "^0.7.3"
 
+"validator@>= 0.4.9":
+  version "13.11.0"
+  resolved "https://registry.npmjs.org/validator/-/validator-13.11.0.tgz#23ab3fd59290c61248364eabf4067f04955fbb1b"
+  integrity sha512-Ii+sehpSfZy+At5nPdnyMhx78fEoPDkR2XW/zimHEL3MyGJQOCQ7WeP20jPYRz7ZCpcKLB21NxuXHF3bxjStBQ==
+
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
@@ -9331,6 +9358,11 @@ walker@^1.0.7:
   integrity sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==
   dependencies:
     makeerror "1.0.12"
+
+watch@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.npmjs.org/watch/-/watch-0.5.1.tgz#50ea3a056358c98073e0bca59956de4afd20b213"
+  integrity sha512-+XJjQ03+NtexhhBdn5Kt7jAMMPA9eJycKfqkECaqxV6ndUy07wMvWHJpnZ/LGbvfI2ZGW27utaSxl1vNuvm/0A==
 
 watchpack@^2.4.0:
   version "2.4.0"
