@@ -13,11 +13,13 @@ export const authEndpoints = {
 
 //OFF-CAMPUS ENDPOINTS
 export const offCampusEndpoints = {
-	SAVE_BOOKMARK_OPPORTUNITY: BASE_URL + "/offCampus/saveBookmarkedOpportunities",
-	GET_ALL_BOOKMARK_OPPORTUNITY: BASE_URL + "/offCampus/getAllSavedOpportunities",
-	REMOVE_BOOKMARK_OPPORTUNITY: BASE_URL + "/offCampus/removeBookmarkedOpportunity",
-	GET_ALL_FRONTEND_BOOKMARK_OPPORTUNITY: BASE_URL + "/offCampus/getAllFrontendBookmarks",
-	REMOVE_BOOKMARKED_OPPORTUNITY: BASE_URL + "/offCampus/removeBookmark"
+	SAVE_BOOKMARK_OPPORTUNITY:
+		BASE_URL + "/offCampus/saveBookmarkedOpportunities",
+	GET_ALL_BOOKMARK_OPPORTUNITY:
+		BASE_URL + "/offCampus/getAllSavedOpportunities",
+	GET_ALL_FRONTEND_BOOKMARK_OPPORTUNITY:
+		BASE_URL + "/offCampus/getAllFrontendBookmarks",
+	REMOVE_BOOKMARKED_OPPORTUNITY: BASE_URL + "/offCampus/removeBookmark",
 };
 
 //PROFILE-SETTINGS ENDPOINTS
@@ -31,21 +33,23 @@ export const profileSettingsEndpoints = {
 // PROFILE ENDPOINTS
 export const profileEndpoints = {
 	GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
-  }
+};
 
 //ON-CAMPUS ENDPOINTS
 export const oncampusEndpoints = {
-     CREATE_OPPORTUNITY: BASE_URL + "/onCampus/createopportunity",
-	 EDIT_OPPORTUNITY: BASE_URL + "/onCampus/editopportunity",
-	 GET_ALL_OPPORTUNITIES: BASE_URL + "/onCampus/getallopportunities",
-	 GET_OPPORTUNITY_DETAILS: BASE_URL + "/onCampus/getopportunitydetails",
-	 DELETE_OPPORTUNITY: BASE_URL + "/onCampus/deleteOpportunity",
-	 GET_USER_OPPORTUNITY: BASE_URL + "/onCampus/getuseropportunities",  //TESTING PART 2 REMAINING : HOW TO MAKE THE STUDENT ENROLLED.
-}
+	CREATE_OPPORTUNITY: BASE_URL + "/onCampus/createopportunity",
+	EDIT_OPPORTUNITY: BASE_URL + "/onCampus/editopportunity",
+	GET_ALL_OPPORTUNITIES: BASE_URL + "/onCampus/getallopportunities",
+	GET_OPPORTUNITY_DETAILS: BASE_URL + "/onCampus/getopportunitydetails",
+	DELETE_OPPORTUNITY: BASE_URL + "/onCampus/deleteOpportunity",
+	GET_USER_OPPORTUNITY: BASE_URL + "/onCampus/getuseropportunities", //TESTING PART 2 REMAINING : HOW TO MAKE THE STUDENT ENROLLED.
+};
 
 //ON-CAMPUS BOOKMARK OPPORTUNITY ENDPOINTS
 export const onCampusBookMarkEndpoints = {
-	SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY : BASE_URL + "/onCampus/saveopportunity",
-	GET_ALL_ONCAMPUS_BOOKMARKED_OPPORTUNITIES : BASE_URL + "/onCampus/getAllBookmarkedOpportunities",
-	DELETE__ONCAMPUS_BOOKMARK_OPPORTUNITY : BASE_URL + "/onCampus/removeBookmarkedOpportunity",
-}
+	SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY: BASE_URL + "/onCampus/saveopportunity",
+	GET_ALL_ONCAMPUS_BOOKMARKED_OPPORTUNITIES:
+		BASE_URL + "/onCampus/getAllBookmarkedOpportunities",
+	DELETE__ONCAMPUS_BOOKMARK_OPPORTUNITY:
+		BASE_URL + "/onCampus/removeBookmarkedOpportunity",
+};
