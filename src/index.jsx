@@ -14,8 +14,9 @@ import Opportunities, {
   loader as OpportunitiesLoader,
 } from "./Pages/Opportunities/Opportunities";
 import Error from "./Components/Opportunities/Error";
-import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
+import MyProfile from "./Pages/MyProfile/MyProfile";
+import Settings from "./Pages/Settings/Settings";
 import OpportunityPanel from "./Pages/OpportunityPanel/OpportunityPanel";
 
 import {
@@ -44,8 +45,9 @@ function App() {
         loader={OpportunitiesLoader}
         errorElement={<Error />}
       />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard/my-profile" element={<MyProfile />} />
       <Route path="/dashboard/my-opportunities" element={<MyOpportunities />} />
+      <Route path="/dashboard/my-settings" element={<Settings />} />
       <Route path="dashboard/opportunity-panel" element={<OpportunityPanel />} />
     </Route>,
   ];
