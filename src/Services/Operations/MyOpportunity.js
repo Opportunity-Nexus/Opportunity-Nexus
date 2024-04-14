@@ -61,7 +61,7 @@ export const fetchBookmarkedOpportunities = async (
 		if (!response.data.success) {
 			throw new Error(response.data.message);
 		}
-		toast.success("YOUR BOOKMARKS AT YOUR PLACE !!");
+		// toast.success("YOUR BOOKMARKS AT YOUR PLACE !!");
 		setBookmarkedOpportunities(response.data.data);
 	} catch (error) {
 		console.log("Could not fetch the bookmarked list.", error);
