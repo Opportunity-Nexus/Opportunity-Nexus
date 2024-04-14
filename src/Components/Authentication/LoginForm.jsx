@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,7 @@ import { login } from "../../Services/Operations/AuthenticationApi";
 
 const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
+	const location = useLocation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [formData, setFormData] = useState({
@@ -34,7 +35,10 @@ const LoginForm = () => {
 			toast.error("Password must be at least 8 characters long");
 			return;
 		}
-		dispatch(login(email, password, navigate));
+		const { search } = location;
+		const urlParams = new URLSearchParams(search);
+		const sourcePage = urlParams.get("from") || "";
+		dispatch(login(email, password, navigate,sourcePage));
 	}
 
 	return (

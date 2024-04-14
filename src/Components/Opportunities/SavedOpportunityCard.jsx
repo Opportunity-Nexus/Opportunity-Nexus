@@ -2,7 +2,7 @@ import React from "react";
 import { CalendarIcon } from "@heroicons/react/solid";
 import { HiInformationCircle } from "react-icons/hi";
 import { FaBookmark } from "react-icons/fa";
-import { deleteOpportunity } from "../../Services/Operations/MyOpportunity";
+import { deleteOpportunity} from "../../Services/Operations/MyOpportunity";
 import { useSelector } from "react-redux";
 
 const SavedOpportunityCard = (opportunity) => {

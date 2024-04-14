@@ -130,7 +130,7 @@ export function logout(navigate) {
 		navigate("/");
 	};
 }
-export function login(email, password, navigate) {
+export function login(email, password, navigate,sourcePage) {
 	return async (dispatch) => {
 		const toastId = toast.loading("Loading...");
 		dispatch(setLoading(true));
@@ -154,7 +154,11 @@ export function login(email, password, navigate) {
 			dispatch(setUser({ ...response.data.user, image: userImage }));
 			localStorage.setItem("token", JSON.stringify(response.data.token));
 			localStorage.setItem("user", JSON.stringify(response.data.user));
-			navigate("/dashboard");
+			if (sourcePage && sourcePage !== "") {
+				navigate(`/${sourcePage}`);
+			  } else {
+				navigate("/dashboard");
+			  }
 		} catch (error) {
 			console.log("LOGIN API ERROR:", error);
 			toast.error("Login Failed");
