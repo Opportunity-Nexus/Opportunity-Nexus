@@ -58,8 +58,8 @@ const MyOpportunities = () => {
   }, [paginationMeta, token, opportunityType]);
 
   return (
-    <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
-      <div className="flex justify-center items-center py-12">
+    <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900 ">
+      <div className="flex justify-center items-center py-12 ">
         <h1 className="font-bold text-2xl sm:text-4xl lg:text-5xl text-center dark:text-white ">
           OpportunityNexus: Save Spot
           <span className="block text-primary-500">
