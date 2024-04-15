@@ -203,7 +203,7 @@ const BookmarkedOpportunities = () => {
                     <TbPlayerTrackPrevFilled className="h-5 w-5 mr-2" />
                     <span className="uppercase font-medium">previous</span>
                   </button>
-                  <div className="flex items-center justify-center">
+                  <div className="hidden md:flex items-center justify-center">
                     {pageNumbers.map((pageNumber) => (
                       <button
                         key={pageNumber}
@@ -245,3 +245,6 @@ const BookmarkedOpportunities = () => {
 };
 
 export default BookmarkedOpportunities;
+
+
+

@@ -32,9 +32,46 @@ export const createOpportunity = async (data, token) => {
 	toast.dismiss(toastId);
 	return result;
 };
+
 //---------------EDIT_OPPORTUNITY------------------//
 export const editOpportunity = async (data,token) => {
 	
+}
+
+
+//---------------FETCH ALL ONCAMPUS OPPORTUNITY------------------//
+export async function getOncampusOpportunities(params) {
+	const { token } = params;
+
+	if (token) {
+		try {
+			const response = await fetch(
+				oncampusEndpoints.GET_ALL_OPPORTUNITIES,
+				{
+					method: "GET",
+					headers: {
+						Authorization: `Bearer ${token}`,
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			const data = await response.json();
+			if (response.ok) {
+				console.log("Success:", data);
+
+				return data.data;
+			} else {
+				// If we get an HTTP error response
+				console.error("Fetch error:", data.message);
+				return [];
+			}
+		} catch (error) {
+			console.error("Request failed:", error);
+		}
+	} else {
+		console.error("Token is undefined or not found");
+	}
 }
 
 

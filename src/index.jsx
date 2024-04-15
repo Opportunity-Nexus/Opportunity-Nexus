@@ -27,6 +27,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import UpdatePassword from "./Pages/Authentication/UpdatePassword";
+import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
 const themes = {
   light: "public/light.css",
   dark: "public/dark.css",
@@ -49,6 +50,7 @@ function App() {
 
       <Route path="/dashboard/my-profile" element={<MyProfile />} />
       <Route path="/dashboard/bookmarked" element={<BookmarkedOpportunities />} />
+      <Route path="/dashboard/my-opportunities" element={<MyOpportunities />} />
       <Route path="/dashboard/my-settings" element={<Settings />} />
       <Route path="dashboard/opportunity-panel" element={<OpportunityPanel />} />
     </Route>,
