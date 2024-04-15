@@ -170,7 +170,7 @@ const BookmarkedOpportunities = () => {
             </div>
           ) : (
             <>
-              <div className="flex flex-wrap justify-center mx-auto mt-4 mb-7 flex-1">
+              <div className="flex flex-wrap justify-center mt-4 mb-7 flex-1">
                 {savedOpportunitiesList
                   .filter((item ) =>
                     opportunityType.includes("All") ? !!item : opportunityType.includes(item.opportunityType)
