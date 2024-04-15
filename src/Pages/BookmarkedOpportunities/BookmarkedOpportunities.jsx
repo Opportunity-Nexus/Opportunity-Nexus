@@ -58,10 +58,12 @@ const BookmarkedOpportunities = () => {
   }, [paginationMeta, token, opportunityType]);
 
   return (
+
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
       <div className="flex justify-center items-center py-12">
         <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl text-center dark:text-white ">
           OpportunityNexus: <span className="block lg:inline-flex">Save Spot</span> 
+
           <span className="block text-primary-500">
             Apply Now! Something you've chosen{" "}
           </span>
