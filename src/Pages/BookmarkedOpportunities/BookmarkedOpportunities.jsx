@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { getSavedOpportunities } from "../../Services/Operations/MyOpportunity";
 
 const BookmarkedOpportunities = () => {
-
   const opportunityTypeArr = [
     "All",
     "Scholarships",
@@ -15,36 +14,15 @@ const BookmarkedOpportunities = () => {
     "CodingContests",
   ];
 
-  const [opportunityType, setOpportunityType] = useState(['All']);
+  const [opportunityType, setOpportunityType] = useState(["All"]);
 
   /**
    * @type {string} - off-campus | on-campus
    */
   const [campusType, setCampusType] = useState("off-campus");
-  const [savedOpportunitiesList, setSavedOpportunitiesList] = useState(null);
+  const [savedOpportunitiesList, setSavedOpportunitiesList] = useState([]);
+  const [filteredOpportunities, setFilteredOpportunities] = useState([]);
   const { token } = useSelector((state) => state.auth);
-
-  //----------------------PAGINTAION----------------------//
-
-  // ! should be sent to backend to determine the number of results we need in a page
-  const pageSize = 10;
-
-  /**
-   * this pagination meta is meant to be returned from backend call on every request
-   * @typedef PaginationMeta
-   * @property {number} currentPage
-   * @property {number} totalResults
-   * @property {boolean} hasNextPage
-   */
-  const [paginationMeta, setPaginationMeta] = useState({
-    currentPage: 1,
-    totalResults: null,
-    hasNextPage: false,
-  });
-  
-  const totalPages = paginationMeta.totalResults
-    ? paginationMeta.totalResults / pageSize
-    : 1;
 
   useEffect(() => {
     getSavedOpportunities({ token: token })
@@ -55,15 +33,44 @@ const BookmarkedOpportunities = () => {
         });
       })
       .catch((error) => console.error(error));
-  }, [paginationMeta, token, opportunityType]);
+  }, [token, opportunityType]);
+
+  //----------------------PAGINTAION----------------------//
+
+  useEffect(() => {
+    if (savedOpportunitiesList) {
+      const filtered = savedOpportunitiesList.filter(
+        (item) =>
+          (opportunityType.includes("All") ||
+            opportunityType.includes(item.opportunityType)) &&
+          (campusType === "off-campus" || campusType === item.campusType)
+      );
+      setFilteredOpportunities(filtered);
+      setCurrentPage(1); // Reset to first page on filter change
+    }
+  }, [savedOpportunitiesList, opportunityType, campusType]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+  const totalOpportunitiesPages = Math.ceil(
+    filteredOpportunities.length / itemsPerPage
+  );
+  const currentOpportunities = filteredOpportunities.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  console.log("total opp pages are", totalOpportunitiesPages);
+  const pageNumbers = Array.from(
+    { length: totalOpportunitiesPages },
+    (_, i) => i + 1
+  );
 
   return (
-
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
       <div className="flex justify-center items-center py-12">
         <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl text-center dark:text-white ">
-          OpportunityNexus: <span className="block lg:inline-flex">Save Spot</span> 
-
+          OpportunityNexus:{" "}
+          <span className="block lg:inline-flex">Save Spot</span>
           <span className="block text-primary-500">
             Apply Now! Something you've chosen{" "}
           </span>
@@ -80,28 +87,21 @@ const BookmarkedOpportunities = () => {
                     ? "bg-gray-200 dark:bg-gray-800"
                     : ""
                 }`}
-                onClick={() => {                
+                onClick={() => {
                   setOpportunityType((data) => {
-                    if(data.includes('All')) {
-                      if(item !== 'All'){
+                    if (data.includes("All")) {
+                      if (item !== "All") {
                         return [item];
+                      } else {
+                        return data;
                       }
-                      else {
-                       return data;
-                      }
-                    }
-                    
-                    else {
+                    } else {
                       console.log("I am called");
                       if (data.includes(item)) {
-                     
                         return data.filter((i) => i === item);
-                        
-                      } 
-                      else {
+                      } else {
                         return [item];
                       }
-                    
                     }
                   });
                 }}
@@ -159,9 +159,9 @@ const BookmarkedOpportunities = () => {
         </select>
       </div>
 
-      {savedOpportunitiesList ? (
+      {filteredOpportunities ? (
         <>
-          {savedOpportunitiesList.length === 0 ? (
+          {filteredOpportunities.length === 0 ? (
             <div className="flex flex-col justify-center items-center lg:w-2/4 flex-1 dark:text-white mx-auto self-center">
               <img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
               <h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">
@@ -171,9 +171,11 @@ const BookmarkedOpportunities = () => {
           ) : (
             <>
               <div className="flex flex-wrap justify-center mt-4 mb-7 flex-1">
-                {savedOpportunitiesList
-                  .filter((item ) =>
-                    opportunityType.includes("All") ? !!item : opportunityType.includes(item.opportunityType)
+                {currentOpportunities
+                  .filter((item) =>
+                    opportunityType.includes("All")
+                      ? !!item
+                      : opportunityType.includes(item.opportunityType)
                   )
                   .filter(() => campusType === "off-campus")
                   .map((opportunity, index) => (
@@ -186,64 +188,50 @@ const BookmarkedOpportunities = () => {
               </div>
 
               {/* ------------PAGINATION----------- */}
-              <div className="flex items-center justify-center w-2/4 mt-8">
-                <button
-                  className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
-                    paginationMeta.currentPage <= 1
-                      ? "cursor-not-allowed text-gray-400 "
-                      : "cursor-pointer"
-                  }`}
-                  onClick={() =>
-                    setPaginationMeta((data) => ({
-                      ...data,
-                      currentPage: data.currentPage - 1,
-                    }))
-                  }
-                  disabled={paginationMeta.currentPage <= 1}
-                >
-                  <TbPlayerTrackPrevFilled />
-                  <span className="uppercase">previous</span>
-                </button>
-                <div className="flex items-center justify-center">
-                  {Array(totalPages)
-                    .fill(null)
-                    .map((_, index) => (
+
+              {pageNumbers.length > 1 && (
+                <div className="flex items-center justify-center w-2/4 mt-8 mx-auto">
+                  <button
+                    className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
+                      currentPage <= 1
+                        ? "cursor-not-allowed text-gray-400 "
+                        : "cursor-pointer"
+                    }`}
+                    onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
+                    disabled={currentPage <= 1}
+                  >
+                    <TbPlayerTrackPrevFilled className="h-5 w-5 mr-2" />
+                    <span className="uppercase font-medium">previous</span>
+                  </button>
+                  <div className="flex items-center justify-center">
+                    {pageNumbers.map((pageNumber) => (
                       <button
-                        key={index + 1}
-                        className={
-                          "border rounded-full px-4 py-2 ml-3 mr-3 dark:text-white focus:ring-2 "
-                        }
-                        onClick={() =>
-                          setPaginationMeta((data) => ({
-                            ...data,
-                            currentPage: index + 1,
-                          }))
-                        }
+                        key={pageNumber}
+                        className={`border rounded-full px-4 py-2 ml-3 mr-3 dark:text-white focus:ring-2 ${
+                          currentPage === pageNumber
+                            ? "bg-primary-500 text-white"
+                            : ""
+                        }`}
+                        onClick={() => setCurrentPage(pageNumber)}
                       >
-                        {index + 1}
+                        {pageNumber}
                       </button>
                     ))}
+                  </div>
+                  <button
+                    className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
+                      currentPage >= totalOpportunitiesPages
+                        ? "cursor-not-allowed text-gray-400"
+                        : "cursor-pointer"
+                    }`}
+                    onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
+                    disabled={currentPage >= totalOpportunitiesPages}
+                  >
+                    <span className="uppercase ml-3 font-medium">next</span>
+                    <TbPlayerTrackNextFilled className="h-5 w-5 ml-2" />
+                  </button>
                 </div>
-                <button
-                  className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
-                    paginationMeta.currentPage >= paginationMeta.totalResults
-                      ? "cursor-not-allowed text-gray-400"
-                      : "cursor-pointer"
-                  }`}
-                  onClick={() =>
-                    setPaginationMeta((data) => ({
-                      ...data,
-                      currentPage: data.currentPage + 1,
-                    }))
-                  }
-                  disabled={
-                    paginationMeta.currentPage >= paginationMeta.totalResults
-                  }
-                >
-                  <span className="uppercase ml-3">next</span>
-                  <TbPlayerTrackNextFilled />
-                </button>
-              </div>
+              )}
             </>
           )}
         </>
