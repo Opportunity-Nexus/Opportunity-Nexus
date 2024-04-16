@@ -48,7 +48,7 @@ export default function EditProfile() {
                 defaultValue={user?.firstName}
               />
               {errors.firstName && (
-                <span className="mt-1 text-[12px] text-blue-500">
+                <span className="error-style">
                   Please Enter your First name{" "}
                 </span>
               )}
@@ -68,7 +68,7 @@ export default function EditProfile() {
                 defaultValue={user?.lastName}
               />
               {errors.lastName && (
-                <span className="mt-1 text-[12px] text-blue-500">
+                <span className="error-style">
                   Please Enter your Last name{" "}
                 </span>
               )}
@@ -89,7 +89,7 @@ export default function EditProfile() {
                 className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("dateOfBirth", {
                   required: {
-                    value: true,
+                    value: false,
                     message: "Please Enter Your Date of Birth",
                   },
                   max: {
@@ -100,7 +100,7 @@ export default function EditProfile() {
                 defaultValue={user?.additionalDetails?.dateOfBirth}
               />
               {errors.dateOfBirth && (
-                <span className="mt-1 text-[12px] text-blue-500">
+                <span className="error-style">
                   {errors.dateOfBirth.message}
                 </span>
               )}
@@ -115,7 +115,7 @@ export default function EditProfile() {
                 name="gender"
                 id="gender"
                 className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
-                {...register("gender", { required: true })}
+                {...register("gender", { required: false })}
                 defaultValue={user?.additionalDetails?.gender || ""}
               >
                 <option value="" disabled>
@@ -128,9 +128,7 @@ export default function EditProfile() {
                 ))}
               </select>
               {errors.gender && (
-                <span className="-mt-1 text-[12px] text-black  dark:text-yellow-100">
-                  Please Select your gender
-                </span>
+                <span className="error-style">Please Select your gender</span>
               )}
             </div>
           </div>
@@ -147,7 +145,7 @@ export default function EditProfile() {
                 className="border border-gray-300 text-black dark:text-richblack-25 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("contactNumber", {
                   required: {
-                    value: true,
+                    value: false,
                     message: "Please enter Your Contact Number ",
                   },
                   maxLength: { value: 12, message: "Invalid Contact Number" },
@@ -156,7 +154,7 @@ export default function EditProfile() {
                 defaultValue={user?.additionalDetails?.contactNumber}
               />
               {errors.contactNumber && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="error-style">
                   {errors.contactNumber.message}
                 </span>
               )}
@@ -172,14 +170,12 @@ export default function EditProfile() {
                 placeholder="Enter Bio Details"
                 className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("about", {
-                  required: true,
+                  required: false,
                 })}
                 defaultValue={user?.additionalDetails?.about}
               />
               {errors.about && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
-                  Pleas enter Your About
-                </span>
+                <span className="error-style">Pleas enter Your About</span>
               )}
             </div>
           </div>

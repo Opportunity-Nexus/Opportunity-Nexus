@@ -62,9 +62,7 @@ export default function UpdatePassword() {
                 )}
               </span>
               {errors.oldPassword && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
-                  Enter Your Current Password
-                </span>
+                <span className="error-style">Enter Your Current Password</span>
               )}
             </div>
             <div className="relative flex flex-col gap-2 w-full mt-3">
@@ -91,9 +89,7 @@ export default function UpdatePassword() {
                 )}
               </span>
               {errors.newPassword && (
-                <span className="-mt-1 text-[12px] dark:text-yellow-100">
-                  Enter Your New Password
-                </span>
+                <span className="error-style">Enter Your New Password</span>
               )}
             </div>
           </div>
