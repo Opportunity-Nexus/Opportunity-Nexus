@@ -80,8 +80,8 @@ const OnCampusOpportunityCard = (opportunity) => {
                   </p>
                 </div>
               </div>
-              <div className="mt-2 sm:flex flex-col flex-1  lg:items-end gap-2">
-                <div className="mt-2 sm:flex flex-col flex-1 gap-2 lg:ml-auto">
+              <div className="mt-2 sm:flex flex-col flex-1 lg:mr-auto lg:items-end gap-2">
+                <div className="mt-2 sm:flex flex-col flex-1 gap-2 items-start">
                   <div className="flex-shrink-0 flex items-center gap-3">
                     <div
                       className={`flex items-center justify-center ${
