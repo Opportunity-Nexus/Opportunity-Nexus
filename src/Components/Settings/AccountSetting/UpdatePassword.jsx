@@ -20,6 +20,10 @@ export default function UpdatePassword() {
     return password.length >= 8;
   };
   const submitPasswordForm = async (data) => {
+    if (data.oldPassword === data.newPassword) {
+      toast.error("The old and new passwords cannot be the same");
+      return;
+    }
     if (!isPasswordValid(data.newPassword)) {
       toast.error("Password must be at least 8 characters long");
       return;

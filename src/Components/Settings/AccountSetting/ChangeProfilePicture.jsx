@@ -80,7 +80,7 @@ export default function ChangeProfilePicture() {
 
               <button
                 className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
-                onclick={handleFileUpload}
+                onClick={handleFileUpload}
               >
                 <span className="flex flex-row gap-x-2 items-center">
                   {loading ? "Uploading..." : "Upload"}

@@ -88,10 +88,6 @@ export default function EditProfile() {
                 id="dateOfBirth"
                 className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("dateOfBirth", {
-                  required: {
-                    value: false,
-                    message: "Please Enter Your Date of Birth",
-                  },
                   max: {
                     value: new Date().toISOString().split("T")[0],
                     message: "Date of Birth cannot be in the future ",
@@ -115,7 +111,7 @@ export default function EditProfile() {
                 name="gender"
                 id="gender"
                 className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
-                {...register("gender", { required: false })}
+                {...register("gender")}
                 defaultValue={user?.additionalDetails?.gender || ""}
               >
                 <option value="" disabled>
@@ -144,10 +140,6 @@ export default function EditProfile() {
                 placeholder=" Enter Contact Number"
                 className="border border-gray-300 text-black dark:text-richblack-25 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
                 {...register("contactNumber", {
-                  required: {
-                    value: false,
-                    message: "Please enter Your Contact Number ",
-                  },
                   maxLength: { value: 12, message: "Invalid Contact Number" },
                   minLength: { value: 10, message: "Invalid Contact Number" },
                 })}
@@ -169,9 +161,7 @@ export default function EditProfile() {
                 id="about"
                 placeholder="Enter Bio Details"
                 className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
-                {...register("about", {
-                  required: false,
-                })}
+                {...register("about")}
                 defaultValue={user?.additionalDetails?.about}
               />
               {errors.about && (
