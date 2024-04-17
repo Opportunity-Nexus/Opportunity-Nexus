@@ -21,7 +21,7 @@ export default function UpdatePassword() {
   };
   const submitPasswordForm = async (data) => {
     if (data.oldPassword === data.newPassword) {
-      toast.error("The old and new passwords cannot be the same");
+      toast.error("New password must vary from the old");
       return;
     }
     if (!isPasswordValid(data.newPassword)) {
