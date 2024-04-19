@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 import ApplyModal from "./ApplyModal";
 
-const OnCampusOpportunityCard = (opportunity, campusType) => {
+const OnCampusOpportunityCard = (opportunity) => {
   console.log({ opportunity });
   const isExpired = new Date(opportunity.opportunityFillLastDate) < new Date();
   const audio = new Audio();
@@ -42,7 +42,7 @@ const OnCampusOpportunityCard = (opportunity, campusType) => {
         <ul className="">
           <li key={opportunity._id} className="border rounded-lg p-3">
             <div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group p-4 flex flex-col w-full gap-8">
-              <div className="flex flex-col flex-1 gap-2">
+              <div className="flex flex-col flex-1 gap-4">
                 {/* title with role */}
                 <div className="flex flex-col gap-1">
                   <p className="text-lg md:text-xl font-bold text-primary-500">
@@ -178,12 +178,26 @@ const OnCampusOpportunityCard = (opportunity, campusType) => {
                       onClick={() => {
                         setIsApplyModalOpen(() => true);
                       }}
-                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
+                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
                     >
                       Apply now
                     </div>
                   </div>
-                  <p className="inline-flex text-xs leading-5 font-semibold">
+                  <div className="flex items-center justify-center">
+                    <button
+                      onClick={() => {
+                        bookmarkOnCampusOpportunity().catch((error) =>
+                          console.error(error)
+                        );
+                      }}
+                      className={` items-center justify-center px-1 py-1  border border-primary-600 text-base font-medium rounded-md text-primary-600 hover:bg-primary-600 hover:text-white ${
+                        isExpired ? "hidden" : "inline-flex"
+                      }`}
+                    >
+                      Save
+                    </button>
+                  </div>
+                  <p className="inline-flex text-base leading-5 font-semibold">
                     {!isExpired ? (
                       <span className="bg-green-100 text-green-800 px-2 rounded-full">
                         Active
@@ -194,20 +208,6 @@ const OnCampusOpportunityCard = (opportunity, campusType) => {
                       </span>
                     )}
                   </p>
-                  <div className="flex items-center justify-center">
-                    <button
-                      onClick={() => {
-                        bookmarkOnCampusOpportunity().catch((error) =>
-                          console.error(error)
-                        );
-                      }}
-                      className={` items-center justify-center px-1 py-1  border border-primary-600 text-xs font-medium rounded-md text-primary-600 hover:bg-primary-600 hover:text-white ${
-                        isExpired ? "hidden" : "inline-flex"
-                      }`}
-                    >
-                      Save
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>

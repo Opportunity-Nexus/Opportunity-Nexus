@@ -111,6 +111,7 @@ export const bookmarkOnCampusOpportunity = async ({ opportunity, token }) => {
   }
 };
 
+//---------------FETCH BOOKMARKED ONCAMPUS OPPORTUNITY------------------//
 export async function getOnCampusBookmarkedOpportunities(params) {
   const { token } = params;
 
@@ -145,6 +146,7 @@ export async function getOnCampusBookmarkedOpportunities(params) {
   }
 }
 
+//---------------REMOVE BOOKMARKED ONCAMPUS OPPORTUNITY------------------//
 export async function removeBookmark({ opportunity, token }) {
   const toastId = toast.loading("Un-bookmarking opportunity...");
   try {

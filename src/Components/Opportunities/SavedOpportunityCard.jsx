@@ -32,6 +32,7 @@ const SavedOpportunityCard = (opportunity) => {
 		}
 	};
 
+
 	return (
 		<>
 			<div className="bg-white dark:bg-gray-900 overflow-hidden sm:rounded-md w-full">
@@ -40,7 +41,7 @@ const SavedOpportunityCard = (opportunity) => {
 						<div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group px-4 py-4 sm:px-6 flex flex-col lg:flex-row lg:justify-between">
 							<div className="flex flex-col gap-2">
 								<p className="text-sm md:text-base font-medium text-black dark:text-white truncate">
-									{opportunity.name}
+									{opportunity.opportunityName}
 								</p>
 
 								<div className="sm:flex items-start">
