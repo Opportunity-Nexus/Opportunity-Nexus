@@ -9,6 +9,7 @@ import { getOncampusOpportunities } from "../../Services/Operations/OnCampusApi"
 const MyOpportunities = () => {
   const [onCampusOpportunities, setOnCampusOpportunities] = useState([]);
   const { token } = useSelector((state) => state.auth);
+  console.log(onCampusOpportunities);
 
   useEffect(() => {
     getOncampusOpportunities({ token: token })

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState }  from "react";
 import { CalendarIcon } from "@heroicons/react/solid";
 import { HiInformationCircle } from "react-icons/hi";
 import { IoMdPin } from "react-icons/io";
@@ -9,38 +9,36 @@ import {
   FaClock,
 } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { removeBookmarkedOpportunity } from "../../Services/Operations/MyOpportunity";
+import { saveOnCampusBookmarkedOpportunity } from "../../Services/Operations/OnCampusApi";
+import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
 import { useSelector } from "react-redux";
 
 const OnCampusOpportunityCard = (opportunity) => {
-  const isExpired = new Date(opportunity.opportunityFillDate) < new Date();
+  const isExpired = new Date(opportunity.opportunityFillLastDate) < new Date();
+  const audio = new Audio();
+  audio.src = BookMarkSound;
+  const [bookmarkedOpportunities, setBookmarkedOpportunities] = useState([]);
+  console.log("bookmark is ", bookmarkedOpportunities);
   const { token } = useSelector((state) => state.auth);
 
-  const handleOpportunityDelete = async () => {
-    try {
-      console.log("DATA BEFORE DELETE", token, opportunity.frontendId);
-      const result = await removeBookmarkedOpportunity(
-        opportunity.frontendId,
-        token
-      );
+
+  const handleBookmark = async () => {
+    console.log('I am clicked');
+      const result = await saveOnCampusBookmarkedOpportunity(opportunity, token);
       if (result) {
-        opportunity.setSavedOpportunitiesList((data) =>
-          data.filter((i) => i.name !== opportunity.name)
-        );
-        toast.success("Opportunity removed from your profile!", {
-          position: "bottom-center",
-        });
+          audio.play();
+          toast.success("Opportunity added to your profile!", { position: "bottom-center" });
+          console.log('Opportunity bookmarked successfully');
       }
-    } catch (error) {
-      console.log(error);
-    }
+      console.log('Opportunity is not bookmarked');
   };
+
 
   return (
     <>
       <div className="bg-white dark:bg-gray-900 overflow-hidden sm:rounded-md w-full">
         <ul className="divide-y divide-gray-200">
-          <li>
+          <li key={opportunity._id}>
             <div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group px-4 py-4 sm:px-6 flex flex-col lg:flex-row lg:justify-between w-full gap-16">
               <div className="flex flex-col flex-1 gap-2">
                 <p className="text-sm md:text-base font-medium text-black dark:text-white truncate">
@@ -69,15 +67,20 @@ const OnCampusOpportunityCard = (opportunity) => {
                   </div>
                 </div>
                 <div className="sm:flex items-start">
-                  <p className="flex text-sm text-gray-500 md:max-w-lg items-start text-justify">
+                  <ul className="flex flex-col text-sm text-gray-500 md:max-w-lg items-start text-justify">
                     <FaExclamationTriangle
                       className="flex-shrink-0 mr-1.5 h-5 w-5 text-red-300 text-start hidden lg:flex"
                       aria-hidden="true"
                     />
                     {opportunity.eligibilityCriteria
-                      ? opportunity.eligibilityCriteria
+                      ? opportunity.eligibilityCriteria.map((item, id) => (
+                        <li className="">
+                          {item}
+                        </li>
+
+                      ))
                       : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five cent "}
-                  </p>
+                  </ul>
                 </div>
               </div>
               <div className="mt-2 sm:flex flex-col flex-1 lg:mr-auto lg:items-end gap-2">
@@ -108,7 +111,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                     </p>
                     <div className="flex items-center justify-center">
                       <button
-                        // onClick={handleOpportunityDelete}
+                        onClick={handleBookmark}
                         className="inline-flex items-center justify-center px-1 py-1  border border-primary-600 text-xs font-medium rounded-md text-primary-600 hover:bg-primary-600 hover:text-white"
                       >
                         Save
