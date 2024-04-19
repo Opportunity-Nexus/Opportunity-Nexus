@@ -57,7 +57,7 @@ const MyOpportunities = () => {
             </div>
           ) : (
             <>
-              <div className="flex flex-wrap justify-center mt-4 mb-7 flex-1">
+              <div className="flex flex-wrap justify-center mt-4 mb-7 flex-1 gap-8 px-2">
                 {currentOpportunities.map((opportunity, index) => (
                   <OnCampusOpportunityCard
                     key={index}
