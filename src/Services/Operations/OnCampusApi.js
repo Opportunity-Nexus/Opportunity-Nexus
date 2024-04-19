@@ -2,7 +2,10 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../ApiConnector";
 import { onCampusBookMarkEndpoints, oncampusEndpoints } from "../BackendApis";
 const { CREATE_OPPORTUNITY } = oncampusEndpoints;
-const { SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY } = onCampusBookMarkEndpoints;
+const {
+  SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY,
+  DELETE__ONCAMPUS_BOOKMARK_OPPORTUNITY,
+} = onCampusBookMarkEndpoints;
 
 //---------------CREATE_OPPORTUNITY------------------//
 export const createOpportunity = async (data, token) => {
@@ -139,5 +142,35 @@ export async function getOnCampusBookmarkedOpportunities(params) {
     }
   } else {
     console.error("Token is undefined or not found");
+  }
+}
+
+export async function removeBookmark({ opportunity, token }) {
+  const toastId = toast.loading("Un-bookmarking opportunity...");
+  try {
+    const response = await apiConnector(
+      "POST",
+      DELETE__ONCAMPUS_BOOKMARK_OPPORTUNITY,
+      {
+        opportunityId: opportunity._id,
+      },
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    if (!response.data.success) {
+      toast.error("Something went wrong while unbookmarking the opportunity");
+      throw new Error(
+        response.data.message || "Failed to unbookmark opportunity"
+      );
+    }
+    toast.dismiss(toastId);
+    toast.success("Opportunity successfully unbookmarked!");
+    return true;
+  } catch (error) {
+    toast.dismiss(toastId);
+    toast.error(error.message || "Failed to unbookmark opportunity.");
+    return false;
   }
 }

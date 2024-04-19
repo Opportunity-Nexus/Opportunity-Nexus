@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { CalendarIcon } from "@heroicons/react/solid";
+import React, { useState } from "react";
 import { HiInformationCircle } from "react-icons/hi";
+import { FaCalendarAlt } from "react-icons/fa";
 import { IoMdPin } from "react-icons/io";
 import {
   FaHourglassEnd,
@@ -8,26 +8,40 @@ import {
   FaExclamationTriangle,
   FaClock,
 } from "react-icons/fa";
-import { bookmarkOnCampusOpportunity as bookmarkHelper } from "../../Services/Operations/OnCampusApi";
 import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
 import { useSelector } from "react-redux";
+import { removeBookmark as removeBookmarkHelper } from "../../Services/Operations/OnCampusApi";
+import ApplyModal from "./ApplyModal";
 
-const OnCampusOpportunityCard = (opportunity) => {
+const SavedOnCampusOpportunityCard = (
+  opportunity,
+  setSavedOpportunitiesList
+) => {
   console.log({ opportunity });
   const isExpired = new Date(opportunity.opportunityFillLastDate) < new Date();
   const audio = new Audio();
   audio.src = BookMarkSound;
   const { token } = useSelector((state) => state.auth);
 
-//   const bookmarkOnCampusOpportunity = async () => {
-//     const result = await bookmarkHelper({ opportunity, token });
-//     if (result) {
-//       audio.play();
-//     }
-//   };
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+
+  const removeBookmark = async () => {
+    const result = await removeBookmarkHelper({ opportunity, token });
+    if (result) {
+      audio.play();
+      setSavedOpportunitiesList((data) =>
+        data.filter((item) => item !== opportunity)
+      );
+    }
+  };
 
   return (
     <>
+      <ApplyModal
+        isOpen={isApplyModalOpen}
+        opportunity={opportunity}
+        setIsOpen={setIsApplyModalOpen}
+      />
       <div className="bg-white dark:bg-gray-900 overflow-hidden sm:rounded-md w-full">
         <ul className="divide-y divide-gray-200">
           <li key={opportunity._id}>
@@ -80,12 +94,14 @@ const OnCampusOpportunityCard = (opportunity) => {
                         isExpired ? "hidden" : ""
                       }`}
                     >
-                      <a
-                        href={opportunity.applicationUrl}
+                      <div
+                        onClick={() => {
+                          setIsApplyModalOpen(() => true);
+                        }}
                         className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
                       >
                         Apply now
-                      </a>
+                      </div>
                     </div>
                     <p className="inline-flex text-xs leading-5 font-semibold">
                       {!isExpired ? (
@@ -101,19 +117,19 @@ const OnCampusOpportunityCard = (opportunity) => {
                     <div className="flex items-center justify-center">
                       <button
                         onClick={() => {
-                          bookmarkOnCampusOpportunity().catch((error) =>
+                          removeBookmark().catch((error) =>
                             console.error(error)
                           );
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1  border border-primary-600 text-xs font-medium rounded-md text-primary-600 hover:bg-primary-600 hover:text-white"
+                        className="inline-flex items-center justify-center px-1 py-1  border border-red-600 text-xs font-medium rounded-md text-white-600 hover:bg-red-600 hover:text-white"
                       >
-                        Save
+                        Remove
                       </button>
                     </div>
                   </div>
 
                   <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-px">
-                    <CalendarIcon
+                    <FaCalendarAlt
                       className="flex-shrink-0  h-5 w-5 text-gray-400"
                       aria-hidden="true"
                     />
@@ -189,4 +205,4 @@ const OnCampusOpportunityCard = (opportunity) => {
   );
 };
 
-export default OnCampusOpportunityCard;
+export default SavedOnCampusOpportunityCard;

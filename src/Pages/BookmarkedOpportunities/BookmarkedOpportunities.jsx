@@ -6,6 +6,7 @@ import OpportunitiesNotFoundImg from "../../assets/utils/opp-not-found.svg";
 import { useSelector } from "react-redux";
 import { getOffCampusBookmarkedOpportunities } from "../../Services/Operations/MyOpportunity";
 import { getOnCampusBookmarkedOpportunities } from "../../Services/Operations/OnCampusApi";
+import SavedOnCampusOpportunityCard from "../../Components/Opportunities/SaveOnCampusOppCard";
 
 const BookmarkedOpportunities = () => {
   const opportunityTypeArr = [
@@ -51,16 +52,20 @@ const BookmarkedOpportunities = () => {
   //----------------------PAGINTAION----------------------//
 
   useEffect(() => {
+    console.log({ campusType, savedOpportunitiesList });
     if (savedOpportunitiesList) {
-      const filtered = savedOpportunitiesList.filter((item) =>
-        campusType === "on-campus"
-          ? true
-          : (opportunityType.includes("All") ||
+      if (campusType === "off-campus") {
+        const filtered = savedOpportunitiesList.filter(
+          (item) =>
+            (opportunityType.includes("All") ||
               opportunityType.includes(item.opportunityType)) &&
             (opportunityType.includes("All") ||
               opportunityType.includes(item.opportunityType))
-      );
-      setFilteredOpportunities(filtered);
+        );
+        setFilteredOpportunities(() => filtered);
+      } else {
+        setFilteredOpportunities(() => savedOpportunitiesList);
+      }
       setCurrentPage(1); // Reset to first page on filter change
     }
   }, [savedOpportunitiesList, opportunityType, campusType]);
@@ -92,40 +97,45 @@ const BookmarkedOpportunities = () => {
         </h1>
       </div>
       <div className="w-full flex items-center justify-between sm:px-6">
-        <div className="justify-between items-center gap-3 hidden lg:flex">
-          {opportunityTypeArr.map((item, id) => {
-            return (
-              <button
-                key={id}
-                className={`px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer ${
-                  opportunityType.includes(item)
-                    ? "bg-gray-200 dark:bg-gray-800"
-                    : ""
-                }`}
-                onClick={() => {
-                  setOpportunityType((data) => {
-                    if (data.includes("All")) {
-                      if (item !== "All") {
-                        return [item];
+        {campusType === "off-campus" ? (
+          <div className="justify-between items-center gap-3 hidden lg:flex">
+            {opportunityTypeArr.map((item, id) => {
+              return (
+                <button
+                  key={id}
+                  className={`px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer ${
+                    opportunityType.includes(item)
+                      ? "bg-gray-200 dark:bg-gray-800"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    setOpportunityType((data) => {
+                      if (data.includes("All")) {
+                        if (item !== "All") {
+                          return [item];
+                        } else {
+                          return data;
+                        }
                       } else {
-                        return data;
+                        console.log("I am called");
+                        if (data.includes(item)) {
+                          return data.filter((i) => i === item);
+                        } else {
+                          return [item];
+                        }
                       }
-                    } else {
-                      console.log("I am called");
-                      if (data.includes(item)) {
-                        return data.filter((i) => i === item);
-                      } else {
-                        return [item];
-                      }
-                    }
-                  });
-                }}
-              >
-                {item}
-              </button>
-            );
-          })}
-        </div>
+                    });
+                  }}
+                >
+                  {item}
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="w-full flex items-center justify-between sm:px-6" />
+        )}
+
         <select
           name="Opportunity Type"
           id="opportunity-type-selector"
@@ -192,14 +202,25 @@ const BookmarkedOpportunities = () => {
                       ? !!item
                       : opportunityType.includes(item.opportunityType)
                   )
-                  .filter(() => campusType === "off-campus")
-                  .map((opportunity, index) => (
-                    <SavedOpportunityCard
-                      key={index}
-                      {...opportunity}
-                      setSavedOpportunitiesList={setSavedOpportunitiesList}
-                    />
-                  ))}
+                  .map((opportunity, index) => {
+                    if (campusType === "off-campus") {
+                      return (
+                        <SavedOpportunityCard
+                          key={index}
+                          {...opportunity}
+                          setSavedOpportunitiesList={setSavedOpportunitiesList}
+                        />
+                      );
+                    } else {
+                      return (
+                        <SavedOnCampusOpportunityCard
+                          key={index}
+                          {...opportunity}
+                          setSavedOpportunitiesList={setSavedOpportunitiesList}
+                        />
+                      );
+                    }
+                  })}
               </div>
 
               {/* ------------PAGINATION----------- */}

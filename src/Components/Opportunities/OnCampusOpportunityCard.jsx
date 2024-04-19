@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { CalendarIcon } from "@heroicons/react/solid";
+import React, { useState } from "react";
+import { FaCalendarAlt } from "react-icons/fa";
 import { MdLens } from "react-icons/md";
 import { IoMdPin } from "react-icons/io";
 import {
@@ -8,15 +8,19 @@ import {
   FaClock,
   FaFileAlt,
 } from "react-icons/fa";
-import toast from "react-hot-toast";
 import { bookmarkOnCampusOpportunity as bookmarkHelper } from "../../Services/Operations/OnCampusApi";
 import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
 import { useSelector } from "react-redux";
 
-const OnCampusOpportunityCard = (opportunity) => {
+import ApplyModal from "./ApplyModal";
+
+const OnCampusOpportunityCard = (opportunity, campusType) => {
   console.log({ opportunity });
   const isExpired = new Date(opportunity.opportunityFillLastDate) < new Date();
   const audio = new Audio();
+
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+
   audio.src = BookMarkSound;
   const { token } = useSelector((state) => state.auth);
 
@@ -29,6 +33,11 @@ const OnCampusOpportunityCard = (opportunity) => {
 
   return (
     <>
+      <ApplyModal
+        isOpen={isApplyModalOpen}
+        opportunity={opportunity}
+        setIsOpen={setIsApplyModalOpen}
+      />
       <div className="bg-white dark:bg-gray-900 overflow-hidden sm:rounded-md w-full shadow-lg">
         <ul className="">
           <li key={opportunity._id} className="border rounded-lg p-3">
@@ -97,7 +106,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                 {/* drive date and time */}
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 text-sm text-gray-500">
                   <div className="flex items-start lg:items-center text-sm text-gray-500 font-medium gap-px">
-                    <CalendarIcon
+                    <FaCalendarAlt
                       className="h-5 w-5  text-gray-400"
                       aria-hidden="true"
                     />
@@ -165,12 +174,14 @@ const OnCampusOpportunityCard = (opportunity) => {
                       isExpired ? "hidden" : ""
                     }`}
                   >
-                    <a
-                      href={opportunity.applicationUrl}
+                    <div
+                      onClick={() => {
+                        setIsApplyModalOpen(() => true);
+                      }}
                       className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
                     >
                       Apply now
-                    </a>
+                    </div>
                   </div>
                   <p className="inline-flex text-xs leading-5 font-semibold">
                     {!isExpired ? (
