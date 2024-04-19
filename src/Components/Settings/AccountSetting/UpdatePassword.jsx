@@ -20,6 +20,10 @@ export default function UpdatePassword() {
     return password.length >= 8;
   };
   const submitPasswordForm = async (data) => {
+    if (data.oldPassword === data.newPassword) {
+      toast.error("New password must vary from the old");
+      return;
+    }
     if (!isPasswordValid(data.newPassword)) {
       toast.error("Password must be at least 8 characters long");
       return;
@@ -62,9 +66,7 @@ export default function UpdatePassword() {
                 )}
               </span>
               {errors.oldPassword && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
-                  Enter Your Current Password
-                </span>
+                <span className="error-style">Enter Your Current Password</span>
               )}
             </div>
             <div className="relative flex flex-col gap-2 w-full mt-3">
@@ -91,9 +93,7 @@ export default function UpdatePassword() {
                 )}
               </span>
               {errors.newPassword && (
-                <span className="-mt-1 text-[12px] dark:text-yellow-100">
-                  Enter Your New Password
-                </span>
+                <span className="error-style">Enter Your New Password</span>
               )}
             </div>
           </div>
