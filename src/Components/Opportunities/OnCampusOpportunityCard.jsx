@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import { CalendarIcon } from "@heroicons/react/solid";
 import { HiInformationCircle } from "react-icons/hi";
 import { IoMdPin } from "react-icons/io";
@@ -9,30 +9,23 @@ import {
   FaClock,
 } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { saveOnCampusBookmarkedOpportunity } from "../../Services/Operations/OnCampusApi";
+import { bookmarkOnCampusOpportunity as bookmarkHelper } from "../../Services/Operations/OnCampusApi";
 import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
 import { useSelector } from "react-redux";
 
 const OnCampusOpportunityCard = (opportunity) => {
+  console.log({ opportunity });
   const isExpired = new Date(opportunity.opportunityFillLastDate) < new Date();
   const audio = new Audio();
   audio.src = BookMarkSound;
-  const [bookmarkedOpportunities, setBookmarkedOpportunities] = useState([]);
-  console.log("bookmark is ", bookmarkedOpportunities);
   const { token } = useSelector((state) => state.auth);
 
-
-  const handleBookmark = async () => {
-    console.log('I am clicked');
-      const result = await saveOnCampusBookmarkedOpportunity(opportunity, token);
-      if (result) {
-          audio.play();
-          toast.success("Opportunity added to your profile!", { position: "bottom-center" });
-          console.log('Opportunity bookmarked successfully');
-      }
-      console.log('Opportunity is not bookmarked');
+  const bookmarkOnCampusOpportunity = async () => {
+    const result = await bookmarkHelper({ opportunity, token });
+    if (result) {
+      audio.play();
+    }
   };
-
 
   return (
     <>
@@ -74,11 +67,8 @@ const OnCampusOpportunityCard = (opportunity) => {
                     />
                     {opportunity.eligibilityCriteria
                       ? opportunity.eligibilityCriteria.map((item, id) => (
-                        <li className="">
-                          {item}
-                        </li>
-
-                      ))
+                          <li className="">{item}</li>
+                        ))
                       : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five cent "}
                   </ul>
                 </div>
@@ -111,7 +101,11 @@ const OnCampusOpportunityCard = (opportunity) => {
                     </p>
                     <div className="flex items-center justify-center">
                       <button
-                        onClick={handleBookmark}
+                        onClick={() => {
+                          bookmarkOnCampusOpportunity().catch((error) =>
+                            console.error(error)
+                          );
+                        }}
                         className="inline-flex items-center justify-center px-1 py-1  border border-primary-600 text-xs font-medium rounded-md text-primary-600 hover:bg-primary-600 hover:text-white"
                       >
                         Save

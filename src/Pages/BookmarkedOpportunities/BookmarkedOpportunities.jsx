@@ -4,7 +4,8 @@ import { TbPlayerTrackPrevFilled } from "react-icons/tb";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import OpportunitiesNotFoundImg from "../../assets/utils/opp-not-found.svg";
 import { useSelector } from "react-redux";
-import { getSavedOpportunities } from "../../Services/Operations/MyOpportunity";
+import { getOffCampusBookmarkedOpportunities } from "../../Services/Operations/MyOpportunity";
+import { getOnCampusBookmarkedOpportunities } from "../../Services/Operations/OnCampusApi";
 
 const BookmarkedOpportunities = () => {
   const opportunityTypeArr = [
@@ -25,25 +26,39 @@ const BookmarkedOpportunities = () => {
   const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    getSavedOpportunities({ token: token })
-      .then((data) => {
-        console.log({ data });
-        setSavedOpportunitiesList(() => {
-          return data;
-        });
-      })
-      .catch((error) => console.error(error));
-  }, [token, opportunityType]);
+    if (campusType === "off-campus") {
+      getOffCampusBookmarkedOpportunities({ token: token })
+        .then((data) => {
+          console.log({ data });
+          setSavedOpportunitiesList(() => {
+            return data;
+          });
+        })
+        .catch((error) => console.error(error));
+    } else {
+      // fetch all on-campus bookmarked opportunities
+      getOnCampusBookmarkedOpportunities({ token: token })
+        .then((data) => {
+          console.log({ data });
+          setSavedOpportunitiesList(() => {
+            return data;
+          });
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [token, opportunityType, campusType]);
 
   //----------------------PAGINTAION----------------------//
 
   useEffect(() => {
     if (savedOpportunitiesList) {
-      const filtered = savedOpportunitiesList.filter(
-        (item) =>
-          (opportunityType.includes("All") ||
-            opportunityType.includes(item.opportunityType)) &&
-          (campusType === "off-campus" || campusType === item.campusType)
+      const filtered = savedOpportunitiesList.filter((item) =>
+        campusType === "on-campus"
+          ? true
+          : (opportunityType.includes("All") ||
+              opportunityType.includes(item.opportunityType)) &&
+            (opportunityType.includes("All") ||
+              opportunityType.includes(item.opportunityType))
       );
       setFilteredOpportunities(filtered);
       setCurrentPage(1); // Reset to first page on filter change
@@ -245,6 +260,3 @@ const BookmarkedOpportunities = () => {
 };
 
 export default BookmarkedOpportunities;
-
-
-

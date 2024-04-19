@@ -1,7 +1,8 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../ApiConnector";
-import { oncampusEndpoints } from "../BackendApis";
-const { CREATE_OPPORTUNITY, SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY } = oncampusEndpoints;
+import { onCampusBookMarkEndpoints, oncampusEndpoints } from "../BackendApis";
+const { CREATE_OPPORTUNITY } = oncampusEndpoints;
+const { SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY } = onCampusBookMarkEndpoints;
 
 //---------------CREATE_OPPORTUNITY------------------//
 export const createOpportunity = async (data, token) => {
@@ -73,29 +74,29 @@ export async function getOncampusOpportunities(params) {
 }
 
 //---------------SAVE BOOKMARKED ONCAMPUS OPPORTUNITY------------------//
-export const saveOnCampusBookmarkedOpportunity = async ({ opportunity, token }) => {
-	console.log('fetching api',oncampusEndpoints.SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY);
-//   const bookmarkedData = {
-//     opportunityId: opportunity._id,
-//   };
-//   console.log('data bookmarked',bookmarkedData)
+export const bookmarkOnCampusOpportunity = async ({ opportunity, token }) => {
+  console.log({ opportunity });
+
   const toastId = toast.loading("Saving opportunity...");
-  console.log('fetching api',oncampusEndpoints.SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY);
   try {
-	// console.log("BEFORE POST", bookmarkedData);
-	const response = await apiConnector(
-		"POST",
-		SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY,
-		// bookmarkedData,
-		{
-			Authorization: `Bearer ${token}`,
-		}
-	);
+    const response = await apiConnector(
+      "POST",
+      SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY,
+      {
+        opportunityId: opportunity._id,
+      },
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
 
-    const data = await response.json(); // Parsing the JSON response body
+    console.log({ response });
 
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to bookmark opportunity");
+    if (!response.data.success) {
+      toast.error("Something went wrong while saving the opportunity");
+      throw new Error(
+        response.data.message || "Failed to bookmark opportunity"
+      );
     }
     toast.dismiss(toastId);
     toast.success("Opportunity successfully bookmarked!");
@@ -106,3 +107,37 @@ export const saveOnCampusBookmarkedOpportunity = async ({ opportunity, token }) 
     return false;
   }
 };
+
+export async function getOnCampusBookmarkedOpportunities(params) {
+  const { token } = params;
+
+  if (token) {
+    try {
+      const response = await fetch(
+        onCampusBookMarkEndpoints.GET_ALL_ONCAMPUS_BOOKMARKED_OPPORTUNITIES,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Success:", data);
+
+        return data.data;
+      } else {
+        // If we get an HTTP error response
+        console.error("Fetch error:", data.message);
+        return [];
+      }
+    } catch (error) {
+      console.error("Request failed:", error);
+    }
+  } else {
+    console.error("Token is undefined or not found");
+  }
+}
