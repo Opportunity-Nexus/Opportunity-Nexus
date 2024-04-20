@@ -17,6 +17,7 @@ const BookmarkedOpportunities = () => {
   ];
 
   const [opportunityType, setOpportunityType] = useState(["All"]);
+  const [oncampusFilter, setOncampusFilter ] = useState(['ALL']);
 
   /**
    * @type {string} - off-campus | on-campus
@@ -30,7 +31,7 @@ const BookmarkedOpportunities = () => {
 
   useEffect(() => {
     if (campusType === "off-campus") {
-      console.log("I am the off campus if block");
+   
       getOffCampusBookmarkedOpportunities({ token: token })
         .then((data) => {
           setSavedOpportunitiesList(() => {
@@ -38,8 +39,9 @@ const BookmarkedOpportunities = () => {
           });
         })
         .catch((error) => console.error(error));
-    } else {
-      console.log("I am the on campus else block");
+    }
+    else {
+ 
       // fetch all on-campus bookmarked opportunities
       getOnCampusBookmarkedOpportunities({ token: token })
         .then((data) => {
@@ -135,34 +137,96 @@ const BookmarkedOpportunities = () => {
             })}
           </div>
         ) : (
-          <div className="w-full flex items-center justify-between sm:px-6" />
+          <div className="justify-between items-center gap-3 hidden lg:flex">
+            {['ALL', 'ACTIVE'].map((item, id) => {
+              return (
+                <button
+                  key={id}
+                  className={`px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer ${
+                    opportunityType.includes(item)
+                      ? "bg-gray-200 dark:bg-gray-800"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    oncampusFilter((data) => {
+                      if (data.includes("All")) {
+                        if (item !== "All") {
+                          return [item];
+                        } else {
+                          return data;
+                        }
+                      } else {
+                        console.log("I am called");
+                        if (data.includes(item)) {
+                          return data.filter((i) => i === item);
+                        } else {
+                          return [item];
+                        }
+                      }
+                    });
+                  }}
+                >
+                  {item}
+                </button>
+              );
+            })}
+          </div>
         )}
 
-        <select
-          name="Opportunity Type"
-          id="opportunity-type-selector"
-          defaultValue="scholarships"
-          className="w-fit border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md lg:hidden "
-          onChange={(e) => {
-            setOpportunityType((data) => {
-              const value = e.target.value;
-              if (!value) return;
-              return [value];
-            });
-          }}
-        >
-          {opportunityTypeArr.map((item) => {
-            return (
-              <option
-                value={item}
-                key={item}
-                className="uppercase gap-1 flex text-sm"
-              >
-                {item}
-              </option>
-            );
-          })}
-        </select>
+        {campusType === "on-campus" ? (
+          <select
+            name="Opportunity Type"
+            id="opportunity-type-selector"
+            defaultValue="scholarships"
+            className="w-fit border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md lg:hidden "
+            onChange={(e) => {
+              setCampusType((data) => {
+                const value = e.target.value;
+                if (!value) return;
+                return [value];
+              });
+            }}
+          >
+            {["all", "active"].map((item) => {
+              return (
+                <option
+                  value={item}
+                  key={item}
+                  className="uppercase gap-1 flex text-sm"
+                >
+                  {item}
+                </option>
+              );
+            })}
+          </select>
+        ) : (
+          <select
+            name="Opportunity Type"
+            id="opportunity-type-selector"
+            defaultValue="scholarships"
+            className="w-fit border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md lg:hidden "
+            onChange={(e) => {
+              setOpportunityType((data) => {
+                const value = e.target.value;
+                if (!value) return;
+                return [value];
+              });
+            }}
+          >
+            {opportunityTypeArr.map((item) => {
+              return (
+                <option
+                  value={item}
+                  key={item}
+                  className="uppercase gap-1 flex text-sm"
+                >
+                  {item}
+                </option>
+              );
+            })}
+          </select>
+        )}
+
         <select
           name="Campus Type"
           id="Campus-type-selector"
@@ -199,7 +263,7 @@ const BookmarkedOpportunities = () => {
             </div>
           ) : (
             <>
-              <div className="flex flex-wrap justify-center mt-4 mb-7">
+              <div className="flex flex-wrap justify-center mt-4 mb-7 divide-y dark:divide-gray-700">
                 {campusType === "off-campus" ? (
                   <>
                     {currentOpportunities

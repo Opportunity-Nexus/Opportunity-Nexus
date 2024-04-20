@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { IoMdPin } from "react-icons/io";
-import {
-  FaHourglassEnd,
-  FaRupeeSign,
-  FaClock,
-} from "react-icons/fa";
+import { FaHourglassEnd, FaRupeeSign, FaClock } from "react-icons/fa";
 import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
 import { useSelector } from "react-redux";
 import { removeBookmark as removeBookmarkHelper } from "../../Services/Operations/OnCampusApi";
 import ApplyModal from "./ApplyModal";
 
-const SavedOnCampusOpportunityCard = (
-  opportunity
-) => {
-  console.log('savesoncampus',opportunity);
+const SavedOnCampusOpportunityCard = (opportunity) => {
+  console.log("savesoncampus", opportunity);
 
   const isExpired =
     new Date(opportunity.opportunityId.opportunityFillLastDate) < new Date();
@@ -28,12 +22,9 @@ const SavedOnCampusOpportunityCard = (
     const result = await removeBookmarkHelper({ opportunity, token });
     if (result) {
       audio.play();
-      opportunity((data) =>
-        data.filter((item) => item !== opportunity)
-      );
+      opportunity((data) => data.filter((item) => item !== opportunity));
     }
   };
-
 
   return (
     <>
@@ -47,7 +38,7 @@ const SavedOnCampusOpportunityCard = (
           <li key={opportunity.opportunityId}>
             <div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group px-4 py-4 sm:px-6 flex flex-col lg:flex-row lg:justify-between w-full gap-6">
               <div className="flex flex-col flex-1 gap-2">
-                title + role + package
+                {/* title + role + package */}
                 <div className="flex flex-col gap-1">
                   <p className="text-lg md:text-xl font-bold text-primary-500">
                     {opportunity.opportunityId.opportunityName}
@@ -62,7 +53,7 @@ const SavedOnCampusOpportunityCard = (
                   </div>
                 </div>
 
-                drive date
+                {/* drive date */}
                 <div className="flex items-center text-sm text-gray-500 sm:mt-0 gap-px">
                   <FaCalendarAlt
                     className="flex-shrink-0  h-5 w-5 text-gray-400"
@@ -79,7 +70,7 @@ const SavedOnCampusOpportunityCard = (
                   </p>
                 </div>
 
-                application fill deadline
+                {/* application fill deadline */}
                 <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-px">
                   <FaHourglassEnd
                     className="flex-shrink-0  h-4 w-5 text-gray-400"
@@ -96,12 +87,11 @@ const SavedOnCampusOpportunityCard = (
                     ).toDateString()}
                   </p>
                 </div>
-               
               </div>
               <div className="mt-2 sm:flex flex-col flex-1 lg:mr-auto lg:items-end gap-2">
                 <div className="mt-2 sm:flex flex-col flex-1 gap-2 items-start">
-                  active OR Expire + apply + remove button
-                  <div className="flex-shrink-0 flex items-center gap-3">
+                  {/* active OR Expire + apply + remove button */}
+                  <div className="flex-shrink-0 flex items-center gap-3 ml-auto">
                     <div
                       className={`flex items-center justify-center ${
                         isExpired ? "hidden" : ""
@@ -140,7 +130,7 @@ const SavedOnCampusOpportunityCard = (
                       </button>
                     </div>
                   </div>
-                  locatoin + time
+                  {/* locatoin + time */}
                   <div className="flex items-center gap-2">
                     {" "}
                     <div className="flex items-center text-sm text-gray-500 sm:mt-0 gap-2">
@@ -153,7 +143,7 @@ const SavedOnCampusOpportunityCard = (
                         <p>
                           {opportunity.opportunityId.opportunityMode ===
                             "OFF-LINE" ||
-                            opportunity.opportunityId.opportunityMode ===
+                          opportunity.opportunityId.opportunityMode ===
                             "Offline" ? (
                             <span className="uppercase font-medium">
                               {opportunity.opportunityId.opportunityLocation}
@@ -174,11 +164,12 @@ const SavedOnCampusOpportunityCard = (
                           <div className="flex items-center gap-px">
                             <span className="mr-1">|</span>
                             <FaClock
-                              className="flex-shrink-0 h-4 w-5 text-gray-400"
+                              className="h-5 w-4 text-gray-400"
                               aria-hidden="true"
                             />
-                            <p className="uppercase font-medium">
-                              {opportunity.opportunityId.opportunityDriveTime}
+                            {""}
+                            <p className="font-medium">
+                              Drive Time: {opportunity.opportunityId.opportunityDriveTime}
                             </p>
                           </div>
                         )}
