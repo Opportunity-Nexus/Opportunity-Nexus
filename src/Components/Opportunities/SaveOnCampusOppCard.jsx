@@ -14,7 +14,6 @@ import ApplyModal from "./ApplyModal";
 const SavedOnCampusOpportunityCard = (
   opportunity
 ) => {
-  console.log({ opportunity });
   console.log('savesoncampus',opportunity);
 
   const isExpired =

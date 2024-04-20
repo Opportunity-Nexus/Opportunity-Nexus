@@ -114,6 +114,7 @@ export const bookmarkOnCampusOpportunity = async ({ opportunity, token }) => {
 //---------------FETCH BOOKMARKED ONCAMPUS OPPORTUNITY------------------//
 export async function getOnCampusBookmarkedOpportunities(params) {
   const { token } = params;
+  console.log({ paramToken: token });
 
   if (token) {
     try {

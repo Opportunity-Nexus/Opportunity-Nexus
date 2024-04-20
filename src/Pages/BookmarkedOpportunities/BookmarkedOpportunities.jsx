@@ -21,33 +21,35 @@ const BookmarkedOpportunities = () => {
   /**
    * @type {string} - off-campus | on-campus
    */
-  const [campusType, setCampusType] = useState("off-campus");
+  const [campusType, setCampusType] = useState("on-campus");
   const [savedOpportunitiesList, setSavedOpportunitiesList] = useState([]);
   const [filteredOpportunities, setFilteredOpportunities] = useState([]);
   const { token } = useSelector((state) => state.auth);
 
+  console.log({ tryToken: token });
+
   useEffect(() => {
     if (campusType === "off-campus") {
+      console.log("I am the off campus if block");
       getOffCampusBookmarkedOpportunities({ token: token })
         .then((data) => {
-          console.log({ data });
           setSavedOpportunitiesList(() => {
             return data;
           });
         })
         .catch((error) => console.error(error));
     } else {
+      console.log("I am the on campus else block");
       // fetch all on-campus bookmarked opportunities
       getOnCampusBookmarkedOpportunities({ token: token })
         .then((data) => {
-          console.log({ data });
           setSavedOpportunitiesList(() => {
             return data;
           });
         })
         .catch((error) => console.error(error));
     }
-  }, [token, opportunityType, campusType]);
+  }, [token, campusType]);
 
   //----------------------PAGINTAION----------------------//
 
@@ -64,6 +66,7 @@ const BookmarkedOpportunities = () => {
         );
         setFilteredOpportunities(() => filtered);
       } else {
+        console.log("else block");
         setFilteredOpportunities(() => savedOpportunitiesList);
       }
       setCurrentPage(1); // Reset to first page on filter change
@@ -79,13 +82,10 @@ const BookmarkedOpportunities = () => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-  console.log("total opp pages are", totalOpportunitiesPages);
   const pageNumbers = Array.from(
     { length: totalOpportunitiesPages },
     (_, i) => i + 1
   );
-
-  console.log({ currentOpportunities });
 
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
@@ -166,9 +166,11 @@ const BookmarkedOpportunities = () => {
         <select
           name="Campus Type"
           id="Campus-type-selector"
-          defaultValue="off-campus"
+          value={campusType}
           className="w-fit border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md "
           onChange={(e) => {
+            setSavedOpportunitiesList(() => []);
+            setFilteredOpportunities(() => []);
             setCampusType(() => e.target.value);
           }}
         >
@@ -186,9 +188,9 @@ const BookmarkedOpportunities = () => {
         </select>
       </div>
 
-      {filteredOpportunities ? (
+      {currentOpportunities ? (
         <>
-          {filteredOpportunities.length === 0 ? (
+          {currentOpportunities.length === 0 ? (
             <div className="flex flex-col justify-center items-center lg:w-2/4 flex-1 dark:text-white mx-auto self-center">
               <img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
               <h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">
@@ -198,6 +200,40 @@ const BookmarkedOpportunities = () => {
           ) : (
             <>
               <div className="flex flex-wrap justify-center mt-4 mb-7">
+                {campusType === "off-campus" ? (
+                  <>
+                    {currentOpportunities
+                      .filter((item) =>
+                        opportunityType.includes("All")
+                          ? !!item
+                          : opportunityType.includes(item.opportunityType)
+                      )
+                      .map((opportunity, index) => {
+                        return (
+                          <SavedOpportunityCard
+                            key={index}
+                            {...opportunity}
+                            setSavedOpportunitiesList={
+                              setSavedOpportunitiesList
+                            }
+                          />
+                        );
+                      })}
+                    )
+                  </>
+                ) : (
+                  <>
+                    {currentOpportunities.map((opportunity, index) => {
+                      return (
+                        <SavedOnCampusOpportunityCard
+                          key={index}
+                          {...opportunity}
+                          setSavedOpportunitiesList={setSavedOpportunitiesList}
+                        />
+                      );
+                    })}
+                  </>
+                )}
                 {currentOpportunities
                   .filter((item) =>
                     opportunityType.includes("All")
