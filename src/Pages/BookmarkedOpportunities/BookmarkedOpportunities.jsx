@@ -49,7 +49,6 @@ const BookmarkedOpportunities = () => {
     }
   }, [token, opportunityType, campusType]);
 
-
   //----------------------PAGINTAION----------------------//
 
   useEffect(() => {
@@ -85,10 +84,9 @@ const BookmarkedOpportunities = () => {
     { length: totalOpportunitiesPages },
     (_, i) => i + 1
   );
-// console.log('oppor', opportunity);
-  console.log('ioo saved opp', savedOpportunitiesList);
 
-  // console.log('id', savedOpportunitiesList[0].opportunityId);
+  console.log({ currentOpportunities });
+
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
       <div className="flex justify-center items-center py-12">
@@ -215,16 +213,15 @@ const BookmarkedOpportunities = () => {
                           setSavedOpportunitiesList={setSavedOpportunitiesList}
                         />
                       );
-                    } 
-                    // else {
-                    //   return (
-                    //     <SavedOnCampusOpportunityCard
-                    //       key={index}
-                    //       {...opportunity}
-                    //       setSavedOpportunitiesList={setSavedOpportunitiesList}
-                    //     />
-                    //   );
-                    // }
+                    } else {
+                      return (
+                        <SavedOnCampusOpportunityCard
+                          key={index}
+                          {...opportunity}
+                          setSavedOpportunitiesList={setSavedOpportunitiesList}
+                        />
+                      );
+                    }
                   })}
               </div>
 
