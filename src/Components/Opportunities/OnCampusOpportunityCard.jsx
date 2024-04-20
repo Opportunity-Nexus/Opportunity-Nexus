@@ -40,7 +40,7 @@ const OnCampusOpportunityCard = (opportunity) => {
       />
       <div className="bg-white dark:bg-gray-900 overflow-hidden sm:rounded-md w-full shadow-lg">
         <ul className="">
-          <li key={opportunity._id} className="border rounded-lg p-3">
+          <li key={opportunity._id} className="border dark:border-gray-700 rounded-lg p-3">
             <div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group p-4 flex flex-col w-full gap-8">
               <div className="flex flex-col flex-1 gap-4">
                 {/* title with role */}
@@ -53,7 +53,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                   </p>
                 </div>
 
-                {/* package + location */}
+                {/* package + location + drive time */}
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <div className="font-medium flex items-center gap-px">
                     <FaRupeeSign className="h-5 w-5 text-gray-400" />
@@ -90,22 +90,22 @@ const OnCampusOpportunityCard = (opportunity) => {
                     {opportunity.opportunityMode === "TBD (To Be Decided)" ? (
                       <></>
                     ) : (
-                      <div className="font-medium flex items-center gap-px">
+                      <div className="font-medium flex items-center gap-1">
                         <FaClock
                           className="h-5 w-4 text-gray-400"
                           aria-hidden="true"
-                        />
-                        <p className="uppercase font-medium">
-                          {opportunity.opportunityDriveTime}
+                        />{''}
+                        <p className="font-medium">
+                           Drive Time: {opportunity.opportunityDriveTime}
                         </p>
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* drive date and time */}
+                {/* drive date and application last date */}
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 text-sm text-gray-500">
-                  <div className="flex items-start lg:items-center text-sm text-gray-500 font-medium gap-px">
+                  <div className="flex items-start lg:items-center text-sm text-gray-500 font-medium gap-1">
                     <FaCalendarAlt
                       className="h-5 w-5  text-gray-400"
                       aria-hidden="true"
@@ -120,7 +120,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                     </p>
                   </div>
                   <span className="mr-1 hidden lg:flex">|</span>
-                  <div className="flex items-start lg:items-center text-sm text-gray-500 font-medium gap-px">
+                  <div className="flex items-start lg:items-center text-sm text-gray-500 font-medium gap-1">
                     <FaHourglassEnd
                       className="h-4 w-5  text-gray-400"
                       aria-hidden="true"
@@ -138,11 +138,8 @@ const OnCampusOpportunityCard = (opportunity) => {
                 </div>
 
                 {/* description */}
-                <div className="flex  text-gray-500 gap-px max-w-4xl">
-                  <FaFileAlt
-                    className="h-5 w-5  text-gray-400"
-                    aria-hidden="true"
-                  />
+                <div className="flex flex-col text-gray-500 gap-px max-w-4xl">
+                  <h4 className="text base font-semibold">Description:</h4>
                   <p className="text-sm">
                     {opportunity.opportunityDescription
                       ? opportunity.opportunityDescription
@@ -153,11 +150,14 @@ const OnCampusOpportunityCard = (opportunity) => {
                 {/* eligibility criteria */}
                 <div className="flex text-gray-500 gap-px max-w-4xl">
                   <ul className="flex flex-col text-gray-500">
+                    <h4 className="text base font-semibold">
+                      Eligibility Criteria:
+                    </h4>
                     {opportunity.eligibilityCriteria
                       ? opportunity.eligibilityCriteria.map((item, id) => (
-                          <li className="flex items-start" key="index">
+                          <li className="flex items-start gap-px" key="index">
                             <MdLens
-                              className="h-4 w-4 text-gray-400"
+                              className="h-3 w-4 text-gray-400 mt-1"
                               aria-hidden="true"
                             />
                             <p className="text-sm">{item}</p>
@@ -199,11 +199,9 @@ const OnCampusOpportunityCard = (opportunity) => {
                   </div>
                   <p className="inline-flex text-base leading-5 font-semibold">
                     {!isExpired ? (
-                      <span className="bg-green-100 text-green-800 px-2 rounded-full">
-                        Active
-                      </span>
+                      <></>
                     ) : (
-                      <span className="bg-red-100 text-red-800 px-2 rounded-full">
+                      <span className="bg-red-100 text-red-800 px-2 rounded-md">
                         Expired
                       </span>
                     )}
