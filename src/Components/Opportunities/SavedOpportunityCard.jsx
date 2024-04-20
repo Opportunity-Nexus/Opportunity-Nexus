@@ -21,7 +21,7 @@ const SavedOpportunityCard = (opportunity) => {
 			);
 			if (result) {
 				opportunity.setSavedOpportunitiesList((data) =>
-					data.filter((i) => i.name !== opportunity.name)
+					data.filter((i) => i._id !== opportunity._id)
 				);
 				toast.success("Opportunity removed from your profile!", {
 					position: "bottom-center",
