@@ -17,7 +17,7 @@ const BookmarkedOpportunities = () => {
   ];
 
   const [opportunityType, setOpportunityType] = useState(["All"]);
-  const [oncampusFilter, setOncampusFilter ] = useState(['ALL']);
+  const [oncampusFilter, setOncampusFilter] = useState(["ALL"]);
 
   /**
    * @type {string} - off-campus | on-campus
@@ -31,7 +31,6 @@ const BookmarkedOpportunities = () => {
 
   useEffect(() => {
     if (campusType === "off-campus") {
-   
       getOffCampusBookmarkedOpportunities({ token: token })
         .then((data) => {
           setSavedOpportunitiesList(() => {
@@ -39,9 +38,7 @@ const BookmarkedOpportunities = () => {
           });
         })
         .catch((error) => console.error(error));
-    }
-    else {
- 
+    } else {
       // fetch all on-campus bookmarked opportunities
       getOnCampusBookmarkedOpportunities({ token: token })
         .then((data) => {
@@ -81,7 +78,7 @@ const BookmarkedOpportunities = () => {
     filteredOpportunities.length / itemsPerPage
   );
   const currentOpportunities = filteredOpportunities.slice(
-    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage - itemsPerPage,
     currentPage * itemsPerPage
   );
   const pageNumbers = Array.from(
@@ -138,7 +135,7 @@ const BookmarkedOpportunities = () => {
           </div>
         ) : (
           <div className="justify-between items-center gap-3 hidden lg:flex">
-            {['ALL', 'ACTIVE'].map((item, id) => {
+            {["ALL", "ACTIVE"].map((item, id) => {
               return (
                 <button
                   key={id}
@@ -283,46 +280,28 @@ const BookmarkedOpportunities = () => {
                           />
                         );
                       })}
-                    )
                   </>
                 ) : (
                   <>
-                    {currentOpportunities.map((opportunity, index) => {
-                      return (
-                        <SavedOnCampusOpportunityCard
-                          key={index}
-                          {...opportunity}
-                          setSavedOpportunitiesList={setSavedOpportunitiesList}
-                        />
-                      );
-                    })}
+                    {currentOpportunities
+                      .filter((item) =>
+                        opportunityType.includes("All")
+                          ? !!item
+                          : opportunityType.includes(item.opportunityType)
+                      )
+                      .map((opportunity, index) => {
+                        return (
+                          <SavedOnCampusOpportunityCard
+                            key={index}
+                            {...opportunity}
+                            setSavedOpportunitiesList={
+                              setSavedOpportunitiesList
+                            }
+                          />
+                        );
+                      })}
                   </>
                 )}
-                {currentOpportunities
-                  .filter((item) =>
-                    opportunityType.includes("All")
-                      ? !!item
-                      : opportunityType.includes(item.opportunityType)
-                  )
-                  .map((opportunity, index) => {
-                    if (campusType === "off-campus") {
-                      return (
-                        <SavedOpportunityCard
-                          key={index}
-                          {...opportunity}
-                          setSavedOpportunitiesList={setSavedOpportunitiesList}
-                        />
-                      );
-                    } else {
-                      return (
-                        <SavedOnCampusOpportunityCard
-                          key={index}
-                          {...opportunity}
-                          setSavedOpportunitiesList={setSavedOpportunitiesList}
-                        />
-                      );
-                    }
-                  })}
               </div>
 
               {/* ------------PAGINATION----------- */}
