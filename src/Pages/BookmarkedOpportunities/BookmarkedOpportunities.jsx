@@ -17,7 +17,7 @@ const BookmarkedOpportunities = () => {
   ];
 
   const [opportunityType, setOpportunityType] = useState(["All"]);
-  const [oncampusFilter, setOncampusFilter] = useState(["ALL"]);
+  const [oncampusFilter, setOncampusFilter] = useState(["All"]);
 
   /**
    * @type {string} - off-campus | on-campus
@@ -145,22 +145,13 @@ const BookmarkedOpportunities = () => {
                       : ""
                   }`}
                   onClick={() => {
-                    oncampusFilter((data) => {
-                      if (data.includes("All")) {
-                        if (item !== "All") {
-                          return [item];
-                        } else {
-                          return data;
-                        }
-                      } else {
-                        console.log("I am called");
-                        if (data.includes(item)) {
-                          return data.filter((i) => i === item);
-                        } else {
-                          return [item];
-                        }
-                      }
-                    });
+                    if(oncampusFilter === "All")
+                    {
+                      // no filter here
+                    }
+                    else {
+                      
+                    }
                   }}
                 >
                   {item}
