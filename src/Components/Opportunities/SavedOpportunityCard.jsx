@@ -1,6 +1,5 @@
 import React from "react";
 import { CalendarIcon } from "@heroicons/react/solid";
-import { HiInformationCircle } from "react-icons/hi";
 import { FaBookmark } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { removeBookmarkedOpportunity } from "../../Services/Operations/MyOpportunity";

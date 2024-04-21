@@ -11,6 +11,11 @@ const MyOpportunities = () => {
   const { token } = useSelector((state) => state.auth);
   console.log(onCampusOpportunities);
 
+  const [onCampusOpportunityTag, setOnCampusOpportunityTag] = useState({
+    availableTags: [],
+    selectedTags: [],
+  });
+
   useEffect(() => {
     getOncampusOpportunities({ token: token })
       .then((data) => {
@@ -18,6 +23,19 @@ const MyOpportunities = () => {
         setOnCampusOpportunities(() => {
           return data;
         });
+
+        const tagSet = new Set();
+
+        data.forEach((opp) => {
+          (opp.opportunityTags || []).forEach((item) => tagSet.add(item));
+        });
+
+        console.log({ tags: Array.from(tagSet) });
+
+        setOnCampusOpportunityTag(() => ({
+          availableTags: Array.from(tagSet),
+          selectedTags: [],
+        }));
       })
       .catch((error) => console.error(error));
   }, [token]);
@@ -58,13 +76,61 @@ const MyOpportunities = () => {
           ) : (
             <>
               <div className="flex flex-wrap justify-center mt-4 mb-7 flex-1 gap-8 px-2">
-                {currentOpportunities.map((opportunity, index) => (
-                  <OnCampusOpportunityCard
-                    key={index}
-                    {...opportunity}
-                    setOnCampusOpportunities={setOnCampusOpportunities}
-                  />
-                ))}
+                {/* tags */}
+                {onCampusOpportunityTag.availableTags.length !== 0 ? (
+                  <div className="flex gap-1 flex-wrap">
+                    <span className="">Tags:</span>
+                    {onCampusOpportunityTag.availableTags.map(
+                      (item, itemIndex) => {
+                        return (
+                          <button
+                            key={itemIndex}
+                            className={`px-1 py-.5 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-sm font-medium text-gray-500 cursor-pointer ${
+                              onCampusOpportunityTag.selectedTags.includes(item)
+                                ? "bg-gray-200 dark:bg-gray-800"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              setOnCampusOpportunityTag((data) => {
+                                if (data.selectedTags.includes(item)) {
+                                  return {
+                                    ...data,
+                                    selectedTags: data.selectedTags.filter(
+                                      (i) => i !== item
+                                    ),
+                                  };
+                                } else {
+                                  return {
+                                    ...data,
+                                    selectedTags: [...data.selectedTags, item],
+                                  };
+                                }
+                              });
+                            }}
+                          >
+                            {item}
+                          </button>
+                        );
+                      }
+                    )}
+                  </div>
+                ) : null}
+
+                {currentOpportunities
+                  .filter((item) =>
+                    onCampusOpportunityTag.selectedTags.length === 0
+                      ? true
+                      : item.opportunityTags.filter((element) =>
+                          onCampusOpportunityTag.selectedTags.includes(element)
+                        ).length > 0
+                  )
+                  .map((opportunity, index) => (
+                    <OnCampusOpportunityCard
+                      key={index}
+                      {...opportunity}
+                      setOnCampusOpportunities={setOnCampusOpportunities}
+                    />
+                  ))}
               </div>
 
               {/* ------------PAGINATION----------- */}

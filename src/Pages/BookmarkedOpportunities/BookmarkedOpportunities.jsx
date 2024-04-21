@@ -16,8 +16,16 @@ const BookmarkedOpportunities = () => {
     "CodingContests",
   ];
 
+  const onCampusOppFilters = ["All", "Active"];
   const [opportunityType, setOpportunityType] = useState(["All"]);
-  const [oncampusFilter, setOncampusFilter] = useState(["All"]);
+
+  // type of this is 'All' | 'Active'
+  const [onCampusFilter, setOnCampusFilter] = useState("All");
+
+  const [onCampusOpportunityTag, setOnCampusOpportunityTag] = useState({
+    availableTags: [],
+    selectedTags: [],
+  });
 
   /**
    * @type {string} - off-campus | on-campus
@@ -67,6 +75,19 @@ const BookmarkedOpportunities = () => {
       } else {
         console.log("else block");
         setFilteredOpportunities(() => savedOpportunitiesList);
+
+        const tagSet = new Set();
+
+        savedOpportunitiesList.forEach((opp) => {
+          (opp.opportunityId.opportunityTags || []).forEach((item) =>
+            tagSet.add(item)
+          );
+        });
+
+        setOnCampusOpportunityTag(() => ({
+          availableTags: Array.from(tagSet),
+          selectedTags: [],
+        }));
       }
       setCurrentPage(1); // Reset to first page on filter change
     }
@@ -134,30 +155,63 @@ const BookmarkedOpportunities = () => {
             })}
           </div>
         ) : (
-          <div className="justify-between items-center gap-3 hidden lg:flex">
-            {["ALL", "ACTIVE"].map((item, id) => {
-              return (
-                <button
-                  key={id}
-                  className={`px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer ${
-                    opportunityType.includes(item)
-                      ? "bg-gray-200 dark:bg-gray-800"
-                      : ""
-                  }`}
-                  onClick={() => {
-                    if(oncampusFilter === "All")
-                    {
-                      // no filter here
-                    }
-                    else {
-                      
-                    }
-                  }}
-                >
-                  {item}
-                </button>
-              );
-            })}
+          <div className="justify-between items-start gap-3 hidden lg:flex flex-col">
+            <div className="justify-between items-start gap-3 flex">
+              {onCampusOppFilters.map((item, id) => {
+                return (
+                  <button
+                    key={id}
+                    className={`px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-base md:text-lg font-medium text-gray-500 cursor-pointer ${
+                      onCampusFilter.toLowerCase() === item.toLowerCase()
+                        ? "bg-gray-200 dark:bg-gray-800"
+                        : ""
+                    }`}
+                    onClick={(e) => {
+                      setOnCampusFilter(() => item);
+                    }}
+                  >
+                    {item}
+                  </button>
+                );
+              })}
+            </div>
+
+            {onCampusOpportunityTag.availableTags.length !== 0 ? (
+              <div className="flex gap-1 flex-wrap">
+                <span className="">Tags:</span>
+                {onCampusOpportunityTag.availableTags.map((item, itemIndex) => {
+                  return (
+                    <button
+                      key={itemIndex}
+                      className={`px-1 py-.5 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-500 dark:border-gray-700 rounded-2xl text-sm font-medium text-gray-500 cursor-pointer ${
+                        onCampusOpportunityTag.selectedTags.includes(item)
+                          ? "bg-gray-200 dark:bg-gray-800"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        setOnCampusOpportunityTag((data) => {
+                          if (data.selectedTags.includes(item)) {
+                            return {
+                              ...data,
+                              selectedTags: data.selectedTags.filter(
+                                (i) => i !== item
+                              ),
+                            };
+                          } else {
+                            return {
+                              ...data,
+                              selectedTags: [...data.selectedTags, item],
+                            };
+                          }
+                        });
+                      }}
+                    >
+                      {item}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
           </div>
         )}
 
@@ -168,14 +222,10 @@ const BookmarkedOpportunities = () => {
             defaultValue="scholarships"
             className="w-fit border-gray-500 text-sm md:text-base dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 font-medium rounded-md lg:hidden "
             onChange={(e) => {
-              setCampusType((data) => {
-                const value = e.target.value;
-                if (!value) return;
-                return [value];
-              });
+              setOnCampusFilter(() => e.target.value);
             }}
           >
-            {["all", "active"].map((item) => {
+            {onCampusOppFilters.map((item) => {
               return (
                 <option
                   value={item}
@@ -276,9 +326,21 @@ const BookmarkedOpportunities = () => {
                   <>
                     {currentOpportunities
                       .filter((item) =>
-                        opportunityType.includes("All")
+                        onCampusFilter.toLowerCase() === "all"
                           ? !!item
-                          : opportunityType.includes(item.opportunityType)
+                          : new Date(
+                              item.opportunityId.opportunityFillLastDate
+                            ) > new Date()
+                      )
+                      .filter((item) =>
+                        onCampusOpportunityTag.selectedTags.length === 0
+                          ? true
+                          : item.opportunityId.opportunityTags.filter(
+                              (element) =>
+                                onCampusOpportunityTag.selectedTags.includes(
+                                  element
+                                )
+                            ).length > 0
                       )
                       .map((opportunity, index) => {
                         return (
