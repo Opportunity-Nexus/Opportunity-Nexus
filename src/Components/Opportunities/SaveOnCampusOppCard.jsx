@@ -10,6 +10,8 @@ import ApplyModal from "./ApplyModal";
 const SavedOnCampusOpportunityCard = (opportunity) => {
   console.log("savesoncampus", opportunity);
 
+  const { setSavedOpportunitiesList } = opportunity;
+
   const isExpired =
     new Date(opportunity.opportunityId.opportunityFillLastDate) < new Date();
   const audio = new Audio();
@@ -25,7 +27,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
     });
     if (result) {
       audio.play();
-      opportunity((data) =>
+      setSavedOpportunitiesList((data) =>
         data.filter((item) => item._id !== opportunity._id)
       );
     }
