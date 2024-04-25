@@ -47,7 +47,7 @@ const CustomModal = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25 blur-2xl" />
+          <div className="fixed inset-0 bg-opacity-25 bg-black blur-2xl" />
         </Transition.Child>
 
         <Transition.Child
@@ -61,7 +61,7 @@ const CustomModal = ({
         >
           <div
             className={clsx(
-              "fixed h-fit w-fit min-w-[400px] bottom-0 left-0 right-0 top-0 mx-auto my-auto"
+              "fixed h-fit w-fit min-w-[500px] bottom-0 left-0 right-0 top-0 mx-auto my-auto"
             )}
           >
             <div
@@ -71,7 +71,7 @@ const CustomModal = ({
             >
               <Dialog.Panel
                 className={clsx(
-                  "relative flex w-full transform flex-col  bg-white rounded-2xl p-6 text-left align-middle shadow-2xl transition-all"
+                  "relative flex w-full transform flex-col bg-white rounded-2xl p-6 text-left align-middle shadow-2xl transition-all"
                 )}
               >
                 <div className="absolute right-4 pl-2 top-50%  my-auto flex items-start justify-end py-1">

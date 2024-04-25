@@ -41,7 +41,7 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
         <div className="lg:min-w-lg flex w-full flex-col items-center justify-center gap-4 py-5">
           {!isApplicationSubmitted ? (
             <>
-              <p className="max-w-lg text-center">
+              <p className="max-w-lg text-center text-lg font-bold">
                 Give the answer to this question to apply to the opportunity.
               </p>
 
@@ -66,10 +66,21 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
                   />
                 </div>
 
-                <div className="w-fit">
-                  <button className="flex" type="submit">
+                <div className="flex justify-between items-center w-full">
+                  <button
+                    className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
+                    type="submit"
+                  >
                     Submit
                   </button>
+                  <a href="/dashboard/my-settings">
+                    <button
+                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
+                      type="submit"
+                    >
+                      Update Details
+                    </button>
+                  </a>
                 </div>
               </form>
             </>

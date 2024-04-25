@@ -137,7 +137,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                     <p>
                       {new Date(opportunity.opportunityDriveDate) > new Date()
                         ? "Drive Date"
-                        : " Drive Ends"}{" "}
+                        : " Drive Ended"}{" "}
                       {new Date(
                         opportunity.opportunityDriveDate
                       ).toDateString()}
@@ -190,6 +190,18 @@ const OnCampusOpportunityCard = (opportunity) => {
                       : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five cent "}
                   </ul>
                 </div>
+
+                {/* Extra Details */}
+                {opportunity.opportunityExtraDetails ? (
+                  <div className="flex flex-col text-gray-500 gap-px max-w-4xl">
+                    <h4 className="text base font-semibold">Extra Details:</h4>
+                    <p className="text-sm">
+                      {opportunity.opportunityExtraDetails}
+                    </p>
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
               <div className="flex flex-col flex-1   gap-2">
                 <div className="flex-shrink-0 flex items-center md:justify-end gap-3">
@@ -220,9 +232,10 @@ const OnCampusOpportunityCard = (opportunity) => {
                           );
                         }
                       }}
-                      className={` items-center justify-center px-1 py-1  border border-primary-600 text-base font-medium rounded-md text-primary-600 hover:bg-primary-600 hover:text-white ${
-                        isExpired ? "hidden" : "inline-flex"
-                      }`}
+                      className={` items-center justify-center px-1 py-1  border border-black dark:border-white text-base font-medium rounded-md hover:bg-black dark:hover:bg-white hover:text-white  dark:hover:text-black ${
+                        isExpired ? "hidden" : "inline-flex" } ${isAlreadyBookMarked ? "bg-black text-white dark:bg-white dark:text-black" : "text-black dark:text-white " }
+
+                      `}
                     >
                       {isAlreadyBookMarked ? "Unsave" : "Save"}
                     </button>

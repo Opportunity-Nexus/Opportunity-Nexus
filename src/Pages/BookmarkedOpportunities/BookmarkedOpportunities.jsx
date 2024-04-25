@@ -200,7 +200,7 @@ const BookmarkedOpportunities = () => {
 
             {onCampusOpportunityTag.availableTags.length !== 0 ? (
               <div className="flex gap-1 flex-wrap">
-                <span className="">Tags:</span>
+                <span className="text-black font-bold text-lg dark:text-white">Search easily with these Keywords</span>
                 {onCampusOpportunityTag.availableTags.map((item, itemIndex) => {
                   return (
                     <button

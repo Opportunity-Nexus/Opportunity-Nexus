@@ -104,11 +104,11 @@ const MyOpportunities = () => {
             </div>
           ) : (
             <>
-              <div className="flex flex-wrap justify-center mt-4 mb-7 flex-1 gap-8 px-2">
+              <div className="flex flex-wrap mt-4 mb-7 gap-8 px-2">
                 {/* tags */}
                 {onCampusOpportunityTag.availableTags.length !== 0 ? (
                   <div className="flex gap-1 flex-wrap">
-                    <span className="">Tags:</span>
+                    <span className="text-black font-bold text-lg dark:text-white">Search easily with these Keywords</span>
                     {onCampusOpportunityTag.availableTags.map(
                       (item, itemIndex) => {
                         return (
