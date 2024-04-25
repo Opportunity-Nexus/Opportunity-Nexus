@@ -118,7 +118,7 @@ const BookmarkedOpportunities = () => {
         currentPage * itemsPerPage
       )
       .forEach((opp) => {
-        (opp.opportunityId.opportunityTags || []).forEach((item) =>
+        (campusType === "on-campus" && opp.opportunityId.opportunityTags || []).forEach((item) =>
           tagSet.add(item)
         );
       });
@@ -198,7 +198,7 @@ const BookmarkedOpportunities = () => {
               })}
             </div>
 
-            {onCampusOpportunityTag.availableTags.length !== 0 ? (
+            {campusType === "on-campus" && onCampusOpportunityTag.availableTags.length !== 0 ? (
               <div className="flex gap-1 flex-wrap">
                 <span className="text-black font-bold text-lg dark:text-white">Search easily with these Keywords</span>
                 {onCampusOpportunityTag.availableTags.map((item, itemIndex) => {
@@ -359,7 +359,7 @@ const BookmarkedOpportunities = () => {
                             ) > new Date()
                       )
                       .filter((item) =>
-                        onCampusOpportunityTag.selectedTags.length === 0
+                      campusType === "on-campus" && onCampusOpportunityTag.selectedTags.length === 0
                           ? true
                           : item.opportunityId.opportunityTags.filter(
                               (element) =>
