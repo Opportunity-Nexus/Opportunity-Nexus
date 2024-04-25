@@ -4,41 +4,19 @@ import { TbPlayerTrackPrevFilled } from "react-icons/tb";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import OpportunitiesNotFoundImg from "../../assets/utils/opp-not-found.svg";
 import { useSelector } from "react-redux";
-import { getOncampusOpportunities } from "../../Services/Operations/OnCampusApi";
+import {
+  getOnCampusBookmarkedOpportunities,
+  getOncampusOpportunities,
+} from "../../Services/Operations/OnCampusApi";
 
 const MyOpportunities = () => {
+  const [isFetching, setIsFetching] = useState(false);
   const [onCampusOpportunities, setOnCampusOpportunities] = useState([]);
   const { token } = useSelector((state) => state.auth);
-  console.log(onCampusOpportunities);
-
   const [onCampusOpportunityTag, setOnCampusOpportunityTag] = useState({
     availableTags: [],
     selectedTags: [],
   });
-
-  useEffect(() => {
-    getOncampusOpportunities({ token: token })
-      .then((data) => {
-        console.log({ data });
-        setOnCampusOpportunities(() => {
-          return data;
-        });
-
-        const tagSet = new Set();
-
-        data.forEach((opp) => {
-          (opp.opportunityTags || []).forEach((item) => tagSet.add(item));
-        });
-
-        console.log({ tags: Array.from(tagSet) });
-
-        setOnCampusOpportunityTag(() => ({
-          availableTags: Array.from(tagSet),
-          selectedTags: [],
-        }));
-      })
-      .catch((error) => console.error(error));
-  }, [token]);
 
   //----------------------PAGINTAION----------------------//
 
@@ -48,10 +26,57 @@ const MyOpportunities = () => {
     currentPage * 6 - 6,
     currentPage * 6
   );
+  console.log({ currentOpportunities });
   const pageNumbers = Array.from(
     { length: totalOpportunitiesPages },
     (_, i) => i + 1
   );
+
+  const [bookmarkedOpportunities, setBookmarkedOpportunities] = useState([]);
+
+  const [refetchBookmarkOpp, setRefetchBookmarkOpp] = useState(false);
+
+  useEffect(() => {
+    if (!refetchBookmarkOpp) return;
+    getOnCampusBookmarkedOpportunities({ token: token })
+      .then((data) => {
+        console.log({ bookmarkedOpps: data });
+        setBookmarkedOpportunities(() => {
+          return data || [];
+        });
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setRefetchBookmarkOpp(false));
+  }, [token, refetchBookmarkOpp]);
+
+  useEffect(() => {
+    setIsFetching(() => true);
+    getOncampusOpportunities({ token: token })
+      .then((data) => {
+        console.log({ data });
+        setOnCampusOpportunities(() => {
+          return data;
+        });
+      })
+      .catch((error) => console.error(error))
+      .finally(() => {
+        setIsFetching(false);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    const tagSet = new Set();
+    onCampusOpportunities
+      .slice(currentPage * 6 - 6, currentPage * 6)
+      .forEach((opp) => {
+        (opp.opportunityTags || []).forEach((item) => tagSet.add(item));
+      });
+
+    setOnCampusOpportunityTag(() => ({
+      availableTags: Array.from(tagSet),
+      selectedTags: [],
+    }));
+  }, [currentPage, onCampusOpportunities]);
 
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
@@ -66,7 +91,11 @@ const MyOpportunities = () => {
 
       {onCampusOpportunities ? (
         <>
-          {onCampusOpportunities.length === 0 ? (
+          {isFetching ? (
+            <div className="h-screen flex flex-1 items-center justify-center">
+              <div className="loader"></div>
+            </div>
+          ) : onCampusOpportunities.length === 0 ? (
             <div className="flex flex-col justify-center items-center lg:w-2/4 flex-1 dark:text-white mx-auto self-center">
               <img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
               <h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">
@@ -124,13 +153,27 @@ const MyOpportunities = () => {
                           onCampusOpportunityTag.selectedTags.includes(element)
                         ).length > 0
                   )
-                  .map((opportunity, index) => (
-                    <OnCampusOpportunityCard
-                      key={index}
-                      {...opportunity}
-                      setOnCampusOpportunities={setOnCampusOpportunities}
-                    />
-                  ))}
+                  .map((opportunity, index) => {
+                    const isAlreadyBookMarked =
+                      bookmarkedOpportunities.findIndex(
+                        (item) => item._id === opportunity._id
+                      ) > -1;
+                    console.log({ isAlreadyBookMarked, opportunity });
+                    return (
+                      <OnCampusOpportunityCard
+                        key={index}
+                        {...opportunity}
+                        setOnCampusOpportunities={setOnCampusOpportunities}
+                        setRefetchBookmarkOpp={setRefetchBookmarkOpp}
+                        bookmarkedOpportunities={bookmarkedOpportunities}
+                        isAlreadyBookMarked={
+                          bookmarkedOpportunities.findIndex(
+                            (item) => item.opportunityId._id === opportunity._id
+                          ) > -1
+                        }
+                      />
+                    );
+                  })}
               </div>
 
               {/* ------------PAGINATION----------- */}

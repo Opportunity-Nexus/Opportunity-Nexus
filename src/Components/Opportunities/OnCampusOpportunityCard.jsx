@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { MdLens } from "react-icons/md";
 import { IoMdPin } from "react-icons/io";
+import { FaHourglassEnd, FaRupeeSign, FaClock } from "react-icons/fa";
 import {
-  FaHourglassEnd,
-  FaRupeeSign,
-  FaClock,
-  FaFileAlt,
-} from "react-icons/fa";
-import { bookmarkOnCampusOpportunity as bookmarkHelper } from "../../Services/Operations/OnCampusApi";
+  bookmarkOnCampusOpportunity as bookmarkHelper,
+  removeBookmark as removeBookmarkHelper,
+} from "../../Services/Operations/OnCampusApi";
 import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
 import { useSelector } from "react-redux";
 
 import ApplyModal from "./ApplyModal";
 
 const OnCampusOpportunityCard = (opportunity) => {
-  console.log({ opportunity });
+  const {
+    isAlreadyBookMarked,
+    bookmarkedOpportunities,
+    setRefetchBookmarkOpp,
+  } = opportunity;
+  console.log({ opportunity, isAlreadyBookMarked });
   const isExpired = new Date(opportunity.opportunityFillLastDate) < new Date();
   const audio = new Audio();
 
@@ -28,6 +31,23 @@ const OnCampusOpportunityCard = (opportunity) => {
     const result = await bookmarkHelper({ opportunity, token });
     if (result) {
       audio.play();
+      setRefetchBookmarkOpp(() => true);
+    }
+  };
+
+  const removeBookmark = async () => {
+    const oppToBeRemoved = bookmarkedOpportunities.find(
+      (item) => item.opportunityId._id === opportunity._id
+    );
+    console.log({ oppToBeRemoved });
+    if (!oppToBeRemoved) return;
+    const result = await removeBookmarkHelper({
+      opportunityId: oppToBeRemoved._id,
+      token,
+    });
+    if (result) {
+      audio.play();
+      setRefetchBookmarkOpp(() => true);
     }
   };
 
@@ -40,7 +60,10 @@ const OnCampusOpportunityCard = (opportunity) => {
       />
       <div className="bg-white dark:bg-gray-900 overflow-hidden sm:rounded-md w-full shadow-lg">
         <ul className="">
-          <li key={opportunity._id} className="border dark:border-gray-700 rounded-lg p-3">
+          <li
+            key={opportunity._id}
+            className="border dark:border-gray-700 rounded-lg p-3"
+          >
             <div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group p-4 flex flex-col w-full gap-8">
               <div className="flex flex-col flex-1 gap-4">
                 {/* title with role */}
@@ -94,9 +117,10 @@ const OnCampusOpportunityCard = (opportunity) => {
                         <FaClock
                           className="h-5 w-4 text-gray-400"
                           aria-hidden="true"
-                        />{''}
+                        />
+                        {""}
                         <p className="font-medium">
-                           Drive Time: {opportunity.opportunityDriveTime}
+                          Drive Time: {opportunity.opportunityDriveTime}
                         </p>
                       </div>
                     )}
@@ -186,15 +210,21 @@ const OnCampusOpportunityCard = (opportunity) => {
                   <div className="flex items-center justify-center">
                     <button
                       onClick={() => {
-                        bookmarkOnCampusOpportunity().catch((error) =>
-                          console.error(error)
-                        );
+                        if (isAlreadyBookMarked) {
+                          removeBookmark().catch((error) =>
+                            console.error(error)
+                          );
+                        } else {
+                          bookmarkOnCampusOpportunity().catch((error) =>
+                            console.error(error)
+                          );
+                        }
                       }}
                       className={` items-center justify-center px-1 py-1  border border-primary-600 text-base font-medium rounded-md text-primary-600 hover:bg-primary-600 hover:text-white ${
                         isExpired ? "hidden" : "inline-flex"
                       }`}
                     >
-                      Save
+                      {isAlreadyBookMarked ? "Unsave" : "Save"}
                     </button>
                   </div>
                   <p className="inline-flex text-base leading-5 font-semibold">

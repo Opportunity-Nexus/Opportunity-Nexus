@@ -16,6 +16,8 @@ const BookmarkedOpportunities = () => {
     "CodingContests",
   ];
 
+  const [isFetching, setIsFetching] = useState(false);
+
   const onCampusOppFilters = ["All", "Active"];
   const [opportunityType, setOpportunityType] = useState(["All"]);
 
@@ -32,36 +34,58 @@ const BookmarkedOpportunities = () => {
    */
   const [campusType, setCampusType] = useState("on-campus");
   const [savedOpportunitiesList, setSavedOpportunitiesList] = useState([]);
-  const [filteredOpportunities, setFilteredOpportunities] = useState([]);
+  const [filteredOpportunities, setFilteredOpportunities] = useState(null);
   const { token } = useSelector((state) => state.auth);
 
   console.log({ tryToken: token });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+  const totalOpportunitiesPages = Math.ceil(
+    filteredOpportunities?.length / itemsPerPage
+  );
+  const currentOpportunities = filteredOpportunities
+    ? filteredOpportunities.slice(
+        currentPage * itemsPerPage - itemsPerPage,
+        currentPage * itemsPerPage
+      )
+    : null;
+  const pageNumbers = Array.from(
+    { length: totalOpportunitiesPages },
+    (_, i) => i + 1
+  );
+
   useEffect(() => {
+    setIsFetching(() => true);
     if (campusType === "off-campus") {
       getOffCampusBookmarkedOpportunities({ token: token })
         .then((data) => {
           setSavedOpportunitiesList(() => {
-            return data;
+            return data || [];
           });
         })
-        .catch((error) => console.error(error));
+        .catch((error) => console.error(error))
+        .finally(() => {
+          setIsFetching(() => false);
+        });
     } else {
       // fetch all on-campus bookmarked opportunities
       getOnCampusBookmarkedOpportunities({ token: token })
         .then((data) => {
           setSavedOpportunitiesList(() => {
-            return data;
+            return data || [];
           });
         })
-        .catch((error) => console.error(error));
+        .catch((error) => console.error(error))
+        .finally(() => {
+          setIsFetching(() => false);
+        });
     }
   }, [token, campusType]);
 
   //----------------------PAGINTAION----------------------//
 
   useEffect(() => {
-    console.log({ campusType, savedOpportunitiesList });
     if (savedOpportunitiesList) {
       if (campusType === "off-campus") {
         const filtered = savedOpportunitiesList.filter(
@@ -73,39 +97,37 @@ const BookmarkedOpportunities = () => {
         );
         setFilteredOpportunities(() => filtered);
       } else {
-        console.log("else block");
         setFilteredOpportunities(() => savedOpportunitiesList);
-
-        const tagSet = new Set();
-
-        savedOpportunitiesList.forEach((opp) => {
-          (opp.opportunityId.opportunityTags || []).forEach((item) =>
-            tagSet.add(item)
-          );
-        });
-
-        setOnCampusOpportunityTag(() => ({
-          availableTags: Array.from(tagSet),
-          selectedTags: [],
-        }));
       }
       setCurrentPage(1); // Reset to first page on filter change
     }
-  }, [savedOpportunitiesList, opportunityType, campusType]);
+  }, [
+    savedOpportunitiesList,
+    opportunityType,
+    campusType,
+    filteredOpportunities,
+  ]);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-  const totalOpportunitiesPages = Math.ceil(
-    filteredOpportunities.length / itemsPerPage
-  );
-  const currentOpportunities = filteredOpportunities.slice(
-    currentPage * itemsPerPage - itemsPerPage,
-    currentPage * itemsPerPage
-  );
-  const pageNumbers = Array.from(
-    { length: totalOpportunitiesPages },
-    (_, i) => i + 1
-  );
+  useEffect(() => {
+    if (!filteredOpportunities || !filteredOpportunities.length) return;
+
+    const tagSet = new Set();
+    filteredOpportunities
+      .slice(
+        currentPage * itemsPerPage - itemsPerPage,
+        currentPage * itemsPerPage
+      )
+      .forEach((opp) => {
+        (opp.opportunityId.opportunityTags || []).forEach((item) =>
+          tagSet.add(item)
+        );
+      });
+
+    setOnCampusOpportunityTag(() => ({
+      availableTags: Array.from(tagSet),
+      selectedTags: [],
+    }));
+  }, [currentPage, filteredOpportunities]);
 
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
@@ -292,7 +314,11 @@ const BookmarkedOpportunities = () => {
 
       {currentOpportunities ? (
         <>
-          {currentOpportunities.length === 0 ? (
+          {isFetching ? (
+            <div className="h-screen flex flex-1 items-center justify-center">
+              <div className="loader"></div>
+            </div>
+          ) : currentOpportunities.length === 0 ? (
             <div className="flex flex-col justify-center items-center lg:w-2/4 flex-1 dark:text-white mx-auto self-center">
               <img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
               <h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">

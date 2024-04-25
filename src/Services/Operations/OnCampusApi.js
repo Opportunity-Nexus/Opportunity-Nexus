@@ -148,14 +148,14 @@ export async function getOnCampusBookmarkedOpportunities(params) {
 }
 
 //---------------REMOVE BOOKMARKED ONCAMPUS OPPORTUNITY------------------//
-export async function removeBookmark({ opportunity, token }) {
+export async function removeBookmark({ opportunityId, token }) {
   const toastId = toast.loading("Un-bookmarking opportunity...");
   try {
     const response = await apiConnector(
       "POST",
       DELETE__ONCAMPUS_BOOKMARK_OPPORTUNITY,
       {
-        opportunityId: opportunity._id,
+        opportunityId: opportunityId,
       },
       {
         Authorization: `Bearer ${token}`,

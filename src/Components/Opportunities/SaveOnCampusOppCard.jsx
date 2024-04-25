@@ -19,10 +19,15 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
 
   const removeBookmark = async () => {
-    const result = await removeBookmarkHelper({ opportunity, token });
+    const result = await removeBookmarkHelper({
+      opportunityId: opportunity._id,
+      token,
+    });
     if (result) {
       audio.play();
-      opportunity((data) => data.filter((item) => item !== opportunity));
+      opportunity((data) =>
+        data.filter((item) => item._id !== opportunity._id)
+      );
     }
   };
 
@@ -169,7 +174,8 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                             />
                             {""}
                             <p className="font-medium">
-                              Drive Time: {opportunity.opportunityId.opportunityDriveTime}
+                              Drive Time:{" "}
+                              {opportunity.opportunityId.opportunityDriveTime}
                             </p>
                           </div>
                         )}
