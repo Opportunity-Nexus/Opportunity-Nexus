@@ -41,7 +41,7 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
         <div className="lg:min-w-lg flex w-full flex-col items-center justify-center gap-4 py-5">
           {!isApplicationSubmitted ? (
             <>
-              <p className="max-w-lg text-center text-lg font-bold">
+              <p className="max-w-lg text-center text-lg font-bold dark:text-white text-black">
                 Give the answer to this question to apply to the opportunity.
               </p>
 
@@ -63,6 +63,7 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
                     placeholder="Description"
                     fullWidth
                     value={answerValue}
+                    className="dark:bg-gray-950 bg-white"
                   />
                 </div>
 
@@ -75,7 +76,7 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
                   </button>
                   <a href="/dashboard/my-settings">
                     <button
-                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
+                      className="inline-flex items-center justify-center px-1 py-1 border border-black dark:border-white text-base font-medium  rounded-md text-black dark:text-white hover:bg-black hover:text-white cursor-pointer"
                       type="submit"
                     >
                       Update Details
