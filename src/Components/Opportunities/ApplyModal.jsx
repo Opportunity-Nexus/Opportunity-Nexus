@@ -2,9 +2,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import CustomModal from "../CustomModal";
 import { FaCheckCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
   const [isApplicationSubmitted, setIsApplicationSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const [answerValue, setAnswerValue] = useState(null);
 
@@ -74,14 +76,16 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
                   >
                     Submit
                   </button>
-                  <a href="/dashboard/my-settings">
-                    <button
-                      className="inline-flex items-center justify-center px-1 py-1 border border-black dark:border-white text-base font-medium  rounded-md text-black dark:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white cursor-pointer"
-                      type="submit"
-                    >
-                      Update Details
-                    </button>
-                  </a>
+
+                  <button
+                    onClick={() => {
+                      navigate("/dashboard/my-settings");
+                    }}
+                    className="inline-flex items-center justify-center px-1 py-1 border border-black dark:border-white text-base font-medium  rounded-md text-black dark:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white cursor-pointer"
+                    type="submit"
+                  >
+                    Update Details
+                  </button>
                 </div>
               </form>
             </>
