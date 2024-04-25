@@ -76,7 +76,7 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
                   </button>
                   <a href="/dashboard/my-settings">
                     <button
-                      className="inline-flex items-center justify-center px-1 py-1 border border-black dark:border-white text-base font-medium  rounded-md text-black dark:text-white hover:bg-black hover:text-white cursor-pointer"
+                      className="inline-flex items-center justify-center px-1 py-1 border border-black dark:border-white text-base font-medium  rounded-md text-black dark:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white cursor-pointer"
                       type="submit"
                     >
                       Update Details
