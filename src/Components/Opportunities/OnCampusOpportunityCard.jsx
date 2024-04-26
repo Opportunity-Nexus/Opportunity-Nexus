@@ -214,14 +214,14 @@ const OnCampusOpportunityCard = (opportunity) => {
                       isExpired ? "hidden" : ""
                     }`}
                   >
-                    <div
+                    <button
                       onClick={() => {
                         setIsApplyModalOpen(() => true);
                       }}
                       className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
                     >
                       Apply now
-                    </div>
+                    </button>
                   </div>
                   <div className="flex items-center justify-center">
                     <button
@@ -248,6 +248,22 @@ const OnCampusOpportunityCard = (opportunity) => {
                     >
                       {isAlreadyBookMarked ? "Unsave" : "Save"}
                     </button>
+                  </div>
+                  <div>
+                    {opportunity.opportunityMode === "ON-LINE" &&
+                    !isExpired &&
+                    new Date(opportunity.opportunityDriveDate) ===
+                      new Date() ? (
+                      <div className="flex items-center justify-center">
+                        <a href={opportunity.opportunityDriveLink}>
+                          <button className="items-center justify-center px-1 py-1  border border-black dark:border-white text-base font-medium rounded-md hover:bg-black dark:hover:bg-white hover:text-white  dark:hover:text-black">
+                            Join the Drive
+                          </button>
+                        </a>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <p className="inline-flex text-base leading-5 font-semibold">
                     {!isExpired ? (
