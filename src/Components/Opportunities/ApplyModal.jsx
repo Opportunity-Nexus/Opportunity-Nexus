@@ -43,8 +43,8 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
         <div className="lg:min-w-lg flex w-full flex-col items-center justify-center gap-4 py-5">
           {!isApplicationSubmitted ? (
             <>
-              <p className="max-w-lg text-center text-lg font-bold dark:text-white text-black">
-                Give the answer to this question to apply to the opportunity.
+              <p className="max-w-lg text-center text-xl font-medium text-gray-500 dark:text-gray-300 py-2">
+               Your details will be shared, make sure all the deatils are updated!!
               </p>
 
               <form
@@ -54,7 +54,7 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
                   applyToOpportunity().catch((error) => console.error(error));
                 }}
               >
-                <div className="flex w-full flex-col gap-3">
+                {/* <div className="flex w-full flex-col gap-3">
                   <textarea
                     label="Your product description (optional)"
                     id="description"
@@ -67,11 +67,11 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
                     value={answerValue}
                     className="dark:bg-gray-950 bg-white"
                   />
-                </div>
+                </div> */}
 
-                <div className="flex justify-between items-center w-full">
+                <div className="flex flex-col justify-center gap-2 items-center w-full">
                   <button
-                    className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
+                    className="inline-flex items-center justify-center px-3 py-2 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer w-full"
                     type="submit"
                   >
                     Submit
@@ -81,7 +81,7 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
                     onClick={() => {
                       navigate("/dashboard/my-settings");
                     }}
-                    className="inline-flex items-center justify-center px-1 py-1 border border-black dark:border-white text-base font-medium  rounded-md text-black dark:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white cursor-pointer"
+                    className="inline-flex items-center justify-center px-3 py-2 border border-black dark:border-white text-base font-medium  rounded-md text-black dark:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white cursor-pointer w-full"
                     type="submit"
                   >
                     Update Details

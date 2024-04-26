@@ -108,7 +108,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                         onClick={() => {
                           setIsApplyModalOpen(() => true);
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-600 cursor-pointer"
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer"
                       >
                         Apply now
                       </div>
