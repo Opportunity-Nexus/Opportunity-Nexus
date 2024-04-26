@@ -90,16 +90,9 @@ const OnCampusOpportunityCard = (opportunity) => {
                       aria-hidden="true"
                     />
                     <p>
-                      {opportunity.opportunityMode === "OFF-LINE" ||
-                      opportunity.opportunityMode === "Offline" ? (
-                        <span className="uppercase font-medium">
-                          {opportunity.opportunityLocation}
-                        </span>
-                      ) : (
-                        <span className="uppercase font-medium">
-                          {opportunity.opportunityMode}
-                        </span>
-                      )}
+                      <span className="uppercase font-medium">
+                        {opportunity.opportunityMode}
+                      </span>
                     </p>
                   </div>
                   <span className="mr-1">
@@ -159,6 +152,17 @@ const OnCampusOpportunityCard = (opportunity) => {
                       ).toDateString()}
                     </p>
                   </div>
+                </div>
+
+                {/* Job location */}
+                <div className="flex text-gray-500 gap-px max-w-4xl">
+                  <ul className="flex text-gray-500 text-base font-semibold gap-2">
+                    <h4>Job Location:</h4>
+                    <p className=" uppercase">
+                      {" "}
+                      {opportunity.opportunityLocation}
+                    </p>{" "}
+                  </ul>
                 </div>
 
                 {/* description */}
@@ -233,7 +237,12 @@ const OnCampusOpportunityCard = (opportunity) => {
                         }
                       }}
                       className={` items-center justify-center px-1 py-1  border border-black dark:border-white text-base font-medium rounded-md hover:bg-black dark:hover:bg-white hover:text-white  dark:hover:text-black ${
-                        isExpired ? "hidden" : "inline-flex" } ${isAlreadyBookMarked ? "bg-black text-white dark:bg-white dark:text-black" : "text-black dark:text-white " }
+                        isExpired ? "hidden" : "inline-flex"
+                      } ${
+                        isAlreadyBookMarked
+                          ? "bg-black text-white dark:bg-white dark:text-black"
+                          : "text-black dark:text-white "
+                      }
 
                       `}
                     >
