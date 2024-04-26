@@ -3,24 +3,29 @@ import toast from "react-hot-toast";
 import CustomModal from "../CustomModal";
 import { FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+// import { apiConnector } from "../../Services/ApiConnector";
+import { oncampusEndpoints } from "../../Services/BackendApis";
+import { getStudentEnrolled } from "../../Services/Operations/OnCampusApi";
+// const {  GET_STUDENT_ENROLLED } = oncampusEndpoints;
 
-const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
+const ApplyModal = ({ opportunityId, opportunity, isOpen, setIsOpen }) => {
   const [isApplicationSubmitted, setIsApplicationSubmitted] = useState(false);
   const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
 
-  const [answerValue, setAnswerValue] = useState(null);
-
-  async function applyToOpportunity() {
+  async function applyToOpportunity({ opportunity, opportunityId, token }) {
     try {
-      if (answerValue) {
-        toast.error("Please fill up the answer first to apply");
-        return;
-      }
+      // console.log("DATA BEFORE DELETE", token, opportunity.frontendId);
+      const result = await getStudentEnrolled(
+        opportunityId,
+        token
+      );
 
       // ! TODO: backend call here
 
-      const response = {}; // placeholder for now
-      if (response.data.success) {
+      // const response = {}; // placeholder for now
+      if (result.data.success) {
         toast.success("Successfully applied to opportunity!");
         setIsApplicationSubmitted(true);
       } else {
@@ -31,6 +36,8 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
       toast.error(error.message);
     }
   }
+
+  
 
   return (
     <>
@@ -44,33 +51,20 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
           {!isApplicationSubmitted ? (
             <>
               <p className="max-w-lg text-center text-xl font-medium text-gray-500 dark:text-gray-300 py-2">
-               Your details will be shared, make sure all the deatils are updated!!
+                Your details will be shared, make sure all the deatils are
+                updated!!
               </p>
 
               <form
                 className="flex w-full max-w-md flex-col items-center justify-center gap-5"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  applyToOpportunity().catch((error) => console.error(error));
+                onSubmit={() => {
+               
+                  applyToOpportunity()
                 }}
               >
-                {/* <div className="flex w-full flex-col gap-3">
-                  <textarea
-                    label="Your product description (optional)"
-                    id="description"
-                    type="text"
-                    onChangeHandler={(e) => {
-                      setAnswerValue(() => e.target.value);
-                    }}
-                    placeholder="Description"
-                    fullWidth
-                    value={answerValue}
-                    className="dark:bg-gray-950 bg-white"
-                  />
-                </div> */}
-
                 <div className="flex flex-col justify-center gap-2 items-center w-full">
                   <button
+                  // onClick={(() => applyToOpportunity())}
                     className="inline-flex items-center justify-center px-3 py-2 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer w-full"
                     type="submit"
                   >
@@ -82,7 +76,6 @@ const ApplyModal = ({ opportunity, isOpen, setIsOpen }) => {
                       navigate("/dashboard/my-settings");
                     }}
                     className="inline-flex items-center justify-center px-3 py-2 border border-black dark:border-white text-base font-medium  rounded-md text-black dark:text-white hover:bg-black dark:hover:bg-white dark:hover:text-black hover:text-white cursor-pointer w-full"
-                    type="submit"
                   >
                     Update Details
                   </button>

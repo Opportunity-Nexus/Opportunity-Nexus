@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../ApiConnector";
 import { onCampusBookMarkEndpoints, oncampusEndpoints } from "../BackendApis";
-const { CREATE_OPPORTUNITY } = oncampusEndpoints;
+const { CREATE_OPPORTUNITY, GET_STUDENT_ENROLLED } = oncampusEndpoints;
 const {
   SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY,
   DELETE__ONCAMPUS_BOOKMARK_OPPORTUNITY,
@@ -169,11 +169,40 @@ export async function removeBookmark({ opportunityId, token }) {
       );
     }
     toast.dismiss(toastId);
-    toast.success("Opportunity successfully unbookmarked!");
+    toast.success("Opportunity Unbookmarked!");
     return true;
   } catch (error) {
     toast.dismiss(toastId);
     toast.error(error.message || "Failed to unbookmark opportunity.");
+    return false;
+  }
+}
+
+// --------------STUDENT ENROLLED ON CLICKING APPLY NOW----------------//
+export async function getStudentEnrolled({ opportunity, token }) {
+  const toastId = toast.loading("loading...");
+  try {
+    const response = await apiConnector(
+      "POST",
+      GET_STUDENT_ENROLLED,
+      {
+        opportunityId: opportunity._id,
+      },
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    if (!response.data.success) {
+      toast.error("Something went wrong while applying to the opportunity");
+      throw new Error(response.data.message || "Failed to apply");
+    }
+    toast.dismiss(toastId);
+    toast.success("Applied successfully!");
+    return true;
+  } catch (error) {
+    toast.dismiss(toastId);
+    toast.error(error.message || "Failed to apply.");
     return false;
   }
 }

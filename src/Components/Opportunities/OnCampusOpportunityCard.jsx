@@ -9,7 +9,8 @@ import {
 } from "../../Services/Operations/OnCampusApi";
 import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
 import { useSelector } from "react-redux";
-
+import { IoBookmarks } from "react-icons/io5";
+import { IoBookmarksOutline } from "react-icons/io5";
 import ApplyModal from "./ApplyModal";
 
 const OnCampusOpportunityCard = (opportunity) => {
@@ -56,6 +57,7 @@ const OnCampusOpportunityCard = (opportunity) => {
       <ApplyModal
         isOpen={isApplyModalOpen}
         opportunity={opportunity}
+        opportunityId={opportunity._id}
         setIsOpen={setIsApplyModalOpen}
       />
       <div className="bg-white dark:bg-gray-900 overflow-hidden sm:rounded-md w-full shadow-lg">
@@ -64,7 +66,30 @@ const OnCampusOpportunityCard = (opportunity) => {
             key={opportunity._id}
             className="border dark:border-gray-700 rounded-lg p-3"
           >
-            <div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group p-4 flex flex-col w-full gap-8">
+            <div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group p-4 flex flex-col w-full gap-8 relative">
+              {/* save icon absolute in position */}
+              <div className="flex items-center justify-center absolute top-4 right-0">
+                <button
+                  onClick={() => {
+                    if (isAlreadyBookMarked) {
+                      removeBookmark().catch((error) => console.error(error));
+                    } else {
+                      bookmarkOnCampusOpportunity().catch((error) =>
+                        console.error(error)
+                      );
+                    }
+                  }}
+                  className={` items-center justify-center px-1 py-1   text-xl font-medium ${
+                    isExpired ? "hidden" : "inline-flex"
+                  }`}
+                >
+                  {isAlreadyBookMarked ? (
+                    <IoBookmarks />
+                  ) : (
+                    <IoBookmarksOutline />
+                  )}
+                </button>
+              </div>
               <div className="flex flex-col flex-1 gap-4">
                 {/* title with role */}
                 <div className="flex flex-col gap-1">
@@ -207,8 +232,8 @@ const OnCampusOpportunityCard = (opportunity) => {
                   <></>
                 )}
               </div>
-              <div className="flex flex-col flex-1   gap-2">
-                <div className="flex-shrink-0 flex items-center md:justify-end gap-3">
+              <div className="flex flex-col flex-1 gap-2">
+                <div className="flex-shrink-0 flex items-center md:justify-end">
                   <div
                     className={`flex items-center justify-center ${
                       isExpired ? "hidden" : ""
@@ -223,32 +248,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                       Apply now
                     </button>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <button
-                      onClick={() => {
-                        if (isAlreadyBookMarked) {
-                          removeBookmark().catch((error) =>
-                            console.error(error)
-                          );
-                        } else {
-                          bookmarkOnCampusOpportunity().catch((error) =>
-                            console.error(error)
-                          );
-                        }
-                      }}
-                      className={` items-center justify-center px-1 py-1  border border-black dark:border-white text-base font-medium rounded-md hover:bg-black dark:hover:bg-white hover:text-white  dark:hover:text-black ${
-                        isExpired ? "hidden" : "inline-flex"
-                      } ${
-                        isAlreadyBookMarked
-                          ? "bg-black text-white dark:bg-white dark:text-black"
-                          : "text-black dark:text-white "
-                      }
 
-                      `}
-                    >
-                      {isAlreadyBookMarked ? "Unsave" : "Save"}
-                    </button>
-                  </div>
                   <div>
                     {opportunity.opportunityMode === "ON-LINE" &&
                     !isExpired &&
