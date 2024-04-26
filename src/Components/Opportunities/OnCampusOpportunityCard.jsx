@@ -256,7 +256,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                       new Date() ? (
                       <div className="flex items-center justify-center">
                         <a href={opportunity.opportunityDriveLink}>
-                          <button className="items-center justify-center px-1 py-1  border border-black dark:border-white text-base font-medium rounded-md hover:bg-black dark:hover:bg-white hover:text-white  dark:hover:text-black">
+                          <button className="items-center justify-center px-1 py-1  border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400">
                             Join the Drive
                           </button>
                         </a>
