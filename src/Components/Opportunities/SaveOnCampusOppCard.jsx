@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { IoMdPin } from "react-icons/io";
 import { FaHourglassEnd, FaRupeeSign, FaClock } from "react-icons/fa";
@@ -12,8 +12,9 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
 
   const { setSavedOpportunitiesList } = opportunity;
 
-  const isExpired =
-    new Date(opportunity.opportunityId.opportunityFillLastDate) < new Date();
+  const oppExpiry = new Date(opportunity.opportunityId.opportunityFillLastDate);
+
+  const isExpired = oppExpiry < new Date();
   const audio = new Audio();
   audio.src = BookMarkSound;
   const { token } = useSelector((state) => state.auth);
@@ -32,6 +33,43 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
       );
     }
   };
+
+  const [timeLeft, setTimeLeft] = useState("");
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      const currentTime = new Date();
+      const difference = oppExpiry - currentTime;
+
+      // Stop the countdown when the target date is reached
+      if (difference <= 0) {
+        setTimeLeft("Time's up!");
+        clearInterval(intervalId);
+        return;
+      }
+
+      // Calculate time difference
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((difference / 1000 / 60) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
+
+      let timeString = "";
+
+      if (days) timeString = timeString + `${days}d `;
+      if (hours) timeString = timeString + `${hours}h `;
+      if (minutes) timeString = timeString + `${minutes}m `;
+      if (seconds) timeString = timeString + `${seconds}s `;
+
+      setTimeLeft(timeString);
+    };
+
+    // Set up the interval to update the countdown
+    const intervalId = setInterval(updateCountdown, 1000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [oppExpiry]);
 
   return (
     <>
@@ -97,10 +135,13 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
               </div>
               <div className="mt-2 sm:flex flex-col flex-1 lg:mr-auto lg:items-end gap-2">
                 <div className="mt-2 sm:flex flex-col flex-1 gap-2 items-start">
+                  {isExpired ? null : (
+                    <span className="text-sm pl-1 ml-auto">{timeLeft}</span>
+                  )}
                   {/* active OR Expire + apply + remove button */}
                   <div className="flex-shrink-0 flex items-center gap-3 ml-auto">
                     <div
-                      className={`flex items-center justify-center ${
+                      className={`flex items-center gap-2 justify-center ${
                         isExpired ? "hidden" : ""
                       }`}
                     >
@@ -137,51 +178,48 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                       </button>
                     </div>
                   </div>
-                  {/* locatoin + time */}
-                  <div className="flex items-center gap-2">
-                    {" "}
-                    <div className="flex items-center text-sm text-gray-500 sm:mt-0 gap-2">
-                      <div className="flex items-center gap-px">
-                        {" "}
-                        <IoMdPin
-                          className="flex-shrink-0 h-4 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        <p>
-                          {opportunity.opportunityId.opportunityMode ===
-                            "OFF-LINE" ||
-                          opportunity.opportunityId.opportunityMode ===
-                            "Offline" ? (
-                            <span className="uppercase font-medium">
-                              {opportunity.opportunityId.opportunityLocation}
-                            </span>
-                          ) : (
-                            <span className="uppercase font-medium">
-                              {opportunity.opportunityId.opportunityMode}
-                            </span>
-                          )}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center">
+                  {/* locatoin + time */}{" "}
+                  <div className="flex items-end w-full justify-end text-sm text-gray-500 sm:mt-0 gap-2">
+                    <div className="flex items-center gap-px">
+                      {" "}
+                      <IoMdPin
+                        className="flex-shrink-0 h-4 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      <p>
                         {opportunity.opportunityId.opportunityMode ===
-                        "TBD (To Be Decided)" ? (
-                          <></>
+                          "OFF-LINE" ||
+                        opportunity.opportunityId.opportunityMode ===
+                          "Offline" ? (
+                          <span className="uppercase font-medium">
+                            {opportunity.opportunityId.opportunityLocation}
+                          </span>
                         ) : (
-                          <div className="flex items-center gap-px">
-                            <span className="mr-1">|</span>
-                            <FaClock
-                              className="h-5 w-4 text-gray-400"
-                              aria-hidden="true"
-                            />
-                            {""}
-                            <p className="font-medium">
-                              Drive Time:{" "}
-                              {opportunity.opportunityId.opportunityDriveTime}
-                            </p>
-                          </div>
+                          <span className="uppercase font-medium">
+                            {opportunity.opportunityId.opportunityMode}
+                          </span>
                         )}
-                      </div>
+                      </p>
+                    </div>
+
+                    <div className="flex items-center">
+                      {opportunity.opportunityId.opportunityMode ===
+                      "TBD (To Be Decided)" ? (
+                        <></>
+                      ) : (
+                        <div className="flex items-center gap-px">
+                          <span className="mr-1">|</span>
+                          <FaClock
+                            className="h-5 w-4 text-gray-400"
+                            aria-hidden="true"
+                          />
+                          {""}
+                          <p className="font-medium">
+                            Drive Time:{" "}
+                            {opportunity.opportunityId.opportunityDriveTime}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

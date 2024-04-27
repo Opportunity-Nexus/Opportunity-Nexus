@@ -18,14 +18,29 @@ const MyOpportunities = () => {
     selectedTags: [],
   });
 
+  const [totalOpportunitiesPages, setTotalOpportunitiesPages] = useState(
+    Math.ceil(onCampusOpportunities.length / 6)
+  );
+
+  useEffect(() => {
+    setTotalOpportunitiesPages(() => {
+      const lengthOfOpportunities = onCampusOpportunities.filter((item) =>
+        onCampusOpportunityTag.selectedTags.length === 0
+          ? true
+          : item.opportunityTags.filter((element) =>
+              onCampusOpportunityTag.selectedTags.includes(element)
+            ).length > 0
+      ).length;
+
+      console.log({ lengthOfOpportunities });
+
+      return Math.ceil(lengthOfOpportunities / 6);
+    });
+  }, [onCampusOpportunities, onCampusOpportunityTag.selectedTags]);
+
   //----------------------PAGINTAION----------------------//
 
   const [currentPage, setCurrentPage] = useState(1);
-  const totalOpportunitiesPages = Math.ceil(onCampusOpportunities.length / 6);
-  const pageNumbers = Array.from(
-    { length: totalOpportunitiesPages },
-    (_, i) => i + 1
-  );
 
   const [bookmarkedOpportunities, setBookmarkedOpportunities] = useState([]);
 
@@ -69,7 +84,7 @@ const MyOpportunities = () => {
       availableTags: Array.from(tagSet),
       selectedTags: [],
     }));
-  }, [currentPage, onCampusOpportunities]);
+  }, [onCampusOpportunities]);
 
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
@@ -150,11 +165,6 @@ const MyOpportunities = () => {
                   )
                   .slice(currentPage * 6 - 6, currentPage * 6)
                   .map((opportunity, index) => {
-                    const isAlreadyBookMarked =
-                      bookmarkedOpportunities.findIndex(
-                        (item) => item._id === opportunity._id
-                      ) > -1;
-                    console.log({ isAlreadyBookMarked, opportunity });
                     return (
                       <OnCampusOpportunityCard
                         key={index}
@@ -174,7 +184,7 @@ const MyOpportunities = () => {
 
               {/* ------------PAGINATION----------- */}
 
-              {pageNumbers.length > 1 && (
+              {totalOpportunitiesPages > 1 && (
                 <div className="flex items-center justify-center w-2/4 mt-8 mx-auto ">
                   <button
                     className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
@@ -191,19 +201,21 @@ const MyOpportunities = () => {
                     </span>
                   </button>
                   <div className="hidden md:flex items-center justify-center">
-                    {pageNumbers.map((pageNumber) => (
-                      <button
-                        key={pageNumber}
-                        className={`border rounded-full px-4 py-2 ml-3 mr-3 dark:text-white focus:ring-2 ${
-                          currentPage === pageNumber
-                            ? "bg-primary-500 text-white"
-                            : ""
-                        }`}
-                        onClick={() => setCurrentPage(pageNumber)}
-                      >
-                        {pageNumber}
-                      </button>
-                    ))}
+                    {Array(totalOpportunitiesPages)
+                      .fill(null)
+                      .map((_, index) => (
+                        <button
+                          key={index + 1}
+                          className={`border rounded-full px-4 py-2 ml-3 mr-3 dark:text-white focus:ring-2 ${
+                            currentPage === index + 1
+                              ? "bg-primary-500 text-white"
+                              : ""
+                          }`}
+                          onClick={() => setCurrentPage(index + 1)}
+                        >
+                          {index + 1}
+                        </button>
+                      ))}
                   </div>
                   <button
                     className={`flex items-center text-black dark:text-white rounded-lg p-3  ${

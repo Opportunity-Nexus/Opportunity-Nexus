@@ -42,14 +42,31 @@ const BookmarkedOpportunities = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const totalOpportunitiesPages = Math.ceil(
-    filteredOpportunities?.length / itemsPerPage
+  const [totalOpportunitiesPages, setTotalOpportunitiesPages] = useState(
+    Math.max(Math.ceil(filteredOpportunities?.length / itemsPerPage), 0)
   );
 
-  const pageNumbers = Array.from(
-    { length: totalOpportunitiesPages },
-    (_, i) => i + 1
-  );
+  useEffect(() => {
+    if (!filteredOpportunities) return;
+    setTotalOpportunitiesPages(() => {
+      if (campusType === "off-campus") {
+        return filteredOpportunities.length;
+      } else {
+        const lengthOfOpportunities = filteredOpportunities?.filter((item) =>
+          campusType === "on-campus" &&
+          onCampusOpportunityTag.selectedTags.length === 0
+            ? true
+            : item.opportunityId.opportunityTags.filter((element) =>
+                onCampusOpportunityTag.selectedTags.includes(element)
+              ).length > 0
+        ).length;
+
+        console.log({ lengthOfOpportunities });
+
+        return Math.ceil(lengthOfOpportunities / 6);
+      }
+    });
+  }, [campusType, filteredOpportunities, onCampusOpportunityTag.selectedTags]);
 
   useEffect(() => {
     setIsFetching(() => true);
@@ -389,7 +406,7 @@ const BookmarkedOpportunities = () => {
 
               {/* ------------PAGINATION----------- */}
 
-              {pageNumbers.length > 1 && (
+              {totalOpportunitiesPages > 1 && (
                 <div className="flex items-center justify-center w-2/4 mt-8 mx-auto">
                   <button
                     className={`flex items-center text-black dark:text-white rounded-lg p-3  ${
@@ -404,19 +421,21 @@ const BookmarkedOpportunities = () => {
                     <span className="uppercase font-medium">previous</span>
                   </button>
                   <div className="hidden md:flex items-center justify-center">
-                    {pageNumbers.map((pageNumber) => (
-                      <button
-                        key={pageNumber}
-                        className={`border rounded-full px-4 py-2 ml-3 mr-3 dark:text-white focus:ring-2 ${
-                          currentPage === pageNumber
-                            ? "bg-primary-500 text-white"
-                            : ""
-                        }`}
-                        onClick={() => setCurrentPage(pageNumber)}
-                      >
-                        {pageNumber}
-                      </button>
-                    ))}
+                    {Array(totalOpportunitiesPages)
+                      .fill(null)
+                      .map((_, index) => (
+                        <button
+                          key={index + 1}
+                          className={`border rounded-full px-4 py-2 ml-3 mr-3 dark:text-white focus:ring-2 ${
+                            currentPage === index + 1
+                              ? "bg-primary-500 text-white"
+                              : ""
+                          }`}
+                          onClick={() => setCurrentPage(index + 1)}
+                        >
+                          {index + 1}
+                        </button>
+                      ))}
                   </div>
                   <button
                     className={`flex items-center text-black dark:text-white rounded-lg p-3  ${

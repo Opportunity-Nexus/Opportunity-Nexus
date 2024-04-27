@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { MdLens } from "react-icons/md";
 import { IoMdPin } from "react-icons/io";
@@ -20,7 +20,8 @@ const OnCampusOpportunityCard = (opportunity) => {
     setRefetchBookmarkOpp,
   } = opportunity;
   console.log({ opportunity, isAlreadyBookMarked });
-  const isExpired = new Date(opportunity.opportunityFillLastDate) < new Date();
+  const oppExpiryDate = new Date(opportunity.opportunityFillLastDate);
+  const isExpired = oppExpiryDate < new Date();
   const audio = new Audio();
 
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
@@ -52,6 +53,43 @@ const OnCampusOpportunityCard = (opportunity) => {
     }
   };
 
+  const [timeLeft, setTimeLeft] = useState("");
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      const currentTime = new Date();
+      const difference = oppExpiryDate - currentTime;
+
+      // Stop the countdown when the target date is reached
+      if (difference <= 0) {
+        setTimeLeft("Time's up!");
+        clearInterval(intervalId);
+        return;
+      }
+
+      // Calculate time difference
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((difference / 1000 / 60) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
+
+      let timeString = "";
+
+      if (days) timeString = timeString + `${days}d `;
+      if (hours) timeString = timeString + `${hours}h `;
+      if (minutes) timeString = timeString + `${minutes}m `;
+      if (seconds) timeString = timeString + `${seconds}s `;
+
+      setTimeLeft(timeString);
+    };
+
+    // Set up the interval to update the countdown
+    const intervalId = setInterval(updateCountdown, 1000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [oppExpiryDate]);
+
   return (
     <>
       <ApplyModal
@@ -79,10 +117,13 @@ const OnCampusOpportunityCard = (opportunity) => {
                       );
                     }
                   }}
-                  className={` items-center justify-center px-1 py-1   text-xl font-medium ${
+                  className={` items-center justify-center px-1 py-1 gap-2 text-xl font-medium ${
                     isExpired ? "hidden" : "inline-flex"
                   }`}
                 >
+                  {isExpired ? null : (
+                    <span className="text-sm font-light">{timeLeft}</span>
+                  )}
                   {isAlreadyBookMarked ? (
                     <IoBookmarks />
                   ) : (
@@ -93,8 +134,8 @@ const OnCampusOpportunityCard = (opportunity) => {
               <div className="flex flex-col flex-1 gap-4">
                 {/* title with role */}
                 <div className="flex flex-col gap-1">
-                  <p className="text-lg md:text-xl font-bold text-primary-500">
-                    {opportunity.opportunityName}
+                  <p className="text-lg md:text-xl flex flex-row items-start pr-2 justify-between font-bold text-primary-500">
+                    <span>{opportunity.opportunityName}</span>
                   </p>
                   <p className="font-medium text-black dark:text-white text-sm  md:text-base">
                     {opportunity.opportunityRole}

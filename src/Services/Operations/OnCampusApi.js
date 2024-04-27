@@ -193,6 +193,8 @@ export async function getStudentEnrolled({ opportunity, token }) {
       }
     );
 
+    console.log({ response });
+
     if (!response.data.success) {
       toast.error("Something went wrong while applying to the opportunity");
       throw new Error(response.data.message || "Failed to apply");

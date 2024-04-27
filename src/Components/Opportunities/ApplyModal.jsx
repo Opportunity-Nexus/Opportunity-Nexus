@@ -4,29 +4,22 @@ import CustomModal from "../CustomModal";
 import { FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import { apiConnector } from "../../Services/ApiConnector";
-import { oncampusEndpoints } from "../../Services/BackendApis";
 import { getStudentEnrolled } from "../../Services/Operations/OnCampusApi";
-// const {  GET_STUDENT_ENROLLED } = oncampusEndpoints;
 
 const ApplyModal = ({ opportunityId, opportunity, isOpen, setIsOpen }) => {
   const [isApplicationSubmitted, setIsApplicationSubmitted] = useState(false);
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
 
-  async function applyToOpportunity({ opportunity, opportunityId, token }) {
+  async function applyToOpportunity() {
     try {
       // console.log("DATA BEFORE DELETE", token, opportunity.frontendId);
-      const result = await getStudentEnrolled(
-        opportunityId,
-        token
-      );
+      const result = await getStudentEnrolled({
+        opportunity,
+        token,
+      });
 
-      // ! TODO: backend call here
-
-      // const response = {}; // placeholder for now
-      if (result.data.success) {
-        toast.success("Successfully applied to opportunity!");
+      if (result) {
         setIsApplicationSubmitted(true);
       } else {
         throw new Error("Something went wrong while applying to opportunity");
@@ -36,8 +29,6 @@ const ApplyModal = ({ opportunityId, opportunity, isOpen, setIsOpen }) => {
       toast.error(error.message);
     }
   }
-
-  
 
   return (
     <>
@@ -57,14 +48,15 @@ const ApplyModal = ({ opportunityId, opportunity, isOpen, setIsOpen }) => {
 
               <form
                 className="flex w-full max-w-md flex-col items-center justify-center gap-5"
-                onSubmit={() => {
-               
-                  applyToOpportunity()
+                onSubmit={(e) => {
+                  e.preventDefault();
+
+                  applyToOpportunity().catch((error) => console.error(error));
                 }}
               >
                 <div className="flex flex-col justify-center gap-2 items-center w-full">
                   <button
-                  // onClick={(() => applyToOpportunity())}
+                    // onClick={(() => applyToOpportunity())}
                     className="inline-flex items-center justify-center px-3 py-2 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer w-full"
                     type="submit"
                   >
