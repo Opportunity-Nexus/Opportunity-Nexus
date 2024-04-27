@@ -41,15 +41,11 @@ const BookmarkedOpportunities = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
+
   const totalOpportunitiesPages = Math.ceil(
     filteredOpportunities?.length / itemsPerPage
   );
-  const currentOpportunities = filteredOpportunities
-    ? filteredOpportunities.slice(
-        currentPage * itemsPerPage - itemsPerPage,
-        currentPage * itemsPerPage
-      )
-    : null;
+
   const pageNumbers = Array.from(
     { length: totalOpportunitiesPages },
     (_, i) => i + 1
@@ -112,22 +108,18 @@ const BookmarkedOpportunities = () => {
     if (!filteredOpportunities || !filteredOpportunities.length) return;
 
     const tagSet = new Set();
-    filteredOpportunities
-      .slice(
-        currentPage * itemsPerPage - itemsPerPage,
-        currentPage * itemsPerPage
-      )
-      .forEach((opp) => {
-        (campusType === "on-campus" && opp.opportunityId.opportunityTags || []).forEach((item) =>
-          tagSet.add(item)
-        );
-      });
+    filteredOpportunities.forEach((opp) => {
+      (
+        (campusType === "on-campus" && opp.opportunityId.opportunityTags) ||
+        []
+      ).forEach((item) => tagSet.add(item));
+    });
 
     setOnCampusOpportunityTag(() => ({
       availableTags: Array.from(tagSet),
       selectedTags: [],
     }));
-  }, [currentPage, filteredOpportunities]);
+  }, [campusType, currentPage, filteredOpportunities]);
 
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
@@ -198,9 +190,12 @@ const BookmarkedOpportunities = () => {
               })}
             </div>
 
-            {campusType === "on-campus" && onCampusOpportunityTag.availableTags.length !== 0 ? (
+            {campusType === "on-campus" &&
+            onCampusOpportunityTag.availableTags.length !== 0 ? (
               <div className="flex gap-1 flex-wrap">
-                <span className="text-black font-bold text-lg dark:text-white">Search easily with these Keywords</span>
+                <span className="text-black font-bold text-lg dark:text-white">
+                  Search easily with these Keywords
+                </span>
                 {onCampusOpportunityTag.availableTags.map((item, itemIndex) => {
                   return (
                     <button
@@ -312,13 +307,13 @@ const BookmarkedOpportunities = () => {
         </select>
       </div>
 
-      {currentOpportunities ? (
+      {filteredOpportunities ? (
         <>
           {isFetching ? (
             <div className="h-screen flex flex-1 items-center justify-center">
               <div className="loader"></div>
             </div>
-          ) : currentOpportunities.length === 0 ? (
+          ) : filteredOpportunities.length === 0 ? (
             <div className="flex flex-col justify-center items-center lg:w-2/4 flex-1 dark:text-white mx-auto self-center">
               <img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
               <h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">
@@ -330,11 +325,15 @@ const BookmarkedOpportunities = () => {
               <div className="flex flex-wrap justify-center mt-4 mb-7 divide-y dark:divide-gray-700">
                 {campusType === "off-campus" ? (
                   <>
-                    {currentOpportunities
+                    {filteredOpportunities
                       .filter((item) =>
                         opportunityType.includes("All")
                           ? !!item
                           : opportunityType.includes(item.opportunityType)
+                      )
+                      .slice(
+                        currentPage * itemsPerPage - itemsPerPage,
+                        currentPage * itemsPerPage
                       )
                       .map((opportunity, index) => {
                         return (
@@ -350,7 +349,7 @@ const BookmarkedOpportunities = () => {
                   </>
                 ) : (
                   <>
-                    {currentOpportunities
+                    {filteredOpportunities
                       .filter((item) =>
                         onCampusFilter.toLowerCase() === "all"
                           ? !!item
@@ -359,7 +358,8 @@ const BookmarkedOpportunities = () => {
                             ) > new Date()
                       )
                       .filter((item) =>
-                      campusType === "on-campus" && onCampusOpportunityTag.selectedTags.length === 0
+                        campusType === "on-campus" &&
+                        onCampusOpportunityTag.selectedTags.length === 0
                           ? true
                           : item.opportunityId.opportunityTags.filter(
                               (element) =>
@@ -367,6 +367,10 @@ const BookmarkedOpportunities = () => {
                                   element
                                 )
                             ).length > 0
+                      )
+                      .slice(
+                        currentPage * itemsPerPage - itemsPerPage,
+                        currentPage * itemsPerPage
                       )
                       .map((opportunity, index) => {
                         return (

@@ -22,11 +22,6 @@ const MyOpportunities = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const totalOpportunitiesPages = Math.ceil(onCampusOpportunities.length / 6);
-  const currentOpportunities = onCampusOpportunities.slice(
-    currentPage * 6 - 6,
-    currentPage * 6
-  );
-  console.log({ currentOpportunities });
   const pageNumbers = Array.from(
     { length: totalOpportunitiesPages },
     (_, i) => i + 1
@@ -66,11 +61,9 @@ const MyOpportunities = () => {
 
   useEffect(() => {
     const tagSet = new Set();
-    onCampusOpportunities
-      .slice(currentPage * 6 - 6, currentPage * 6)
-      .forEach((opp) => {
-        (opp.opportunityTags || []).forEach((item) => tagSet.add(item));
-      });
+    onCampusOpportunities.forEach((opp) => {
+      (opp.opportunityTags || []).forEach((item) => tagSet.add(item));
+    });
 
     setOnCampusOpportunityTag(() => ({
       availableTags: Array.from(tagSet),
@@ -108,7 +101,9 @@ const MyOpportunities = () => {
                 {/* tags */}
                 {onCampusOpportunityTag.availableTags.length !== 0 ? (
                   <div className="flex gap-1 flex-wrap">
-                    <span className="text-black font-bold text-lg dark:text-white">Search easily with these Keywords</span>
+                    <span className="text-black font-bold text-lg dark:text-white">
+                      Search easily with these Keywords
+                    </span>
                     {onCampusOpportunityTag.availableTags.map(
                       (item, itemIndex) => {
                         return (
@@ -145,7 +140,7 @@ const MyOpportunities = () => {
                   </div>
                 ) : null}
 
-                {currentOpportunities
+                {onCampusOpportunities
                   .filter((item) =>
                     onCampusOpportunityTag.selectedTags.length === 0
                       ? true
@@ -153,6 +148,7 @@ const MyOpportunities = () => {
                           onCampusOpportunityTag.selectedTags.includes(element)
                         ).length > 0
                   )
+                  .slice(currentPage * 6 - 6, currentPage * 6)
                   .map((opportunity, index) => {
                     const isAlreadyBookMarked =
                       bookmarkedOpportunities.findIndex(
