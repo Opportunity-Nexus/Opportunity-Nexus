@@ -9,7 +9,7 @@ import {
   getOncampusOpportunities,
 } from "../../Services/Operations/OnCampusApi";
 
-const MyOpportunities = () => {
+const AdminOpportunitiesRecords = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [onCampusOpportunities, setOnCampusOpportunities] = useState([]);
   const { token } = useSelector((state) => state.auth);
@@ -177,7 +177,7 @@ const MyOpportunities = () => {
                             (item) => item.opportunityId._id === opportunity._id
                           ) > -1
                         }
-                        isAdmin={false}
+                        isAdmin={true}
                       />
                     );
                   })}
@@ -246,4 +246,4 @@ const MyOpportunities = () => {
   );
 };
 
-export default MyOpportunities;
+export default AdminOpportunitiesRecords;

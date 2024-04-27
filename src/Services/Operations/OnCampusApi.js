@@ -1,7 +1,8 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../ApiConnector";
 import { onCampusBookMarkEndpoints, oncampusEndpoints } from "../BackendApis";
-const { CREATE_OPPORTUNITY, GET_STUDENT_ENROLLED } = oncampusEndpoints;
+const { CREATE_OPPORTUNITY, GET_STUDENT_ENROLLED, DELETE_OPPORTUNITY } =
+  oncampusEndpoints;
 const {
   SAVE_ONCAMPUS_BOOKMARK_OPPORTUNITY,
   DELETE__ONCAMPUS_BOOKMARK_OPPORTUNITY,
@@ -205,6 +206,36 @@ export async function getStudentEnrolled({ opportunity, token }) {
   } catch (error) {
     toast.dismiss(toastId);
     toast.error(error.message || "Failed to apply.");
+    return false;
+  }
+}
+
+export async function deleteOpportunity({ opportunity, token }) {
+  const toastId = toast.loading("loading...");
+  try {
+    const response = await apiConnector(
+      "DELETE",
+      DELETE_OPPORTUNITY,
+      {
+        opportunityId: opportunity._id,
+      },
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    console.log({ response });
+
+    if (!response.data.success) {
+      toast.error("Something went wrong while deleting the opportunity");
+      throw new Error(response.data.message || "Failed to apply");
+    }
+    toast.dismiss(toastId);
+    toast.success("Deleted successfully!");
+    return true;
+  } catch (error) {
+    toast.dismiss(toastId);
+    toast.error(error.message || "Failed to delete.");
     return false;
   }
 }

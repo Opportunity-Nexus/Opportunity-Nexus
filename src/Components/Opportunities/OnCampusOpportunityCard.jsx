@@ -5,24 +5,33 @@ import { IoMdPin } from "react-icons/io";
 import { FaHourglassEnd, FaRupeeSign, FaClock } from "react-icons/fa";
 import {
   bookmarkOnCampusOpportunity as bookmarkHelper,
+  deleteOpportunity,
   removeBookmark as removeBookmarkHelper,
 } from "../../Services/Operations/OnCampusApi";
 import BookMarkSound from "../../assets/sounds/bookmark-sound.mp3";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IoBookmarks } from "react-icons/io5";
 import { IoBookmarksOutline } from "react-icons/io5";
 import ApplyModal from "./ApplyModal";
+import { useNavigate } from "react-router-dom";
+import {
+  setEditOpportunity,
+  setOpportunity,
+} from "../../Redux/Slices/OpportunitySlice";
 
 const OnCampusOpportunityCard = (opportunity) => {
   const {
     isAlreadyBookMarked,
     bookmarkedOpportunities,
     setRefetchBookmarkOpp,
+    isAdmin,
   } = opportunity;
   console.log({ opportunity, isAlreadyBookMarked });
   const oppExpiryDate = new Date(opportunity.opportunityFillLastDate);
   const isExpired = oppExpiryDate < new Date();
   const audio = new Audio();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
 
@@ -50,6 +59,16 @@ const OnCampusOpportunityCard = (opportunity) => {
     if (result) {
       audio.play();
       setRefetchBookmarkOpp(() => true);
+    }
+  };
+
+  const deleteOpportunityHandler = async () => {
+    const result = await deleteOpportunity({
+      opportunity,
+      token,
+    });
+    if (result) {
+      audio.play();
     }
   };
 
@@ -276,18 +295,43 @@ const OnCampusOpportunityCard = (opportunity) => {
               <div className="flex flex-col flex-1 gap-2">
                 <div className="flex-shrink-0 flex items-center md:justify-end">
                   <div
-                    className={`flex items-center justify-center ${
+                    className={`flex items-center gap-3 justify-center ${
                       isExpired ? "hidden" : ""
                     }`}
                   >
-                    <button
-                      onClick={() => {
-                        setIsApplyModalOpen(() => true);
-                      }}
-                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer"
-                    >
-                      Apply now
-                    </button>
+                    {isAdmin ? (
+                      <button
+                        onClick={() => {
+                          dispatch(setEditOpportunity(true));
+                          dispatch(setOpportunity(opportunity));
+                          navigate("/dashboard/opportunity-panel");
+                        }}
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer"
+                      >
+                        Edit
+                      </button>
+                    ) : null}
+                    {isAdmin ? (
+                      <button
+                        onClick={() => {
+                          deleteOpportunityHandler().catch((error) =>
+                            console.error(error)
+                          );
+                        }}
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-red-500 hover:bg-red-700 cursor-pointer"
+                      >
+                        Delete
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setIsApplyModalOpen(() => true);
+                        }}
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer"
+                      >
+                        Apply now
+                      </button>
+                    )}
                   </div>
 
                   <div>

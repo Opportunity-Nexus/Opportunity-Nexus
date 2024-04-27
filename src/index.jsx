@@ -28,6 +28,7 @@ import {
 } from "react-router-dom";
 import UpdatePassword from "./Pages/Authentication/UpdatePassword";
 import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
+import AdminOpportunitiesRecords from "./Pages/AdminRecord/AdminRecord";
 const themes = {
   light: "public/light.css",
   dark: "public/dark.css",
@@ -52,7 +53,8 @@ function App() {
       <Route path="/dashboard/bookmarked" element={<BookmarkedOpportunities />} />
       <Route path="/dashboard/my-opportunities" element={<MyOpportunities />} />
       <Route path="/dashboard/my-settings" element={<Settings />} />
-      <Route path="dashboard/opportunity-panel" element={<OpportunityPanel />} />
+      <Route path="/dashboard/opportunity-panel" element={<OpportunityPanel />} />
+      <Route path="/dashboard/records" element={<AdminOpportunitiesRecords />} />
     </Route>,
   ];
   const router = createBrowserRouter(createRoutesFromElements(...routes));
