@@ -54,3 +54,28 @@ export const onCampusBookMarkEndpoints = {
 	DELETE__ONCAMPUS_BOOKMARK_OPPORTUNITY:
 		BASE_URL + "/onCampus/removeBookmarkedOpportunity",
 };
+
+//CAREER-PARTICULARS
+export const careerParticulars = {
+	//--------EDUCATION--------//
+	CREATE_EDUCATION_DETAILS:
+		BASE_URL + "/careerParticulars/create-education-details",
+	UPDATE_EDUCATION_DETAILS:
+		BASE_URL + "/careerParticulars/update-education-details",
+	//--------INTERNSHIP--------//
+	CREATE_INTERNSHIP_DETAILS:
+		BASE_URL + "/careerParticulars/create-internships-details",
+	UPDATE_INTERNSHIP_DETAILS:
+		BASE_URL + "/careerParticulars/update-internships-details",
+    //--------PROJECTS--------//
+	CREATE_PROJECT_DETAILS:
+		BASE_URL + "/careerParticulars/create-project-details",
+	UPDATE_PROJECT_DETAILS:
+		BASE_URL + "/careerParticulars/update-project-details",
+	//-------SOCIALS----------//
+	CREATE_SOCIAL_DETAILS:
+		BASE_URL + "/careerParticulars/create-socials-details",
+	UPDATE_SOCIAL_DETAILS:
+		BASE_URL + "/careerParticulars/update-socials-details",
+
+};
