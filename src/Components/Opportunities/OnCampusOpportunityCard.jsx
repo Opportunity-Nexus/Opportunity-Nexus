@@ -125,53 +125,61 @@ const OnCampusOpportunityCard = (opportunity) => {
           >
             <div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group p-4 flex flex-col w-full gap-8 relative">
               {/* save icon absolute in position */}
-              <p className="inline-flex text-base leading-5 font-semibold absolute top-4 right-2">
-                {!isExpired ? (
-                  <></>
-                ) : (
-                  <span className="bg-red-100 dark:bg-red-800 dark:bg-opacity-70 dark:text-red-300 text-red-800 px-2 rounded-md">
-                    Expired
-                  </span>
-                )}
-              </p>
-              {isAdmin ? (
-                <></>
-              ) : (
-                <div className="flex items-center justify-center absolute top-4 right-2">
-                  <button
-                    onClick={() => {
-                      if (isAlreadyBookMarked) {
-                        removeBookmark().catch((error) => console.error(error));
-                      } else {
-                        bookmarkOnCampusOpportunity().catch((error) =>
-                          console.error(error)
-                        );
-                      }
-                    }}
-                    className={` items-center justify-center px-1 py-1 gap-2 text-xl font-medium dark:text-white ${
-                      isExpired ? "hidden" : "inline-flex"
-                    }`}
-                  >
-                    {isExpired ? null : (
-                      <span className="text-sm  text-gray-700 dark:text-gray-300">
-                        {timeLeft}
-                      </span>
-                    )}
-                    {isAlreadyBookMarked ? (
-                      <IoBookmarks />
-                    ) : (
-                      <IoBookmarksOutline />
-                    )}
-                  </button>
-                </div>
-              )}
 
               <div className="flex flex-col flex-1 gap-4">
                 {/* title with role */}
                 <div className="flex flex-col gap-1">
-                  <p className="text-lg md:text-xl flex flex-row items-start pr-2 justify-between font-bold text-primary-500">
-                    <span>{opportunity.opportunityName}</span>
-                  </p>
+                  <div className="flex justify-between items-center gap-5 w-full">
+                    {" "}
+                    <div className="text-lg md:text-xl font-bold text-primary-500">
+                      <p>{opportunity.opportunityName}</p>
+                    </div>
+                    <div className="gap-2 flex items-center justify-between">
+                      <p className="inline-flex text-base leading-5 font-semibold absolute top-4 right-2">
+                        {!isExpired ? (
+                          <></>
+                        ) : (
+                          <span className="bg-red-100 dark:bg-red-800 dark:bg-opacity-70 dark:text-red-300 text-red-800 px-2 rounded-md">
+                            Expired
+                          </span>
+                        )}
+                      </p>
+                      {isAdmin ? (
+                        <></>
+                      ) : (
+                        <div className="flex items-center justify-center absolute top-4 right-2">
+                          <button
+                            onClick={() => {
+                              if (isAlreadyBookMarked) {
+                                removeBookmark().catch((error) =>
+                                  console.error(error)
+                                );
+                              } else {
+                                bookmarkOnCampusOpportunity().catch((error) =>
+                                  console.error(error)
+                                );
+                              }
+                            }}
+                            className={` items-center justify-center px-1 py-1 gap-2 text-xl font-medium dark:text-white ${
+                              isExpired ? "hidden" : "inline-flex"
+                            }`}
+                          >
+                            {isExpired ? null : (
+                              <span className="text-sm  text-gray-700 dark:text-gray-300">
+                                {timeLeft}
+                              </span>
+                            )}
+                            {isAlreadyBookMarked ? (
+                              <IoBookmarks />
+                            ) : (
+                              <IoBookmarksOutline />
+                            )}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
                   <p className="font-medium text-black dark:text-white text-sm  md:text-base">
                     {opportunity.opportunityRole}
                   </p>

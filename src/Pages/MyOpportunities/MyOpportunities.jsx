@@ -197,11 +197,11 @@ const MyOpportunities = () => {
                     disabled={currentPage <= 1}
                   >
                     <TbPlayerTrackPrevFilled className="h-5 w-5 mr-2" />
-                    <span className="uppercase font-medium text-sm md:text-base">
+                    <span className="uppercase font-medium text-sm lg:text-base">
                       previous
                     </span>
                   </button>
-                  <div className="hidden md:flex items-center justify-center">
+                  <div className="hidden lg:flex items-center justify-center">
                     {Array(totalOpportunitiesPages)
                       .fill(null)
                       .map((_, index) => (
