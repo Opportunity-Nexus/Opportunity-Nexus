@@ -92,7 +92,7 @@ const AdminOpportunitiesRecords = () => {
         <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl text-center dark:text-white ">
           OpportunityNexus
           <span className="block text-primary-500">
-            On Campus Opportunity Hub
+            Manage your Opportunities
           </span>
         </h1>
       </div>
@@ -107,7 +107,7 @@ const AdminOpportunitiesRecords = () => {
             <div className="flex flex-col justify-center items-center lg:w-2/4 flex-1 dark:text-white mx-auto self-center">
               <img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
               <h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">
-                You have not have any open opportunities yet!
+                You have not have any open opportunities published yet!
               </h2>
             </div>
           ) : (

@@ -125,31 +125,47 @@ const OnCampusOpportunityCard = (opportunity) => {
           >
             <div className=" dark:hover:bg-gray-800 hover:bg-gray-50 group p-4 flex flex-col w-full gap-8 relative">
               {/* save icon absolute in position */}
-              <div className="flex items-center justify-center absolute top-4 right-0">
-                <button
-                  onClick={() => {
-                    if (isAlreadyBookMarked) {
-                      removeBookmark().catch((error) => console.error(error));
-                    } else {
-                      bookmarkOnCampusOpportunity().catch((error) =>
-                        console.error(error)
-                      );
-                    }
-                  }}
-                  className={` items-center justify-center px-1 py-1 gap-2 text-xl font-medium ${
-                    isExpired ? "hidden" : "inline-flex"
-                  }`}
-                >
-                  {isExpired ? null : (
-                    <span className="text-sm font-light">{timeLeft}</span>
-                  )}
-                  {isAlreadyBookMarked ? (
-                    <IoBookmarks />
-                  ) : (
-                    <IoBookmarksOutline />
-                  )}
-                </button>
-              </div>
+              <p className="inline-flex text-base leading-5 font-semibold absolute top-4 right-2">
+                {!isExpired ? (
+                  <></>
+                ) : (
+                  <span className="bg-red-100 dark:bg-red-800 dark:bg-opacity-70 dark:text-red-300 text-red-800 px-2 rounded-md">
+                    Expired
+                  </span>
+                )}
+              </p>
+              {isAdmin ? (
+                <></>
+              ) : (
+                <div className="flex items-center justify-center absolute top-4 right-2">
+                  <button
+                    onClick={() => {
+                      if (isAlreadyBookMarked) {
+                        removeBookmark().catch((error) => console.error(error));
+                      } else {
+                        bookmarkOnCampusOpportunity().catch((error) =>
+                          console.error(error)
+                        );
+                      }
+                    }}
+                    className={` items-center justify-center px-1 py-1 gap-2 text-xl font-medium dark:text-white ${
+                      isExpired ? "hidden" : "inline-flex"
+                    }`}
+                  >
+                    {isExpired ? null : (
+                      <span className="text-sm  text-gray-700 dark:text-gray-300">
+                        {timeLeft}
+                      </span>
+                    )}
+                    {isAlreadyBookMarked ? (
+                      <IoBookmarks />
+                    ) : (
+                      <IoBookmarksOutline />
+                    )}
+                  </button>
+                </div>
+              )}
+
               <div className="flex flex-col flex-1 gap-4">
                 {/* title with role */}
                 <div className="flex flex-col gap-1">
@@ -296,7 +312,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                 <div className="flex-shrink-0 flex items-center md:justify-end">
                   <div
                     className={`flex items-center gap-3 justify-center ${
-                      isExpired ? "hidden" : ""
+                      isExpired && !isAdmin ? "hidden" : ""
                     }`}
                   >
                     {isAdmin ? (
@@ -350,15 +366,6 @@ const OnCampusOpportunityCard = (opportunity) => {
                       <></>
                     )}
                   </div>
-                  <p className="inline-flex text-base leading-5 font-semibold">
-                    {!isExpired ? (
-                      <></>
-                    ) : (
-                      <span className="bg-red-100 text-red-800 px-2 rounded-md">
-                        Expired
-                      </span>
-                    )}
-                  </p>
                 </div>
               </div>
             </div>
