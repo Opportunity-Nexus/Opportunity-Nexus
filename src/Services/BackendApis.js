@@ -32,7 +32,7 @@ export const profileSettingsEndpoints = {
 
 // PROFILE ENDPOINTS
 export const profileEndpoints = {
-	GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
+	GET_USER_COMPLETE_DETAILS_API: BASE_URL + "/profile//getusercompletedetails",
 };
 
 //ON-CAMPUS ENDPOINTS
@@ -42,7 +42,9 @@ export const oncampusEndpoints = {
 	GET_ALL_OPPORTUNITIES: BASE_URL + "/onCampus/getallopportunities",
 	GET_OPPORTUNITY_DETAILS: BASE_URL + "/onCampus/getopportunitydetails",
 	DELETE_OPPORTUNITY: BASE_URL + "/onCampus/deleteOpportunity",
-	GET_USER_OPPORTUNITY: BASE_URL + "/onCampus/getuseropportunities", //TESTING PART 2 REMAINING : HOW TO MAKE THE STUDENT ENROLLED.
+	GET_USER_OPPORTUNITY: BASE_URL + "/onCampus/getuseropportunities",
+	GET_OPPORTUNITY_ENROLLMENTS:
+		BASE_URL + "/api/v1/onCampus/getstudentenrollments",
 };
 
 //ON-CAMPUS BOOKMARK OPPORTUNITY ENDPOINTS
@@ -66,15 +68,12 @@ export const careerParticulars = {
 		BASE_URL + "/careerParticulars/create-internships-details",
 	UPDATE_INTERNSHIP_DETAILS:
 		BASE_URL + "/careerParticulars/update-internships-details",
-    //--------PROJECTS--------//
+	//--------PROJECTS--------//
 	CREATE_PROJECT_DETAILS:
 		BASE_URL + "/careerParticulars/create-project-details",
 	UPDATE_PROJECT_DETAILS:
 		BASE_URL + "/careerParticulars/update-project-details",
 	//-------SOCIALS----------//
-	CREATE_SOCIAL_DETAILS:
-		BASE_URL + "/careerParticulars/create-socials-details",
-	UPDATE_SOCIAL_DETAILS:
-		BASE_URL + "/careerParticulars/update-socials-details",
-
+	UPDATE_SOCIAL_DETAILS: BASE_URL + "/careerParticulars/update-socials-details",
+	UPDATE_CAREER_PARTICULARS: BASE_URL + "/careerParticulars/updatecareerparticulars"
 };
