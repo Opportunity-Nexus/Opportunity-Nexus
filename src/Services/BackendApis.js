@@ -77,3 +77,8 @@ export const careerParticulars = {
 	UPDATE_SOCIAL_DETAILS: BASE_URL + "/careerParticulars/update-socials-details",
 	UPDATE_CAREER_PARTICULARS: BASE_URL + "/careerParticulars/updatecareerparticulars"
 };
+
+//ANALYTICS
+export const studentAnalyticsEndpoints = {
+	OFFCAMPUS_BOOKMARK_API: BASE_URL + "/analytics/getoffcampusanalytics"
+}

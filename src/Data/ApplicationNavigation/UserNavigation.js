@@ -9,7 +9,7 @@ const userNavigation = [
     href: "/dashboard/my-opportunities",
     id: 2,
   },
-  { name: "Analytics", icon: FaChartBar, href: "/dashboard/analytics", id: 3 },
+  { name: "Analytics", icon: FaChartBar, href: "/dashboard/my-analytics", id: 3 },
   {
     name: "Settings",
     icon: IoMdSettings,
