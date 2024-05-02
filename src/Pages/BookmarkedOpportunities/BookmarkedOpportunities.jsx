@@ -56,12 +56,10 @@ const BookmarkedOpportunities = () => {
           campusType === "on-campus" &&
           onCampusOpportunityTag.selectedTags.length === 0
             ? true
-            : item.opportunityId.opportunityTags.filter((element) =>
+            : item.opportunityId?.opportunityTags.filter((element) =>
                 onCampusOpportunityTag.selectedTags.includes(element)
               ).length > 0
         ).length;
-
-        console.log({ lengthOfOpportunities });
 
         return Math.ceil(lengthOfOpportunities / 6);
       }
@@ -127,7 +125,7 @@ const BookmarkedOpportunities = () => {
     const tagSet = new Set();
     filteredOpportunities.forEach((opp) => {
       (
-        (campusType === "on-campus" && opp.opportunityId.opportunityTags) ||
+        (campusType === "on-campus" && opp.opportunityId?.opportunityTags) ||
         []
       ).forEach((item) => tagSet.add(item));
     });
@@ -178,6 +176,7 @@ const BookmarkedOpportunities = () => {
                         }
                       }
                     });
+                    setCurrentPage(() => 1);
                   }}
                 >
                   {item}
@@ -390,6 +389,8 @@ const BookmarkedOpportunities = () => {
                         currentPage * itemsPerPage
                       )
                       .map((opportunity, index) => {
+                        console.log({ bookmarkedArryOp: opportunity });
+                        if (!opportunity.opportunityId) return null;
                         return (
                           <SavedOnCampusOpportunityCard
                             key={index}

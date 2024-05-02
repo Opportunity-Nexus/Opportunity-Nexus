@@ -32,8 +32,6 @@ const MyOpportunities = () => {
             ).length > 0
       ).length;
 
-      console.log({ lengthOfOpportunities });
-
       return Math.ceil(lengthOfOpportunities / 6);
     });
   }, [onCampusOpportunities, onCampusOpportunityTag.selectedTags]);
@@ -145,6 +143,8 @@ const MyOpportunities = () => {
                                   };
                                 }
                               });
+
+                              setCurrentPage(() => 1);
                             }}
                           >
                             {item}

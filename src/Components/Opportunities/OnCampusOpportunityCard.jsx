@@ -326,8 +326,15 @@ const OnCampusOpportunityCard = (opportunity) => {
                     {isAdmin ? (
                       <button
                         onClick={() => {
+                          console.log({ opportunity });
                           dispatch(setEditOpportunity(true));
-                          dispatch(setOpportunity(opportunity));
+                          dispatch(
+                            setOpportunity({
+                              ...opportunity,
+                              setOnCampusOpportunities: null,
+                              setRefetchBookmarkOpp: null,
+                            })
+                          );
                           navigate("/dashboard/opportunity-panel");
                         }}
                         className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer"

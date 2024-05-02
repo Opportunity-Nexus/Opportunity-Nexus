@@ -8,13 +8,23 @@ import { removeBookmark as removeBookmarkHelper } from "../../Services/Operation
 import ApplyModal from "./ApplyModal";
 
 const SavedOnCampusOpportunityCard = (opportunity) => {
-  console.log("savesoncampus", opportunity);
-
   const { setSavedOpportunitiesList } = opportunity;
 
-  const oppExpiry = new Date(opportunity.opportunityId.opportunityFillLastDate);
+  const [isExpired, setIsExpired] = useState(() => {
+    console.log({ opportunity });
 
-  const isExpired = oppExpiry < new Date();
+    return (
+      new Date(opportunity.opportunityId.opportunityFillLastDate) < new Date()
+    );
+  });
+
+  useEffect(() => {
+    setIsExpired(
+      () =>
+        new Date(opportunity.opportunityId.opportunityFillLastDate) < new Date()
+    );
+  }, [opportunity.opportunityId.opportunityFillLastDate]);
+
   const audio = new Audio();
   audio.src = BookMarkSound;
   const { token } = useSelector((state) => state.auth);
@@ -37,9 +47,13 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
   const [timeLeft, setTimeLeft] = useState("");
 
   useEffect(() => {
+    if (!opportunity.opportunityId) return;
+
     const updateCountdown = () => {
       const currentTime = new Date();
-      const difference = oppExpiry - currentTime;
+      const difference =
+        new Date(opportunity.opportunityId.opportunityFillLastDate) -
+        currentTime;
 
       // Stop the countdown when the target date is reached
       if (difference <= 0) {
@@ -69,7 +83,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
 
     // Clean up the interval on component unmount
     return () => clearInterval(intervalId);
-  }, [oppExpiry]);
+  }, [opportunity.opportunityId]);
 
   return (
     <>
