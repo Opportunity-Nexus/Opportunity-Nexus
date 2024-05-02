@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateCareerParticular } from "../../../Services/Operations/SocialLinks";
 const SocialProfile = () => {
+  const { user } = useSelector((state) => state.profile);
   const { register, handleSubmit } = useForm();
   const { token } = useSelector((state) => state.auth);
 
@@ -43,6 +44,7 @@ const SocialProfile = () => {
                 placeholder="https://linkedin.com/in/username"
                 className="input-style"
                 {...register("linkedin")}
+                defaultValue={user?.careerParticulars?.socialLinks?.LinkedIn}
               />
             </div>
           </div>
@@ -98,12 +100,12 @@ const SocialProfile = () => {
               />
             </div>
           </div>
-          <div className="flex sm:justify-end justify-center flex-wrap gap-2 mt-6 ">
+          <div className="flex justify-center sm:justify-end gap-2  flex-wrap">
             <button
               onClick={() => {
                 navigate("/dashboard/my-profile");
               }}
-              className="cursor-pointer rounded-md dark:bg-red-500  px-3 font-semibold dark:text-richblack-5 border dark:border-richblack-800"
+              className="cursor-pointer rounded-md dark:bg-red-500 py-2 px-5 font-semibold  dark:text-richblack-5 border dark:border-richblack-700"
             >
               Cancel
             </button>
@@ -111,7 +113,7 @@ const SocialProfile = () => {
               className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
               type="submit"
             >
-              Save
+              Update
             </button>
           </div>
         </div>

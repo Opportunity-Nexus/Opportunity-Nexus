@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { updateCareerParticular } from "../../../Services/Operations/SocialLinks";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaDeleteLeft } from "react-icons/fa6";
+
 const LookupData = [
   "Choose Your Type of job",
   "Full-Time",
@@ -13,7 +15,7 @@ const WorkModeData = [
   "Choose Your Work Mode",
   "WORK FROM HOME",
   "IN-OFFICE",
-  "Not-Specified",
+  "Hybrid",
 ];
 export default function UdateCareerParticulars() {
   const navigate = useNavigate();
@@ -34,8 +36,12 @@ export default function UdateCareerParticulars() {
       }
     }
   };
+  const handleDeleteSkill = (skillToDelete) => {
+    setSkills(skills.filter((skill) => skill !== skillToDelete));
+  };
   const submitHandler = async (data) => {
     try {
+      data.skills = skills;
       console.log(token, data);
       const result = await updateCareerParticular(data, token);
       if (result) {
@@ -54,7 +60,7 @@ export default function UdateCareerParticulars() {
           </h2>
           <div className="flex flex-col space-y-2 w-full">
             <label htmlFor="projectName" className="label-style">
-              Your Skills<sup className="text-pink-200">*</sup>
+              Your Skills
             </label>
             <input
               type="text"
@@ -70,8 +76,18 @@ export default function UdateCareerParticulars() {
             )}
             <div>
               {skills.map((skill) => (
-                <span key={skill} className="font-semibold text-sm">
-                  *{skill}
+                <span
+                  key={skill}
+                  className="font-semibold text-sm flex  items-center gap-x-1 "
+                >
+                  {skill}
+                  <button
+                    type="button"
+                    className="text-center "
+                    onClick={() => handleDeleteSkill(skill)}
+                  >
+                    <FaDeleteLeft />
+                  </button>
                   {"  "}
                 </span>
               ))}
@@ -106,17 +122,16 @@ export default function UdateCareerParticulars() {
           </div>
           <div className="flex flex-col  sm:w-full space-y-2 sm:mt-1 mt-3   ">
             <label htmlFor="oppToLookFor" className="label-style">
-              Internship Type
+              What you are looking for
             </label>
             <select
+              type="text"
               name="oppToLookFor"
               id="oppToLookFor"
+              placeholder="Choose Opp to Look for"
               className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
               {...register("oppToLookFor")}
             >
-              <option value=" " disabled>
-                Choose Opp to Look for
-              </option>
               {LookupData.map((element, i) => (
                 <option key={i} value={element}>
                   {element}
@@ -129,14 +144,12 @@ export default function UdateCareerParticulars() {
               Work Mode
             </label>
             <select
+              type="text"
               name="workModeChoice"
               id="workModeChoice"
               className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
               {...register("workModeChoice")}
             >
-              <option value="" disabled>
-                Choose Work Mode
-              </option>
               {WorkModeData.map((element, i) => (
                 <option key={i} value={element}>
                   {element}
@@ -144,12 +157,12 @@ export default function UdateCareerParticulars() {
               ))}
             </select>
           </div>
-          <div className="flex sm:justify-end justify-center flex-wrap gap-2 mt-6 ">
+          <div className="flex justify-center sm:justify-end gap-2  flex-wrap">
             <button
               onClick={() => {
                 navigate("/dashboard/my-profile");
               }}
-              className="cursor-pointer rounded-md dark:bg-red-500  px-3 font-semibold dark:text-richblack-5 border dark:border-richblack-800"
+              className="cursor-pointer rounded-md dark:bg-red-500 py-2 px-5 font-semibold  dark:text-richblack-5 border dark:border-richblack-700"
             >
               Cancel
             </button>
@@ -157,7 +170,7 @@ export default function UdateCareerParticulars() {
               className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
               type="submit"
             >
-              Save
+              Update
             </button>
           </div>
         </div>

@@ -7,6 +7,7 @@ const Internship = () => {
   const { token } = useSelector((state) => state.auth);
   const [isOnGoing, setIsOnGoing] = useState(false);
   const navigate = useNavigate();
+  const today = new Date().toISOString().split("T")[0];
   const {
     register,
     handleSubmit,
@@ -67,12 +68,14 @@ const Internship = () => {
               name="certificateLink"
               id="certificateLink"
               className="input-style"
-              placeholder="Enter your certificate number"
+              placeholder="https://certification-link"
               {...register("certificateLink")}
             />
           </div>
           <div className="flex flex-col space-y-2 w-full">
-            <label htmlFor="internshipStartDate">Internship Start Date</label>
+            <label htmlFor="internshipStartDate">
+              Internship Start Date<sup className="text-pink-200">*</sup>
+            </label>
 
             <input
               type="date"
@@ -80,11 +83,14 @@ const Internship = () => {
               id="internshipStartDate"
               className="input-style"
               placeholder="Start date"
-              {...register("internshipStartDate", { required: true })}
+              max={today}
+              {...register("internshipStartDate", {
+                required: "Enter your Start date of internship",
+              })}
             />
             {errors.internshipStartDate && (
               <span className="error-style">
-                Enter Your Start date of internship
+                {errors.internshipStartDate.message}
               </span>
             )}
           </div>
@@ -99,6 +105,7 @@ const Internship = () => {
                 id="internshipLastDate"
                 className="input-style"
                 placeholder="Start date"
+                max={today}
                 {...register("internshipLastDate")}
               />
             </div>
@@ -114,12 +121,12 @@ const Internship = () => {
             <label htmlFor="currentlyWorking">I currently work here</label>
           </div>
 
-          <div className="flex sm:justify-end justify-center flex-wrap gap-2 mt-6 ">
+          <div className="flex justify-center sm:justify-end gap-2  flex-wrap">
             <button
               onClick={() => {
                 navigate("/dashboard/my-profile");
               }}
-              className="cursor-pointer rounded-md dark:bg-red-500  px-3 font-semibold dark:text-richblack-5 border dark:border-richblack-800"
+              className="cursor-pointer rounded-md dark:bg-red-500 py-2 px-5 font-semibold  dark:text-richblack-5 border dark:border-richblack-700"
             >
               Cancel
             </button>
@@ -127,7 +134,7 @@ const Internship = () => {
               className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
               type="submit"
             >
-              Save
+              Update
             </button>
           </div>
         </div>

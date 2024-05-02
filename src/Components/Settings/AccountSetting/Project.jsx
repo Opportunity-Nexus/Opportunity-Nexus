@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { createProjectDetails } from "../../../Services/Operations/Projects";
 import { useSelector } from "react-redux";
+import { FaDeleteLeft } from "react-icons/fa6";
 export default function Project() {
   const {
     register,
@@ -22,6 +23,9 @@ export default function Project() {
       }
     }
   };
+  const handleDeleteTechStack = (techStackToDelete) => {
+    setTechStacks(techStacks.filter((stack) => stack !== techStackToDelete));
+  };
   const onSubmit = async (data) => {
     const projectData = {
       ...data,
@@ -29,6 +33,7 @@ export default function Project() {
     };
     console.log(projectData, token);
     console.log(techStacks);
+    data.techStacks = techStacks;
     try {
       const result = await createProjectDetails(token, projectData);
       if (result) {
@@ -97,8 +102,18 @@ export default function Project() {
             )}
             <div>
               {techStacks.map((techStack) => (
-                <span key={techStack} className="font-semibold text-sm">
-                  *{techStack}
+                <span
+                  key={techStack}
+                  className="font-semibold text-sm flex  items-center gap-x-1 "
+                >
+                  {techStack}
+                  <button
+                    type="button"
+                    className="text-center "
+                    onClick={() => handleDeleteTechStack(techStack)}
+                  >
+                    <FaDeleteLeft />
+                  </button>
                   {"  "}
                 </span>
               ))}
@@ -120,12 +135,12 @@ export default function Project() {
               <span className="error-style">Enter your project link</span>
             )}
           </div>
-          <div className="flex sm:justify-end justify-center flex-wrap gap-2 mt-6 ">
+          <div className="flex justify-center sm:justify-end gap-2  flex-wrap">
             <button
               onClick={() => {
                 navigate("/dashboard/my-profile");
               }}
-              className="cursor-pointer rounded-md dark:bg-red-500  px-3 font-semibold dark:text-richblack-5 border dark:border-richblack-800"
+              className="cursor-pointer rounded-md dark:bg-red-500 py-2 px-5 font-semibold  dark:text-richblack-5 border dark:border-richblack-700"
             >
               Cancel
             </button>
@@ -133,7 +148,7 @@ export default function Project() {
               className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
               type="submit"
             >
-              Save
+              Update
             </button>
           </div>
         </div>

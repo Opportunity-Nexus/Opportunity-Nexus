@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { educationData } from "../../../Data/Education/EducationData";
 import { educationBoardData } from "../../../Data/Education/EducationBoardData";
@@ -8,6 +8,7 @@ import { createEducatoinDetails } from "../../../Services/Operations/Education";
 const Education = () => {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
+  const [selectedEducation, setSelectedEducation] = useState("");
   const {
     register,
     handleSubmit,
@@ -24,6 +25,8 @@ const Education = () => {
       console.log("error Message: ", error.message);
     }
   };
+
+  const selectEducationBoards = educationBoardData[selectedEducation] || [];
   return (
     <>
       <form action="" onSubmit={handleSubmit(submitEducationForm)}>
@@ -42,6 +45,7 @@ const Education = () => {
               placeholder="College/University"
               className="input-style"
               {...register("education", { required: true })}
+              onChange={(e) => setSelectedEducation(e.target.value)}
             >
               {educationData.map((element, i) => {
                 return (
@@ -69,7 +73,7 @@ const Education = () => {
               className="input-style"
               {...register("educationBoard", { required: true })}
             >
-              {educationBoardData.map((element, i) => {
+              {selectEducationBoards.map((element, i) => {
                 return (
                   <option key={i} value={element}>
                     {element}
@@ -107,7 +111,7 @@ const Education = () => {
               What's Your Percentage<sup className="text-pink-200">*</sup>
             </label>
             <input
-              type="text"
+              type="number"
               name="educationPercentage"
               id="educationPercentage"
               className="input-style"
@@ -120,12 +124,12 @@ const Education = () => {
               <span className="error-style">Enter Your respective marks</span>
             )}
           </div>
-          <div className="flex sm:justify-end justify-center flex-wrap gap-2 mt-6 ">
+          <div className="flex justify-center sm:justify-end gap-2  flex-wrap">
             <button
               onClick={() => {
                 navigate("/dashboard/my-profile");
               }}
-              className="cursor-pointer rounded-md dark:bg-red-500  px-3 font-semibold dark:text-richblack-5 border dark:border-richblack-800"
+              className="cursor-pointer rounded-md dark:bg-red-500 py-2 px-5 font-semibold  dark:text-richblack-5 border dark:border-richblack-700"
             >
               Cancel
             </button>
@@ -133,7 +137,7 @@ const Education = () => {
               className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
               type="submit"
             >
-              Save
+              Update
             </button>
           </div>
         </div>
