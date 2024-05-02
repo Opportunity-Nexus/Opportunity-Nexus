@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
-import OffCampusPieChart from "../../Components/Dashboard/StudentAnalytics/OffCampusPieChart";
+import OpportunityPieChart from "../../Components/Dashboard/StudentAnalytics/OpportunityPieChart";
 import { FaBookReader } from "react-icons/fa";
 import { offcampusBookmarkAnalytics } from "../../Services/Operations/StudentAnalytics";
 import { useSelector } from "react-redux";
 import { useSpring, animated } from "react-spring";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import OnCampusAnalytics from "../../Components/Dashboard/StudentAnalytics/OnCampusAnalytics";
+import OnCampusStudentAnalytics from "../../Components/Dashboard/StudentAnalytics/OnCampusStudentAnalytics";
 
 const StudentAnalytics = () => {
 	//eslint-disable-next-line
@@ -14,6 +16,7 @@ const StudentAnalytics = () => {
 	const [offcampusData, setOffcampusData] = useState([]);
 	console.log("OFFCAMPUSDATA", offcampusData);
 	const { token } = useSelector((state) => state.auth);
+	const { user } = useSelector((state) => state.profile);
 	console.log("HERE", offcampusData);
 	const fetchOffCampusDetails = () => {
 		try {
@@ -42,7 +45,7 @@ const StudentAnalytics = () => {
 	}, []);
 	return (
 		<>
-			<div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
+			<div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900 gap-y-5">
 				{/* ------------TITLE && TAGLINE--------------- */}
 				<div className="flex justify-center items-center py-12">
 					<h1 className="font-bold text-base sm:text-3xl md:text-2xl lg:text-4xl text-center dark:text-white ">
@@ -70,9 +73,9 @@ const StudentAnalytics = () => {
 							Insights into Your Bookmarked Opportunities
 						</h1>
 					</span>
-					<div className="flex flex-col items-center justify-center md:flex-row">
-						<div className="flex flex-col w-1/2">
-							<div className="flex mt-8 py-2 md:py-5">
+					<div className="flex flex-col md:flex-row justify-center gap-2">
+						<div className="flex flex-col items-center justify-center w-full md:w-1/2">
+							<div className="flex py-2 md:py-5">
 								{offcampusData.length > 0 &&
 									offcampusData.map((item) => (
 										<span
@@ -97,10 +100,13 @@ const StudentAnalytics = () => {
 							</div>
 						</div>
 						<div className="w-1/2 h-60 md:h-80 p-2">
-							<OffCampusPieChart />
+							<OpportunityPieChart offcampusData={offcampusData} />
 						</div>
 					</div>
 				</div>
+				<span className="my-10 font-bold  animate-bounce text-2xl text-slate-50 text-center bg-gradient-to-r from-blue-600 to-violet-900 bg-clip-text text-transparent">{`${user.firstName.toUpperCase()}'S ON-CAMPUS ANALYSIS`}</span>
+				<OnCampusAnalytics/>
+				<OnCampusStudentAnalytics/>
 			</div>
 		</>
 	);

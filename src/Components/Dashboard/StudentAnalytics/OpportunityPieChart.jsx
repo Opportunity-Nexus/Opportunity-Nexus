@@ -1,33 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { offcampusBookmarkAnalytics } from "../../../Services/Operations/StudentAnalytics";
 import { Pie } from "react-chartjs-2";
-import { useSelector } from "react-redux";
-
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const OffCampusPieChart = () => {
-	//eslint-disable-next-line
-	const [loading, setLoading] = useState(false);
-	const [offcampusData, setOffcampusData] = useState(null);
-	console.log("OFFCAMPUSDATA", offcampusData);
-	const { token } = useSelector((state) => state.auth);
-	const fetchOffCampusDetails = () => {
-		try {
-			const result = offcampusBookmarkAnalytics(token, setOffcampusData);
-			if (result) {
-				setOffcampusData(result);
-			}
-		} catch (error) {
-			console.log("Error while fetching offcampus!!");
-		}
-	};
-	useEffect(() => {
-		setLoading(true);
-		fetchOffCampusDetails();
-		setLoading(false);
-		//eslint-disable-next-line
-	}, []);
+const OpportunityPieChart = ({ offcampusData }) => {
 	const generateChartData = () => {
 		if (
 			!offcampusData ||
@@ -40,7 +16,6 @@ const OffCampusPieChart = () => {
 		const data = offcampusData.map((item) => item.count);
 		return { labels, data };
 	};
-
 	const chartData = generateChartData();
 	const data = {
 		labels: ["Scholarships", "Workplace Prospects", "Coding Contests"],
@@ -67,10 +42,8 @@ const OffCampusPieChart = () => {
 		},
 	};
 	return (
-		<>
 			<Pie data={data} height={200} options={options} />
-		</>
 	);
 };
 
-export default OffCampusPieChart;
+export default OpportunityPieChart;
