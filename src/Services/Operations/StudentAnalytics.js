@@ -8,7 +8,7 @@ export const offcampusBookmarkAnalytics = async (
 	token,
 	setOffcampusData
 ) => {
-	const toastId = toast.loading("Loading...");
+	// const toastId = toast.loading("Loading...");
 	try {
 		const response = await apiConnector(
 			"GET",
@@ -22,10 +22,10 @@ export const offcampusBookmarkAnalytics = async (
 		if (!response.data.success) {
 			throw new Error(response.data.message);
 		}
-		toast.success("DATA FETCHED!!");
+		// toast.success("DATA FETCHED!!");
 		setOffcampusData(response.data.data);
 	} catch (error) {
 		console.log("Could not fetch the analytics data", error);
 	}
-	toast.dismiss(toastId);
+	// toast.dismiss(toastId);
 };
