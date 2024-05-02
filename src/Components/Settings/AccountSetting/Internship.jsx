@@ -35,7 +35,7 @@ const Internship = () => {
             Internship
           </h2>
           <div className="flex flex-col space-y-2 w-full">
-            <label htmlFor="companyName">
+            <label htmlFor="companyName" className="label-style">
               Company <sup className="text-pink-200">*</sup>
             </label>
             <input
@@ -51,7 +51,9 @@ const Internship = () => {
             )}
           </div>
           <div className="flex flex-col space-y-2 w-full">
-            <label htmlFor="certificationNumber">Certification Number</label>
+            <label htmlFor="certificationNumber" className="label-style">
+              Certification Number
+            </label>
             <input
               type="text"
               name="certificationNumber"
@@ -62,18 +64,20 @@ const Internship = () => {
             />
           </div>
           <div className="flex flex-col space-y-2 w-full">
-            <label htmlFor="certificateLink">Certificate Link</label>
+            <label htmlFor="certificateLink" className="label-style">
+              Certificate Link
+            </label>
             <input
               type="url"
               name="certificateLink"
               id="certificateLink"
               className="input-style"
-              placeholder="https://certification-link"
+              placeholder="i.e: https://certification-link"
               {...register("certificateLink")}
             />
           </div>
           <div className="flex flex-col space-y-2 w-full">
-            <label htmlFor="internshipStartDate">
+            <label htmlFor="internshipStartDate" className="label-style">
               Internship Start Date<sup className="text-pink-200">*</sup>
             </label>
 
@@ -96,8 +100,8 @@ const Internship = () => {
           </div>
           {!isOnGoing && (
             <div className="flex flex-col space-y-2 w-full">
-              <label htmlFor="internshipLastDate">
-                Internship Last Date <sup className="text-pink-200">*</sup>
+              <label htmlFor="internshipLastDate" className="label-style">
+                Internship Last Date
               </label>
               <input
                 type="date"
@@ -118,7 +122,9 @@ const Internship = () => {
               onChange={handleCheckboxChange}
               checked={isOnGoing}
             />
-            <label htmlFor="currentlyWorking">I currently work here</label>
+            <label htmlFor="currentlyWorking" className="label-style">
+              I currently work here
+            </label>
           </div>
 
           <div className="flex justify-center sm:justify-end gap-2  flex-wrap">

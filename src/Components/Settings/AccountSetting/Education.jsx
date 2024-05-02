@@ -13,7 +13,11 @@ const Education = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      education: "",
+    },
+  });
   const submitEducationForm = async (data) => {
     try {
       console.log(token, data);
@@ -39,14 +43,16 @@ const Education = () => {
               Your qualifications <sup className="text-pink-200">*</sup>
             </label>
             <select
-              type="text"
               name="education"
               id="education"
-              placeholder="College/University"
               className="input-style"
               {...register("education", { required: true })}
               onChange={(e) => setSelectedEducation(e.target.value)}
+              defaultValue=" "
             >
+              <option value="" disabled>
+                Choose Your Qualification
+              </option>
               {educationData.map((element, i) => {
                 return (
                   <option key={i} value={element}>
@@ -72,7 +78,11 @@ const Education = () => {
               placeholder="College/University"
               className="input-style"
               {...register("educationBoard", { required: true })}
+              defaultValue=""
             >
+              <option value="" disabled>
+                Choose Your board
+              </option>
               {selectEducationBoards.map((element, i) => {
                 return (
                   <option key={i} value={element}>
@@ -115,7 +125,7 @@ const Education = () => {
               name="educationPercentage"
               id="educationPercentage"
               className="input-style"
-              placeholder="Enter your marks "
+              placeholder="i.e 80, 70"
               {...register("educationPercentage", {
                 required: true,
               })}

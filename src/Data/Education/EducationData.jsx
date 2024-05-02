@@ -1,6 +1,1 @@
-export const educationData = [
-  "Choose Your Qualification",
-  "High School",
-  "Intermediate",
-  "Bachelors",
-];
+export const educationData = ["High School", "Intermediate", "Bachelors"];

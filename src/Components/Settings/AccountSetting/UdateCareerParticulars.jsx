@@ -5,18 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaDeleteLeft } from "react-icons/fa6";
 
-const LookupData = [
-  "Choose Your Type of job",
-  "Full-Time",
-  "Internship",
-  "Not-Specified",
-];
-const WorkModeData = [
-  "Choose Your Work Mode",
-  "WORK FROM HOME",
-  "IN-OFFICE",
-  "Hybrid",
-];
+const LookupData = ["Full-Time", "Internship", "Not-Specified"];
+const WorkModeData = ["WORK FROM HOME", "IN-OFFICE", "Hybrid"];
 export default function UdateCareerParticulars() {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
@@ -24,7 +14,7 @@ export default function UdateCareerParticulars() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: { oppToLookFor: "", workModeChoice: "" } });
   const [skills, setSkills] = useState([]);
   const handleSkillsSubmit = (event) => {
     if (event.key === "Enter") {
@@ -67,7 +57,7 @@ export default function UdateCareerParticulars() {
               name="skills"
               id="skills"
               className="input-style"
-              placeholder="Enter Your Skills"
+              placeholder="Enter Your Skills i.e React and press Enter"
               onKeyDown={handleSkillsSubmit}
               {...register("skills")}
             />
@@ -78,12 +68,12 @@ export default function UdateCareerParticulars() {
               {skills.map((skill) => (
                 <span
                   key={skill}
-                  className="font-semibold text-sm flex  items-center gap-x-1 "
+                  className="font-semibold text-sm flex-col px-1  items-center gap-x-1 "
                 >
                   {skill}
                   <button
                     type="button"
-                    className="text-center "
+                    className=" flex-col px-1 items-center "
                     onClick={() => handleDeleteSkill(skill)}
                   >
                     <FaDeleteLeft />
@@ -115,7 +105,7 @@ export default function UdateCareerParticulars() {
               type="text"
               name="achievements"
               id="achievements"
-              placeholder="Enter Your  Achievements"
+              placeholder="Enter Your Achievements"
               className="input-style"
               {...register("achievements")}
             />
@@ -125,13 +115,16 @@ export default function UdateCareerParticulars() {
               What you are looking for
             </label>
             <select
-              type="text"
               name="oppToLookFor"
               id="oppToLookFor"
               placeholder="Choose Opp to Look for"
               className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
               {...register("oppToLookFor")}
+              defaultValue=""
             >
+              <option value="" disabled>
+                Choose Your type of job
+              </option>
               {LookupData.map((element, i) => (
                 <option key={i} value={element}>
                   {element}
@@ -144,12 +137,15 @@ export default function UdateCareerParticulars() {
               Work Mode
             </label>
             <select
-              type="text"
               name="workModeChoice"
               id="workModeChoice"
               className="border border-gray-300 text-black dark:text-richblack-5 bg-gray-50 dark:bg-richblack-700 dark:border-none rounded-lg w-full px-3 py-3 shadow-[0_1px_0_0] shadow-white/25"
               {...register("workModeChoice")}
+              defaultValue=""
             >
+              <option value="" disabled>
+                Choose Your Work Mode
+              </option>
               {WorkModeData.map((element, i) => (
                 <option key={i} value={element}>
                   {element}

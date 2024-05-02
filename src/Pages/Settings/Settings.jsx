@@ -53,20 +53,7 @@ const AccountSetting = () => {
             <UpdatePassword />
           </div>
         </div>
-        <hr className="border-t dark:border-richblack-700" />
-        <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
-          <div className="pr-4  lg:w-[30%]">
-            <h1 className="text-2xl font-semibold dark:text-white px-2">
-              Delete account
-            </h1>
-            <p className="text-sm px-2 ">
-              Do you wish to have your account deleted?
-            </p>
-          </div>
-          <div className="lg:w-[70%] w-full ">
-            <DeleteAccount />
-          </div>
-        </div>
+
         <hr className="border-t dark:border-richblack-700" />
         <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
           <div className="pr-4  lg:w-[30%]">
@@ -127,6 +114,20 @@ const AccountSetting = () => {
           </div>
           <div className="lg:w-[70%] w-full ">
             <UdateCareerParticulars />
+          </div>
+        </div>
+        <hr className="border-t dark:border-richblack-700" />
+        <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
+          <div className="pr-4  lg:w-[30%]">
+            <h1 className="text-2xl font-semibold dark:text-white px-2">
+              Delete account
+            </h1>
+            <p className="text-sm px-2 ">
+              Do you wish to have your account deleted?
+            </p>
+          </div>
+          <div className="lg:w-[70%] w-full ">
+            <DeleteAccount />
           </div>
         </div>
       </div>
