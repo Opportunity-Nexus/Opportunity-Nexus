@@ -165,7 +165,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                             }`}
                           >
                             {isExpired ? null : (
-                              <span className="text-sm  text-gray-700 dark:text-gray-300">
+                              <span className="text-sm   text-green-600 dark:text-green-500">
                                 {timeLeft}
                               </span>
                             )}
