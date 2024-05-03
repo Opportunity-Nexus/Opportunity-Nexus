@@ -72,7 +72,7 @@ const Internship = () => {
               name="certificateLink"
               id="certificateLink"
               className="input-style"
-              placeholder="i.e: https://certification-link"
+              placeholder="e.g : https://certification-link"
               {...register("certificateLink")}
             />
           </div>

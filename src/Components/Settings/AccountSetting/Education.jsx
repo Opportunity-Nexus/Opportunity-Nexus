@@ -99,39 +99,40 @@ const Education = () => {
           </div>
           <div className="flex flex-col space-y-2 w-full">
             <label htmlFor="educationDegree" className="label-style">
-              What's Your Specetialization{" "}
-              <sup className="text-pink-200">*</sup>
+              Your specialization <sup className="text-pink-200">*</sup>
             </label>
             <input
               type="text"
               name="educationDegree"
               id="educationDegree"
               className="input-style"
-              placeholder="i.e PCM, PCB, CSE"
+              placeholder="e.g  PCM, PCB, CSE"
               {...register("educationDegree", {
                 required: true,
               })}
             />
             {errors.educationDegree && (
-              <span className="error-style">Enter your Specetialization</span>
+              <span className="error-style">Enter your specialization</span>
             )}
           </div>
           <div className="flex flex-col space-y-2 w-full">
             <label htmlFor="educationPercentage" className="label-style">
-              What's Your Percentage<sup className="text-pink-200">*</sup>
+              Your Percentage<sup className="text-pink-200">*</sup>
             </label>
             <input
               type="number"
               name="educationPercentage"
               id="educationPercentage"
               className="input-style"
-              placeholder="i.e 80, 70"
+              placeholder="e.g  80 "
               {...register("educationPercentage", {
                 required: true,
               })}
             />
             {errors.educationPercentage && (
-              <span className="error-style">Enter Your respective marks</span>
+              <span className="error-style">
+                Enter Your Percentage (in whole no)
+              </span>
             )}
           </div>
           <div className="flex justify-center sm:justify-end gap-2  flex-wrap">

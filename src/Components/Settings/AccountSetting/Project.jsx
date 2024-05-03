@@ -93,7 +93,7 @@ export default function Project() {
               name="projectTechnologyStack"
               id="projectTechnologyStack"
               className="input-style"
-              placeholder="Enter Tech stacks you used i.e MERN and then press Enter"
+              placeholder="Enter Tech stacks you used e.g  MERN and then press Enter"
               onKeyDown={handleTechStackSubmit}
               {...register("projectTechnologyStack", { required: true })}
             />
@@ -104,12 +104,12 @@ export default function Project() {
               {techStacks.map((techStack) => (
                 <span
                   key={techStack}
-                  className="font-semibold text-sm flex-col px-1 items-center gap-x-1 justify-center "
+                  className="font-semibold text-sm flex-col px-1 items-center gap-x-2 justify-center "
                 >
                   {techStack}
                   <button
                     type="button"
-                    className="text-center "
+                    className=""
                     onClick={() => handleDeleteTechStack(techStack)}
                   >
                     <FaDeleteLeft />

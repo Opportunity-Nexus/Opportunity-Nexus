@@ -4,7 +4,6 @@ import { updateCareerParticular } from "../../../Services/Operations/SocialLinks
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaDeleteLeft } from "react-icons/fa6";
-
 const LookupData = ["Full-Time", "Internship", "Not-Specified"];
 const WorkModeData = ["WORK FROM HOME", "IN-OFFICE", "Hybrid"];
 export default function UdateCareerParticulars() {
@@ -16,6 +15,41 @@ export default function UdateCareerParticulars() {
     formState: { errors },
   } = useForm({ defaultValues: { oppToLookFor: "", workModeChoice: "" } });
   const [skills, setSkills] = useState([]);
+  const [workExperiences, setWorkExperiences] = useState([]);
+  const [achievements, setAchievements] = useState([]);
+
+  const handleWorkExperiencesSubmit = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const newWorkExperiences = event.target.value.trim();
+      if (newWorkExperiences && !workExperiences.includes(newWorkExperiences)) {
+        setWorkExperiences([...workExperiences, newWorkExperiences]);
+        event.target.value = " ";
+      }
+    }
+  };
+  const handleDeleteWorkExperience = (workExperienceToDelete) => {
+    setWorkExperiences(
+      workExperiences.filter(
+        (workExperience) => workExperience !== workExperienceToDelete
+      )
+    );
+  };
+  const handleAchievementsSubmit = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const newAchievements = event.target.value.trim();
+      if (newAchievements && !achievements.includes(newAchievements)) {
+        setAchievements([...achievements, newAchievements]);
+        event.target.value = " ";
+      }
+    }
+  };
+  const handleDeleteAchievement = (achievementToDelete) => {
+    setAchievements(
+      achievements.filter((achievement) => achievement !== achievementToDelete)
+    );
+  };
   const handleSkillsSubmit = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -57,7 +91,7 @@ export default function UdateCareerParticulars() {
               name="skills"
               id="skills"
               className="input-style"
-              placeholder="Enter Your Skills i.e React and press Enter"
+              placeholder="Enter Your Skills e.g  React and press Enter"
               onKeyDown={handleSkillsSubmit}
               {...register("skills")}
             />
@@ -90,12 +124,34 @@ export default function UdateCareerParticulars() {
             </label>
             <input
               type="text"
-              name="workExperience"
-              id="workExperience"
-              placeholder="Enter Your Work Experience"
+              name="workExperiences"
+              id="workExperiences"
+              placeholder="Enter Your Work Experience and then press Enter"
               className="input-style"
-              {...register("workExperience")}
+              onKeyDown={handleWorkExperiencesSubmit}
+              {...register("workExperiences")}
             />
+            {errors.workExperiences && (
+              <span className="error-style">Enter your Work Experience </span>
+            )}
+            <div>
+              {workExperiences.map((workExperience) => (
+                <span
+                  key={workExperience}
+                  className="font-semibold text-sm flex-col px-1  items-center gap-x-1 "
+                >
+                  {workExperience}
+                  <button
+                    type="button"
+                    className=" flex-col px-1 items-center "
+                    onClick={() => handleDeleteWorkExperience(workExperience)}
+                  >
+                    <FaDeleteLeft />
+                  </button>
+                  {"  "}
+                </span>
+              ))}
+            </div>
           </div>
           <div className="relative flex flex-col gap-2 w-full">
             <label htmlFor="achievements" className="label-style">
@@ -105,10 +161,32 @@ export default function UdateCareerParticulars() {
               type="text"
               name="achievements"
               id="achievements"
-              placeholder="Enter Your Achievements"
+              placeholder="Enter Your Achievements and press Enter"
               className="input-style"
+              onKeyDown={handleAchievementsSubmit}
               {...register("achievements")}
             />
+            {errors.achievements && (
+              <span className="error-style">Enter your Achievements </span>
+            )}
+            <div>
+              {achievements.map((achievement) => (
+                <span
+                  key={achievement}
+                  className="font-semibold text-sm flex-col px-1  items-center gap-x-1 "
+                >
+                  {achievement}
+                  <button
+                    type="button"
+                    className=" flex-col px-1 items-center "
+                    onClick={() => handleDeleteAchievement(achievement)}
+                  >
+                    <FaDeleteLeft />
+                  </button>
+                  {"  "}
+                </span>
+              ))}
+            </div>
           </div>
           <div className="flex flex-col  sm:w-full space-y-2 sm:mt-1 mt-3   ">
             <label htmlFor="oppToLookFor" className="label-style">

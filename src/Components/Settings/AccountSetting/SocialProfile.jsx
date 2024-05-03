@@ -2,7 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FaLinkedinIn, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaLinkedinIn, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { TbWorld } from "react-icons/tb";
 import { updateCareerParticular } from "../../../Services/Operations/SocialLinks";
 
@@ -42,7 +43,10 @@ const SocialProfile = () => {
         </h2>
 
         <div className="relative flex flex-col gap-2">
-          <label htmlFor="linkedin" className="flex items-center gap-x-1">
+          <label
+            htmlFor="linkedin"
+            className="flex items-center gap-x-1 text-base font-semibold text-black dark:text-richblack-5"
+          >
             <FaLinkedinIn /> LinkedIn
           </label>
           <input
@@ -64,7 +68,10 @@ const SocialProfile = () => {
         </div>
 
         <div className="relative flex flex-col gap-2">
-          <label htmlFor="github" className="flex items-center gap-x-1">
+          <label
+            htmlFor="github"
+            className="flex items-center gap-x-1 text-base font-semibold text-black dark:text-richblack-5"
+          >
             <FaGithub /> GitHub
           </label>
           <input
@@ -86,8 +93,11 @@ const SocialProfile = () => {
         </div>
 
         <div className="relative flex flex-col gap-2">
-          <label htmlFor="twitter" className="flex items-center gap-x-1">
-            <FaTwitter /> Twitter
+          <label
+            htmlFor="X"
+            className="flex items-center gap-x-1 text-base font-semibold text-black dark:text-richblack-5"
+          >
+            <FaXTwitter />
           </label>
           <input
             type="url"
@@ -98,7 +108,7 @@ const SocialProfile = () => {
             {...register("twitter", {
               pattern: {
                 value: /^https:\/\/(www\.)?twitter\.com\/[^/]+\/?$/,
-                message: "Enter a valid Twitter URL",
+                message: "Enter a valid X URL",
               },
             })}
           />
@@ -108,7 +118,10 @@ const SocialProfile = () => {
         </div>
 
         <div className="relative flex flex-col gap-2">
-          <label htmlFor="website" className="flex items-center gap-x-1">
+          <label
+            htmlFor="website"
+            className="flex items-center gap-x-1 text-base font-semibold text-black dark:text-richblack-5"
+          >
             <TbWorld /> Website
           </label>
           <input
@@ -129,17 +142,18 @@ const SocialProfile = () => {
           )}
         </div>
 
-        <div className="flex justify-end gap-2 flex-wrap">
+        <div className="flex justify-center sm:justify-end gap-2  flex-wrap">
           <button
-            type="button"
-            onClick={() => navigate("/dashboard/my-profile")}
-            className="rounded-md dark:bg-red-500 py-2 px-5 font-semibold dark:text-richblack-5"
+            onClick={() => {
+              navigate("/dashboard/my-profile");
+            }}
+            className="cursor-pointer rounded-md dark:bg-red-500 py-2 px-5 font-semibold  dark:text-richblack-5 border dark:border-richblack-700"
           >
             Cancel
           </button>
           <button
+            className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
             type="submit"
-            className="bg-primary-600 hover:bg-primary-700 cursor-pointer rounded-md py-2 px-5 font-semibold text-white"
           >
             Update
           </button>
