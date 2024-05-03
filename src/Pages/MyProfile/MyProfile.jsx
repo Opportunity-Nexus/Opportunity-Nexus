@@ -27,6 +27,7 @@ export default function MyProfile() {
           </h1>
 
           <div className="flex  items-center justify-between rounded-md border-[1px] dark:border-richblack-700  bg-white dark:bg-gray-900 p-8 px-16 w-[]">
+            {/* hello */}
             <div className="flex items-center gap-x-4 w-full justify-between ">
               <div className="space-y-0">
                 <p className="text-xl font-semibold px-4 dark:text-richblack-5 ">
