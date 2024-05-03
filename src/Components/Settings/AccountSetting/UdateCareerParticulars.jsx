@@ -134,22 +134,23 @@ export default function UdateCareerParticulars() {
             {errors.workExperiences && (
               <span className="error-style">Enter your Work Experience </span>
             )}
-            <div>
+            <div className="flex flex-col gap-2 w-full">
               {workExperiences.map((workExperience) => (
-                <span
+                <div
                   key={workExperience}
-                  className="font-semibold text-sm flex-col px-1  items-center gap-x-1 "
+                  className="flex items-center gap-2 w-full"
                 >
-                  {workExperience}
+                  <span className="flex-1 min-w-0 break-words overflow-hidden text-ellipsis">
+                    {workExperience}
+                  </span>
                   <button
                     type="button"
-                    className=" flex-col px-1 items-center "
                     onClick={() => handleDeleteWorkExperience(workExperience)}
+                    className="p-1"
                   >
                     <FaDeleteLeft />
                   </button>
-                  {"  "}
-                </span>
+                </div>
               ))}
             </div>
           </div>
@@ -169,22 +170,23 @@ export default function UdateCareerParticulars() {
             {errors.achievements && (
               <span className="error-style">Enter your Achievements </span>
             )}
-            <div>
+            <div className="flex flex-col gap-2 w-full">
               {achievements.map((achievement) => (
-                <span
+                <div
                   key={achievement}
-                  className="font-semibold text-sm flex-col px-1  items-center gap-x-1 "
+                  className="flex items-center gap-2 w-full"
                 >
-                  {achievement}
+                  <span className="flex-1 min-w-0 break-words overflow-hidden text-ellipsis">
+                    {achievement}
+                  </span>
                   <button
                     type="button"
-                    className=" flex-col px-1 items-center "
                     onClick={() => handleDeleteAchievement(achievement)}
+                    className="p-1 flex items-center"
                   >
                     <FaDeleteLeft />
                   </button>
-                  {"  "}
-                </span>
+                </div>
               ))}
             </div>
           </div>

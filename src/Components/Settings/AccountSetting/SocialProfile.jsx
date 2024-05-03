@@ -38,7 +38,7 @@ const SocialProfile = () => {
   return (
     <form onSubmit={handleSubmit(submitSocialLinks)}>
       <div className="flex flex-col gap-y-4 rounded-md border dark:border-richblack-700 dark:bg-richblack-800 p-8">
-        <h2 className="text-2xl font-bold dark:text-richblack-5 mb-8">
+        <h2 className="sm:text-2xl text-xl font-bold dark:text-richblack-5 mb-8 text-center sm:text-start  ">
           Social Links
         </h2>
 
