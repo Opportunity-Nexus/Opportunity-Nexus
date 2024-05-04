@@ -50,41 +50,6 @@ const SavedOpportunityCard = (opportunity) => {
                     </p>
                   </div>
                 </div>
-              </div>
-              <div className="mt-2 sm:flex flex-col gap-2">
-                <div className="flex-shrink-0 flex items-center gap-3 ml-auto">
-                  <div
-                    className={`flex items-center justify-center ${
-                      isExpired ? "hidden" : ""
-                    }`}
-                  >
-                    <a
-                      href={opportunity.applicationUrl}
-                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-600"
-                    >
-                      Apply now
-                    </a>
-                  </div>
-                  <p className="inline-flex text-xs leading-5 font-semibold">
-                    {!isExpired ? (
-                      <span className="bg-green-100 text-green-800 px-2 rounded-full">
-                        Active
-                      </span>
-                    ) : (
-                      <span className="bg-red-100 text-red-800 px-2 rounded-full">
-                        Expired
-                      </span>
-                    )}
-                  </p>
-                  <div className="flex items-center justify-center">
-                    <button
-                      onClick={handleOpportunityDelete}
-                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-red-500 hover:bg-red-600"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
 
                 <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                   <CalendarIcon
@@ -107,6 +72,39 @@ const SavedOpportunityCard = (opportunity) => {
                     Bookmarked on{" "}
                     {new Date(opportunity.createdAt).toDateString()}{" "}
                   </p>
+                </div>
+              </div>
+              <div className="mt-2 sm:flex flex-col gap-2">
+                <div className="flex-shrink-0 flex items-center justify-end gap-2 ml-auto">
+                  <div
+                    className={`flex items-center justify-center ${
+                      isExpired ? "hidden" : ""
+                    }`}
+                  >
+                    <a
+                      href={opportunity.applicationUrl}
+                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-600"
+                    >
+                      Apply now
+                    </a>
+                  </div>
+                  <p className="inline-flex text-xs leading-5 font-semibold">
+                    {!isExpired ? (
+                      <></>
+                    ) : (
+                      <span className="bg-red-100 text-red-800 px-2 rounded-full">
+                        Expired
+                      </span>
+                    )}
+                  </p>
+                  <div className="flex items-center justify-center">
+                    <button
+                      onClick={handleOpportunityDelete}
+                      className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-red-500 hover:bg-red-600"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
