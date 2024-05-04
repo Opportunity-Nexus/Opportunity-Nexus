@@ -2,7 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FaLinkedinIn, FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { TbWorld } from "react-icons/tb";
 import { updateCareerParticular } from "../../../Services/Operations/SocialLinks";
@@ -47,7 +48,7 @@ const SocialProfile = () => {
             htmlFor="linkedin"
             className="flex items-center gap-x-1 text-base font-semibold text-black dark:text-richblack-5"
           >
-            <FaLinkedinIn /> LinkedIn
+            <FaLinkedin /> LinkedIn
           </label>
           <input
             type="url"

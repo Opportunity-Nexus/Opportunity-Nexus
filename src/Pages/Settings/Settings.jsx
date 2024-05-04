@@ -8,7 +8,9 @@ import Internship from "../../Components/Settings/AccountSetting/Internship";
 import Education from "../../Components/Settings/AccountSetting/Education";
 import Project from "../../Components/Settings/AccountSetting/Project";
 import UdateCareerParticulars from "../../Components/Settings/AccountSetting/UdateCareerParticulars";
+import { useSelector } from "react-redux";
 const AccountSetting = () => {
+  const user = useSelector((state) => state.profile);
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
       <div className="flex justify-center items-center py-12">
@@ -54,6 +56,25 @@ const AccountSetting = () => {
           </div>
         </div>
 
+        {user?.accountType === "Student" && (
+          <div>
+            <hr className="border-t dark:border-richblack-700" />
+            <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
+              <div className="pr-4  lg:w-[30%]">
+                <h1 className="text-2xl font-semibold dark:text-white px-2">
+                  Your work experience
+                </h1>
+                <p className="text-sm px-2 ">
+                  What other position have you held?
+                </p>
+              </div>
+              <div className="lg:w-[70%] w-full ">
+                <Internship />
+              </div>
+            </div>
+          </div>
+        )}
+
         <hr className="border-t dark:border-richblack-700" />
         <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
           <div className="pr-4  lg:w-[30%]">
@@ -66,56 +87,58 @@ const AccountSetting = () => {
             <SocialProfile />
           </div>
         </div>
-        <hr className="border-t dark:border-richblack-700" />
-        <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
-          <div className="pr-4  lg:w-[30%]">
-            <h1 className="text-2xl font-semibold dark:text-white px-2">
-              Your work experience
-            </h1>
-            <p className="text-sm px-2 ">What other position have you held?</p>
+
+        {user?.accountType === "Student" && (
+          <div>
+            <hr className="border-t dark:border-richblack-700" />
+            <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
+              <div className="pr-4  lg:w-[30%]">
+                <h1 className="text-2xl font-semibold dark:text-white px-2">
+                  Education
+                </h1>
+                <p className="text-sm px-2 ">
+                  What school / college have you studied at?
+                </p>
+              </div>
+              <div className="lg:w-[70%] w-full ">
+                <Education />
+              </div>
+            </div>
           </div>
-          <div className="lg:w-[70%] w-full ">
-            <Internship />
+        )}
+        {user?.accountType === "Student" && (
+          <div>
+            <hr className="border-t dark:border-richblack-700" />
+            <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
+              <div className="pr-4  lg:w-[30%]">
+                <h1 className="text-2xl font-semibold dark:text-white px-2">
+                  Projects
+                </h1>
+                <p className="text-sm px-2 ">What Project have you created ?</p>
+              </div>
+              <div className="lg:w-[70%] w-full ">
+                <Project />
+              </div>
+            </div>
           </div>
-        </div>
-        <hr className="border-t dark:border-richblack-700" />
-        <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
-          <div className="pr-4  lg:w-[30%]">
-            <h1 className="text-2xl font-semibold dark:text-white px-2">
-              Education
-            </h1>
-            <p className="text-sm px-2 ">
-              What school / college have you studied at?
-            </p>
+        )}
+        {user?.accountType === "Student" && (
+          <div>
+            <hr className="border-t dark:border-richblack-700" />
+            <div className="flex flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
+              <div className="pr-4  lg:w-[30%]">
+                <h1 className="text-2xl font-semibold dark:text-white px-2">
+                  Career Options
+                </h1>
+                <p className="text-sm px-2 ">What's Your preferences ?</p>
+              </div>
+              <div className="lg:w-[70%] w-full ">
+                <UdateCareerParticulars />
+              </div>
+            </div>
           </div>
-          <div className="lg:w-[70%] w-full ">
-            <Education />
-          </div>
-        </div>
-        <hr className="border-t dark:border-richblack-700" />
-        <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
-          <div className="pr-4  lg:w-[30%]">
-            <h1 className="text-2xl font-semibold dark:text-white px-2">
-              Projects
-            </h1>
-            <p className="text-sm px-2 ">What Project have you created ?</p>
-          </div>
-          <div className="lg:w-[70%] w-full ">
-            <Project />
-          </div>
-        </div>
-        <hr className="border-t dark:border-richblack-700" />
-        <div className="flex flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
-          <div className="pr-4  lg:w-[30%]">
-            <h1 className="text-2xl font-semibold dark:text-white px-2">
-              Career Options
-            </h1>
-            <p className="text-sm px-2 ">What's Your preferences ?</p>
-          </div>
-          <div className="lg:w-[70%] w-full ">
-            <UdateCareerParticulars />
-          </div>
-        </div>
+        )}
+
         <hr className="border-t dark:border-richblack-700" />
         <div className="flex  flex-col gap-y-8 lg:gap-x-10 p-2 sm:p-4 lg:flex-row justify-between">
           <div className="pr-4  lg:w-[30%]">

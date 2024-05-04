@@ -17,7 +17,12 @@ const adminNavigation = [
   },
   { name: "Record", icon: FaRegFileAlt, href: "/dashboard/records", id: 3 },
   { name: "Analytics", icon: FaChartPie, href: "/dashboard/analytics", id: 4 },
-  { name: "Settings", icon: IoMdSettings, href: "/dashboard/settings", id: 5 },
+  {
+    name: "Settings",
+    icon: IoMdSettings,
+    href: "/dashboard/my-settings",
+    id: 5,
+  },
 ];
 
 export default adminNavigation;
