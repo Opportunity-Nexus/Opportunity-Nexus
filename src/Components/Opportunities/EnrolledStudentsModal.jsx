@@ -36,7 +36,7 @@ const EnrolledStudentsModal = ({ opportunityId, token, isOpen, setIsOpen }) => {
             <>
               {enrolledStudents.length > 0 ? (
                 <>
-                  <div className="text-center border px-2 py-1 rounded-lg mr-auto">
+                  <div className="text-center border px-2 py-1 rounded-lg mr-auto text-base md:text-lg font-medium text-gray-500 dark:text-gray-300">
                     {enrolledStudents.length} Student Enrolled in this
                     opportunity
                   </div>
@@ -58,7 +58,7 @@ const EnrolledStudentsModal = ({ opportunityId, token, isOpen, setIsOpen }) => {
                 </>
               ) : (
                 <>
-                  <p className="flex max-w-lg flex-col gap-4 text-center">
+                  <p className="flex max-w-lg flex-col gap-4 text-center text-base md:text-lg font-medium text-gray-500 dark:text-gray-300">
                     <span>
                       No Student has applied to this opportunity yet!!
                     </span>

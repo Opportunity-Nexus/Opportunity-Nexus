@@ -61,7 +61,7 @@ const CustomModal = ({
         >
           <div
             className={clsx(
-              "fixed h-fit w-fit min-w-[500px] bottom-0 left-0 right-0 top-0 mx-auto my-auto"
+              "fixed h-fit w-fit md:min-w-[500px] bottom-0 left-0 right-0 top-0 mx-auto my-auto"
             )}
           >
             <div
