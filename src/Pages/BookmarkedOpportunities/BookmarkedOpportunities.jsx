@@ -21,10 +21,12 @@ const BookmarkedOpportunities = () => {
 
   const [isFetching, setIsFetching] = useState(false);
 
-  const onCampusOppFilters = ["All", "Active"];
+  const onCampusOppFilters = ["All", "Active", "Applied"];
+
+  // for off-campus
   const [opportunityType, setOpportunityType] = useState(["All"]);
 
-  // type of this is 'All' | 'Active'
+  // type of this is 'All' | 'Active', for on campus
   const [onCampusFilter, setOnCampusFilter] = useState("All");
 
   const [onCampusOpportunityTag, setOnCampusOpportunityTag] = useState({
@@ -105,7 +107,7 @@ const BookmarkedOpportunities = () => {
     getUserOpportunities({ token: token })
       .then((data) => {
         setAppliedOpportunities(() => {
-          return data;
+          return data || [];
         });
       })
       .catch((error) => console.error(error))
@@ -387,9 +389,14 @@ const BookmarkedOpportunities = () => {
                       .filter((item) =>
                         onCampusFilter.toLowerCase() === "all"
                           ? !!item
-                          : new Date(
+                          : onCampusFilter.toLowerCase() === "active"
+                          ? new Date(
                               item.opportunityId?.opportunityFillLastDate
                             ) > new Date()
+                          : // applied filter
+                            appliedOpportunities.some(
+                              (appOp) => appOp._id === item.opportunityId?._id
+                            )
                       )
                       .filter((item) =>
                         campusType === "on-campus" &&
