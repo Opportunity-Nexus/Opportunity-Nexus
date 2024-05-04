@@ -49,7 +49,7 @@ const EnrolledStudentsModal = ({ opportunityId, token, isOpen, setIsOpen }) => {
                             {student.firstName + " " + student.lastName}
                           </span>
                         </div>
-                        <Link to={`/student/${student._id}`} target="_blank">
+                        <Link to={`/enrolled-student/${student._id}`} target="_blank">
                           <FaExternalLinkSquareAlt />
                         </Link>
                       </li>
