@@ -97,7 +97,7 @@ const SocialProfile = () => {
             htmlFor="X"
             className="flex items-center gap-x-1 text-base font-semibold text-black dark:text-richblack-5"
           >
-            <FaXTwitter />
+            <FaXTwitter /> Twitter
           </label>
           <input
             type="url"
