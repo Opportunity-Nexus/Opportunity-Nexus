@@ -10,7 +10,8 @@ import Project from "../../Components/Settings/AccountSetting/Project";
 import UdateCareerParticulars from "../../Components/Settings/AccountSetting/UdateCareerParticulars";
 import { useSelector } from "react-redux";
 const AccountSetting = () => {
-  const user = useSelector((state) => state.profile);
+  const { user } = useSelector((state) => state.profile);
+  console.log(user?.accountType);
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
       <div className="flex justify-center items-center py-12">
