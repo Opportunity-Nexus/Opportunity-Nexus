@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoBookmarks } from "react-icons/io5";
 import { IoBookmarksOutline } from "react-icons/io5";
 import ApplyModal from "./ApplyModal";
+import EnrolledStudentsModal from "./EnrolledStudentsModal";
 import { useNavigate } from "react-router-dom";
 import {
   setEditOpportunity,
@@ -22,11 +23,12 @@ import {
 const OnCampusOpportunityCard = (opportunity) => {
   const {
     isAlreadyBookMarked,
+    isAlreadyApplied,
     bookmarkedOpportunities,
     setRefetchBookmarkOpp,
     isAdmin,
+    setRefetchAppliedOpportunities,
   } = opportunity;
-  console.log({ opportunity, isAlreadyBookMarked });
   const oppExpiryDate = new Date(opportunity.opportunityFillLastDate);
   const isExpired = oppExpiryDate < new Date();
   const audio = new Audio();
@@ -34,6 +36,51 @@ const OnCampusOpportunityCard = (opportunity) => {
   const navigate = useNavigate();
 
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [isStudentsEnrolledModelOpen, setIsStudentsEnrolledModelOpen] =
+    useState(false);
+
+  const driveDateAndTime = (() => {
+    const dateStr = opportunity.opportunityDriveDate;
+    const timeStr = opportunity.opportunityDriveTime;
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    const date = new Date(dateStr);
+    date.setUTCHours(hours);
+    date.setUTCMinutes(minutes);
+
+    return date;
+  })();
+
+  const [meetLinkMeta] = useState(() => {
+    if (!opportunity.opportunityMode === "ON-LINE" || isExpired || isAdmin) {
+      return {
+        shouldBeVisible: false,
+        shouldBeEnabled: false,
+      };
+    }
+
+    if (isAlreadyApplied) {
+      const currentTime = new Date();
+      let differenceInMinutes = Math.floor(
+        (driveDateAndTime - currentTime) / (1000 * 60)
+      );
+      if (differenceInMinutes <= 5 && differenceInMinutes > 0) {
+        return {
+          shouldBeVisible: true,
+          shouldBeEnabled: true,
+        };
+      } else {
+        return {
+          shouldBeVisible: true,
+          shouldBeEnabled: false,
+        };
+      }
+    } else {
+      return {
+        shouldBeVisible: false,
+        shouldBeEnabled: false,
+      };
+    }
+  });
 
   audio.src = BookMarkSound;
   const { token } = useSelector((state) => state.auth);
@@ -113,9 +160,16 @@ const OnCampusOpportunityCard = (opportunity) => {
     <>
       <ApplyModal
         isOpen={isApplyModalOpen}
+        setRefetchAppliedOpportunities={setRefetchAppliedOpportunities}
         opportunity={opportunity}
         opportunityId={opportunity._id}
         setIsOpen={setIsApplyModalOpen}
+      />
+      <EnrolledStudentsModal
+        isOpen={isStudentsEnrolledModelOpen}
+        opportunityId={opportunity._id}
+        setIsOpen={setIsStudentsEnrolledModelOpen}
+        token={token}
       />
       <div className="bg-white dark:bg-gray-900 overflow-hidden sm:rounded-md w-full shadow-lg">
         <ul className="">
@@ -342,6 +396,17 @@ const OnCampusOpportunityCard = (opportunity) => {
                         Edit
                       </button>
                     ) : null}
+
+                    {isAdmin ? (
+                      <button
+                        onClick={() => {
+                          setIsStudentsEnrolledModelOpen(() => true);
+                        }}
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer"
+                      >
+                        Enrolled Student
+                      </button>
+                    ) : null}
                     {isAdmin ? (
                       <button
                         onClick={() => {
@@ -358,28 +423,34 @@ const OnCampusOpportunityCard = (opportunity) => {
                         onClick={() => {
                           setIsApplyModalOpen(() => true);
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer"
+                        disabled={isAlreadyApplied}
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-300 disabled:hover:bg-primary-300 cursor-pointer disabled:cursor-not-allowed"
                       >
-                        Apply now
+                        {isAlreadyApplied ? "Applied" : "Apply now"}
                       </button>
                     )}
                   </div>
 
-                  <div>
-                    {opportunity.opportunityMode === "ON-LINE" &&
-                    !isExpired &&
-                    new Date(opportunity.opportunityDriveDate) ===
-                      new Date() ? (
+                  <div className="ml-3">
+                    {meetLinkMeta.shouldBeVisible ? (
                       <div className="flex items-center justify-center">
-                        <a href={opportunity.opportunityDriveLink}>
-                          <button className="items-center justify-center px-1 py-1  border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400">
+                        <a
+                          href={opportunity.opportunityDriveLink}
+                          className={
+                            meetLinkMeta.shouldBeEnabled
+                              ? ""
+                              : "pointer-events-none"
+                          }
+                        >
+                          <button
+                            className="items-center justify-center px-1 py-1 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 disabled:hover:text-white  border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
+                            disabled={!meetLinkMeta.shouldBeEnabled}
+                          >
                             Join the Drive
                           </button>
                         </a>
                       </div>
-                    ) : (
-                      <></>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </div>

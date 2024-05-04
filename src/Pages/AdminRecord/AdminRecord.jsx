@@ -60,7 +60,6 @@ const AdminOpportunitiesRecords = () => {
     setIsFetching(() => true);
     getOncampusOpportunities({ token: token })
       .then((data) => {
-        console.log({ data });
         setOnCampusOpportunities(() => {
           return data;
         });

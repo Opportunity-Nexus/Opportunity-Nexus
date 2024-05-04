@@ -5,7 +5,10 @@ import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import OpportunitiesNotFoundImg from "../../assets/utils/opp-not-found.svg";
 import { useSelector } from "react-redux";
 import { getOffCampusBookmarkedOpportunities } from "../../Services/Operations/MyOpportunity";
-import { getOnCampusBookmarkedOpportunities } from "../../Services/Operations/OnCampusApi";
+import {
+  getOnCampusBookmarkedOpportunities,
+  getUserOpportunities,
+} from "../../Services/Operations/OnCampusApi";
 import SavedOnCampusOpportunityCard from "../../Components/Opportunities/SaveOnCampusOppCard";
 
 const BookmarkedOpportunities = () => {
@@ -93,6 +96,21 @@ const BookmarkedOpportunities = () => {
         });
     }
   }, [token, campusType]);
+
+  const [refetchAppliedOpportunities, setRefetchAppliedOpportunities] =
+    useState(true);
+  const [appliedOpportunities, setAppliedOpportunities] = useState([]);
+  useEffect(() => {
+    if (!refetchAppliedOpportunities) return;
+    getUserOpportunities({ token: token })
+      .then((data) => {
+        setAppliedOpportunities(() => {
+          return data;
+        });
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setRefetchAppliedOpportunities(false));
+  }, [refetchAppliedOpportunities, token]);
 
   //----------------------PAGINTAION----------------------//
 
@@ -397,6 +415,16 @@ const BookmarkedOpportunities = () => {
                             {...opportunity}
                             setSavedOpportunitiesList={
                               setSavedOpportunitiesList
+                            }
+                            isAlreadyApplied={
+                              appliedOpportunities.findIndex((item) => {
+                                return (
+                                  item._id === opportunity.opportunityId._id
+                                );
+                              }) > -1
+                            }
+                            setRefetchAppliedOpportunities={
+                              setRefetchAppliedOpportunities
                             }
                           />
                         );

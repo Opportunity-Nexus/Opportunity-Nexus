@@ -6,7 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getStudentEnrolled } from "../../Services/Operations/OnCampusApi";
 
-const ApplyModal = ({ opportunityId, opportunity, isOpen, setIsOpen }) => {
+const ApplyModal = ({
+  opportunity,
+  isOpen,
+  setIsOpen,
+  setRefetchAppliedOpportunities,
+}) => {
   const [isApplicationSubmitted, setIsApplicationSubmitted] = useState(false);
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
@@ -27,6 +32,8 @@ const ApplyModal = ({ opportunityId, opportunity, isOpen, setIsOpen }) => {
     } catch (error) {
       console.error(error);
       toast.error(error.message);
+    } finally {
+      setRefetchAppliedOpportunities(true);
     }
   }
 

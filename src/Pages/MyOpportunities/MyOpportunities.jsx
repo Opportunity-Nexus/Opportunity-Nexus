@@ -7,11 +7,15 @@ import { useSelector } from "react-redux";
 import {
   getOnCampusBookmarkedOpportunities,
   getOncampusOpportunities,
+  getUserOpportunities,
 } from "../../Services/Operations/OnCampusApi";
 
 const MyOpportunities = () => {
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetchingOnCampusOpportunities, setIsFetchingOnCampusOpportunities] =
+    useState(false);
+
   const [onCampusOpportunities, setOnCampusOpportunities] = useState([]);
+
   const { token } = useSelector((state) => state.auth);
   const [onCampusOpportunityTag, setOnCampusOpportunityTag] = useState({
     availableTags: [],
@@ -42,7 +46,7 @@ const MyOpportunities = () => {
 
   const [bookmarkedOpportunities, setBookmarkedOpportunities] = useState([]);
 
-  const [refetchBookmarkOpp, setRefetchBookmarkOpp] = useState(false);
+  const [refetchBookmarkOpp, setRefetchBookmarkOpp] = useState(true);
 
   useEffect(() => {
     if (!refetchBookmarkOpp) return;
@@ -58,7 +62,7 @@ const MyOpportunities = () => {
   }, [token, refetchBookmarkOpp]);
 
   useEffect(() => {
-    setIsFetching(() => true);
+    setIsFetchingOnCampusOpportunities(() => true);
     getOncampusOpportunities({ token: token })
       .then((data) => {
         console.log({ data });
@@ -68,9 +72,24 @@ const MyOpportunities = () => {
       })
       .catch((error) => console.error(error))
       .finally(() => {
-        setIsFetching(false);
+        setIsFetchingOnCampusOpportunities(false);
       });
   }, [token]);
+
+  const [refetchAppliedOpportunities, setRefetchAppliedOpportunities] =
+    useState(true);
+  const [appliedOpportunities, setAppliedOpportunities] = useState([]);
+  useEffect(() => {
+    if (!refetchAppliedOpportunities) return;
+    getUserOpportunities({ token: token })
+      .then((data) => {
+        setAppliedOpportunities(() => {
+          return data;
+        });
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setRefetchAppliedOpportunities(false));
+  }, [refetchAppliedOpportunities, token]);
 
   useEffect(() => {
     const tagSet = new Set();
@@ -97,7 +116,7 @@ const MyOpportunities = () => {
 
       {onCampusOpportunities ? (
         <>
-          {isFetching ? (
+          {isFetchingOnCampusOpportunities ? (
             <div className="h-screen flex flex-1 items-center justify-center">
               <div className="loader"></div>
             </div>
@@ -172,9 +191,19 @@ const MyOpportunities = () => {
                         setOnCampusOpportunities={setOnCampusOpportunities}
                         setRefetchBookmarkOpp={setRefetchBookmarkOpp}
                         bookmarkedOpportunities={bookmarkedOpportunities}
+                        setRefetchAppliedOpportunities={
+                          setRefetchAppliedOpportunities
+                        }
+                        isAlreadyApplied={
+                          appliedOpportunities.findIndex((item) => {
+                            console.log({ item });
+                            return item._id === opportunity._id;
+                          }) > -1
+                        }
                         isAlreadyBookMarked={
                           bookmarkedOpportunities.findIndex(
-                            (item) => item.opportunityId._id === opportunity._id
+                            (item) =>
+                              item.opportunityId?._id === opportunity._id
                           ) > -1
                         }
                         isAdmin={false}

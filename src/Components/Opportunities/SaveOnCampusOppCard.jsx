@@ -8,11 +8,13 @@ import { removeBookmark as removeBookmarkHelper } from "../../Services/Operation
 import ApplyModal from "./ApplyModal";
 
 const SavedOnCampusOpportunityCard = (opportunity) => {
-  const { setSavedOpportunitiesList } = opportunity;
+  const {
+    setSavedOpportunitiesList,
+    isAlreadyApplied,
+    setRefetchAppliedOpportunities,
+  } = opportunity;
 
   const [isExpired, setIsExpired] = useState(() => {
-    console.log({ opportunity });
-
     return (
       new Date(opportunity.opportunityId.opportunityFillLastDate) < new Date()
     );
@@ -24,6 +26,49 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
         new Date(opportunity.opportunityId.opportunityFillLastDate) < new Date()
     );
   }, [opportunity.opportunityId.opportunityFillLastDate]);
+
+  const driveDateAndTime = (() => {
+    const dateStr = opportunity.opportunityId.opportunityDriveDate;
+    const timeStr = opportunity.opportunityId.opportunityDriveTime;
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    const date = new Date(dateStr);
+    date.setUTCHours(hours);
+    date.setUTCMinutes(minutes);
+
+    return date;
+  })();
+
+  const [meetLinkMeta] = useState(() => {
+    if (!opportunity.opportunityId.opportunityMode === "ON-LINE" || isExpired) {
+      return {
+        shouldBeVisible: false,
+        shouldBeEnabled: false,
+      };
+    }
+
+    if (isAlreadyApplied) {
+      const currentTime = new Date();
+      let differenceInMinutes = Math.floor(
+        (driveDateAndTime - currentTime) / (1000 * 60)
+      );
+      if (differenceInMinutes <= 5 && differenceInMinutes > 0) {
+        return {
+          shouldBeVisible: true,
+          shouldBeEnabled: true,
+        };
+      } else {
+        return {
+          shouldBeVisible: true,
+          shouldBeEnabled: false,
+        };
+      }
+    } else {
+      return {
+        shouldBeVisible: false,
+        shouldBeEnabled: false,
+      };
+    }
+  });
 
   const audio = new Audio();
   audio.src = BookMarkSound;
@@ -91,6 +136,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
         isOpen={isApplyModalOpen}
         opportunity={opportunity}
         setIsOpen={setIsApplyModalOpen}
+        setRefetchAppliedOpportunities={setRefetchAppliedOpportunities}
       />
       <div className="bg-white dark:bg-gray-900 overflow-hidden sm:rounded-md w-full">
         <ul className="divide-y divide-gray-200">
@@ -159,14 +205,15 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                         isExpired ? "hidden" : ""
                       }`}
                     >
-                      <div
+                      <button
                         onClick={() => {
                           setIsApplyModalOpen(() => true);
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer"
+                        disabled={isAlreadyApplied}
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-300 disabled:hover:bg-primary-300 disabled:cursor-not-allowed cursor-pointer"
                       >
-                        Apply now
-                      </div>
+                        {isAlreadyApplied ? "Applied" : "Apply now"}
+                      </button>
                     </div>
                     <p className="inline-flex text-xs leading-5 font-semibold">
                       {!isExpired ? (
@@ -236,6 +283,25 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                       )}
                     </div>
                   </div>
+                  {meetLinkMeta.shouldBeVisible ? (
+                    <div className="flex items-center justify-end ml-auto">
+                      <a
+                        href={opportunity.opportunityDriveLink}
+                        className={
+                          meetLinkMeta.shouldBeEnabled
+                            ? ""
+                            : "pointer-events-none"
+                        }
+                      >
+                        <button
+                          className="items-center justify-center px-1 py-1 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 disabled:hover:text-white  border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
+                          disabled={!meetLinkMeta.shouldBeEnabled}
+                        >
+                          Join the Drive
+                        </button>
+                      </a>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>

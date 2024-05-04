@@ -239,3 +239,66 @@ export async function deleteOpportunity({ opportunity, token }) {
     return false;
   }
 }
+
+//---------------FETCH BOOKMARKED ONCAMPUS OPPORTUNITY------------------//
+export async function getUserOpportunities(params) {
+  const { token } = params;
+  console.log({ paramToken: token });
+
+  if (token) {
+    try {
+      const response = await fetch(oncampusEndpoints.GET_USER_OPPORTUNITY, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Success:", data);
+        return data.userOpportunityDetails.opportunities;
+      } else {
+        // If we get an HTTP error response
+        console.error("Fetch error:", data.message);
+        return [];
+      }
+    } catch (error) {
+      console.error("Request failed:", error);
+    }
+  } else {
+    console.error("Token is undefined or not found");
+  }
+}
+
+//---------------FETCH BOOKMARKED ONCAMPUS OPPORTUNITY------------------//
+export async function fetchAllStudentEnrolledInAOpportunity(params) {
+  const { token, opportunityId } = params;
+  console.log({ paramToken: token, opportunityId });
+
+  if (token) {
+    try {
+      const response = await apiConnector(
+        "GET",
+        `${oncampusEndpoints.GET_OPPORTUNITY_ENROLLMENTS}/${opportunityId}`,
+        null,
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (response.status === 200) {
+        return response.data.data[0].studentsEnrolled;
+      } else {
+        // If we get an HTTP error response
+        console.error("Fetch error:", response.data.message);
+        return [];
+      }
+    } catch (error) {
+      console.error("Request failed:", error);
+    }
+  } else {
+    console.error("Token is undefined or not found");
+  }
+}
