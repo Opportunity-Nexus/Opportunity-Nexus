@@ -240,12 +240,12 @@ const OnCampusOpportunityCard = (opportunity) => {
                 </div>
 
                 {/* package + location + drive time */}
-                <div className="flex items-center gap-2 text-sm text-gray-500">
+                <div className="flex flex-col items-start lg:flex-row lg:items-center gap-2 text-sm text-gray-500">
                   <div className="font-medium flex items-center gap-px">
                     <FaRupeeSign className="h-5 w-5 text-gray-400" />
                     <p>{opportunity.opportunityPackage}</p>
                   </div>
-                  <span className="mr-1">|</span>
+                  <span className="mr-1 hidden lg:flex">|</span>
                   <div className="font-medium flex items-center gap-px">
                     {" "}
                     <IoMdPin
@@ -258,7 +258,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                       </span>
                     </p>
                   </div>
-                  <span className="mr-1">
+                  <span className="mr-1 hidden lg:flex">
                     {opportunity.opportunityMode === "TBD (To Be Decided)" ? (
                       <></>
                     ) : (
@@ -370,7 +370,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                   <></>
                 )}
               </div>
-              <div className="flex flex-col flex-1 gap-2">
+              <div className="flex flex-col flex-1 gap-2 ml-auto">
                 <div className="flex-shrink-0 flex items-center md:justify-end">
                   <div
                     className={`flex items-center gap-3 justify-center ${
@@ -402,7 +402,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                         onClick={() => {
                           setIsStudentsEnrolledModelOpen(() => true);
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
+                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-sm sm:text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
                       >
                         Enrolled Student
                       </button>
