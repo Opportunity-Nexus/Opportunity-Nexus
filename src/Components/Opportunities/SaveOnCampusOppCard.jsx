@@ -158,6 +158,17 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                   </div>
                 </div>
 
+                 {/* Job location */}
+                 <div className="flex font-medium text-black dark:text-white text-sm  md:text-base gap-px max-w-4xl">
+                  <ul className="flex gap-2">
+                    <h4>Job Location:</h4>
+                    <p className=" uppercase">
+                      {" "}
+                      {opportunity.opportunityId.opportunityLocation}
+                    </p>{" "}
+                  </ul>
+                </div>
+
                 {/* drive date */}
                 <div className="flex items-center text-sm text-gray-500 sm:mt-0 gap-px">
                   <FaCalendarAlt
@@ -192,11 +203,15 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                     ).toDateString()}
                   </p>
                 </div>
+
+               
               </div>
               <div className="mt-2 sm:flex flex-col flex-1 lg:mr-auto lg:items-end gap-2">
                 <div className="mt-2 sm:flex flex-col flex-1 gap-2 items-start">
                   {isExpired ? null : (
-                    <span className="text-sm pl-1 ml-auto">{timeLeft}</span>
+                    <span className="text-sm pl-1 ml-auto text-green-600 dark:text-green-500">
+                      {timeLeft}
+                    </span>
                   )}
                   {/* active OR Expire + apply + remove button */}
                   <div className="flex-shrink-0 flex items-center gap-3 ml-auto">
@@ -217,9 +232,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                     </div>
                     <p className="inline-flex text-xs leading-5 font-semibold">
                       {!isExpired ? (
-                        <span className="bg-green-100 text-green-800 px-2 rounded-full">
-                          Active
-                        </span>
+                        <></>
                       ) : (
                         <span className="bg-red-100 text-red-800 px-2 rounded-full">
                           Expired
@@ -248,39 +261,25 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                         aria-hidden="true"
                       />
                       <p>
-                        {opportunity.opportunityId.opportunityMode ===
-                          "OFF-LINE" ||
-                        opportunity.opportunityId.opportunityMode ===
-                          "Offline" ? (
-                          <span className="uppercase font-medium">
-                            {opportunity.opportunityId.opportunityLocation}
-                          </span>
-                        ) : (
-                          <span className="uppercase font-medium">
-                            {opportunity.opportunityId.opportunityMode}
-                          </span>
-                        )}
+                        <span className="uppercase font-medium">
+                          {opportunity.opportunityId.opportunityMode}
+                        </span>
                       </p>
                     </div>
 
                     <div className="flex items-center">
-                      {opportunity.opportunityId.opportunityMode ===
-                      "TBD (To Be Decided)" ? (
-                        <></>
-                      ) : (
-                        <div className="flex items-center gap-px">
-                          <span className="mr-1">|</span>
-                          <FaClock
-                            className="h-5 w-4 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          {""}
-                          <p className="font-medium">
-                            Drive Time:{" "}
-                            {opportunity.opportunityId.opportunityDriveTime}
-                          </p>
-                        </div>
-                      )}
+                      <div className="flex items-center gap-px">
+                        <span className="mr-1">|</span>
+                        <FaClock
+                          className="h-5 w-4 text-gray-400 mr-px"
+                          aria-hidden="true"
+                        />
+                        {""}
+                        <p className="font-medium">
+                          Drive Time:{" "}
+                          {opportunity.opportunityId.opportunityDriveTime}
+                        </p>
+                      </div>
                     </div>
                   </div>
                   {meetLinkMeta.shouldBeVisible ? (
