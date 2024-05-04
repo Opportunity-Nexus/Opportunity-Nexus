@@ -388,14 +388,14 @@ const BookmarkedOpportunities = () => {
                         onCampusFilter.toLowerCase() === "all"
                           ? !!item
                           : new Date(
-                              item.opportunityId.opportunityFillLastDate
+                              item.opportunityId?.opportunityFillLastDate
                             ) > new Date()
                       )
                       .filter((item) =>
                         campusType === "on-campus" &&
                         onCampusOpportunityTag.selectedTags.length === 0
                           ? true
-                          : item.opportunityId.opportunityTags.filter(
+                          : item.opportunityId?.opportunityTags.filter(
                               (element) =>
                                 onCampusOpportunityTag.selectedTags.includes(
                                   element
