@@ -36,21 +36,21 @@ const EnrolledStudentsModal = ({ opportunityId, token, isOpen, setIsOpen }) => {
             <>
               {enrolledStudents.length > 0 ? (
                 <>
-                  <div className="text-center border px-2 py-1 rounded-lg mr-auto text-base md:text-lg font-medium text-gray-500 dark:text-gray-300">
+                  <div className="text-center px-2 py-1 rounded-lg mr-auto text-base md:text-lg font-semibold text-primary-500">
                     {enrolledStudents.length} Student Enrolled in this
                     opportunity
                   </div>
                   <ul className="flex flex-col gap-2 px-2 py-3 items-start mr-auto w-full">
                     {enrolledStudents.map((student, index) => (
                       <li className="flex flex-row justify-between w-full gap-4 items-center">
-                        <div className="flex justify-center items-center gap-3">
+                        <div className="flex justify-center items-center gap-3 font-medium text-gray-500 dark:text-gray-300">
                           <span>{index + 1}.</span>
                           <span>
                             {student.firstName + " " + student.lastName}
                           </span>
                         </div>
                         <Link to={`/enrolled-student/${student._id}`} target="_blank">
-                          <FaExternalLinkSquareAlt />
+                          <FaExternalLinkSquareAlt className="h-6 w-6 p-1 text-black dark:text-white" />
                         </Link>
                       </li>
                     ))}
