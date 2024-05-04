@@ -214,7 +214,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                     </span>
                   )}
                   {/* active OR Expire + apply + remove button */}
-                  <div className="flex-shrink-0 flex items-center gap-3 ml-auto">
+                  <div className="flex-shrink-0 flex items-center gap-2 ml-auto">
                     <div
                       className={`flex items-center gap-2 justify-center ${
                         isExpired ? "hidden" : ""
