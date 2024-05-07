@@ -100,16 +100,16 @@ export default function Project() {
             {errors.projectTechnologyStack && (
               <span className="error-style">Enter your project name</span>
             )}
-            <div>
+            <div className="flex">
               {techStacks.map((techStack) => (
                 <span
                   key={techStack}
-                  className="font-semibold text-sm flex-col px-1 items-center gap-x-2 justify-center "
+                  className="m-1 flex items-center rounded-full bg-primary-700 px-2 py-1 text-sm text-richblack-5"
                 >
                   {techStack}
                   <button
                     type="button"
-                    className=""
+                    className="ml-2 focus:outline-none"
                     onClick={() => handleDeleteTechStack(techStack)}
                   >
                     <FaDeleteLeft />

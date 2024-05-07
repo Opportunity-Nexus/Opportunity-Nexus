@@ -98,13 +98,13 @@ export default function UdateCareerParticulars() {
             {errors.skills && (
               <span className="error-style">Enter your skills </span>
             )}
-            <div>
+            <div className="flex ">
               {skills.map((skill) => (
                 <span
                   key={skill}
-                  className="font-semibold text-sm flex-col px-1  items-center gap-x-1 "
+                  className="m-1 flex items-center rounded-full bg-primary-700 px-2 py-1 text-sm text-richblack-5"
                 >
-                  {skill}
+                  <span>{skill}</span>
                   <button
                     type="button"
                     className=" flex-col px-1 items-center "
