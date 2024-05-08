@@ -169,12 +169,12 @@ export default function EditProfile() {
               )}
             </div>
           </div>
-          <div className="flex sm:justify-end justify-center flex-wrap gap-2 mt-6 ">
+          <div className="flex justify-center sm:justify-end gap-2  flex-wrap">
             <button
               onClick={() => {
                 navigate("/dashboard/my-profile");
               }}
-              className="cursor-pointer rounded-md dark:bg-red-500  px-3 font-semibold dark:text-richblack-5 border dark:border-richblack-800"
+              className="cursor-pointer rounded-md dark:bg-red-500 py-2 px-5 font-semibold  dark:text-richblack-5 border dark:border-richblack-700"
             >
               Cancel
             </button>
@@ -182,7 +182,7 @@ export default function EditProfile() {
               className="bg-primary-600 hover:bg-primary-700 cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white"
               type="submit"
             >
-              Save
+              Update
             </button>
           </div>
         </div>
