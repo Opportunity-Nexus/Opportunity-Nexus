@@ -32,7 +32,7 @@ export const profileSettingsEndpoints = {
 
 // PROFILE ENDPOINTS
 export const profileEndpoints = {
-  R_COMPLETE_DETAILS_API: BASE_URL + "/profile//getusercompletedetails",
+  GET_USER_COMPLETE_DETAILS_API: BASE_URL + "/profile/getusercompletedetails",
 };
 
 //ON-CAMPUS ENDPOINTS
