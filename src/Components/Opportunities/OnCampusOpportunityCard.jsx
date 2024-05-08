@@ -370,31 +370,65 @@ const OnCampusOpportunityCard = (opportunity) => {
                   <></>
                 )}
               </div>
-              <div className="flex flex-col flex-1 gap-2 ml-auto">
-                <div className="flex-shrink-0 flex items-center md:justify-end">
+              <div className="flex flex-col flex-1 gap-2 md:ml-auto">
+                <div className="flex-shrink-0 flex items-center md:justify-end w-full">
                   <div
-                    className={`flex items-center gap-3 justify-center ${
+                    className={`flex flex-col md:flex-row gap-3 justify-center w-full md:w-fit ${
                       isExpired && !isAdmin ? "hidden" : ""
                     }`}
                   >
                     {isAdmin ? (
-                      <button
-                        onClick={() => {
-                          console.log({ opportunity });
-                          dispatch(setEditOpportunity(true));
-                          dispatch(
-                            setOpportunity({
-                              ...opportunity,
-                              setOnCampusOpportunities: null,
-                              setRefetchBookmarkOpp: null,
-                            })
-                          );
-                          navigate("/dashboard/opportunity-panel");
-                        }}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer"
+                      <div className="flex flex-row justify-between items-center w-full md:w-fit gap-3 ">
+                        {" "}
+                        <button
+                          onClick={() => {
+                            console.log({ opportunity });
+                            dispatch(setEditOpportunity(true));
+                            dispatch(
+                              setOpportunity({
+                                ...opportunity,
+                                setOnCampusOpportunities: null,
+                                setRefetchBookmarkOpp: null,
+                              })
+                            );
+                            navigate("/dashboard/opportunity-panel");
+                          }}
+                          className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 cursor-pointer flex-1 md:flex-none"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => {
+                            deleteOpportunityHandler().catch((error) =>
+                              console.error(error)
+                            );
+                          }}
+                          className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-red-500 hover:bg-red-700 cursor-pointer md:hidden flex-1 md:flex-none"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    ) : null}
+
+                    {isAdmin &&
+                    opportunity.opportunityMode === "ON-LINE" &&
+                    new Date(opportunity.opportunityFillLastDate) >
+                      new Date() ? (
+                      <a
+                        href={opportunity.opportunityDriveLink}
+                        className={
+                          meetLinkMeta.shouldBeEnabled
+                            ? ""
+                            : "pointer-events-none"
+                        }
                       >
-                        Edit
-                      </button>
+                        <button
+                          className="inline-flex w-full items-center justify-center px-1 py-1 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 disabled:hover:text-white border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
+                          disabled={!meetLinkMeta.shouldBeEnabled}
+                        >
+                          Join the Drive
+                        </button>
+                      </a>
                     ) : null}
 
                     {isAdmin ? (
@@ -402,7 +436,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                         onClick={() => {
                           setIsStudentsEnrolledModelOpen(() => true);
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-sm sm:text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
+                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
                       >
                         Enrolled Student
                       </button>
@@ -414,7 +448,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                             console.error(error)
                           );
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-red-500 hover:bg-red-700 cursor-pointer"
+                        className="md:inline-flex hidden items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-red-500 hover:bg-red-700 cursor-pointer "
                       >
                         Delete
                       </button>

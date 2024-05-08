@@ -198,7 +198,7 @@ const AdminOpportunitiesRecords = () => {
                       previous
                     </span>
                   </button>
-                  <div className="hidden md:flex items-center justify-center">
+                  <div className="hidden lg:flex items-center justify-center">
                     {Array(totalOpportunitiesPages)
                       .fill(null)
                       .map((_, index) => (
