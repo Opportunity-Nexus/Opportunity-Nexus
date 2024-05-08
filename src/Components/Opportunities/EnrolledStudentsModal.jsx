@@ -43,7 +43,7 @@ const EnrolledStudentsModal = ({ opportunityId, token, isOpen, setIsOpen }) => {
                   <ul className="flex flex-col gap-2 px-2 py-3 items-start mr-auto w-full">
                     {enrolledStudents.map((student, index) => (
                       <li className="flex flex-row justify-between w-full gap-4 items-center">
-                        <div className="flex justify-center items-center gap-3 font-medium text-gray-500 dark:text-gray-300">
+                        <div className="flex justify-center items-start gap-3 font-medium text-gray-500 dark:text-gray-300">
                           <span>{index + 1}.</span>
                           <span>
                             {student.firstName + " " + student.lastName}

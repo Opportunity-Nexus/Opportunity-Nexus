@@ -83,7 +83,7 @@ const ApplyModal = ({
             </>
           ) : (
             <>
-              <p className="flex max-w-lg flex-col gap-4 text-center">
+              <p className="flex max-w-lg flex-col gap-4 text-center  font-medium text-gray-500 dark:text-gray-300 ">
                 <span>Successfully applied to opportunity!!</span>
                 <FaCheckCircle className="mx-auto h-10 w-10 text-green-500" />
               </p>

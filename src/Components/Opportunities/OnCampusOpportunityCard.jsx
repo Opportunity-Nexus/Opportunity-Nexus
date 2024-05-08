@@ -197,39 +197,40 @@ const OnCampusOpportunityCard = (opportunity) => {
                           </span>
                         )}
                       </p>
-                      {isAdmin ? (
-                        <></>
-                      ) : (
-                        <div className="flex items-center justify-center absolute top-4 right-2">
-                          <button
-                            onClick={() => {
-                              if (isAlreadyBookMarked) {
-                                removeBookmark().catch((error) =>
-                                  console.error(error)
-                                );
-                              } else {
-                                bookmarkOnCampusOpportunity().catch((error) =>
-                                  console.error(error)
-                                );
-                              }
-                            }}
-                            className={` items-center justify-center px-1 py-1 gap-2 text-xl font-medium dark:text-white ${
-                              isExpired ? "hidden" : "inline-flex"
-                            }`}
-                          >
-                            {isExpired ? null : (
-                              <span className="text-sm   text-green-600 dark:text-green-500">
-                                {timeLeft}
-                              </span>
-                            )}
-                            {isAlreadyBookMarked ? (
-                              <IoBookmarks />
-                            ) : (
-                              <IoBookmarksOutline />
-                            )}
-                          </button>
-                        </div>
-                      )}
+
+                      <div className="flex items-center justify-center absolute top-4 right-2">
+                        <button
+                          onClick={() => {
+                            if (isAlreadyBookMarked) {
+                              removeBookmark().catch((error) =>
+                                console.error(error)
+                              );
+                            } else {
+                              bookmarkOnCampusOpportunity().catch((error) =>
+                                console.error(error)
+                              );
+                            }
+                          }}
+                          className={` items-center justify-center px-1 py-1 gap-2 text-xl font-medium dark:text-white ${
+                            isExpired ? "hidden" : "inline-flex"
+                          }`}
+                        >
+                          {isExpired ? null : (
+                            <span className="text-sm   text-green-600 dark:text-green-500">
+                              {timeLeft}
+                            </span>
+                          )}
+                          {!isAdmin ? (
+                            <>
+                              {isAlreadyBookMarked ? (
+                                <IoBookmarks />
+                              ) : (
+                                <IoBookmarksOutline />
+                              )}
+                            </>
+                          ) : null}
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -350,7 +351,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                               className="h-3 w-4 text-gray-400 mt-1"
                               aria-hidden="true"
                             /> */}
-                            <p className="text-sm font-bold">{id +1}.</p>
+                            <p className="text-sm font-bold">{id + 1}.</p>
                             <p className="text-sm">{item}</p>
                           </li>
                         ))
@@ -412,8 +413,7 @@ const OnCampusOpportunityCard = (opportunity) => {
 
                     {isAdmin &&
                     opportunity.opportunityMode === "ON-LINE" &&
-                    new Date(opportunity.opportunityFillLastDate) >
-                      new Date() ? (
+                    new Date(opportunity.opportunityDriveDate) > new Date() ? (
                       <a
                         href={opportunity.opportunityDriveLink}
                         className={
@@ -466,7 +466,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                   </div>
 
                   <div className="ml-3">
-                    {meetLinkMeta.shouldBeVisible ? (
+                    {meetLinkMeta.shouldBeVisible && new Date(opportunity.opportunityDriveDate) > new Date() ? (
                       <div className="flex items-center justify-center">
                         <a
                           href={opportunity.opportunityDriveLink}
