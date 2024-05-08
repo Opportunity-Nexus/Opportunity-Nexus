@@ -59,13 +59,13 @@ const OnCampusStudentAnalytics = () => {
 	}, []);
 	return (
 		<>
-			<div className="flex justify-center items-center  dark:text-gray-400 h-fit gap-2">
-				<div className="rounded-md border border-1 dark:border-richblack-700 h-fit w-1/2 p-2">
-					<span className="flex flex-col items-center justify-center  font-bold text-lg  dark:hover:bg-gray-800 hover:bg-gray-300  md:h-48 p-2 md:p-4  rounded-md ">
-						<p className="text-primary-500 text-center">
+			<div className="flex flex-wrap justify-center items-center dark:text-gray-400 gap-2 ">
+				<div className="flex-grow rounded-md border border-1 dark:border-richblack-700 p-2">
+					<span className=" flex flex-col items-center justify-center font-bold dark:hover:bg-gray-800 hover:bg-gray-300  p-8 md:p-12  rounded-md ">
+						<p className="text-primary-500 text-center text-base md:text-lg">
 							Applied Opportunities
 						</p>
-						<p className="flex justify-center items-center font-bold text-7xl">
+						<p className="flex justify-center items-center font-bold text-5xl md:text-7xl">
 							<Number
 								n={onCampusOppData && (onCampusOppData.totalBookmarked || 0)}
 							/>
@@ -75,12 +75,12 @@ const OnCampusStudentAnalytics = () => {
 						</p>
 					</span>
 				</div>
-				<div className="rounded-md border border-1 dark:border-richblack-700 h-fit w-1/2 p-2">
-					<span className="flex flex-col items-center justify-center font-bold text-lg  dark:hover:bg-gray-800 hover:bg-gray-300  md:h-48 p-2 md:p-4 gap-y-4 rounded-md ">
-						<p className="text-primary-500 text-center">
+				<div className="flex-grow rounded-md border border-1 dark:border-richblack-700 p-2">
+					<span className=" flex flex-col items-center justify-center font-bold dark:hover:bg-gray-800 hover:bg-gray-300 p-8 md:p-12 rounded-md ">
+						<p className="text-primary-500 text-center text-base md:text-lg">
 							Bookmarked Opportunities
 						</p>
-						<p className="flex justify-center items-center font-bold text-7xl">
+						<p className="flex justify-center items-center font-bold text-5xl md:text-7xl">
 							<Number
 								n={
 									onCampusOppAppliedData &&

@@ -27,7 +27,7 @@ const OnCampusPieChart = ({ onCampusOppData }) => {
 	  },
 	};
   
-	return <Pie data={data} height={200} options={options} />;
+	return <Pie data={data} height={200} options={options}/>;
   };
   
   export default OnCampusPieChart;

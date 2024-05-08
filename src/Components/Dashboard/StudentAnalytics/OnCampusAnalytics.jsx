@@ -40,22 +40,22 @@ const OnCampusAnalytics = () => {
 	}, []);
 	return (
 		<>
-			<div className="flex flex-col space-y-8 rounded-md border border-1 dark:border-richblack-700  sm:p-6 dark:text-gray-400 h-fit">
+			<div className="flex flex-col space-y-8 rounded-md border border-1 dark:border-richblack-700 sm:p-6 dark:text-gray-400">
 				<span className="flex items-center gap-2">
 					<FaBookReader />
 					<h1 className="font-bold text-xl ">
 						Discover the pulse of our on-campus opportunities
 					</h1>
 				</span>
-				<div className="flex flex-col md:flex-row h-fit py-8">
+				<div className="flex justify-center items-center dark:text-gray-400 gap-2 py-8">
 					{/*-------------Pie-Chart------------ */}
-					<div className="w-1/2 h-60 md:h-80 p-2">
+					<div className="flex-grow h-60 md:h-80 p-2 ">
 						<OnCampusPieChart onCampusOppData={onCampusOppData} />
 					</div>
 					{/* -----------Statistics----------- */}
-					<div className="flex flex-col items-center justify-center w-full md:w-1/2">
-						<div className="flex">
-							<span className="flex flex-col items-center justify-center mx-2 font-bold text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300 w-30 md:w-48 w-30 md:h-48 p-2 md:p-4 ">
+					<div className="flex flex-col items-center justify-center flex-grow w-full p-3">
+						<div className="flex gap-2">
+							<span className="flex flex-col items-center justify-center font-bold text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300  p-4 md:p-8 ">
 								<p className="text-green-500 text-center">
 									Active Opportunities
 								</p>
@@ -68,7 +68,7 @@ const OnCampusAnalytics = () => {
 									/>
 								</p>
 							</span>
-							<span className="flex flex-col items-center justify-center mx-2 font-bold text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300 w-30 md:w-48 w-30 md:h-48 p-2 md:p-4 ">
+							<span className="flex flex-col items-center justify-center font-bold text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300 p-4 md:p-8 ">
 								<p className="text-red-600 text-center">
 									Expired Opportunities
 								</p>
