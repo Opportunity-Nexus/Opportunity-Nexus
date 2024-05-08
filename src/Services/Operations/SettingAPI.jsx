@@ -2,6 +2,7 @@ import { setUser } from "../../Redux/Slices/ProfileSlice";
 import { apiConnector } from "../ApiConnector";
 import { profileSettingsEndpoints } from "../BackendApis";
 import { toast } from "react-hot-toast";
+import { careerParticulars } from "../BackendApis";
 import { logout } from "./AuthenticationApi";
 const {
   UPDATE_DISPLAY_PICTURE_API,
@@ -9,6 +10,8 @@ const {
   CHANGE_PASSWORD_API,
   DELETE_PROFILE_API,
 } = profileSettingsEndpoints;
+const { CREATE_INTERNSHIP_DETAILS, UPDATE_INTERNSHIP_DETAILS } =
+  careerParticulars;
 export function updateDisplayPicture(token, formData) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
@@ -99,3 +102,58 @@ export function deleteProfile(token, navigate) {
     toast.dismiss(toastId);
   };
 }
+export const createInternshipDetails = async (data, token) => {
+  console.log("here is the data", data);
+  console.log("here is the token", token);
+  const toastId = toast.loading("Loading...");
+  let result = null;
+  try {
+    const response = await apiConnector(
+      "POST",
+      CREATE_INTERNSHIP_DETAILS,
+      data,
+      { Authorization: `Bearer ${token}` }
+    );
+    console.log("Created Internship data :", response);
+    if (!response?.data?.success) {
+      throw new Error(response.data.message);
+    }
+    toast.success("Created Internship data");
+    result = response?.data?.success;
+  } catch (error) {
+    console.log("CREATE_INTERNSHIP_DETAILS API ERROR", error);
+    toast.error("Could not save this information");
+  }
+  toast.dismiss(toastId);
+  return result;
+};
+
+export const updateInternshipDetails = async (token, data) => {
+  console.log(token);
+  console.log(data);
+
+  const toastId = toast.loading("...Loading");
+
+  let result = null;
+  try {
+    const response = await apiConnector(
+      "PUT",
+      UPDATE_INTERNSHIP_DETAILS,
+      data,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+    console.log("Updated Internship Details", response);
+    if (!response.success) {
+      throw new Error(response.message);
+    }
+    toast.success("Updated Internship Details");
+    result = response?.data?.success;
+  } catch (error) {
+    console.log("UPDATE_INTERNSHIP_DETAILS API ERROR", error);
+    toast.error("Could not update this information");
+  }
+  toast.dismiss(toastId);
+  return result;
+};
