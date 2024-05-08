@@ -183,9 +183,9 @@ const OnCampusOpportunityCard = (opportunity) => {
               <div className="flex flex-col flex-1 gap-4">
                 {/* title with role */}
                 <div className="flex flex-col gap-1">
-                  <div className="flex justify-between items-center gap-5 w-full">
+                  <div className="flex  flex-col-reverse items-start md:flex-row justify-between md:items-center gap-6 md:gap-5 w-full">
                     {" "}
-                    <div className="text-lg md:text-xl font-bold text-primary-500">
+                    <div className="text-lg md:max-w-[18rem] lg:max-w-none md:text-xl font-bold text-primary-500">
                       <p>{opportunity.opportunityName}</p>
                     </div>
                     <div className="gap-2 flex items-center justify-between">
