@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
-import { MdLens } from "react-icons/md";
 import { IoMdPin } from "react-icons/io";
 import { FaHourglassEnd, FaRupeeSign, FaClock } from "react-icons/fa";
 import {
@@ -347,10 +346,11 @@ const OnCampusOpportunityCard = (opportunity) => {
                     {opportunity.eligibilityCriteria
                       ? opportunity.eligibilityCriteria.map((item, id) => (
                           <li className="flex items-start gap-px" key="index">
-                            <MdLens
+                            {/* <MdLens
                               className="h-3 w-4 text-gray-400 mt-1"
                               aria-hidden="true"
-                            />
+                            /> */}
+                            <p className="text-sm font-bold">{id +1}.</p>
                             <p className="text-sm">{item}</p>
                           </li>
                         ))
