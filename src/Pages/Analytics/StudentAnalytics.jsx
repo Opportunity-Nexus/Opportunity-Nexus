@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useSpring, animated } from "react-spring";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { HiMiniUserGroup } from "react-icons/hi2";
 import OnCampusAnalytics from "../../Components/Dashboard/StudentAnalytics/OnCampusAnalytics";
 import OnCampusStudentAnalytics from "../../Components/Dashboard/StudentAnalytics/OnCampusStudentAnalytics";
 
@@ -50,39 +51,41 @@ const StudentAnalytics = () => {
 				<div className="flex justify-center items-center py-12">
 					<h1 className="font-bold text-base sm:text-3xl md:text-2xl lg:text-4xl text-center dark:text-white ">
 						Mapping Student Trajectories
-						<TypeAnimation
-							sequence={[
-								"Empowerment through Data,Success through Insight",
-								1000,
-								"Empowerment through Data,Innovation through Collaboration.",
-								1000,
-								"Empowerment through Data,Growth through Action",
-								1000,
-							]}
-							wrapper="span"
-							speed={50}
-							className="block text-primary-500 mt-1"
-							repeat={Infinity}
-						/>
+							<TypeAnimation
+								sequence={[
+									"Empowerment through Data,Success through Insight",
+									1000,
+									"Empowerment through Data,Innovation through Collaboration.",
+									1000,
+									"Empowerment through Data,Growth through Action",
+									1000,
+								]}
+								wrapper="span"
+								speed={50}
+								className="block text-primary-500 mt-1 "
+								repeat={Infinity}
+							/>
 					</h1>
 				</div>
-				<div className="flex flex-col space-y-8 rounded-md border border-1 dark:border-richblack-700  sm:p-6 dark:text-gray-400 h-fit">
+				<div className="flex flex-col space-y-8 rounded-md border border-1 dark:border-richblack-700 p-6 dark:text-gray-400">
 					<span className="flex items-center gap-2">
 						<FaBookReader />
-						<h1 className="font-bold text-xl ">
+						<h1 className="font-bold text-base sm:text-xl ">
 							Insights into Your Bookmarked Opportunities
 						</h1>
 					</span>
-					<div className="flex flex-col md:flex-row justify-center gap-2">
+					<div className="flex flex-col md:flex-row justify-center items-center dark:text-gray-400 gap-2 py-8">
 						<div className="flex flex-col items-center justify-center w-full md:w-1/2">
-							<div className="flex py-2 md:py-5">
+							<div className="flex flex-wrap justify-center items-center dark:text-gray-400 gap-2">
 								{offcampusData.length > 0 &&
 									offcampusData.map((item) => (
 										<span
 											key={item.opportunityType}
-											className="flex flex-col items-center justify-center mx-2 font-bold text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300 w-30 md:w-48 w-30 md:h-48 p-2 md:p-4 "
+											className=" flex flex-col items-center justify-center font-bold text-sm md:text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300 px-3 py-3 md:px-6 md:py-7 w-28 md:w-40"
 										>
-											<p className="text-primary-500">{item.opportunityType}</p>
+											<p className="text-primary-500 text-center">
+												{item.opportunityType}
+											</p>
 											<p className="font-bold text-7xl">
 												<Number n={item.count} />
 											</p>
@@ -94,19 +97,24 @@ const StudentAnalytics = () => {
 									to="/opportunities/Scholarships"
 									className="bg-primary-500 hover:bg-primary-700 flex justify-center items-center w-fit p-2 rounded-md gap-x-2 text-base font-semibold text-white"
 								>
-									<p>Access Bookmarked Selections</p>
+									<p className="text-sm">Access Bookmarked Selections</p>
 									<FaArrowTrendUp />
 								</Link>
 							</div>
 						</div>
-						<div className="w-1/2 h-60 md:h-80 p-2">
+						<div className="w-full flex justify-center items-center md:w-[50%] h-52 md:h-64 lg:h-72 p-2">
 							<OpportunityPieChart offcampusData={offcampusData} />
 						</div>
 					</div>
 				</div>
-				<span className="my-10 font-bold  animate-bounce text-2xl text-slate-50 text-center bg-gradient-to-r from-blue-600 to-violet-900 bg-clip-text text-transparent">{`${user.firstName.toUpperCase()}'S ON-CAMPUS ANALYSIS`}</span>
-				<OnCampusAnalytics/>
-				<OnCampusStudentAnalytics/>
+				<div className="flex flex-col justify-center items-center my-10 ">
+					<span className="text-4xl text-primary-500">
+						<HiMiniUserGroup />
+					</span>
+					<span className=" font-extrabold animate-bounce text-2xl text-primary-500 text-center ">{`${user.firstName.toUpperCase()}'S ON-CAMPUS ANALYSIS`}</span>
+				</div>
+				<OnCampusAnalytics />
+				<OnCampusStudentAnalytics />
 			</div>
 		</>
 	);

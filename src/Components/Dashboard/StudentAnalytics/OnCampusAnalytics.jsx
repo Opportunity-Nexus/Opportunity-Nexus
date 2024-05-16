@@ -40,22 +40,22 @@ const OnCampusAnalytics = () => {
 	}, []);
 	return (
 		<>
-			<div className="flex flex-col space-y-8 rounded-md border border-1 dark:border-richblack-700 sm:p-6 dark:text-gray-400">
+			<div className="flex flex-col space-y-8 rounded-md border border-1 dark:border-richblack-700 p-6 dark:text-gray-400">
 				<span className="flex items-center gap-2">
 					<FaBookReader />
-					<h1 className="font-bold text-xl ">
+					<h1 className="font-bold text-base sm:text-xl ">
 						Discover the pulse of our on-campus opportunities
 					</h1>
 				</span>
-				<div className="flex justify-center items-center dark:text-gray-400 gap-2 py-8">
+				<div className="flex flex-col md:flex-row justify-center items-center dark:text-gray-400 gap-2 py-8">
 					{/*-------------Pie-Chart------------ */}
-					<div className="flex-grow h-60 md:h-80 p-2 ">
+					<div className="w-full md:w-[50%] h-52 md:h-60 lg:h-64 p-2">
 						<OnCampusPieChart onCampusOppData={onCampusOppData} />
 					</div>
 					{/* -----------Statistics----------- */}
-					<div className="flex flex-col items-center justify-center flex-grow w-full p-3">
-						<div className="flex gap-2">
-							<span className="flex flex-col items-center justify-center font-bold text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300  p-4 md:p-8 ">
+					<div className="w-full  flex flex-col items-center justify-center md:w-[50%]   ">
+						<div className="flex flex-wrap justify-center items-center dark:text-gray-400 gap-2">
+							<span className="flex-grow flex flex-col items-center justify-center font-bold text-sm md:text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300 px-6 py-7">
 								<p className="text-green-500 text-center">
 									Active Opportunities
 								</p>
@@ -68,7 +68,7 @@ const OnCampusAnalytics = () => {
 									/>
 								</p>
 							</span>
-							<span className="flex flex-col items-center justify-center font-bold text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300 p-4 md:p-8 ">
+							<span className="flex-grow flex flex-col items-center justify-center font-bold text-sm md:text-lg border rounded-md border-richblack-700 dark:hover:bg-gray-800 hover:bg-gray-300 px-6 py-7 ">
 								<p className="text-red-600 text-center">
 									Expired Opportunities
 								</p>
@@ -87,8 +87,8 @@ const OnCampusAnalytics = () => {
 								to="/dashboard/my-opportunities"
 								className="bg-primary-500 hover:bg-primary-700 flex justify-center items-center w-fit p-2 rounded-md gap-x-2 text-base font-semibold text-white"
 							>
-								<p>Uncover more opportunities.</p>
-								<FaArrowTrendUp />
+								<p className="text-sm">Discover opportunities.</p>
+								<FaArrowTrendUp className="hidden md:block" />
 							</Link>
 						</div>
 					</div>

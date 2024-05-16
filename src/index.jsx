@@ -18,7 +18,7 @@ import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
 import MyProfile from "./Pages/MyProfile/MyProfile";
 import Settings from "./Pages/Settings/Settings";
 import OpportunityPanel from "./Pages/OpportunityPanel/OpportunityPanel";
-// import StudentAnalytics from "./Pages/Analytics/StudentAnalytics";
+import StudentAnalytics from "./Pages/Analytics/StudentAnalytics";
 
 import {
   Route,
@@ -50,7 +50,7 @@ function App() {
       <Route path="/dashboard/my-opportunities" element={<MyOpportunities />} />
       <Route path="/dashboard/my-settings" element={<Settings />} />
       <Route path="dashboard/opportunity-panel" element={<OpportunityPanel />} />
-      {/* <Route path="dashboard/my-analytics" element={<StudentAnalytics />} /> */}
+      <Route path="dashboard/my-analytics" element={<StudentAnalytics />} />
     </Route>,
   ];
   const router = createBrowserRouter(createRoutesFromElements(...routes));
