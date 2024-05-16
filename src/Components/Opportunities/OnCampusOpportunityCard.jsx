@@ -199,37 +199,36 @@ const OnCampusOpportunityCard = (opportunity) => {
                       </p>
 
                       <div className="flex items-center justify-center absolute top-4 right-2">
-                        <button
-                          onClick={() => {
-                            if (isAlreadyBookMarked) {
-                              removeBookmark().catch((error) =>
-                                console.error(error)
-                              );
-                            } else {
-                              bookmarkOnCampusOpportunity().catch((error) =>
-                                console.error(error)
-                              );
-                            }
-                          }}
-                          className={` items-center justify-center px-1 py-1 gap-2 text-xl font-medium dark:text-white ${
-                            isExpired ? "hidden" : "inline-flex"
-                          }`}
-                        >
-                          {isExpired ? null : (
-                            <span className="text-sm   text-green-600 dark:text-green-500">
-                              {timeLeft}
-                            </span>
-                          )}
-                          {!isAdmin ? (
-                            <>
-                              {isAlreadyBookMarked ? (
-                                <IoBookmarks />
-                              ) : (
-                                <IoBookmarksOutline />
-                              )}
-                            </>
-                          ) : null}
-                        </button>
+                        {isExpired ? null : (
+                          <span className="text-sm   text-green-600 dark:text-green-500">
+                            {timeLeft}
+                          </span>
+                        )}
+
+                        {!isAdmin ? (
+                          <button
+                            onClick={() => {
+                              if (isAlreadyBookMarked) {
+                                removeBookmark().catch((error) =>
+                                  console.error(error)
+                                );
+                              } else {
+                                bookmarkOnCampusOpportunity().catch((error) =>
+                                  console.error(error)
+                                );
+                              }
+                            }}
+                            className={` items-center justify-center px-1 py-1 gap-2 text-xl font-medium dark:text-white ${
+                              isExpired ? "hidden" : "inline-flex"
+                            }`}
+                          >
+                            {isAlreadyBookMarked ? (
+                              <IoBookmarks />
+                            ) : (
+                              <IoBookmarksOutline />
+                            )}
+                          </button>
+                        ) : null}
                       </div>
                     </div>
                   </div>
@@ -436,7 +435,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                         onClick={() => {
                           setIsStudentsEnrolledModelOpen(() => true);
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
+                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:bg-yellow-500 hover:text-black"
                       >
                         Enrolled Student
                       </button>
@@ -466,7 +465,8 @@ const OnCampusOpportunityCard = (opportunity) => {
                   </div>
 
                   <div className="ml-3">
-                    {meetLinkMeta.shouldBeVisible && new Date(opportunity.opportunityDriveDate) > new Date() ? (
+                    {meetLinkMeta.shouldBeVisible &&
+                    new Date(opportunity.opportunityDriveDate) > new Date() ? (
                       <div className="flex items-center justify-center">
                         <a
                           href={opportunity.opportunityDriveLink}
