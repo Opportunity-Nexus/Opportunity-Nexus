@@ -50,7 +50,7 @@ const OnCampusOpportunityCard = (opportunity) => {
   })();
 
   const [meetLinkMeta] = useState(() => {
-    if (opportunity.opportunityMode === "ON-LINE" || isExpired || isAdmin) {
+    if (!opportunity.opportunityMode === "ON-LINE" || isExpired || isAdmin) {
       return {
         shouldBeVisible: false,
         shouldBeEnabled: false,
@@ -452,7 +452,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                           setIsApplyModalOpen(() => true);
                         }}
                         disabled={isAlreadyApplied}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-300 disabled:hover:bg-primary-800 cursor-pointer disabled:cursor-not-allowed"
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-base font-medium  rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-800 disabled:hover:bg-primary-800 cursor-pointer disabled:cursor-not-allowed"
                       >
                         {isAlreadyApplied ? "Applied" : "Apply now"}
                       </button>

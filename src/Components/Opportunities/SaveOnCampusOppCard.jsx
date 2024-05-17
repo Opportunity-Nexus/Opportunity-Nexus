@@ -148,7 +148,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                   <p className="text-lg md:text-xl font-bold text-primary-500">
                     {opportunity.opportunityId.opportunityName}
                   </p>
-                  <div className="flex items-center font-medium text-gray-400 text-sm  md:text-base gap-2">
+                  <div className="flex items-center font-medium text-gray-500 text-sm  md:text-base gap-2">
                     <p>{opportunity.opportunityId.opportunityRole}</p>
                     <span>|</span>
                     <div className="flex items-center gap-px">
@@ -158,7 +158,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                   </div>
                 </div>
                 {/* Job location */}
-                <div className="flex font-medium text-gray-400 text-sm  md:text-base gap-px max-w-4xl">
+                <div className="flex font-medium text-gray-500 text-sm  md:text-base gap-px max-w-4xl">
                   <ul className="flex gap-2">
                     <h4>Job Location:</h4>
                     <p className=" uppercase">
