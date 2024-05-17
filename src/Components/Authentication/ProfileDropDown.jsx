@@ -38,7 +38,7 @@ export default function ProfileDropdown() {
             </div>
           </div>
           <hr className="border-px dark:border-gray-700" />
-          {!(pathName === "/dashboard" || pathName === "/dashboard/") ? (
+          {!(pathName === "/dashboard" || pathName.startsWith("/dashboard/")) ? (
             <Link to="/dashboard/my-profile" onClick={() => setOpen(false)}>
               <div className="flex w-full items-center gap-x-1 my-2  p-2 text-sm transition-all font-medium   rounded-md dark:hover:bg-gray-700 hover:bg-gray-50 ">
                 Dashboard

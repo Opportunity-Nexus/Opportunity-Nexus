@@ -7,15 +7,11 @@ import { useSelector } from "react-redux";
 import {
   getOnCampusBookmarkedOpportunities,
   getOncampusOpportunities,
-  getUserOpportunities,
 } from "../../Services/Operations/OnCampusApi";
 
-const MyOpportunities = () => {
-  const [isFetchingOnCampusOpportunities, setIsFetchingOnCampusOpportunities] =
-    useState(false);
-
+const AdminOpportunitiesRecords = () => {
+  const [isFetching, setIsFetching] = useState(false);
   const [onCampusOpportunities, setOnCampusOpportunities] = useState([]);
-
   const { token } = useSelector((state) => state.auth);
   const [onCampusOpportunityTag, setOnCampusOpportunityTag] = useState({
     availableTags: [],
@@ -35,7 +31,6 @@ const MyOpportunities = () => {
               onCampusOpportunityTag.selectedTags.includes(element)
             ).length > 0
       ).length;
-
       return Math.ceil(lengthOfOpportunities / 6);
     });
   }, [onCampusOpportunities, onCampusOpportunityTag.selectedTags]);
@@ -46,7 +41,7 @@ const MyOpportunities = () => {
 
   const [bookmarkedOpportunities, setBookmarkedOpportunities] = useState([]);
 
-  const [refetchBookmarkOpp, setRefetchBookmarkOpp] = useState(true);
+  const [refetchBookmarkOpp, setRefetchBookmarkOpp] = useState(false);
 
   useEffect(() => {
     if (!refetchBookmarkOpp) return;
@@ -62,34 +57,18 @@ const MyOpportunities = () => {
   }, [token, refetchBookmarkOpp]);
 
   useEffect(() => {
-    setIsFetchingOnCampusOpportunities(() => true);
+    setIsFetching(() => true);
     getOncampusOpportunities({ token: token })
       .then((data) => {
-        console.log({ data });
         setOnCampusOpportunities(() => {
           return data;
         });
       })
       .catch((error) => console.error(error))
       .finally(() => {
-        setIsFetchingOnCampusOpportunities(false);
+        setIsFetching(false);
       });
   }, [token]);
-
-  const [refetchAppliedOpportunities, setRefetchAppliedOpportunities] =
-    useState(true);
-  const [appliedOpportunities, setAppliedOpportunities] = useState([]);
-  useEffect(() => {
-    if (!refetchAppliedOpportunities) return;
-    getUserOpportunities({ token: token })
-      .then((data) => {
-        setAppliedOpportunities(() => {
-          return data;
-        });
-      })
-      .catch((error) => console.error(error))
-      .finally(() => setRefetchAppliedOpportunities(false));
-  }, [refetchAppliedOpportunities, token]);
 
   useEffect(() => {
     const tagSet = new Set();
@@ -106,17 +85,17 @@ const MyOpportunities = () => {
   return (
     <div className="flex flex-col mx-auto min-h-screen p-1 md:p-4 bg-white dark:bg-gray-900">
       <div className="flex justify-center items-center py-12">
-        <h1 className="font-bold text-base sm:text-3xl md:text-2xl lg:text-4xl text-center dark:text-white ">
+        <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl text-center dark:text-white ">
           OpportunityNexus
           <span className="block text-primary-500">
-            On Campus Opportunity Hub
+            Manage your Opportunities
           </span>
         </h1>
       </div>
 
       {onCampusOpportunities ? (
         <>
-          {isFetchingOnCampusOpportunities ? (
+          {isFetching ? (
             <div className="h-screen flex flex-1 items-center justify-center">
               <div className="loader"></div>
             </div>
@@ -124,7 +103,7 @@ const MyOpportunities = () => {
             <div className="flex flex-col justify-center items-center lg:w-2/4 flex-1 dark:text-white mx-auto self-center">
               <img src={OpportunitiesNotFoundImg} alt="OppNotFound" />
               <h2 className="text-2xl sm:text-3xl font-bold animate-bounce text-center ">
-                You have not have any open opportunities yet!
+                You have not have any open opportunities published yet!
               </h2>
             </div>
           ) : (
@@ -132,10 +111,10 @@ const MyOpportunities = () => {
               <div className="flex flex-wrap mt-4 mb-7 gap-8 px-2">
                 {/* tags */}
                 {onCampusOpportunityTag.availableTags.length !== 0 ? (
-                  <div className="md:flex gap-1 flex-wrap hidden">
-                    <div className="text-black font-bold text-lg dark:text-white">
+                  <div className="hidden md:flex gap-1 flex-wrap">
+                    <span className="text-black font-bold text-lg dark:text-white">
                       Search easily with these Keywords
-                    </div>
+                    </span>
                     {onCampusOpportunityTag.availableTags.map(
                       (item, itemIndex) => {
                         return (
@@ -162,7 +141,6 @@ const MyOpportunities = () => {
                                   };
                                 }
                               });
-
                               setCurrentPage(() => 1);
                             }}
                           >
@@ -191,22 +169,12 @@ const MyOpportunities = () => {
                         setOnCampusOpportunities={setOnCampusOpportunities}
                         setRefetchBookmarkOpp={setRefetchBookmarkOpp}
                         bookmarkedOpportunities={bookmarkedOpportunities}
-                        setRefetchAppliedOpportunities={
-                          setRefetchAppliedOpportunities
-                        }
-                        isAlreadyApplied={
-                          appliedOpportunities.findIndex((item) => {
-                            console.log({ item });
-                            return item._id === opportunity._id;
-                          }) > -1
-                        }
                         isAlreadyBookMarked={
                           bookmarkedOpportunities.findIndex(
-                            (item) =>
-                              item.opportunityId?._id === opportunity._id
+                            (item) => item.opportunityId._id === opportunity._id
                           ) > -1
                         }
-                        isAdmin={false}
+                        isAdmin={true}
                       />
                     );
                   })}
@@ -226,7 +194,7 @@ const MyOpportunities = () => {
                     disabled={currentPage <= 1}
                   >
                     <TbPlayerTrackPrevFilled className="h-5 w-5 mr-2" />
-                    <span className="uppercase font-medium text-sm lg:text-base">
+                    <span className="uppercase font-medium text-sm md:text-base">
                       previous
                     </span>
                   </button>
@@ -275,4 +243,4 @@ const MyOpportunities = () => {
   );
 };
 
-export default MyOpportunities;
+export default AdminOpportunitiesRecords;
