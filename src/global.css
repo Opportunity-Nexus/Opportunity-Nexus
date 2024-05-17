@@ -43,3 +43,9 @@
 .error-style{
   @apply ml-2 text-xs tracking-wide text-pink-200
 }
+
+
+.gradient {
+  background: rgb(120,15,109);
+  background: radial-gradient(circle, rgba(120,15,109,1) 0%, rgba(67,27,226,1) 92%);
+}

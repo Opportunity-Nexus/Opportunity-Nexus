@@ -2,6 +2,7 @@ import React from "react";
 import { RiEditBoxLine } from "react-icons/ri";
 import ActionBtn from "../../../Common/ActionBtn";
 import { useNavigate } from "react-router-dom";
+import EditIcon from "../../../assets/profile-section/editIcon.svg";
 
 const HeaderSection = () => {
   const navigate = useNavigate();
@@ -13,18 +14,14 @@ const HeaderSection = () => {
           <span className="block text-primary-500">Your Profile Awaits! </span>
         </h1>
       </div>
-      <div className="flex justify-between">
-        <h1 className="sm:mb-6 text-3xl font-bold text-black   dark:text-richblack-25 ml-4 sm:ml-5 mt-2 sm:mt-0 ">
-          Your Profile
-        </h1>
+      <div className="flex justify-end">
         <div className="mt-3 px-4 mb-3">
           <ActionBtn
             text="Edit"
             onclick={() => {
               navigate("/dashboard/my-settings");
-            }}
-          >
-            <RiEditBoxLine />
+            }}>
+            <img  src={EditIcon} alt="" />
           </ActionBtn>
         </div>
       </div>

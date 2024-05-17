@@ -1,55 +1,71 @@
 import React from "react";
-import { MdEmail } from "react-icons/md";
-import { FaRegUserCircle } from "react-icons/fa";
-import { CgEditUnmask } from "react-icons/cg";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { TbWorldWww } from "react-icons/tb";
+import UserIcon from "../../../assets/profile-section/user.svg";
+import EmailIcon from "../../../assets/profile-section/email.svg";
+import LayerIcon from "../../../assets/profile-section/layers.svg";
+import GoogleIcon from "../../../assets/profile-section/smallGoogleIcon.svg";
+import InstagramIcon from "../../../assets/profile-section/instagramIcon.svg";
+import FacebookIcon from "../../../assets/profile-section/smallFacebookIcon.svg";
+import LinkedinIcon from "../../../assets/profile-section/linkedinIcon.svg";
+import YoutubeIcon from "../../../assets/profile-section/youtubeIcon.svg";
+// import SaveIcon from '../../../assets/profile-section/saveIcon.svg'
 
 const ProfileSection = ({ userData }) => {
+  const socialMediaList = [
+    GoogleIcon,
+    InstagramIcon,
+    FacebookIcon,
+    LinkedinIcon,
+    YoutubeIcon,
+  ];
+
   return (
     <>
-      <div className="flex  items-center justify-between rounded-md border-[1px] dark:border-richblack-700  bg-white dark:bg-richblack-800 p-8 px-16 ">
-        <div className="flex  flex-col lg:flex-col items-center gap-x-72 w-full justify-center ">
-          <div className="space-y-0">
-            <div className="text-3xl font-semibold px-4 text-gray-700 dark:text-richblack-25 ">
-              <span>{userData?.firstName + " " + userData?.lastName} </span>
-            </div>
-            <div className="text-sm font-semibold px-2 text-gray-700 dark:text-richblack-25">
-              <div className="flex items-center gap-x-2 text-base font-semibold px-2 dark:text-richblack-5">
-                <MdEmail />
-                <span>{userData?.email}</span>
-              </div>
-            </div>
-            <div className="text-sm font-semibold px-2 text-gray-700 dark:text-richblack-25">
-              <div className="flex items-center gap-x-2 text-base font-semibold px-2 dark:text-richblack-5">
-                <FaRegUserCircle />
-                <span>{userData?.accountType} </span>
-              </div>
-            </div>
-            <div className="text-sm font-semibold px-2 text-gray-700 dark:text-richblack-25 ">
-              <div className="flex items-center gap-x-2 text-base font-semibold px-2 dark:text-richblack-5 mb-5">
-                <CgEditUnmask />
-                <span>{userData?.enrollmentNumber}</span>
-              </div>
-            </div>
-          </div>
+      <div className="profile-card flex flex-col dark:border-gray-800 border border-solid rounded-2xl">
+        <div className="relative rounded-t-2xl w-full h-[180px] gradient dark:dark-gradient"></div>
 
-          {/* img div */}
-          <div className="flex flex-col justify-center  ">
-            <div className="flex items-center justify-center">
-              <img
-                src={userData?.image}
-                alt={`profile-${userData?.firstName}`}
-                className="aspect-square w-[130px] rounded-full flex "
-              />
+        <div className="profile-info flex flex-col md:flex-row lg:gap-24">
+          <div className="DP relative -inset-y-[105px] left-[17%] md:inset-x-4 w-fit">
+            <img
+              src={userData?.image}
+              alt={`profile-${userData?.firstName}`}
+              className="aspect-square w-[200px] rounded-full flex "
+            />
+          </div>
+          <div className="profile-details flex flex-col items-between mt-[-80px] md:mt-5 lg:mr-5 mx-auto lg:ml-0  divide-y dark:divide-gray-800 space gap-7 px-4 lg:px-0 lg:mx-none">
+            <div className="flex flex-col flex-wrap gap-5">
+              <div className="flex flex-col">
+                <div className="name flex items-center gap-3">
+                  <h2 className="text-3xl font-bold text-primary-500">
+                    {userData?.firstName + " " + userData?.lastName}{" "}
+                  </h2>
+                </div>
+                <span className="flex items-center text-base font-normal dark:text-gray-700 text-gray-400">
+                  <img className=" w-auto mx-1" src={UserIcon} alt="" />
+                  <p className="text-base font-medium dark:text-gray-700 text-gray-400">
+                    {userData?.accountType}
+                  </p>
+                </span>
+                <span className="flex items-center text-base font-normal dark:text-gray-700 text-gray-400">
+                  <img className=" w-auto mx-1" src={EmailIcon} alt="" />
+                  <p>{userData?.email}</p>
+                </span>
+                <span className="flex items-center text-base font-normal dark:text-gray-700 text-gray-400">
+                  <img className=" w-auto mx-1" src={LayerIcon} alt="" />
+                  <p>{userData?.enrollmentNumber}</p>
+                </span>
+              </div>
             </div>
-            <div className="flex gap-x-3 justify-center m-2 py-2">
-              {/* {userData?.careerParticulars?.socialLinks} */}
-              <FaLinkedin size={24} className="text-blue-500" />
-              <FaGithub size={24} className="dark:text-white" />
-              <FaXTwitter size={24} className="dark:text-white" />
-              <TbWorldWww size={24} className="dark:text-white" />
+            <div className="socials-bttn flex items-center justify-between  mt-3">
+              <div className="socials flex my-5 gap-3 ">
+                {socialMediaList.map((socialAccOption, index) => (
+                  <img
+                    className="socialaccount-option p-2 border border-solid dark:border-gray-800 rounded-lg cursor-pointer h-10 w-10"
+                    key={index}
+                    src={socialAccOption}
+                    alt=""
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
