@@ -1,6 +1,7 @@
 import { setUser } from "../../Redux/Slices/ProfileSlice";
 import { apiConnector } from "../ApiConnector";
 import { profileSettingsEndpoints } from "../BackendApis";
+import { profileEndpoints } from "../BackendApis";
 import { toast } from "react-hot-toast";
 import { careerParticulars } from "../BackendApis";
 import { logout } from "./AuthenticationApi";
@@ -10,6 +11,7 @@ const {
   CHANGE_PASSWORD_API,
   DELETE_PROFILE_API,
 } = profileSettingsEndpoints;
+const { GET_USER_COMPLETE_DETAILS_API } = profileEndpoints;
 const { CREATE_INTERNSHIP_DETAILS, UPDATE_INTERNSHIP_DETAILS } =
   careerParticulars;
 export function updateDisplayPicture(token, formData) {
@@ -153,6 +155,31 @@ export const updateInternshipDetails = async (token, data) => {
   } catch (error) {
     console.log("UPDATE_INTERNSHIP_DETAILS API ERROR", error);
     toast.error("Could not update this information");
+  }
+  toast.dismiss(toastId);
+  return result;
+};
+export const getUsetCompleteDetails = async (token) => {
+  const toastId = toast.loading("Loading...");
+  let result = null;
+  try {
+    const response = await apiConnector(
+      "GET",
+      GET_USER_COMPLETE_DETAILS_API,
+      null,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+    console.log(" GET_USER_COMPLETE_DETAILS_API RESPONSE:", response);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    result = await response.data.userCompleteDetails;
+
+    console.log("result.....", result);
+  } catch (error) {
+    console.log("Could not fetch the profile data.", error);
   }
   toast.dismiss(toastId);
   return result;

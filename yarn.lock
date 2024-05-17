@@ -7975,6 +7975,11 @@ react-scripts@^5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-super-responsive-table@^5.2.3:
+  version "5.2.3"
+  resolved "https://registry.npmjs.org/react-super-responsive-table/-/react-super-responsive-table-5.2.3.tgz#28da7131b659cd5536aaa4648954016e24800b11"
+  integrity sha512-bFpNb6RrTfsrO8Exigr8R6cvH305P3ATLUciQGD6o8Ve+Wh/37TXzM+6+QpeF1NMweV/PDtBTIgT6CAc8TUluA==
+
 react-toastify@^9.1.3:
   version "9.1.3"
   resolved "https://registry.npmjs.org/react-toastify/-/react-toastify-9.1.3.tgz"
