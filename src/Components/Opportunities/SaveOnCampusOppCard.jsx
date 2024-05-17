@@ -168,7 +168,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                   </ul>
                 </div>
                 {/* locatoin + time */}{" "}
-                <div className="flex text-sm text-gray-500 sm:mt-0 gap-2">
+                <div className="flex flex-col sm:flex-row text-sm text-gray-500 sm:mt-0 gap-2">
                   <div className="flex items-center gap-px">
                     {" "}
                     <IoMdPin
@@ -184,7 +184,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
 
                   <div className="flex items-center">
                     <div className="flex items-center gap-px">
-                      <span className="mr-1">|</span>
+                      <span className="mr-1 hidden sm:flex">|</span>
                       <FaClock
                         className="h-5 w-4 text-gray-400 mr-px"
                         aria-hidden="true"
@@ -252,7 +252,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                           setIsApplyModalOpen(() => true);
                         }}
                         disabled={isAlreadyApplied}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-300 disabled:hover:bg-primary-300 disabled:cursor-not-allowed cursor-pointer"
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-300 disabled:hover:bg-primary-800 disabled:cursor-not-allowed cursor-pointer"
                       >
                         {isAlreadyApplied ? "Applied" : "Apply now"}
                       </button>
@@ -295,7 +295,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                           setIsApplyModalOpen(() => true);
                         }}
                         disabled={isAlreadyApplied}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-300 disabled:hover:bg-primary-300 disabled:cursor-not-allowed cursor-pointer"
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-300 disabled:hover:bg-primary-800 disabled:cursor-not-allowed cursor-pointer"
                       >
                         {isAlreadyApplied ? "Applied" : "Apply now"}
                       </button>
