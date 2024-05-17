@@ -76,14 +76,14 @@ export const careerParticulars = {
   //-------SOCIALS----------//
   UPDATE_SOCIAL_DETAILS: BASE_URL + "/careerParticulars/update-socials-details",
   UPDATE_CAREER_PARTICULARS:
-		BASE_URL + "/careerParticulars/updatecareerparticulars",
+    BASE_URL + "/careerParticulars/updatecareerparticulars",
 };
 
 //ANALYTICS
 export const studentAnalyticsEndpoints = {
-	OFFCAMPUS_BOOKMARK_API: BASE_URL + "/analytics/getoffcampusanalytics",
-	ONCAMPUS_BOOKMARK_API: BASE_URL + "/analytics/getoncampusbookmarkanalytics",
-	ONCAMPUS_APPLIED_API: BASE_URL + "/analytics/getoncampusappliedanalytics",
-	ONCAMPUS_AVAILABILITY_API:
-		BASE_URL + "/analytics/getactiveopportunityanalytics",
+  OFFCAMPUS_BOOKMARK_API: BASE_URL + "/analytics/getoffcampusanalytics",
+  ONCAMPUS_BOOKMARK_API: BASE_URL + "/analytics/getoncampusbookmarkanalytics",
+  ONCAMPUS_APPLIED_API: BASE_URL + "/analytics/getoncampusappliedanalytics",
+  ONCAMPUS_AVAILABILITY_API:
+    BASE_URL + "/analytics/getactiveopportunityanalytics",
 };
