@@ -71,7 +71,7 @@ const CustomModal = ({
             >
               <Dialog.Panel
                 className={clsx(
-                  "relative flex w-full max-h-[680px] transform flex-col bg-white dark:bg-gray-950 rounded-2xl p-6 text-left align-middle shadow-2xl transition-all"
+                  "relative flex w-full max-h-96 md:max-h-[580px] overflow-y-auto transform flex-col bg-white dark:bg-gray-950 rounded-2xl p-6 text-left align-middle shadow-2xl transition-all"
                 )}
               >
                 <div className="absolute right-4 pl-2 top-50%  my-auto flex items-start justify-end py-1">

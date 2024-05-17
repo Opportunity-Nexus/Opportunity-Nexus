@@ -318,9 +318,9 @@ const OnCampusOpportunityCard = (opportunity) => {
 
                 {/* Job location */}
                 <div className="flex text-gray-500 gap-px max-w-4xl">
-                  <ul className="flex text-gray-500 text-base font-semibold gap-2">
+                  <ul className="flex text-gray-500 text-sm md:text-base font-semibold gap-2">
                     <h4>Job Location:</h4>
-                    <p className=" uppercase">
+                    <p className=" ">
                       {" "}
                       {opportunity.opportunityLocation}
                     </p>{" "}
@@ -415,15 +415,10 @@ const OnCampusOpportunityCard = (opportunity) => {
                     new Date(opportunity.opportunityDriveDate) > new Date() ? (
                       <a
                         href={opportunity.opportunityDriveLink}
-                        className={
-                          meetLinkMeta.shouldBeEnabled
-                            ? ""
-                            : "pointer-events-none"
-                        }
                       >
                         <button
-                          className="inline-flex w-full items-center justify-center px-1 py-1 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 disabled:hover:text-white border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
-                          disabled={!meetLinkMeta.shouldBeEnabled}
+                          className="cursor-pointer inline-flex w-full items-center justify-center px-1 py-1 border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:bg-yellow-500"
+
                         >
                           Join the Drive
                         </button>
@@ -435,7 +430,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                         onClick={() => {
                           setIsStudentsEnrolledModelOpen(() => true);
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:bg-yellow-500 hover:text-black"
+                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:bg-yellow-500 hover:text-black hover:bg-white"
                       >
                         Enrolled Student
                       </button>
@@ -477,7 +472,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                           }
                         >
                           <button
-                            className="items-center justify-center px-1 py-1 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 disabled:hover:text-white  border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:text-yellow-400"
+                            className="cursor-pointer items-center justify-center px-1 py-1 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 disabled:hover:text-white  border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black hover:bg-white dark:hover:text-yellow-400"
                             disabled={!meetLinkMeta.shouldBeEnabled}
                           >
                             Join the Drive
