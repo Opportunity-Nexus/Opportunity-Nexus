@@ -43,8 +43,8 @@ export const oncampusEndpoints = {
   GET_OPPORTUNITY_DETAILS: BASE_URL + "/onCampus/getopportunitydetails",
   DELETE_OPPORTUNITY: BASE_URL + "/onCampus/deleteOpportunity",
   GET_USER_OPPORTUNITY: BASE_URL + "/onCampus/getuseropportunities",
-  GET_OPPORTUNITY_ENROLLMENTS:
-    BASE_URL + "/api/v1/onCampus/getstudentenrollments",
+  GET_STUDENT_ENROLLED: BASE_URL + "/onCampus/getstudentenrolled",
+  GET_OPPORTUNITY_ENROLLMENTS: BASE_URL + "/onCampus/getstudentenrollments",
 };
 
 //ON-CAMPUS BOOKMARK OPPORTUNITY ENDPOINTS
@@ -76,5 +76,14 @@ export const careerParticulars = {
   //-------SOCIALS----------//
   UPDATE_SOCIAL_DETAILS: BASE_URL + "/careerParticulars/update-socials-details",
   UPDATE_CAREER_PARTICULARS:
-    BASE_URL + "/careerParticulars/updatecareerparticulars",
+		BASE_URL + "/careerParticulars/updatecareerparticulars",
+};
+
+//ANALYTICS
+export const studentAnalyticsEndpoints = {
+	OFFCAMPUS_BOOKMARK_API: BASE_URL + "/analytics/getoffcampusanalytics",
+	ONCAMPUS_BOOKMARK_API: BASE_URL + "/analytics/getoncampusbookmarkanalytics",
+	ONCAMPUS_APPLIED_API: BASE_URL + "/analytics/getoncampusappliedanalytics",
+	ONCAMPUS_AVAILABILITY_API:
+		BASE_URL + "/analytics/getactiveopportunityanalytics",
 };
