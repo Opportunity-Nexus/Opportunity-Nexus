@@ -12,7 +12,7 @@ const AboutSection = ({ userData }) => {
           About
         </p>
         <hr className="w-full text-gray-400" />
-        <div className="text-gray-500 text-base mt-4">
+        <div className="text-gray-600 dark:text-gray-500 text-justify text-base mt-4">
           {userData?.additionalDetails?.about ? (
             userData?.additionalDetails?.about
           ) : (

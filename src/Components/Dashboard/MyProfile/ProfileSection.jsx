@@ -5,12 +5,11 @@ import { CgEditUnmask } from "react-icons/cg";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { TbWorldWww } from "react-icons/tb";
-
 const ProfileSection = ({ userData }) => {
   return (
     <>
       <div className="flex  items-center justify-between rounded-md border-[1px] dark:border-richblack-700  bg-white dark:bg-richblack-800 p-8 px-16 ">
-        <div className="flex  flex-col lg:flex-col items-center gap-x-72 w-full justify-center ">
+        <div className="flex  flex-col-reverse lg:flex-col items-center gap-x-72 w-full justify-center ">
           <div className="space-y-0">
             <div className="text-3xl font-semibold px-4 text-gray-700 dark:text-richblack-25 ">
               <span>{userData?.firstName + " " + userData?.lastName} </span>
