@@ -50,7 +50,7 @@ const OnCampusOpportunityCard = (opportunity) => {
   })();
 
   const [meetLinkMeta] = useState(() => {
-    if (!opportunity.opportunityMode === "ON-LINE" || isExpired || isAdmin) {
+    if (opportunity.opportunityMode === "ON-LINE" || isExpired || isAdmin) {
       return {
         shouldBeVisible: false,
         shouldBeEnabled: false,
@@ -417,7 +417,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                         href={opportunity.opportunityDriveLink}
                       >
                         <button
-                          className="cursor-pointer inline-flex w-full items-center justify-center px-1 py-1 border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-transparent hover:text-black  dark:hover:bg-yellow-500"
+                          className="cursor-pointer inline-flex w-full items-center justify-center px-1 py-1 border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:border-yellow-400 hover:bg-gray-800 dark:hover:bg-yellow-500"
 
                         >
                           Join the Drive
@@ -430,7 +430,7 @@ const OnCampusOpportunityCard = (opportunity) => {
                         onClick={() => {
                           setIsStudentsEnrolledModelOpen(() => true);
                         }}
-                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:bg-yellow-500 hover:text-black hover:bg-white"
+                        className="inline-flex items-center justify-center px-1 py-1 cursor-pointer border border-black dark:border-transparent dark:bg-yellow-400 bg-black text-white dark:text-black text-base font-medium rounded-md  dark:hover:bg-yellow-500 hover:bg-gray-800"
                       >
                         Enrolled Student
                       </button>
