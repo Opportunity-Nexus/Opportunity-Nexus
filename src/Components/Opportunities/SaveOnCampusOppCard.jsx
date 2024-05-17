@@ -252,7 +252,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                           setIsApplyModalOpen(() => true);
                         }}
                         disabled={isAlreadyApplied}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-300 disabled:hover:bg-primary-800 disabled:cursor-not-allowed cursor-pointer"
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-800 disabled:hover:bg-primary-800 disabled:cursor-not-allowed cursor-pointer"
                       >
                         {isAlreadyApplied ? "Applied" : "Apply now"}
                       </button>
@@ -295,7 +295,7 @@ const SavedOnCampusOpportunityCard = (opportunity) => {
                           setIsApplyModalOpen(() => true);
                         }}
                         disabled={isAlreadyApplied}
-                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-300 disabled:hover:bg-primary-800 disabled:cursor-not-allowed cursor-pointer"
+                        className="inline-flex items-center justify-center px-1 py-1 border border-transparent text-xs rounded-md text-white bg-primary-500 hover:bg-primary-700 disabled:bg-primary-800 disabled:hover:bg-primary-800 disabled:cursor-not-allowed cursor-pointer"
                       >
                         {isAlreadyApplied ? "Applied" : "Apply now"}
                       </button>
