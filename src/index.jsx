@@ -14,7 +14,7 @@ import Opportunities, {
   loader as OpportunitiesLoader,
 } from "./Pages/Opportunities/Opportunities";
 import Error from "./Components/Opportunities/Error";
-import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
+import BookmarkedOpportunities from "./Pages/BookmarkedOpportunities/BookmarkedOpportunities";
 import MyProfile from "./Pages/MyProfile/MyProfile";
 import Settings from "./Pages/Settings/Settings";
 import OpportunityPanel from "./Pages/OpportunityPanel/OpportunityPanel";
@@ -27,6 +27,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import UpdatePassword from "./Pages/Authentication/UpdatePassword";
+import MyOpportunities from "./Pages/MyOpportunities/MyOpportunities";
+import AdminOpportunitiesRecords from "./Pages/AdminRecord/AdminRecord";
 const themes = {
   light: "public/light.css",
   dark: "public/dark.css",
@@ -47,9 +49,12 @@ function App() {
         errorElement={<Error />}
       />
       <Route path="/dashboard/my-profile" element={<MyProfile />} />
+      <Route path="/dashboard/bookmarked" element={<BookmarkedOpportunities />} />
       <Route path="/dashboard/my-opportunities" element={<MyOpportunities />} />
       <Route path="/dashboard/my-settings" element={<Settings />} />
-      <Route path="dashboard/opportunity-panel" element={<OpportunityPanel />} />
+
+      <Route path="/dashboard/opportunity-panel" element={<OpportunityPanel />} />
+      <Route path="/dashboard/records" element={<AdminOpportunitiesRecords />} />
       <Route path="dashboard/my-analytics" element={<StudentAnalytics />} />
     </Route>,
   ];

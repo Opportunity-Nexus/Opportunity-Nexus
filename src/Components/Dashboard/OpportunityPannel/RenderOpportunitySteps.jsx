@@ -39,7 +39,7 @@ const RenderOpportunitySteps = () => {
 											step === item.id
 												? "border-primary-700 bg-primary-500 text-white"
 												: "border-richblack-200 bg-richblack-200 dark:bg-richblack-700 text-black dark:text-white"
-										} ${step > item.id && "bg-yellow-50 dark:bg-yellow-50 text-yellow-50"}} `}
+										} ${step > item.id && "bg-lime-500 dark:bg-lime-600 text-lime-300"}} `}
 									>
 										{step > item.id ? (
 											<FaCheck className="font-bold text-white" />

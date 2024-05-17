@@ -43,8 +43,8 @@ export const oncampusEndpoints = {
   GET_OPPORTUNITY_DETAILS: BASE_URL + "/onCampus/getopportunitydetails",
   DELETE_OPPORTUNITY: BASE_URL + "/onCampus/deleteOpportunity",
   GET_USER_OPPORTUNITY: BASE_URL + "/onCampus/getuseropportunities",
-  GET_OPPORTUNITY_ENROLLMENTS:
-    BASE_URL + "/api/v1/onCampus/getstudentenrollments",
+  GET_STUDENT_ENROLLED: BASE_URL + "/onCampus/getstudentenrolled",
+  GET_OPPORTUNITY_ENROLLMENTS: BASE_URL + "/onCampus/getstudentenrollments",
 };
 
 //ON-CAMPUS BOOKMARK OPPORTUNITY ENDPOINTS
