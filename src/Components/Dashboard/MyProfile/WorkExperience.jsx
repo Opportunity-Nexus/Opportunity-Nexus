@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { VscDebugBreakpointLog } from "react-icons/vsc";
 
 const WorkExperience = ({ userData }) => {
   return (
@@ -8,18 +9,35 @@ const WorkExperience = ({ userData }) => {
         <p className="flex gap-1 items-center text-lg font-semibold px-2 dark:text-richblack-5 mb-4">
           Work Experience
         </p>
-        <hr className="w-full text-gray-400" />
-        <div className="text-gray-500 text-base mt-4">
-          {userData?.additionalDetails?.about ? (
-            userData?.additionalDetails?.about
-          ) : (
-            <>
+        <hr className="w-full text-gray-400 mb-3" />
+        {userData?.careerParticulars?.workExperience.length === 0 ? (
+          <>
+            <span>
+              {" "}
               <Link to="/dashboard/my-settings">
-                <p>Update your Work Experience</p>
+                <button className="dark:text-blue-600 flex justify-start px-4 mt-4 text-lg ">
+                  + Tell us about the professional roles you have held.
+                </button>
               </Link>
-            </>
-          )}
-        </div>
+            </span>
+          </>
+        ) : (
+          <>
+            {userData?.careerParticulars?.workExperience.map((item, index) => {
+              return (
+                <div key={index} className="mt-2 gap-y-2">
+                  <p className="flex text-justify  text-gray-600 dark:text-gray-500  text-base">
+                    <span>
+                      {" "}
+                      <VscDebugBreakpointLog size={18} />{" "}
+                    </span>
+                    {item}
+                  </p>
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
     </>
   );

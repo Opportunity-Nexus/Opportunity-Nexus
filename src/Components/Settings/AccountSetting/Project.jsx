@@ -27,9 +27,10 @@ export default function Project() {
     setTechStacks(techStacks.filter((stack) => stack !== techStackToDelete));
   };
   const onSubmit = async (data) => {
+    console.log(data);
     const projectData = {
       ...data,
-      projectTechnologyStack: JSON.stringify([techStacks.join(", ")]),
+      projectTechnologyStack: JSON.stringify(techStacks),
     };
     console.log(projectData, token);
     console.log(techStacks);
