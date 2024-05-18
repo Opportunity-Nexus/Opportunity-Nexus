@@ -37,7 +37,7 @@ export default function MyProfile() {
     setLoading(false);
   }, []);
   return (
-    <div className=" bg-white dark:bg-gray-900">
+    <div className="bg-white dark:bg-gray-900">
       <div className="flex flex-col mx-auto max-w-5xl min-h-screen p-1 md:p-4">
         <HeaderSection />
         <ProfileSection userData={userData} />
