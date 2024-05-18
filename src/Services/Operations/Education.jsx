@@ -25,7 +25,7 @@ export const createEducatoinDetails = async (data, token) => {
     toast.success("Created Education data");
     result = response?.data?.success;
   } catch (error) {
-    console.log("CREATE_INTERNSHIP_DETAILS API ERROR", error);
+    console.log(" CREATE_EDUCATION_DETAILS API ERROR", error);
     toast.error("Could not save this information");
   }
   toast.dismiss(toastId);
