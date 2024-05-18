@@ -55,7 +55,7 @@ const ProfileSection = ({ userData }) => {
                 </span>
               </div>
             </div>
-            <div className="socials-bttn flex items-center justify-between  mt-3">
+            <div className="socials-bttn flex items-center justify-between gap-8  mt-3">
               <div className="socials flex my-5 gap-3 ">
                 {socialMediaList.map((socialAccOption, index) => (
                   <img
@@ -66,6 +66,11 @@ const ProfileSection = ({ userData }) => {
                   />
                 ))}
               </div>
+              <span className="flex gap-4">
+									<a href="https://resume-builder-rouge-ten.vercel.app/" className="bg-primary-500 text-sm text-white font-semibold rounded-md py-2 px-4">
+										Resume Builder
+									</a>
+								</span>
             </div>
           </div>
         </div>
