@@ -55,7 +55,7 @@ const ProfileSection = ({ userData }) => {
                 </span>
               </div>
             </div>
-            <div className="socials-bttn flex items-center justify-between gap-8  mt-3">
+            <div className="socials-bttn flex items-center justify-between gap-18  mt-3">
               <div className="socials flex my-5 gap-3 ">
                 {socialMediaList.map((socialAccOption, index) => (
                   <img
