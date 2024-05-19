@@ -31,7 +31,7 @@ const ProfileSection = ({ userData }) => {
               className="aspect-square w-[200px] rounded-full flex "
             />
           </div>
-          <div className="profile-details flex flex-col items-between mt-[-80px] md:mt-5 lg:mr-5 mx-auto lg:ml-0  divide-y dark:divide-gray-800 space gap-7 px-4 lg:px-0 lg:mx-none">
+          <div className="profile-details flex flex-col items-between mt-[-80px] md:mt-5 lg:mr-5 mx-auto lg:ml-0  divide-y dark:divide-gray-800 space gap-7 px-4 lg:px-0 lg:mx-none w-full">
             <div className="flex flex-col flex-wrap gap-5">
               <div className="flex flex-col">
                 <div className="name flex items-center gap-3">
@@ -55,7 +55,7 @@ const ProfileSection = ({ userData }) => {
                 </span>
               </div>
             </div>
-            <div className="socials-bttn flex items-center justify-between  mt-3">
+            <div className="socials-bttn flex flex-col lg:flex-row items-center justify-between gap-18  mt-3 mb-3 lg:mb-0">
               <div className="socials flex my-5 gap-3 ">
                 {socialMediaList.map((socialAccOption, index) => (
                   <img
@@ -66,6 +66,11 @@ const ProfileSection = ({ userData }) => {
                   />
                 ))}
               </div>
+              <span className="flex gap-4">
+									<a href="https://resume-builder-rouge-ten.vercel.app/" className="bg-primary-500 text-sm text-white font-semibold rounded-md py-2 px-4">
+										Resume Builder
+									</a>
+								</span>
             </div>
           </div>
         </div>
